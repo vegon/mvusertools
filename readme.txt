@@ -1,5 +1,5 @@
 ﻿1.6.2
-	Ahora disponible como extensión nativa para Chrome #262 y para Firefox #265
+    Ahora disponible como extensión nativa para Chrome #262 y para Firefox #265
 
 
 1.6
