@@ -520,9 +520,14 @@ function main() {
 		});
 		
 		// hilos con live destacados
-
 		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
 		
+		// hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
+		// jQuery('<img alt="Relaciones" src="http://www.mvwat.com/mvusertools/heart.png" style="width: 12px; height: 12px;">').insertAfter('a[class="hb"]:contains("amor"), a[class="hb"]:contains("rollo"), a[class="hb"]:contains("novia"), a[class="hb"]:contains("celos")');
+		
+		
+		// Alien_crrpt = Alien_derp
+		jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
 		
 		
 		//Set Toggle Class
