@@ -1,11 +1,10 @@
 // ==UserScript==
-// @name           mv-usertools
-// @namespace      mv-usertools
+// @name           Mediavida Edición Elite
+// @namespace      Mediavida-Edicion-Elite
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/foro/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
 // @exclude        http://www.mediavida.com/foro/live.php*
-// @exclude        http://www.mediavida.com/foro/spy*
 // ==/UserScript==
 
 function addJQuery(callback) {
@@ -271,7 +270,7 @@ function main() {
 			.blacklist\
 			{\
 			}\
-			.online\
+			.ut-online\
 			{\
 					background: url(http://www.mvwat.com/mvusertools/online.png) no-repeat;\
 					text-indent: -99999px;\
@@ -459,6 +458,12 @@ function main() {
 				height: 17px; \
 				display: block; \
 			}\
+			.ut-live td {\
+				background-color: #FFEEEE;\
+			}\
+			.ut-live td.alt {\
+				background-color: #EFE0E0;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -513,6 +518,13 @@ function main() {
 		jQuery("#button_list").click(function () {
 			bbstyle2(28);
 		});
+		
+		// hilos con live destacados
+
+		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+		
+		
+		
 		//Set Toggle Class
 		
 		$("#scrollpages").append(balcklistToggle);
@@ -548,7 +560,7 @@ function main() {
 						</div>");
 		});
 		$('.online').hide();
-		$('.online').parent().parent().find('.offline').toggleClass('online offline');
+		$('.online').parent().parent().find('.offline').toggleClass('ut-online offline');
 		
 		//Primera carga del a página. Tapar los posts de la blacklist si procede.
 		
