@@ -4,7 +4,6 @@
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/foro/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
-// @exclude        http://www.mediavida.com/foro/live.php*
 // ==/UserScript==
 
 function addJQuery(callback) {
@@ -463,6 +462,9 @@ function main() {
 			}\
 			.ut-live td.alt {\
 				background-color: #EFE0E0;\
+			}\
+			div.post.mark {\
+				background-color: #fff1e3;\
 			}\
 			";
 		}
