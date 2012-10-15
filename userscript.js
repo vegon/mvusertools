@@ -193,7 +193,7 @@ function main() {
 			Usuario <span class='mensaje-ocultado'>Blacklisted</span> \
 		</div> ";
 		
-		var balcklistToggle ="<div id='toggle'><div> "; 
+		var balcklistToggle ="<div id='toggle' class='sprite'><div> "; 
 	
 		var blacklistInfo = "<span class='blacklisted-post'>Click en <img src='http://www.mvwat.com/mvusertools/blacklist-mini.png'> para desbloquear.</span>";
 	
@@ -202,7 +202,10 @@ function main() {
 		//Inject CSS in header
 		{
 		var css = 
-			".usertools TABLE TD\
+			".sprite {\
+				background: url(http://www.mvwat.com/mvusertools/sprites.png) no-repeat;\
+			}\
+			.usertools TABLE TD\
 			{\
 					padding: 3px;\
 			}\
@@ -211,7 +214,7 @@ function main() {
 			}\
 			.firma\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/firma.png) no-repeat;\
+					background-position: -0px -69px;\
 					text-indent: -9999px;\
 					width: 14px;\
 					height: 11px;\
@@ -221,11 +224,11 @@ function main() {
 			}\
 			.firma:hover\
 			{\
-					background-position: 0 -11px;\
+					background-position: 0 -80px;\
 			}\
 			.mensaje\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/mensaje.png) no-repeat;\
+					background-position: -90px -35px;\
 					text-indent: -9999px;\
 					width: 14px;\
 					height: 10px;\
@@ -235,11 +238,11 @@ function main() {
 			}\
 			.mensaje:hover\
 			{\
-					background-position: 0 -10px;\
+					background-position: -90px -45px;\
 			}\
 			.blacklist-off\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/blacklist.png) no-repeat;\
+					background-position: -90px -0px;\
 					text-indent: -9999px;\
 					width: 12px;\
 					height: 12px;\
@@ -249,29 +252,28 @@ function main() {
 			}\
 			.blacklist-off:hover\
 			{\
-					background-position: 0 -12px;\
+					background-position: -90px -12px;\
 			}\
 			.blacklist-on\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/blacklist.png) no-repeat;\
+					background-position: -90px -12px;\
 					text-indent: -9999px;\
 					width: 12px;\
 					height: 12px;\
 					outline: 0;\
 					display: block;\
 					margin-top: 1px;\
-					background-position: 0 -12px;\
 			}\
 			.blacklist-on:hover\
 			{\
-					background-position: 0 0px;\
+					background-position: -90px -0px;\
 			}\
 			.blacklist\
 			{\
 			}\
 			.ut-online\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/online.png) no-repeat;\
+					background-position: -71px -91px;\
 					text-indent: -99999px;\
 					width: 8px;\
 					height: 12px;\
@@ -281,7 +283,7 @@ function main() {
 			\
 			.offline\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/offline.png) no-repeat;\
+					background-position: -90px -91px;\
 					text-indent: -99999px;\
 					width: 8px;\
 					height: 12px;\
@@ -316,14 +318,14 @@ function main() {
 			}\
 			.toggle-on\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/toggle-on.png) no-repeat;\
+					background-position: -0px -24px;\
 					width: 34px;\
 					height: 34px;\
 					cursor: pointer;\
 			}\
 			.toggle-off\
 			{\
-					background: url(http://www.mvwat.com/mvusertools/toggle-off.png) no-repeat;\
+					background-position: -45px -24px;\
 					width: 34px;\
 					height: 34px;\
 					cursor: pointer;\
@@ -427,32 +429,32 @@ function main() {
 				text-decoration: line-through !important;\
 			}\
 			.baudio {\
-				background: url('http://www.mvwat.com/mvusertools/bicons.png') no-repeat scroll 0 3px transparent;\
+				background-position: -0px 3px;\
 				width: 11px; \
 				height: 17px; \
 				display: block; \
 			}\
 			.bimg {\
-				background: url('http://www.mvwat.com/mvusertools/bicons.png') no-repeat scroll -25px 3px transparent;\
+				background-position: -25px 3px;\
 				width: 12px; \
 				height: 17px; \
 				display: block; \
 				margin-left: 1px; \
 			}\
 			.bvideo {\
-				background: url('http://www.mvwat.com/mvusertools/bicons.png') no-repeat scroll -12px 3px transparent;\
+				background-position: -12px 3px;\
 				width: 12px; \
 				height: 17px; \
 				display: block; \
 			}\
 			.bcentericon {\
-				background: url('http://www.mvwat.com/mvusertools/bicons.png') no-repeat scroll -37px 3px transparent;\
+				background-position: -37px 3px;\
 				width: 14px; \
 				height: 17px; \
 				display: block; \
 			}\
 			.blist {\
-				background: url('http://www.mvwat.com/mvusertools/bicons.png') no-repeat scroll -51px 3px transparent;\
+				background-position: -51px 3px;\
 				width: 14px; \
 				height: 17px; \
 				display: block; \
@@ -491,13 +493,13 @@ function main() {
 		jQuery('button[accesskey="b"]').hide();
 		jQuery('<button class="alt bleft bb" accesskey="b" type="button" onclick="bbstyle(0)">b</button>').insertAfter('button[accesskey="b"]');
 		jQuery('button[accesskey="i"]').hide();
-		jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button class="alt bright bs" id = "button_x" accesskey="x" type="button" onclick="bbstyle(24)">s</button><button class="alt bsolo" id = "button_c" accesskey="c" type="button" onclick="bbstyle(22)" title="[center]"><a class="bcentericon"></a></button><button class="alt bsolo" id = "button_list" type="button" onclick="bbstyle(28)" title="[list] Usar * para cada elemento de la lista"><a class="blist"></a></button>').insertAfter('button[accesskey="i"]');
+		jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button class="alt bright bs" id = "button_x" accesskey="x" type="button" onclick="bbstyle(24)">s</button><button class="alt bsolo" id = "button_c" accesskey="c" type="button" onclick="bbstyle(22)" title="[center]"><a class="sprite bcentericon"></a></button><button class="alt bsolo" id = "button_list" type="button" onclick="bbstyle(28)" title="[list] Usar * para cada elemento de la lista"><a class="blist sprite"></a></button>').insertAfter('button[accesskey="i"]');
 		jQuery('button[accesskey="l"]').hide();
 		jQuery('<button class="alt bsolo" accesskey="l" type="button" onclick="bbstyle(8)">[url=]</button>').insertAfter('button[accesskey="l"]');
 		jQuery('button[accesskey="m"]').hide();
-		jQuery('<button class="alt bleft" accesskey="m" type="button" onclick="bbstyle(10)" title="[img]"><a class="bimg"></a></button>').insertAfter('button[accesskey="m"]');
+		jQuery('<button class="alt bleft" accesskey="m" type="button" onclick="bbstyle(10)" title="[img]"><a class="bimg sprite"></a></button>').insertAfter('button[accesskey="m"]');
 		jQuery('button[accesskey="v"]').hide();
-		jQuery('<button class="alt bcenter" accesskey="v" type="button" onclick="bbstyle(12)" title="[video]"><a class="bvideo"></a></button><button title="[audio]" id = "button_audio" class="alt bright" type="button" onclick="bbstyle(30)"><a class="baudio"></a></button>').insertAfter('button[accesskey="v"]');
+		jQuery('<button class="alt bcenter" accesskey="v" type="button" onclick="bbstyle(12)" title="[video]"><a class="bvideo sprite"></a></button><button title="[audio]" id = "button_audio" class="alt bright" type="button" onclick="bbstyle(30)"><a class="baudio sprite"></a></button>').insertAfter('button[accesskey="v"]');
 		jQuery('button[accesskey="s"]').hide();
 		jQuery('<button class="alt bleft" accesskey="s" type="button" onclick="bbstyle(14)">[spoiler]</button>').insertAfter('button[accesskey="s"]');
 		jQuery('button[accesskey="d"]').hide();
@@ -560,10 +562,10 @@ function main() {
 		
 		jQuery('.autor').each(function() {
 			jQuery(this).append("<div class='usertools'>\
-								<div class='online-pos'><a class='tooltip offline' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
-								<div class='mensaje-pos'><a class='tooltip mensaje' href='http://www.mediavida.com/mensajes/nuevo/" + jQuery(this).data('name') + "' original-title='Mensaje'></a></div>\
-								<div class='firma-pos'><a class='tooltip firma' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "/firmas' original-title='Firma'></a></div>\
-								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off' href='javascript:void(0)' original-title='Blacklist'></a></div>\
+								<div class='online-pos'><a class='tooltip offline sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
+								<div class='mensaje-pos'><a class='tooltip mensaje sprite' href='http://www.mediavida.com/mensajes/nuevo/" + jQuery(this).data('name') + "' original-title='Mensaje'></a></div>\
+								<div class='firma-pos'><a class='tooltip firma sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "/firmas' original-title='Firma'></a></div>\
+								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off sprite' href='javascript:void(0)' original-title='Blacklist'></a></div>\
 						</div>");
 		});
 		$('.online').hide();
