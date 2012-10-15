@@ -464,7 +464,7 @@ function main() {
 				background-color: #EFE0E0;\
 			}\
 			div.post.mark {\
-				background-color: #fff1e3;\
+				background-color: #FFFCF1;\
 			}\
 			";
 		}
