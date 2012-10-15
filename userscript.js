@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name           Mediavida Edición Elite
-// @namespace      Mediavida-Edicion-Elite
+// @name           MV Usertools
+// @namespace      MVusertools
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/foro/*
 // @exclude        http://www.mediavida.com/foro/reportes.php

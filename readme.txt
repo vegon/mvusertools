@@ -1,4 +1,16 @@
-﻿1.6.2
+﻿1.6.3
+    Añadido:
+        - Hilos con Live! activado tienen un fondo para hacerlos resaltar más con el resto de hilos.
+        - La respuestas por la que entras a un hilo (por url directa o por posts sin leer) más destacado.
+        - Todas las imágenes en un único archivo para aliviar cargas.
+        - El panel de noticias destacadas en la vista general de foros con iconos del foro al que pertenece cada noticia.
+        - Diversos huevos de pascua ;).
+
+    Corregido:
+        - Error en el estado online de el popup de las manitas.
+
+
+1.6.2
     Ahora disponible como extensión nativa para Chrome #262 y para Firefox #265
 
 
@@ -12,10 +24,10 @@
     Optimización del código y tooltips en los iconos (gracias Kiroushi).
     Retoques visuales aquí y allá.
 
-Algunos avisos sobre la blacklist:
-- Los usuarios que tengas blacklisted se guardan en tu navegador, no en mediavida. Ciertas acciones para limpiar datos privados del navegador borran la configuración. Si accedes desde otro navegador, ya sea en tu propio pc o desde otro lugar no se conservara la configuración.
+    Algunos avisos sobre la blacklist:
+        - Los usuarios que tengas blacklisted se guardan en tu navegador, no en mediavida. Ciertas acciones para limpiar datos privados del navegador borran la configuración. Si accedes desde otro navegador, ya sea en tu propio pc o desde otro lugar no se conservara la configuración.
 
-- La blacklist no va asociada a tu cuenta de MV. Si alguien usa tu navegador para acceder a MV tendrá exactamente la misma blacklist que tu. Lo mismo si no estás logeado. 
+        - La blacklist no va asociada a tu cuenta de MV. Si alguien usa tu navegador para acceder a MV tendrá exactamente la misma blacklist que tu. Lo mismo si no estás logeado. 
 
 
 
