@@ -658,6 +658,7 @@ function main() {
 		
 		// Alien_crrpt = Alien_derp
 		jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
+		jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
 		
 		// Destacados con icono de su foro
 		jQuery('div[class="minibox"]').children().children().children('a[href*="/6/"]').parent('li').addClass('ut-6').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/6.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
