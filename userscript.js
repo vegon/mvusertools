@@ -619,6 +619,7 @@ function main() {
 				return "<span style='color: green;'>" + a + "</span>"
 			});
 		});
+		
 		//Icono del foro del que viene la noticia en Portada
 		jQuery('.bbar a[href^="/foro"]').each(function(i) {
 			var enlace = this + "";
@@ -627,12 +628,14 @@ function main() {
 			var pathIndexToGet = 3;
 			var foro = path[pathIndexToGet];
 			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			$(this).html('<img src="' + foroicon + '">');
+			$(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
 		});
-			//jQuery('div.item H4').prepend(jQuery('.bbar a[href^="/foro"]'));
+		jQuery('.item h4').each(function (index) {
+			$(this).prepend($('.bbar a[href^="/foro"]').eq(0));
+		});
+		
 
 		// nueva botonera
-		
 		jQuery('button[accesskey="b"]').hide();
 		jQuery('<button class="alt bleft bb" accesskey="b" type="button" onclick="bbstyle(0)">b</button>').insertAfter('button[accesskey="b"]');
 		jQuery('button[accesskey="i"]').hide();
