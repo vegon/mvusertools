@@ -2,6 +2,7 @@
 // @name           MV Usertools
 // @namespace      MVusertools
 // @description    Añade controles avanzados a los posts en MV
+// @include        http://www.mediavida.com/*
 // @include        http://www.mediavida.com/foro/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
 // ==/UserScript==
@@ -609,9 +610,21 @@ function main() {
 		function (i,h) {
 			//return h.replace(/<br>\n[\t\s]+(&gt.*)/g, function(a) {
 			return h.replace(/[(^\s)(<br>\s)]+&gt.(.*)/g, function(a) {
-				return "<span style='color: green'>" + a + "</span>"
+				return "<span style='color: green;'>" + a + "</span>"
 			});
 		});
+		//Icono del foro del que viene la noticia en Portada
+		jQuery('.bbar a[href^="/foro"]').each(function(i) {
+			var enlace = this + "";
+			var split = enlace.split('/');
+			var path = split.splice(1, split.length - 1);
+			var pathIndexToGet = 3;
+			var foro = path[pathIndexToGet];
+			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+			$(this).html('<img src="' + foroicon + '">');
+		});
+		
+		
 		// nueva botonera
 		
 		jQuery('button[accesskey="b"]').hide();
