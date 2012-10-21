@@ -25,11 +25,7 @@ function addJQuery(callback) {
 
 function main() {
 		jQuery.noConflict();
-
-
-		
-				// Magia con botones
-
+		// Magia con botones
 		var bbcode = new Array();
 		var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 		var theSelection = false;
@@ -179,14 +175,8 @@ function main() {
 			}
 			return c;
 		}
-
-
-
 		// Fin de la magia
-		
-		
-		
-		
+
 		//Cosas de Vegon
 		
 		var blacklistBarra = "<div class='nopost barra'> \
@@ -612,8 +602,16 @@ function main() {
 			}
 		}
 		
-		
-		
+		// > Greentext
+		// > Implicando que no mola
+
+		jQuery('div[id^="cuerpo_"]').html(
+		function (i,h) {
+			//return h.replace(/<br>\n[\t\s]+(&gt.*)/g, function(a) {
+			return h.replace(/&gt.(.*)/g, function(a) {
+				return "<span>" + a + "</span>"
+			});
+		});
 		// nueva botonera
 		
 		jQuery('button[accesskey="b"]').hide();
