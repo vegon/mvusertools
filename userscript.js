@@ -201,7 +201,7 @@ function main() {
 		{
 		var css = 
 			".sprite {\
-				background: url(http://www.mvwat.com/mvusertools/sprites.png) no-repeat;\
+				background: url(http://www.mvwat.com/mvusertools/sprites-new.png) no-repeat;\
 			}\
 			.usertools TABLE TD\
 			{\
@@ -212,7 +212,7 @@ function main() {
 			}\
 			.firma\
 			{\
-					background-position: -0px -69px;\
+					background-position: 0 -58px;\
 					text-indent: -9999px;\
 					width: 14px;\
 					height: 11px;\
@@ -222,11 +222,11 @@ function main() {
 			}\
 			.firma:hover\
 			{\
-					background-position: 0 -80px;\
+					background-position: 0 -69px;\
 			}\
 			.mensaje\
 			{\
-					background-position: -90px -35px;\
+					background-position: -20px -58px;\
 					text-indent: -9999px;\
 					width: 14px;\
 					height: 10px;\
@@ -236,11 +236,11 @@ function main() {
 			}\
 			.mensaje:hover\
 			{\
-					background-position: -90px -45px;\
+					background-position: -20px -68px;\
 			}\
 			.blacklist-off\
 			{\
-					background-position: -90px -0px;\
+					background-position: -39px -57px;\
 					text-indent: -9999px;\
 					width: 12px;\
 					height: 12px;\
@@ -250,11 +250,11 @@ function main() {
 			}\
 			.blacklist-off:hover\
 			{\
-					background-position: -90px -12px;\
+					background-position: -39px -69px;\
 			}\
 			.blacklist-on\
 			{\
-					background-position: -90px -12px;\
+					background-position: -39px -69px;\
 					text-indent: -9999px;\
 					width: 12px;\
 					height: 12px;\
@@ -264,14 +264,14 @@ function main() {
 			}\
 			.blacklist-on:hover\
 			{\
-					background-position: -90px -0px;\
+					background-position: -39px -57px;\
 			}\
 			.blacklist\
 			{\
 			}\
 			.ut-online\
 			{\
-					background-position: -71px -91px;\
+					background-position: -56px -72px;\
 					text-indent: -99999px;\
 					width: 8px;\
 					height: 12px;\
@@ -281,7 +281,7 @@ function main() {
 			\
 			.offline\
 			{\
-					background-position: -90px -91px;\
+					background-position: -56px -58px;\
 					text-indent: -99999px;\
 					width: 8px;\
 					height: 12px;\
@@ -316,14 +316,14 @@ function main() {
 			}\
 			.toggle-on\
 			{\
-					background-position: -0px -24px;\
+					background-position: -37px -21px;\
 					width: 34px;\
 					height: 34px;\
 					cursor: pointer;\
 			}\
 			.toggle-off\
 			{\
-					background-position: -45px -24px;\
+					background-position: 0 -21px;\
 					width: 34px;\
 					height: 34px;\
 					cursor: pointer;\
@@ -629,8 +629,8 @@ function main() {
 			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
 			$(this).html('<img src="' + foroicon + '">');
 		});
-		
-		
+			//jQuery('div.item H4').prepend(jQuery('.bbar a[href^="/foro"]'));
+
 		// nueva botonera
 		
 		jQuery('button[accesskey="b"]').hide();
