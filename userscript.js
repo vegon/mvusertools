@@ -608,8 +608,8 @@ function main() {
 		jQuery('div[id^="cuerpo_"]').html(
 		function (i,h) {
 			//return h.replace(/<br>\n[\t\s]+(&gt.*)/g, function(a) {
-			return h.replace(/^[\n\t\s]+&gt.(.*)/g, function(a) {
-				return "<span>" + a + "</span>"
+			return h.replace(/[(^\s)(<br>\s)]+&gt.(.*)/g, function(a) {
+				return "<span style='color: green'>" + a + "</span>"
 			});
 		});
 		// nueva botonera
