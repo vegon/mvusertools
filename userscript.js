@@ -3,8 +3,15 @@
 // @namespace      MVusertools
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
-// @include        http://www.mediavida.com/foro/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
+// @exclude        http://www.mediavida.com/id/*
+// @exclude        http://www.mediavida.com/notificaciones*
+// @exclude        http://www.mediavida.com/invitaciones*
+// @exclude        http://www.mediavida.com/mensajes*
+// @exclude        http://www.mediavida.com/online*
+// @exclude        http://www.mediavida.com/grupos*
+// @exclude        http://www.mediavida.com/clanes*
+// @exclude        http://www.mediavida.com/stream*
 // ==/UserScript==
 
 function addJQuery(callback) {
