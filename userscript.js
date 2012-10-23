@@ -618,7 +618,7 @@ function main() {
 		function (i,h) {
 			return h.replace(/^\s*&gt.*/mg, function(a) {
 				if (is_dark) {
-			        return "<span style='color: #b5bd68;'>" + a + "</span>"
+			        return "<span style='color: #A7BD68;'>" + a + "</span>"
 			    } else {
 			        return "<span style='color: #789922;'>" + a + "</span>"
 			    }
