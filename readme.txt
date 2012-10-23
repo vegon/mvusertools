@@ -1,4 +1,10 @@
-﻿1.6.3
+﻿1.6.4
+    >Greentext
+    Iconos del foro donde viene cada noticia en portada.
+    Optimización de las imagenes.
+    Actualizado jQuery.
+
+1.6.3
     Añadido:
         - Hilos con Live! activado tienen un fondo para hacerlos resaltar más con el resto de hilos.
         - La respuestas por la que entras a un hilo (por url directa o por posts sin leer) más destacado.
