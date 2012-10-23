@@ -633,6 +633,11 @@ function main() {
 		jQuery('.item h4').each(function (index) {
 			$(this).prepend($('.bbar a[href^="/foro"]').eq(0));
 		});
+		jQuery('div.left:first-child').contents().filter(function(){
+			return this.nodeType === 3;
+		}).remove();
+		jQuery('div.left:first-child').prepend('En ');
+		
 		
 
 		// nueva botonera
