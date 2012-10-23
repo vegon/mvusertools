@@ -42,7 +42,7 @@ function main() {
 		var is_ie = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
 		var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -1));
 		var baseHeight;
-		var is_dark = $("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
+		var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 
 		function initInsertions() {
 			var b;
@@ -633,10 +633,10 @@ function main() {
 			var pathIndexToGet = 3;
 			var foro = path[pathIndexToGet];
 			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			$(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
+			jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
 		});
 		jQuery('.item h4').each(function (index) {
-			$(this).prepend($('.bbar a[href^="/foro"]').eq(0));
+			jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
 		});
 		jQuery('div.left:first-child').contents().filter(function(){
 			return this.nodeType === 3;
@@ -737,16 +737,16 @@ function main() {
 		
 		//Set Toggle Class
 		
-		$("#scrollpages").append(balcklistToggle);
+		jQuery("#scrollpages").append(balcklistToggle);
 		
 		if (localStorage.getItem('blacklist') == 'on') {
-			$('#toggle').addClass("toggle-on");
-			$('#toggle').removeClass("toggle-off");
+			jQuery('#toggle').addClass("toggle-on");
+			jQuery('#toggle').removeClass("toggle-off");
 			console.log("encendido");
 		}
 		else {
-			$('#toggle').addClass("toggle-off");
-			$('#toggle').removeClass("toggle-on");
+			jQuery('#toggle').addClass("toggle-off");
+			jQuery('#toggle').removeClass("toggle-on");
 			console.log("apagado");
 		}
 		
@@ -769,8 +769,8 @@ function main() {
 								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off sprite' href='javascript:void(0)' original-title='Blacklist'></a></div>\
 						</div>");
 		});
-		$('.online').hide();
-		$('.online').parent().parent().find('.offline').toggleClass('ut-online offline');
+		jQuery('.online').hide();
+		jQuery('.online').parent().parent().find('.offline').toggleClass('ut-online offline');
 		
 		//Primera carga del a página. Tapar los posts de la blacklist si procede.
 		
@@ -820,13 +820,13 @@ function main() {
 		//	jQuery('#toggle').toggleClass("toggle-on toggle-off");
 		
 			if (localStorage.getItem('blacklist') == 'on') {
-				$('#toggle').addClass("toggle-off");
-				$('#toggle').removeClass("toggle-on");
+				jQuery('#toggle').addClass("toggle-off");
+				jQuery('#toggle').removeClass("toggle-on");
 				localStorage.setItem('blacklist', 'off');
 			}
 			else {
-				$('#toggle').addClass("toggle-on");
-				$('#toggle').removeClass("toggle-off");
+				jQuery('#toggle').addClass("toggle-on");
+				jQuery('#toggle').removeClass("toggle-off");
 				localStorage.setItem('blacklist', 'on');
 			}
 			console.log(localStorage.getItem('blacklist'));
@@ -901,7 +901,7 @@ function main() {
 			});
 			// Fin de actualización
 		});
-		$("a.tooltip").tipsy();
+		jQuery("a.tooltip").tipsy();
 	}
 
 // load jQuery and execute the main function
