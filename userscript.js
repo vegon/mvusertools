@@ -610,14 +610,14 @@ function main() {
 			}
 		}
 		
-		// > Greentext
-		// > Implicando que no mola
+		// > Greentext 
+		// > Implicando que no mola. Color para el theme oscuro #A7BD68
 
 		jQuery('div[id^="cuerpo_"]').html(
 		function (i,h) {
 			return h.replace(/^\s*&gt.*/mg, function(a) {
-				return "<span style='color: green;'>" + a + "</span>"
-			});
+				return "<span style='color: #789922;'>" + a + "</span>"
+			});	
 		});
 		
 		//Icono del foro del que viene la noticia en Portada
