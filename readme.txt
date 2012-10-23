@@ -1,4 +1,9 @@
-﻿1.6.4
+﻿1.6.5
+    Soporte completo al theme oscuro. Gracias scumah.
+    Marcapáginas para saber desde que post estás leyendo.
+    Corrección de errores. 
+
+1.6.4
     >Greentext
     Iconos del foro donde viene cada noticia en portada.
     Optimización de las imagenes.
