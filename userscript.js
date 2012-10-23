@@ -10,6 +10,7 @@
 // @exclude        http://www.mediavida.com/mensajes*
 // @exclude        http://www.mediavida.com/online*
 // @exclude        http://www.mediavida.com/grupos*
+// @exclude        http://www.mediavida.com/g/*
 // @exclude        http://www.mediavida.com/clanes*
 // @exclude        http://www.mediavida.com/stream*
 // ==/UserScript==
@@ -609,7 +610,7 @@ function main() {
 		}
 		
 		// Marcapaginas en los posts que entras directamente
-		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas.png") !important; background-repeat: no-repeat !important; background-position: 664px top !important;');
+		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
 		
 		
 		// > Greentext 
