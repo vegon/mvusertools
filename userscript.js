@@ -636,7 +636,7 @@ function main() {
 		jQuery('div.left:first-child').contents().filter(function(){
 			return this.nodeType === 3;
 		}).remove();
-		jQuery('div.left:first-child').prepend('En ');
+		jQuery('.bbar div.left:first-child').prepend('En ');
 		
 		
 
