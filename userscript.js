@@ -611,7 +611,7 @@ function main() {
 		}
 		
 		// > Greentext 
-		// > Implicando que no mola. Color para el theme oscuro #A7BD68
+		// > Implicando que no mola. Color para el theme oscuro #b5bd68
 
 		jQuery('div[id^="cuerpo_"]').html(
 		function (i,h) {
