@@ -42,6 +42,7 @@ function main() {
 		var is_ie = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
 		var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -1));
 		var baseHeight;
+		var is_dark = $("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 
 		function initInsertions() {
 			var b;
@@ -193,7 +194,7 @@ function main() {
 		
 		var balcklistToggle ="<div id='toggle' class='sprite'><div> "; 
 	
-		var blacklistInfo = "<span class='blacklisted-post'>Click en <img src='http://www.mvwat.com/mvusertools/blacklist-mini.png'> para desbloquear.</span>";
+		var blacklistInfo = "<span class='blacklisted-post'" + (is_dark ? " style='color: #626262 !important;'" : "") + ">Click en <img src='http://www.mvwat.com/mvusertools/blacklist-mini.png'> para desbloquear.</span>";
 	
 		var blacklistAvatar = "~";
 	
@@ -611,12 +612,16 @@ function main() {
 		}
 		
 		// > Greentext 
-		// > Implicando que no mola. Color para el theme oscuro #b5bd68
+		// > Implicando que no mola
 
 		jQuery('div[id^="cuerpo_"]').html(
 		function (i,h) {
 			return h.replace(/^\s*&gt.*/mg, function(a) {
-				return "<span style='color: #789922;'>" + a + "</span>"
+				if (is_dark) {
+			        return "<span style='color: #b5bd68;'>" + a + "</span>"
+			    } else {
+			        return "<span style='color: #789922;'>" + a + "</span>"
+			    }
 			});	
 		});
 		
