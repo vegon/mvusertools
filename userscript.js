@@ -464,9 +464,6 @@ function main() {
 			.ut-live td.alt {\
 				background-color: #EFE0E0;\
 			}\
-			div.post.mark {\
-				background-color: #FFFCF1;\
-			}\
 			.minibox .mini li {\
 				padding: 8px 8px 8px 35px !important;\
 			}\
@@ -611,9 +608,12 @@ function main() {
 			}
 		}
 		
+		// Marcapaginas en los posts que entras directamente
+		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas.png") !important; background-repeat: no-repeat !important; background-position: 664px top !important;');
+		
+		
 		// > Greentext 
 		// > Implicando que no mola
-
 		jQuery('div[id^="cuerpo_"]').html(
 		function (i,h) {
 			return h.replace(/^\s*&gt.*/mg, function(a) {
@@ -679,7 +679,7 @@ function main() {
 			bbstyle2(28);
 		});
 		
-		// hilos con live destacados
+		// hilos con live destacados (solo funciona con theme normal)
 		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
 		
 		// hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
