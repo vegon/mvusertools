@@ -1,4 +1,8 @@
-﻿1.6.5
+﻿1.6.5.1
+    Desactivado greentext hasta corrección de errores.
+	Soporte para perfiles y grupos.
+	
+1.6.5
     Soporte completo al theme oscuro. Gracias scumah.
     Marcapáginas para saber desde que post estás leyendo.
     Corrección de errores. 
