@@ -614,16 +614,16 @@ function main() {
 		
 		// > Greentext 
 		// > Implicando que no mola
-		jQuery('div[id^="cuerpo_"]').html(
-		function (i,h) {
-			return h.replace(/^\s*&gt.*/mg, function(a) {
-				if (is_dark) {
-			        return "<span style='color: #A7BD68;'>" + a + "</span>"
-			    } else {
-			        return "<span style='color: #789922;'>" + a + "</span>"
-			    }
-			});	
-		});
+//		jQuery('div[id^="cuerpo_"]').html(
+//		function (i,h) {
+//			return h.replace(/^\s*&gt.*/mg, function(a) {
+//				if (is_dark) {
+//			        return "<span style='color: #A7BD68;'>" + a + "</span>"
+//			    } else {
+//			        return "<span style='color: #789922;'>" + a + "</span>"
+//			    }
+//			});	
+//		});
 		
 		//Icono del foro del que viene la noticia en Portada
 		jQuery('.bbar a[href^="/foro"]').each(function(i) {
