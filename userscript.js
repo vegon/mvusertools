@@ -4,7 +4,6 @@
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
-// @exclude        http://www.mediavida.com/id/*
 // @exclude        http://www.mediavida.com/notificaciones*
 // @exclude        http://www.mediavida.com/invitaciones*
 // @exclude        http://www.mediavida.com/mensajes*
@@ -212,7 +211,7 @@ function main() {
 			.usertools A\
 			{\
 			}\
-			.firma\
+			.ut-firma\
 			{\
 					background-position: 0 -58px;\
 					text-indent: -9999px;\
@@ -222,7 +221,7 @@ function main() {
 					outline: 0;\
 					margin-top: 1px;\
 			}\
-			.firma:hover\
+			.ut-firma:hover\
 			{\
 					background-position: 0 -69px;\
 			}\
@@ -766,7 +765,7 @@ function main() {
 			jQuery(this).append("<div class='usertools'>\
 								<div class='online-pos'><a class='tooltip offline sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
 								<div class='mensaje-pos'><a class='tooltip mensaje sprite' href='http://www.mediavida.com/mensajes/nuevo/" + jQuery(this).data('name') + "' original-title='Mensaje'></a></div>\
-								<div class='firma-pos'><a class='tooltip firma sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "/firmas' original-title='Firma'></a></div>\
+								<div class='firma-pos'><a class='tooltip ut-firma sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "/firmas' original-title='Firma'></a></div>\
 								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off sprite' href='javascript:void(0)' original-title='Blacklist'></a></div>\
 						</div>");
 		});
