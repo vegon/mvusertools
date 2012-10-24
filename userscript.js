@@ -770,8 +770,8 @@ function main() {
 								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off sprite' href='javascript:void(0)' original-title='Blacklist'></a></div>\
 						</div>");
 		});
-		jQuery('.online').hide();
-		jQuery('.online').parent().parent().find('.offline').toggleClass('ut-online offline');
+		jQuery('div.autor dd.online').hide();
+		jQuery('div.autor dd.online').parent().parent().find('.offline').toggleClass('ut-online offline');
 		
 		//Primera carga del a página. Tapar los posts de la blacklist si procede.
 		
