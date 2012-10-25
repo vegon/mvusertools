@@ -608,6 +608,10 @@ function main() {
 			}
 		}
 		
+		// Links importantes en el footer
+		jQuery('div.tpanel:first').after('<div class="tpanel" style="background: none; border: none; margin: 5px 0px -20px 0px; padding: 0px;line-height: 15px; height: 30px;color: #888888;"><div class="" style="background: none;"><strong class="inner linkrapidos"><a href="/foro/spy">Spy</a> • <a href="/foro/favoritos">Favoritos</a> • <a href="/notificaciones">Avisos</a> • </strong></div></div>');
+		jQuery('div#userinfo a[href^="/id/"]').clone().appendTo('strong.linkrapidos').children('img').remove().end().children('span').text('Mi Perfil');
+		
 		// Marcapaginas en los posts que entras directamente
 		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
 		
