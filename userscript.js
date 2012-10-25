@@ -590,6 +590,27 @@ function main() {
 			.ut-4 {\
 				background: url('http://www.mediavida.com/style/img/icon/foro/4.png') no-repeat scroll 6px center transparent !important;\
 			}\
+			.linksfooter A {\
+				opacity: 0.5;\
+			}\
+			.linksfooter A:hover {\
+				opacity: 1;\
+			}\
+			.linksfooter2 {\
+				background: linear-gradient(to top, #1c252b, #010101) !important;\
+				padding: 5px 6px !important;\
+				border-radius: 6px;\
+				line-height: 35px;\
+				color: #4A4D50;\
+				border: 1px solid #555f66;\
+				border-bottom: 1px solid #0e1113;\
+			}\
+			.linksfooter2 IMG {\
+				vertical-align: sub;\
+			}\
+			.linksfooter2 A {\
+				padding: 0px 3px !important;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -608,9 +629,69 @@ function main() {
 			}
 		}
 		
+
 		// Links importantes en el footer
-		jQuery('div.tpanel:first').after('<div class="tpanel" style="background: none; border: none; margin: 5px 0px -20px 0px; padding: 0px;line-height: 15px; height: 30px;color: #888888;"><div class="" style="background: none;"><strong class="inner linkrapidos"><a href="/foro/spy">Spy</a> • <a href="/foro/favoritos">Favoritos</a> • <a href="/notificaciones">Avisos</a> • </strong></div></div>');
-		jQuery('div#userinfo a[href^="/id/"]').clone().appendTo('strong.linkrapidos').children('img').remove().end().children('span').text('Mi Perfil');
+		jQuery(function(){
+		   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
+				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+				jQuery('.linksfooter2 .separator').remove();
+				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+					//Noti
+				var utnoti = jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').each(function() {
+					if (utnoti.length > 0) {
+						jQuery(this).append(' ('+ utnoti +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+					//Avisos
+				var utavisos = jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').each(function() {
+					if (utavisos.length > 0) {
+						jQuery(this).append(' ('+ utavisos +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+					//Mensajes
+				var utmsj = jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').each(function() {
+					if (utmsj.length > 0) {
+						jQuery(this).append(' ('+ utmsj +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
+			 }
+			 else {
+				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').removeClass('bar').insertAfter('form#postform').prepend('<a href="/foro/spy">Spy</a> |');
+				jQuery('.linksfooter2 .separator').remove();
+				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+					//Noti
+				var utnoti = jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').each(function() {
+					if (utnoti.length > 0) {
+						jQuery(this).append(' ('+ utnoti +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+					//Avisos
+				var utavisos = jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').each(function() {
+					if (utavisos.length > 0) {
+						jQuery(this).append(' ('+ utavisos +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+					//Mensajes
+				var utmsj = jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').html();
+				jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').each(function() {
+					if (utmsj.length > 0) {
+						jQuery(this).append(' ('+ utmsj +')');
+					}
+					});
+				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
+			 }
+		});
+		
 		
 		// Marcapaginas en los posts que entras directamente
 		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
