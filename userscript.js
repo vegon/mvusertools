@@ -597,19 +597,70 @@ function main() {
 				opacity: 1;\
 			}\
 			.linksfooter2 {\
-				background: linear-gradient(to top, #1c252b, #010101) !important;\
 				padding: 5px 6px !important;\
 				border-radius: 6px;\
 				line-height: 35px;\
-				color: #4A4D50;\
-				border: 1px solid #555f66;\
-				border-bottom: 1px solid #0e1113;\
 			}\
 			.linksfooter2 IMG {\
 				vertical-align: sub;\
 			}\
 			.linksfooter2 A {\
 				padding: 0px 3px !important;\
+			}\
+			.linksfooterblanco {\
+				background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;\
+				color: #8e908a;\
+				border: 1px solid #C7C9C3;\
+				border-bottom: 1px solid #BABCB6;\
+			}\
+			.linksfooterblanco A {\
+				color: #666666;\
+			}\
+			.linksfooterblanco A:hover {\
+				color: #222222;\
+			}\
+			.linksfooternegro {\
+				background: linear-gradient(to top, #1c252b, #010101) !important;\
+				color: #4A4D50;\
+				border: 1px solid #555f66;\
+				border-bottom: 1px solid #0e1113;\
+			}\
+			#modlist {\
+				margin: 20px 0 0;\
+				padding: 10px 10px;\
+				border-radius: 6px 6px 6px 6px;\
+			}\
+			.modlistblanco {\
+				border: 1px solid #D4D4D2;\
+			}\
+			.modlistnegro {\
+				border: 1px solid #273037;\
+				background-color: #39444B;\
+			}\
+			#modlist H3{\
+				margin-top: 0px !important;\
+			}\
+			#modlist A{\
+				padding: 3px 0 3px 3px;\
+				display: block;\
+			}\
+			.modlistblanco A:nth-child(odd){\
+				background: #E8EBE3;\
+			}\
+			.modlistblanco A:hover{\
+				background: #D6D8D2;\
+			}\
+			.modlistblanco span{\
+				color: #555555;\
+			}\
+			.modlistnegro A:nth-child(odd){\
+				background: #435058;\
+			}\
+			.modlistnegro A:hover{\
+				background: #273037;\
+			}\
+			.modlistnegro span{\
+				color: #C5D1EC;\
 			}\
 			";
 		}
@@ -629,11 +680,52 @@ function main() {
 			}
 		}
 		
-
+		
+		// Mods de cada foro
+		jQuery(function() {
+			if(jQuery('div#topnav a[href="/foro/"]').length > 0) {
+				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
+				var url = window.location.pathname;
+				var id = url.split("/")[2];
+				mods = [
+					['nulo'],['TazzMaTazz','RaymaN','jadgix','J40','bazoo'],['Eristoff','kalinka-'],['Josekron','aLeX','Loa','Prava','mongui','MegalomaniaC'],[''],[''],['JMBaDBoY','PruDeN','Prava','Atoll','Kails','Eristoff','sacnoth','Bloody'],['lb_nacho','Korso','abichuela','alejo','Ch4iNeR','AG','cm07','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['tutitin','TNx7'],[''],[''],[''],[''],[''],[''],[''],[''],['TNx7','Kaneas'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['thunder_','StumKrav','Midgard'],[''],[''],[''],[''],['Eristoff','ReYzell'],['loko_man','eisenfaust','Andy','ruben132','Sh1n0d4','t0rrY','ISAILOVIC','JMBaDBoY'],[''],[''],[''],[''],[''],['Ligia','ManOwaR','sPoiLeR','Hir0shz'],[''],['HaZuKi','J40','horvathzeros','ferk'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','tutitin','MaSqUi','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['darkavm','Cheester','Txentx0','sk_sk4t3r','TNx7','cuerpi'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['ZaGo','JMBaDBoY','Sirius_spa','suggus'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','Kb','GryF','lb_nacho','-Power'],[''],[''],['darkavm','sk_sk4t3r','ElKedao','dicon'],[''],[''],[''],['ZaGo','Atoll'],['NosFeR_','kaitoo','DeNz1L'],['Skelus'],['urrako','Txentx0','darkavm','Dolz'],['RoDRa','dicon','babri','Spank'],['lb_nacho','Hogwarts','iosp'],['zashael'],['zashael','frostttt','edvan','Kazuya_','Charly-'],['sPoiLeR','RaymaN'],['CybeR','CsNarsil'],['eisenfaust'],['thunder_','StumKrav','bazoo'],['Netzach','StumKrav','Korso','DarkHawX'],['BigmAK','benitogb'],[''],['loko_man','Andy','ruben132','Sh1n0d4','t0rrY','ISAILOVIC','JMBaDBoY'],[''],['thunder_','StumKrav','slakk','naete','allmy'],['TRON','gonya707'],['RoninPiros','babri'],['Bidroid','MagicAnnii'],['ChaRliFuM','undimmer','menolikeyou'],['Pedrosa7','Syuk','locof'],[''],['J40','horvathzeros','ferk','alexander'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
+				];
+				jQuery.each(mods[id], function(i,v) {
+					if (mods[id] == '') {
+					jQuery('<p/>').html('<span>Este foro no tiene mods o no están listados.</span>').appendTo('#modlist');
+					}
+					else {
+					//jQuery('<li/>').html(v).appendTo('#modlist');
+					jQuery('<a/>').html(v).attr('href','/id/'+ v+ '').append('<br />').appendTo('#modlist');
+					}
+				});	
+			}	
+		});
+		jQuery(function() {
+			if (is_dark == 0){
+				jQuery('#modlist').addClass('modlistblanco');
+			}
+			else {
+				jQuery('#modlist').addClass('modlistnegro');
+			}
+		});
+		
+		
 		// Links importantes en el footer
 		jQuery(function(){
 		   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
-				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
+					if (is_dark == 0) {
+						jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+						jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
+						jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
+						jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
+						jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+					}
+					else {
+						jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+					}
+				});
 				jQuery('.linksfooter2 .separator').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
@@ -662,7 +754,18 @@ function main() {
 				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
 			 }
 			 else {
-				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').removeClass('bar').insertAfter('form#postform').prepend('<a href="/foro/spy">Spy</a> |');
+				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
+						if (is_dark == 0) {
+							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
+							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
+							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
+							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+						}
+						else {
+							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform').prepend('<a href="/foro/spy">Spy</a> |');
+						}
+					});		 
 				jQuery('.linksfooter2 .separator').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
@@ -692,12 +795,11 @@ function main() {
 			 }
 		});
 		
-		
 		// Marcapaginas en los posts que entras directamente
 		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
 		
 		
-		// > Greentext 
+		// > Greentext (no funciona, hace que dejen de ir los popups de las imagenes y los el hover de los quotes)
 		// > Implicando que no mola
 //		jQuery('div[id^="cuerpo_"]').html(
 //		function (i,h) {
