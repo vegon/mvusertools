@@ -683,7 +683,7 @@ function main() {
 		
 		// Mods de cada foro
 		jQuery(function() {
-			if(jQuery('div#topnav a[href="/foro/"]').length > 0) {
+			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
 				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
 				var url = window.location.pathname;
 				var id = url.split("/")[2];
