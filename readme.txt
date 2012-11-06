@@ -1,4 +1,8 @@
-﻿1.6.5.1
+﻿1.6.6
+    Añadidos enlaces utiles al final de cada página de un hilo.
+    Listado de los mods del foro que estas visitando en la columna de la derecha.
+
+1.6.5.1
     Desactivado greentext hasta corrección de errores.
 	Soporte para perfiles y grupos.
 	
