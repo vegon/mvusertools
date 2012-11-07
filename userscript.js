@@ -736,7 +736,7 @@ function main() {
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble');
+				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
 				if (utavisos.length > 0) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
@@ -744,7 +744,7 @@ function main() {
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble');
+				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
 				if (utmsj.length > 0) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
@@ -755,14 +755,14 @@ function main() {
 			 else {
 				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
 						if (is_dark == 0) {
-							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('').prepend('<a href="/foro/spy">Spy</a> |');
 							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
 							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
 							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
 							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
 						}
 						else {
-							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform').prepend('<a href="/foro/spy">Spy</a> |');
+							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
 						}
 					});		 
 				jQuery('.linksfooter2 .separator').remove();
@@ -776,7 +776,7 @@ function main() {
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble');
+				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
 				if (utavisos.length > 0) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
@@ -784,7 +784,7 @@ function main() {
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble');
+				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
 				if (utmsj.length > 0) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
