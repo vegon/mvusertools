@@ -679,8 +679,7 @@ function main() {
                 heads[0].appendChild(node);
 			}
 		}
-		
-		
+
 		// Mods de cada foro
 		jQuery(function() {
 			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
@@ -729,28 +728,28 @@ function main() {
 				jQuery('.linksfooter2 .separator').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').each(function() {
-					if (utnoti.length > 0) {
-						jQuery(this).append(' ('+ utnoti +')');
-					}
-					});
+				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+				jQuery(function() {
+				if (utnoti.length > 0) {
+					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').each(function() {
-					if (utavisos.length > 0) {
-						jQuery(this).append(' ('+ utavisos +')');
-					}
-					});
+				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble');
+				jQuery(function() {
+				if (utavisos.length > 0) {
+					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').each(function() {
-					if (utmsj.length > 0) {
-						jQuery(this).append(' ('+ utmsj +')');
-					}
-					});
+				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble');
+				jQuery(function() {
+				if (utmsj.length > 0) {
+					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
 			 }
 			 else {
@@ -769,28 +768,28 @@ function main() {
 				jQuery('.linksfooter2 .separator').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').each(function() {
-					if (utnoti.length > 0) {
-						jQuery(this).append(' ('+ utnoti +')');
-					}
-					});
+				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+				jQuery(function() {
+				if (utnoti.length > 0) {
+					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').each(function() {
-					if (utavisos.length > 0) {
-						jQuery(this).append(' ('+ utavisos +')');
-					}
-					});
+				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble');
+				jQuery(function() {
+				if (utavisos.length > 0) {
+					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').html();
-				jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').each(function() {
-					if (utmsj.length > 0) {
-						jQuery(this).append(' ('+ utmsj +')');
-					}
-					});
+				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble');
+				jQuery(function() {
+				if (utmsj.length > 0) {
+					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
+				}
+				});
 				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
 			 }
 		});
@@ -961,7 +960,7 @@ function main() {
 		
 		//Primera carga del a página. Tapar los posts de la blacklist si procede.
 		
-		jQuery("img[src^='/img/users/avatar']").parent().prepend("<div class='tapavatares'><span></span></div>");
+		jQuery("img[src^='/img/users/avatar']").parent().prepend("<div class=''><span></span></div>");
 		
 		//jQuery("img[src^='/img/users/avatar']").parent().append("<div class='ancla'><div>");
 		
