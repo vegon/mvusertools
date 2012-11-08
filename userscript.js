@@ -652,7 +652,7 @@ function main() {
 			 else {
 				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
 						if (is_dark == 0) {
-							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('').prepend('<a href="/foro/spy">Spy</a> |');
+							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
 							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
 							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
 							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
