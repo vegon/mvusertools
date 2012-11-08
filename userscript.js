@@ -554,6 +554,27 @@ function main() {
 			}
 		}
 
+		
+		// Mensaje al updatear
+		var utupdate = localStorage["utupdate"];
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.6.6</p><br />- Añadidos enlaces utiles al final de cada página de un hilo.<br />- Listado de los mods del foro que estas visitando en la columna de la derecha.<br />- Temporalmente desactivado el greentext debido a errores en los posts.';
+		jQuery(function() {
+		if (utupdate != 'ut166') {
+			jQuery('<div style="background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.5; z-index: 9998;" id="ut-mask"></div>').insertBefore('#background');
+			jQuery('<div style="width: 400px; top: 50%; left: 50%; margin-top: -100px; margin-left: -200px; position: fixed; z-index: 9999;" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-patchnotes" style="background: #ffffff; border-radius: 6px; width: 400px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;">'+ utpatchnotes +'<a style="float: right; margin-top: 20px;" href="#cerrar" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+			jQuery('#ut-box-cerrar').click(function() {
+				jQuery('#ut-dialog').hide();
+				jQuery('#ut-mask').hide();
+			});
+			jQuery('#ut-mask').click(function() {
+				jQuery('#ut-dialog').hide();
+				jQuery('#ut-mask').hide();
+			});
+
+			localStorage["utupdate"] = 'ut166';
+		}
+		});
+		
 		// Mods de cada foro
 		jQuery(function() {
 			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
