@@ -483,6 +483,7 @@ function main() {
 			}\
 			.linksfooterblanco {\
 				background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;\
+				background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;\
 				color: #8e908a;\
 				border: 1px solid #C7C9C3;\
 				border-bottom: 1px solid #BABCB6;\
@@ -495,6 +496,7 @@ function main() {
 			}\
 			.linksfooternegro {\
 				background: linear-gradient(to top, #1c252b, #010101) !important;\
+				background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;\
 				color: #4A4D50;\
 				border: 1px solid #555f66;\
 				border-bottom: 1px solid #0e1113;\
