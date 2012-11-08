@@ -464,132 +464,6 @@ function main() {
 			.ut-live td.alt {\
 				background-color: #EFE0E0;\
 			}\
-			.minibox .mini li {\
-				padding: 8px 8px 8px 35px !important;\
-			}\
-			.ut-6 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/6.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-23 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/23.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-102 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/102.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-82 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/82.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-109 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/109.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-99 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/99.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-32 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/32.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-96 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/96.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-127 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/127.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-126 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/126.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-107 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/107.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-106 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/106.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-7 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/7.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-119 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/119.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-26 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/26.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-124 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/124.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-10 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/10.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-117 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/117.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-31 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/31.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-1 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/1.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-130 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/130.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-40 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/40.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-2 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/2.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-114 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/114.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-115 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/115.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-123 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/123.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-108 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/108.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-110 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/110.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-120 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/120.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-111 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/111.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-128 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/128.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-42 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/42.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-118 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/118.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-22 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/22.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-19 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/19.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-125 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/125.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-38 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/38.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-3 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/3.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-83 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/83.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-9 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/9.png') no-repeat scroll 6px center transparent !important;\
-			}\
-			.ut-4 {\
-				background: url('http://www.mediavida.com/style/img/icon/foro/4.png') no-repeat scroll 6px center transparent !important;\
-			}\
 			.linksfooter A {\
 				opacity: 0.5;\
 			}\
@@ -829,6 +703,17 @@ function main() {
 		}).remove();
 		jQuery('.bbar div.left:first-child').prepend('En ');
 		
+		//Icono del foro del que viene la noticia en Destacados
+		jQuery('ul.mini a[href^="/foro"]').each(function(i) {
+			var enlace = this + "";
+			var split = enlace.split('/');
+			var path = split.splice(1, split.length - 1);
+			var pathIndexToGet = 3;
+			var foro = path[pathIndexToGet];
+			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+			jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
+		});
+		
 		
 
 		// nueva botonera
@@ -875,51 +760,6 @@ function main() {
 		// Alien_crrpt = Alien_derp
 		jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
 		jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
-		
-		// Destacados con icono de su foro
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/6/"]').parent('li').addClass('ut-6').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/6.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/23/"]').parent('li').addClass('ut-23').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/23.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/102/"]').parent('li').addClass('ut-102').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/102.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/82/"]').parent('li').addClass('ut-82').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/82.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/109/"]').parent('li').addClass('ut-109').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/109.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/99/"]').parent('li').addClass('ut-99').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/99.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/32/"]').parent('li').addClass('ut-32').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/32.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/96/"]').parent('li').addClass('ut-96').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/96.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/127/"]').parent('li').addClass('ut-127').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/127.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/126/"]').parent('li').addClass('ut-126').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/126.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/107/"]').parent('li').addClass('ut-107').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/107.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/106/"]').parent('li').addClass('ut-106').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/106.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/7/"]').parent('li').addClass('ut-7').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/7.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/119/"]').parent('li').addClass('ut-119').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/119.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/26/"]').parent('li').addClass('ut-26').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/26.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/124/"]').parent('li').addClass('ut-124').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/124.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/10/"]').parent('li').addClass('ut-10').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/10.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/117/"]').parent('li').addClass('ut-117').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/117.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/31/"]').parent('li').addClass('ut-31').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/31.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/1/"]').parent('li').addClass('ut-1').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/1.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/130/"]').parent('li').addClass('ut-130').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/130.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/40/"]').parent('li').addClass('ut-40').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/40.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/2/"]').parent('li').addClass('ut-2').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/2.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/114/"]').parent('li').addClass('ut-114').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/114.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/115/"]').parent('li').addClass('ut-115').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/115.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/123/"]').parent('li').addClass('ut-123').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/123.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/108/"]').parent('li').addClass('ut-108').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/108.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/110/"]').parent('li').addClass('ut-110').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/110.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/120/"]').parent('li').addClass('ut-120').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/120.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/111/"]').parent('li').addClass('ut-111').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/111.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/128/"]').parent('li').addClass('ut-128').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/128.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/42/"]').parent('li').addClass('ut-42').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/42.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/118/"]').parent('li').addClass('ut-118').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/118.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/22/"]').parent('li').addClass('ut-22').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/22.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/19/"]').parent('li').addClass('ut-19').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/19.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/125/"]').parent('li').addClass('ut-125').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/125.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/38/"]').parent('li').addClass('ut-38').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/38.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/3/"]').parent('li').addClass('ut-3').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/3.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/83/"]').parent('li').addClass('ut-83').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/83.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/9/"]').parent('li').addClass('ut-9').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/9.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/4/"]').parent('li').addClass('ut-4').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/4.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		jQuery('div[class="minibox"]').children().children().children('a[href*="/131/"]').parent('li').attr( 'style', "background-image: url('http://www.mediavida.com/style/img/icon/foro/131.png') !important; background-repeat: no-repeat !important; background-position: 6px center !important;" );
-		
 		
 		//Set Toggle Class
 		
