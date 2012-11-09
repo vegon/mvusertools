@@ -581,13 +581,14 @@ function main() {
 		}
 		
 		
-		// Menu
+		/////////// MENU ///////////////////////////////////////////////////////////////
 		var utlinksfooter = localStorage["utlinksfooter"];
-		
-		jQuery('<a id="ut-menu" href="#ut"><span class="sprite config"></span><span class="uextra">Ut</span></a>').insertAfter('div#userinfo a[href="/mensajes"]');
+		var uttablamods = localStorage["uttablamods"];
+		var utmarcapaginas = localStorage["utmarcapaginas"];
+			// Forma del menu
+		jQuery('<a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a>').insertAfter('div#userinfo a[href="/mensajes"]');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window">Links en el footer: <a id="ut-linksfooter-si">Si</a> <a id="ut-linksfooter-no">No</a><p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" href="#cerrar" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
-		
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window">Links en el footer: <a id="ut-linksfooter-si">Si</a> <a id="ut-linksfooter-no">No</a><br />Tabla de mods: <a id="ut-tablamods-si">Si</a> <a id="ut-tablamods-no">No<br /></a>Marcapáginas: <a id="ut-marcapaginas-si">Si</a> <a id="ut-marcapaginas-no">No</a><p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery('#ut-menu').click(function () {
 			jQuery('#ut-mask-menu').show();
 			jQuery('#ut-dialog-menu').show();
@@ -600,6 +601,7 @@ function main() {
 			jQuery('#ut-dialog-menu').hide();
 			jQuery('#ut-mask-menu').hide();
 		});
+			// Boton de utlinksfooter
 		jQuery('#ut-linksfooter-si').click(function() {
 			localStorage["utlinksfooter"] = 'si';
 			jQuery('#ut-linksfooter-no').css('color','#555555')
@@ -616,20 +618,55 @@ function main() {
 		if (utlinksfooter == 'no') {
 			jQuery('#ut-linksfooter-si').css('color','#555555')
 		}
+			// Boton de uttablamods
+		jQuery('#ut-tablamods-si').click(function() {
+			localStorage["uttablamods"] = 'si';
+			jQuery('#ut-tablamods-no').css('color','#555555')
+			jQuery('#ut-tablamods-si').css('color','#EF5000')
+		});
+		jQuery('#ut-tablamods-no').click(function() {
+			localStorage["uttablamods"] = 'no';
+			jQuery('#ut-tablamods-si').css('color','#555555')
+			jQuery('#ut-tablamods-no').css('color','#EF5000')
+		});
+		if (uttablamods == 'si') {
+			jQuery('#ut-tablamods-no').css('color','#555555')
+		}
+		if (uttablamods == 'no') {
+			jQuery('#ut-tablamods-si').css('color','#555555')
+		}
+			// Marcapaginas
+		jQuery('#ut-marcapaginas-si').click(function() {
+			localStorage["utmarcapaginas"] = 'si';
+			jQuery('#ut-marcapaginas-no').css('color','#555555')
+			jQuery('#ut-marcapaginas-si').css('color','#EF5000')
+		});
+		jQuery('#ut-marcapaginas-no').click(function() {
+			localStorage["utmarcapaginas"] = 'no';
+			jQuery('#ut-marcapaginas-si').css('color','#555555')
+			jQuery('#ut-marcapaginas-no').css('color','#EF5000')
+		});
+		if (utmarcapaginas == 'si') {
+			jQuery('#ut-marcapaginas-no').css('color','#555555')
+		}
+		if (utmarcapaginas == 'no') {
+			jQuery('#ut-marcapaginas-si').css('color','#555555')
+		}
 		
 		
-		// Mensaje al updatear
+		// Mensaje al updatear y reset de opciones
 		var utupdate = localStorage["utupdate"];
 		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.6.6</p><br />- Añadidos enlaces utiles al final de cada página de un hilo.<br />- Listado de los mods del foro que estas visitando en la columna de la derecha.<br />- Temporalmente desactivado el greentext debido a errores en los posts.';
-		
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" href="#" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut166-b') {
+			if (utupdate != 'ut166-t') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut166-b';
+				localStorage["utupdate"] = 'ut166-t';
 				localStorage["utlinksfooter"] = 'si';
+				localStorage["uttablamods"] = 'si';
+				localStorage["utmarcapaginas"] = 'si';
 			}
 		});
 		jQuery('#ut-box-cerrar').click(function() {
@@ -639,35 +676,39 @@ function main() {
 		
 		// Mods de cada foro
 		jQuery(function() {
-			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
-				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
-				var url = window.location.pathname;
-				var id = url.split("/")[2];
-				mods = [
-					['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
-				];
-				jQuery.each(mods[id], function(i,v) {
-					if (mods[id] == '') {
-					jQuery('<p/>').html('<span>Este foro no tiene mods o no están listados.</span>').appendTo('#modlist');
+			if (uttablamods == 'si') {
+				jQuery(function() {
+					if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
+						jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
+						var url = window.location.pathname;
+						var id = url.split("/")[2];
+						mods = [
+							['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
+						];
+						jQuery.each(mods[id], function(i,v) {
+							if (mods[id] == '') {
+							jQuery('<p/>').html('<span>Este foro no tiene mods o no están listados.</span>').appendTo('#modlist');
+							}
+							else {
+							//jQuery('<li/>').html(v).appendTo('#modlist');
+							jQuery('<a/>').html(v).attr('href','/id/'+ v+ '').append('<br />').appendTo('#modlist');
+							}
+						});	
+					}	
+				});
+				jQuery(function() {
+					if (is_dark == 0){
+						jQuery('#modlist').addClass('modlistblanco');
 					}
 					else {
-					//jQuery('<li/>').html(v).appendTo('#modlist');
-					jQuery('<a/>').html(v).attr('href','/id/'+ v+ '').append('<br />').appendTo('#modlist');
+						jQuery('#modlist').addClass('modlistnegro');
 					}
-				});	
-			}	
-		});
-		jQuery(function() {
-			if (is_dark == 0){
-				jQuery('#modlist').addClass('modlistblanco');
-			}
-			else {
-				jQuery('#modlist').addClass('modlistnegro');
+				});
 			}
 		});
 		
 		
-		// Links importantes en el footer  if ( (var == 'text1') || (var == 'text2') )
+		// Links importantes en el footer
 		jQuery(function(){
 			if (utlinksfooter == 'si') {
 				jQuery(function(){
@@ -758,8 +799,11 @@ function main() {
 		});
 		
 		// Marcapaginas en los posts que entras directamente
-		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
-		
+		jQuery(function(){
+			if (utmarcapaginas == 'si') {
+				jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
+			}
+		});
 		
 		// > Greentext (no funciona, hace que dejen de ir los popups de las imagenes y los el hover de los quotes)
 		// > Implicando que no mola
