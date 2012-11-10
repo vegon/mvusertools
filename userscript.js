@@ -553,14 +553,23 @@ function main() {
 			#ut-mask-menu {\
 			background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
 			}\
-			#ut-dialog, #ut-dialog-menu {\
+			#ut-dialog {\
 			width: 400px; top: 50px; left: 50%; margin-left: -200px; position: fixed; z-index: 9999;\
+			}\
+			#ut-dialog-menu {\
+			width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
 			}\
 			#ut-dialog A, #ut-dialog-menu A{\
 			cursor: pointer;\
 			}\
 			#ut-window {\
-			background: #ffffff; border-radius: 6px; width: 400px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;\
+			background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;\
+			}\
+			#ut-menu-contenido {\
+			background: #eee;\
+			}\
+			#ut-menu-contenido TABLE{\
+			border-top: 1px solid #ccc;\
 			}\
 			";
 		}
@@ -582,13 +591,18 @@ function main() {
 		
 		
 		/////////// MENU ///////////////////////////////////////////////////////////////
+		var bottominfo = '<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.<br /><br />Instrucciones y más información en <a href="http://mvusertools.mvwat.com" target="_blank">la web oficial de la extensión</a>.</p>';
+		
 		var utlinksfooter = localStorage["utlinksfooter"];
 		var uttablamods = localStorage["uttablamods"];
 		var utmarcapaginas = localStorage["utmarcapaginas"];
+		var uticonosportada = localStorage["uticonosportada"];
+		var uticonosdestacados = localStorage["uticonosdestacados"];
+		var utlivesdestacados = localStorage["utlivesdestacados"];
 			// Forma del menu
-		jQuery('<a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a>').insertAfter('div#userinfo a[href="/mensajes"]');
+		jQuery('<div id="ut-config" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window">Links en el footer: <a id="ut-linksfooter-si">Si</a> <a id="ut-linksfooter-no">No</a><br />Tabla de mods: <a id="ut-tablamods-si">Si</a> <a id="ut-tablamods-no">No<br /></a>Marcapáginas: <a id="ut-marcapaginas-si">Si</a> <a id="ut-marcapaginas-no">No</a><p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><a id="ut-linksfooter-si">Si</a> <a id="ut-linksfooter-no">No</a></td></tr><tr><td>Tabla de mods</td><td><a id="ut-tablamods-si">Si</a> <a id="ut-tablamods-no">No</a></td></tr><tr><td>Marcapáginas</td><td><a id="ut-marcapaginas-si">Si</a> <a id="ut-marcapaginas-no">No</a></td></tr><tr><td>Iconos de las noticias en portada</td><td><a id="ut-uticonosportada-si">Si</a> <a id="ut-uticonosportada-no">No</a></td></tr><tr><td>Iconos de las noticias en destacados</td><td><a id="ut-uticonosdestacados-si">Si</a> <a id="ut-uticonosdestacados-no">No</a></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><a id="ut-utlivesdestacados-si">Si</a> <a id="ut-utlivesdestacados-no">No</a></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery('#ut-menu').click(function () {
 			jQuery('#ut-mask-menu').show();
 			jQuery('#ut-dialog-menu').show();
@@ -604,69 +618,123 @@ function main() {
 			// Boton de utlinksfooter
 		jQuery('#ut-linksfooter-si').click(function() {
 			localStorage["utlinksfooter"] = 'si';
-			jQuery('#ut-linksfooter-no').css('color','#555555')
+			jQuery('#ut-linksfooter-no').css('color','#999999')
 			jQuery('#ut-linksfooter-si').css('color','#EF5000')
 		});
 		jQuery('#ut-linksfooter-no').click(function() {
 			localStorage["utlinksfooter"] = 'no';
-			jQuery('#ut-linksfooter-si').css('color','#555555')
+			jQuery('#ut-linksfooter-si').css('color','#999999')
 			jQuery('#ut-linksfooter-no').css('color','#EF5000')
 		});
 		if (utlinksfooter == 'si') {
-			jQuery('#ut-linksfooter-no').css('color','#555555')
+			jQuery('#ut-linksfooter-no').css('color','#999999')
 		}
 		if (utlinksfooter == 'no') {
-			jQuery('#ut-linksfooter-si').css('color','#555555')
+			jQuery('#ut-linksfooter-si').css('color','#999999')
 		}
 			// Boton de uttablamods
 		jQuery('#ut-tablamods-si').click(function() {
 			localStorage["uttablamods"] = 'si';
-			jQuery('#ut-tablamods-no').css('color','#555555')
+			jQuery('#ut-tablamods-no').css('color','#999999')
 			jQuery('#ut-tablamods-si').css('color','#EF5000')
 		});
 		jQuery('#ut-tablamods-no').click(function() {
 			localStorage["uttablamods"] = 'no';
-			jQuery('#ut-tablamods-si').css('color','#555555')
+			jQuery('#ut-tablamods-si').css('color','#999999')
 			jQuery('#ut-tablamods-no').css('color','#EF5000')
 		});
 		if (uttablamods == 'si') {
-			jQuery('#ut-tablamods-no').css('color','#555555')
+			jQuery('#ut-tablamods-no').css('color','#999999')
 		}
 		if (uttablamods == 'no') {
-			jQuery('#ut-tablamods-si').css('color','#555555')
+			jQuery('#ut-tablamods-si').css('color','#999999')
 		}
 			// Marcapaginas
 		jQuery('#ut-marcapaginas-si').click(function() {
 			localStorage["utmarcapaginas"] = 'si';
-			jQuery('#ut-marcapaginas-no').css('color','#555555')
+			jQuery('#ut-marcapaginas-no').css('color','#999999')
 			jQuery('#ut-marcapaginas-si').css('color','#EF5000')
 		});
 		jQuery('#ut-marcapaginas-no').click(function() {
 			localStorage["utmarcapaginas"] = 'no';
-			jQuery('#ut-marcapaginas-si').css('color','#555555')
+			jQuery('#ut-marcapaginas-si').css('color','#999999')
 			jQuery('#ut-marcapaginas-no').css('color','#EF5000')
 		});
 		if (utmarcapaginas == 'si') {
-			jQuery('#ut-marcapaginas-no').css('color','#555555')
+			jQuery('#ut-marcapaginas-no').css('color','#999999')
 		}
 		if (utmarcapaginas == 'no') {
-			jQuery('#ut-marcapaginas-si').css('color','#555555')
+			jQuery('#ut-marcapaginas-si').css('color','#999999')
+		}
+			// Iconos de las noticias en portada
+		jQuery('#ut-uticonosportada-si').click(function() {
+			localStorage["uticonosportada"] = 'si';
+			jQuery('#ut-uticonosportada-no').css('color','#999999')
+			jQuery('#ut-uticonosportada-si').css('color','#EF5000')
+		});
+		jQuery('#ut-uticonosportada-no').click(function() {
+			localStorage["uticonosportada"] = 'no';
+			jQuery('#ut-uticonosportada-si').css('color','#999999')
+			jQuery('#ut-uticonosportada-no').css('color','#EF5000')
+		});
+		if (uticonosportada == 'si') {
+			jQuery('#ut-uticonosportada-no').css('color','#999999')
+		}
+		if (uticonosportada == 'no') {
+			jQuery('#ut-uticonosportada-si').css('color','#999999')
+		}
+			// Iconos de las noticias en destacados
+		jQuery('#ut-uticonosdestacados-si').click(function() {
+			localStorage["uticonosdestacados"] = 'si';
+			jQuery('#ut-uticonosdestacados-no').css('color','#999999')
+			jQuery('#ut-uticonosdestacados-si').css('color','#EF5000')
+		});
+		jQuery('#ut-uticonosdestacados-no').click(function() {
+			localStorage["uticonosdestacados"] = 'no';
+			jQuery('#ut-uticonosdestacados-si').css('color','#999999')
+			jQuery('#ut-uticonosdestacados-no').css('color','#EF5000')
+		});
+		if (uticonosdestacados == 'si') {
+			jQuery('#ut-uticonosdestacados-no').css('color','#999999')
+		}
+		if (uticonosdestacados == 'no') {
+			jQuery('#ut-uticonosdestacados-si').css('color','#999999')
+		}
+			// Lives destacados
+		jQuery('#ut-utlivesdestacados-si').click(function() {
+			localStorage["utlivesdestacados"] = 'si';
+			jQuery('#ut-utlivesdestacados-no').css('color','#999999')
+			jQuery('#ut-utlivesdestacados-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utlivesdestacados-no').click(function() {
+			localStorage["utlivesdestacados"] = 'no';
+			jQuery('#ut-utlivesdestacados-si').css('color','#999999')
+			jQuery('#ut-utlivesdestacados-no').css('color','#EF5000')
+		});
+		if (utlivesdestacados == 'si') {
+			jQuery('#ut-utlivesdestacados-no').css('color','#999999')
+		}
+		if (utlivesdestacados == 'no') {
+			jQuery('#ut-utlivesdestacados-si').css('color','#999999')
 		}
 		
 		
 		// Mensaje al updatear y reset de opciones
 		var utupdate = localStorage["utupdate"];
-		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.6.6</p><br />- Añadidos enlaces utiles al final de cada página de un hilo.<br />- Listado de los mods del foro que estas visitando en la columna de la derecha.<br />- Temporalmente desactivado el greentext debido a errores en los posts.';
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7</p><br /><br />- Menú para activar y desactivar los modulos que quieras. Funcionamiento y advertencias en <a href="http://mvusertools.mvwat.com/caracteristicas" target="_blank">la web oficial</a>.<br /><br />- Mods por orden alfabético (gracias Netzach).<br /><br />- Corrección de bugs menores.';
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.</p><a style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut166-t') {
+			if (utupdate != 'ut17-beta') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut166-t';
+				localStorage["utupdate"] = 'ut17-beta';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
+				localStorage["uticonosportada"] = 'si';
+				localStorage["uticonosdestacados"] = 'si';
+				localStorage["utlivesdestacados"] = 'si';
 			}
 		});
 		jQuery('#ut-box-cerrar').click(function() {
@@ -819,34 +887,41 @@ function main() {
 //		});
 		
 		//Icono del foro del que viene la noticia en Portada
-		jQuery('.bbar a[href^="/foro"]').each(function(i) {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foro = path[pathIndexToGet];
-			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
+		jQuery(function(){
+			if (uticonosportada == 'si') {
+				jQuery('.bbar a[href^="/foro"]').each(function(i) {
+					var enlace = this + "";
+					var split = enlace.split('/');
+					var path = split.splice(1, split.length - 1);
+					var pathIndexToGet = 3;
+					var foro = path[pathIndexToGet];
+					var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+					jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
+				});
+				jQuery('.item h4').each(function (index) {
+					jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
+				});
+				jQuery('div.left:first-child').contents().filter(function(){
+					return this.nodeType === 3;
+				}).remove();
+				jQuery('.bbar div.left:first-child').prepend('En ');
+			}
 		});
-		jQuery('.item h4').each(function (index) {
-			jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
+				
+				//Icono del foro del que viene la noticia en Destacados
+		jQuery(function(){
+			if (uticonosdestacados == 'si') {
+				jQuery('ul.mini a[href^="/foro"]').each(function(i) {
+					var enlace = this + "";
+					var split = enlace.split('/');
+					var path = split.splice(1, split.length - 1);
+					var pathIndexToGet = 3;
+					var foro = path[pathIndexToGet];
+					var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+					jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
+				});
+			}
 		});
-		jQuery('div.left:first-child').contents().filter(function(){
-			return this.nodeType === 3;
-		}).remove();
-		jQuery('.bbar div.left:first-child').prepend('En ');
-		
-		//Icono del foro del que viene la noticia en Destacados
-		jQuery('ul.mini a[href^="/foro"]').each(function(i) {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foro = path[pathIndexToGet];
-			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
-		});
-		
 		
 
 		// nueva botonera
@@ -884,7 +959,11 @@ function main() {
 		});
 		
 		// hilos con live destacados (solo funciona con theme normal)
-		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+		jQuery(function(){
+			if (utlivesdestacados == 'si') {
+				jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+			}
+		});
 		
 		// hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
 		// jQuery('<img alt="Relaciones" src="http://www.mvwat.com/mvusertools/heart.png" style="width: 12px; height: 12px;">').insertAfter('a[class="hb"]:contains("amor"), a[class="hb"]:contains("rollo"), a[class="hb"]:contains("novia"), a[class="hb"]:contains("celos")');
