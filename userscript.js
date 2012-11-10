@@ -559,8 +559,9 @@ function main() {
 			#ut-dialog-menu {\
 			width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
 			}\
-			#ut-dialog A, #ut-dialog-menu A{\
+			#ut-dialog span, #ut-dialog-menu span, ut-dialog A, #ut-dialog-menu A{\
 			cursor: pointer;\
+			color: #EF5000;\
 			}\
 			#ut-window {\
 			background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;\
@@ -602,7 +603,7 @@ function main() {
 			// Forma del menu
 		jQuery('<div id="ut-config" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><a id="ut-linksfooter-si">Si</a> <a id="ut-linksfooter-no">No</a></td></tr><tr><td>Tabla de mods</td><td><a id="ut-tablamods-si">Si</a> <a id="ut-tablamods-no">No</a></td></tr><tr><td>Marcapáginas</td><td><a id="ut-marcapaginas-si">Si</a> <a id="ut-marcapaginas-no">No</a></td></tr><tr><td>Iconos de las noticias en portada</td><td><a id="ut-uticonosportada-si">Si</a> <a id="ut-uticonosportada-no">No</a></td></tr><tr><td>Iconos de las noticias en destacados</td><td><a id="ut-uticonosdestacados-si">Si</a> <a id="ut-uticonosdestacados-no">No</a></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><a id="ut-utlivesdestacados-si">Si</a> <a id="ut-utlivesdestacados-no">No</a></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery('#ut-menu').click(function () {
 			jQuery('#ut-mask-menu').show();
 			jQuery('#ut-dialog-menu').show();
