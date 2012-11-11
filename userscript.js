@@ -737,14 +737,14 @@ function main() {
 		
 		// Mensaje al updatear y reset de opciones
 		var utupdate = localStorage["utupdate"];
-		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7</p><br /><br />- Menú para activar y desactivar los modulos que quieras. Funcionamiento y advertencias en <a href="http://mvusertools.mvwat.com/caracteristicas#menu" target="_blank">la web oficial</a>.<br /><br />- Mods por orden alfabético (gracias Netzach).<br /><br />- Corrección de bugs menores.';
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.1</p><br /><br />- Corregido que la caja de busqueda cambie de linea si tienes un nick largo.';
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut17') {
+			if (utupdate != 'ut171') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut17';
+				localStorage["utupdate"] = 'ut171';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
