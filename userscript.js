@@ -601,9 +601,24 @@ function main() {
 		var uticonosdestacados = localStorage["uticonosdestacados"];
 		var utlivesdestacados = localStorage["utlivesdestacados"];
 			// Forma del menu
-		jQuery('<div id="ut-config" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
+		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
 		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
+		jQuery(function() {
+			if (nicklenght > 8) {
+				jQuery('#nav_bar #buscar').css('width','130px');
+				jQuery('#nav_bar #sbii').css('width','93px');
+				jQuery('#nav_bar .bbii').css('left','103px');
+			}
+		});
+		jQuery(function() {
+			if (nicklenght == 7) {
+				jQuery('#nav_bar #buscar').css('width','170px');
+				jQuery('#nav_bar #sbii').css('width','133px');
+				jQuery('#nav_bar .bbii').css('left','143px');
+			}
+		});
 		jQuery('#ut-menu').click(function () {
 			jQuery('#ut-mask-menu').show();
 			jQuery('#ut-dialog-menu').show();
@@ -726,10 +741,10 @@ function main() {
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut17-beta') {
+			if (utupdate != 'ut17') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut17-beta';
+				localStorage["utupdate"] = 'ut17';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
