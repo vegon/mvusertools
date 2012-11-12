@@ -1116,10 +1116,12 @@ function main() {
 		if (localStorage.getItem('blacklist') == 'on') {
 			jQuery('#toggle').addClass("toggle-on");
 			jQuery('#toggle').removeClass("toggle-off");
+			console.log("encendido");
 		}
 		else {
 			jQuery('#toggle').addClass("toggle-off");
 			jQuery('#toggle').removeClass("toggle-on");
+			console.log("apagado");
 		}
 		
 		
@@ -1201,6 +1203,7 @@ function main() {
 				jQuery('#toggle').removeClass("toggle-off");
 				localStorage.setItem('blacklist', 'on');
 			}
+			console.log(localStorage.getItem('blacklist'));
 			//Tenemos un nuevo estado. Si ahora es on, tenemos que ocultar, si es off tenemos que mostrar
 			jQuery('.autor').each(function() {
 				var localvalue = 'blacklist.' + jQuery(this).data('name');
@@ -1228,6 +1231,7 @@ function main() {
 			else
 				localStorage.setItem(localvalue, 'true');
 				
+			console.log('set ' + localvalue + ' = ' + localStorage.getItem(localvalue));
 	
 	
 			// En caso de blacklist ON Tapar los posts del autor si ahora esta blacklisted, o mostrarlos en caso contrario.
