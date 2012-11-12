@@ -538,6 +538,40 @@ function main() {
 			.modlistnegro span{\
 				color: #C5D1EC;\
 			}\
+			.config {\
+			background-position: -78px -34px;\
+			width: 14px;\
+			height: 14px;\
+			display: inline-block;\
+			margin: 0 3px;\
+			top: 3px;\
+			position: relative;\
+			}\
+			#ut-mask {\
+			background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
+			}\
+			#ut-mask-menu {\
+			background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
+			}\
+			#ut-dialog {\
+			width: 400px; top: 50px; left: 50%; margin-left: -200px; position: fixed; z-index: 9999;\
+			}\
+			#ut-dialog-menu {\
+			width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
+			}\
+			#ut-dialog span, #ut-dialog-menu span, ut-dialog A, #ut-dialog-menu A{\
+			cursor: pointer;\
+			color: #EF5000;\
+			}\
+			#ut-window {\
+			background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;\
+			}\
+			#ut-menu-contenido {\
+			background: #eee;\
+			}\
+			#ut-menu-contenido TABLE{\
+			border-top: 1px solid #ccc;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -555,145 +589,305 @@ function main() {
                 heads[0].appendChild(node);
 			}
 		}
-
 		
-		// Mensaje al updatear
-		var utupdate = localStorage["utupdate"];
-		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.6.6</p><br />- Añadidos enlaces utiles al final de cada página de un hilo.<br />- Listado de los mods del foro que estas visitando en la columna de la derecha.<br />- Temporalmente desactivado el greentext debido a errores en los posts.';
+		
+		/////////// MENU ///////////////////////////////////////////////////////////////
+		var bottominfo = '<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.<br /><br />Instrucciones y más información en <a href="http://mvusertools.mvwat.com" target="_blank">la web oficial de la extensión</a>.</p>';
+		
+		var utlinksfooter = localStorage["utlinksfooter"];
+		var uttablamods = localStorage["uttablamods"];
+		var utmarcapaginas = localStorage["utmarcapaginas"];
+		var uticonosportada = localStorage["uticonosportada"];
+		var uticonosdestacados = localStorage["uticonosdestacados"];
+		var utlivesdestacados = localStorage["utlivesdestacados"];
+			// Forma del menu
+		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
+		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 		jQuery(function() {
-		if (utupdate != 'ut166') {
-			jQuery('<div style="background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.5; z-index: 9998;" id="ut-mask"></div>').insertBefore('#background');
-			jQuery('<div style="width: 400px; top: 50%; left: 50%; margin-top: -100px; margin-left: -200px; position: fixed; z-index: 9999;" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-patchnotes" style="background: #ffffff; border-radius: 6px; width: 400px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;">'+ utpatchnotes +'<a style="float: right; margin-top: 20px;" href="#cerrar" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
-			jQuery('#ut-box-cerrar').click(function() {
-				jQuery('#ut-dialog').hide();
-				jQuery('#ut-mask').hide();
+			if (nicklenght > 8) {
+				jQuery('#nav_bar #buscar').css('width','130px');
+				jQuery('#nav_bar #sbii').css('width','93px');
+				jQuery('#nav_bar .bbii').css('left','103px');
+			}
+		});
+		jQuery(function() {
+			if (nicklenght == 7) {
+				jQuery('#nav_bar #buscar').css('width','170px');
+				jQuery('#nav_bar #sbii').css('width','133px');
+				jQuery('#nav_bar .bbii').css('left','143px');
+			}
+		});
+		jQuery('#ut-menu').click(function () {
+			jQuery('#ut-mask-menu').show();
+			jQuery('#ut-dialog-menu').show();
 			});
-			jQuery('#ut-mask').click(function() {
-				jQuery('#ut-dialog').hide();
-				jQuery('#ut-mask').hide();
+		jQuery('#ut-menu-cerrar').click(function() {
+			jQuery('#ut-dialog-menu').hide();
+			jQuery('#ut-mask-menu').hide();
 			});
-
-			localStorage["utupdate"] = 'ut166';
+		jQuery('#ut-mask-menu').click(function() {
+			jQuery('#ut-dialog-menu').hide();
+			jQuery('#ut-mask-menu').hide();
+		});
+			// Boton de utlinksfooter
+		jQuery('#ut-linksfooter-si').click(function() {
+			localStorage["utlinksfooter"] = 'si';
+			jQuery('#ut-linksfooter-no').css('color','#999999')
+			jQuery('#ut-linksfooter-si').css('color','#EF5000')
+		});
+		jQuery('#ut-linksfooter-no').click(function() {
+			localStorage["utlinksfooter"] = 'no';
+			jQuery('#ut-linksfooter-si').css('color','#999999')
+			jQuery('#ut-linksfooter-no').css('color','#EF5000')
+		});
+		if (utlinksfooter == 'si') {
+			jQuery('#ut-linksfooter-no').css('color','#999999')
 		}
+		if (utlinksfooter == 'no') {
+			jQuery('#ut-linksfooter-si').css('color','#999999')
+		}
+			// Boton de uttablamods
+		jQuery('#ut-tablamods-si').click(function() {
+			localStorage["uttablamods"] = 'si';
+			jQuery('#ut-tablamods-no').css('color','#999999')
+			jQuery('#ut-tablamods-si').css('color','#EF5000')
+		});
+		jQuery('#ut-tablamods-no').click(function() {
+			localStorage["uttablamods"] = 'no';
+			jQuery('#ut-tablamods-si').css('color','#999999')
+			jQuery('#ut-tablamods-no').css('color','#EF5000')
+		});
+		if (uttablamods == 'si') {
+			jQuery('#ut-tablamods-no').css('color','#999999')
+		}
+		if (uttablamods == 'no') {
+			jQuery('#ut-tablamods-si').css('color','#999999')
+		}
+			// Marcapaginas
+		jQuery('#ut-marcapaginas-si').click(function() {
+			localStorage["utmarcapaginas"] = 'si';
+			jQuery('#ut-marcapaginas-no').css('color','#999999')
+			jQuery('#ut-marcapaginas-si').css('color','#EF5000')
+		});
+		jQuery('#ut-marcapaginas-no').click(function() {
+			localStorage["utmarcapaginas"] = 'no';
+			jQuery('#ut-marcapaginas-si').css('color','#999999')
+			jQuery('#ut-marcapaginas-no').css('color','#EF5000')
+		});
+		if (utmarcapaginas == 'si') {
+			jQuery('#ut-marcapaginas-no').css('color','#999999')
+		}
+		if (utmarcapaginas == 'no') {
+			jQuery('#ut-marcapaginas-si').css('color','#999999')
+		}
+			// Iconos de las noticias en portada
+		jQuery('#ut-uticonosportada-si').click(function() {
+			localStorage["uticonosportada"] = 'si';
+			jQuery('#ut-uticonosportada-no').css('color','#999999')
+			jQuery('#ut-uticonosportada-si').css('color','#EF5000')
+		});
+		jQuery('#ut-uticonosportada-no').click(function() {
+			localStorage["uticonosportada"] = 'no';
+			jQuery('#ut-uticonosportada-si').css('color','#999999')
+			jQuery('#ut-uticonosportada-no').css('color','#EF5000')
+		});
+		if (uticonosportada == 'si') {
+			jQuery('#ut-uticonosportada-no').css('color','#999999')
+		}
+		if (uticonosportada == 'no') {
+			jQuery('#ut-uticonosportada-si').css('color','#999999')
+		}
+			// Iconos de las noticias en destacados
+		jQuery('#ut-uticonosdestacados-si').click(function() {
+			localStorage["uticonosdestacados"] = 'si';
+			jQuery('#ut-uticonosdestacados-no').css('color','#999999')
+			jQuery('#ut-uticonosdestacados-si').css('color','#EF5000')
+		});
+		jQuery('#ut-uticonosdestacados-no').click(function() {
+			localStorage["uticonosdestacados"] = 'no';
+			jQuery('#ut-uticonosdestacados-si').css('color','#999999')
+			jQuery('#ut-uticonosdestacados-no').css('color','#EF5000')
+		});
+		if (uticonosdestacados == 'si') {
+			jQuery('#ut-uticonosdestacados-no').css('color','#999999')
+		}
+		if (uticonosdestacados == 'no') {
+			jQuery('#ut-uticonosdestacados-si').css('color','#999999')
+		}
+			// Lives destacados
+		jQuery('#ut-utlivesdestacados-si').click(function() {
+			localStorage["utlivesdestacados"] = 'si';
+			jQuery('#ut-utlivesdestacados-no').css('color','#999999')
+			jQuery('#ut-utlivesdestacados-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utlivesdestacados-no').click(function() {
+			localStorage["utlivesdestacados"] = 'no';
+			jQuery('#ut-utlivesdestacados-si').css('color','#999999')
+			jQuery('#ut-utlivesdestacados-no').css('color','#EF5000')
+		});
+		if (utlivesdestacados == 'si') {
+			jQuery('#ut-utlivesdestacados-no').css('color','#999999')
+		}
+		if (utlivesdestacados == 'no') {
+			jQuery('#ut-utlivesdestacados-si').css('color','#999999')
+		}
+		
+		
+		// Mensaje al updatear y reset de opciones
+		var utupdate = localStorage["utupdate"];
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.1</p><br /><br />- Corregido que la caja de busqueda cambie de linea si tienes un nick largo.';
+		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+		jQuery(function() {
+			if (utupdate != 'ut171') {
+				jQuery('div#ut-mask').show();
+				jQuery('div#ut-dialog').show();
+				localStorage["utupdate"] = 'ut171';
+				localStorage["utlinksfooter"] = 'si';
+				localStorage["uttablamods"] = 'si';
+				localStorage["utmarcapaginas"] = 'si';
+				localStorage["uticonosportada"] = 'si';
+				localStorage["uticonosdestacados"] = 'si';
+				localStorage["utlivesdestacados"] = 'si';
+			}
+		});
+		jQuery('#ut-box-cerrar').click(function() {
+			jQuery('div#ut-mask').hide();
+			jQuery('div#ut-dialog').hide();
 		});
 		
 		// Mods de cada foro
 		jQuery(function() {
-			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
-				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
-				var url = window.location.pathname;
-				var id = url.split("/")[2];
-				mods = [
-					['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
-				];
-				jQuery.each(mods[id], function(i,v) {
-					if (mods[id] == '') {
-					jQuery('<p/>').html('<span>Este foro no tiene mods o no están listados.</span>').appendTo('#modlist');
+			if (uttablamods == 'si') {
+				jQuery(function() {
+					if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
+						jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
+						var url = window.location.pathname;
+						var id = url.split("/")[2];
+						mods = [
+							['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
+						];
+						jQuery.each(mods[id], function(i,v) {
+							if (mods[id] == '') {
+							jQuery('<p/>').html('<span>Este foro no tiene mods o no están listados.</span>').appendTo('#modlist');
+							}
+							else {
+							//jQuery('<li/>').html(v).appendTo('#modlist');
+							jQuery('<a/>').html(v).attr('href','/id/'+ v+ '').append('<br />').appendTo('#modlist');
+							}
+						});	
+					}	
+				});
+				jQuery(function() {
+					if (is_dark == 0){
+						jQuery('#modlist').addClass('modlistblanco');
 					}
 					else {
-					//jQuery('<li/>').html(v).appendTo('#modlist');
-					jQuery('<a/>').html(v).attr('href','/id/'+ v+ '').append('<br />').appendTo('#modlist');
+						jQuery('#modlist').addClass('modlistnegro');
 					}
-				});	
-			}	
-		});
-		jQuery(function() {
-			if (is_dark == 0){
-				jQuery('#modlist').addClass('modlistblanco');
-			}
-			else {
-				jQuery('#modlist').addClass('modlistnegro');
+				});
 			}
 		});
 		
 		
 		// Links importantes en el footer
 		jQuery(function(){
-		   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
-				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
-					if (is_dark == 0) {
-						jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-						jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
-						jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
-						jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
-						jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
-					}
-					else {
-						jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-					}
-				});
-				jQuery('.linksfooter2 .separator').remove();
-				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
-					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
-				jQuery(function() {
-				if (utnoti.length > 0) {
-					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
-					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
-				jQuery(function() {
-				if (utavisos.length > 0) {
-					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
-					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
-				jQuery(function() {
-				if (utmsj.length > 0) {
-					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
-			 }
-			 else {
-				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
-						if (is_dark == 0) {
-							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
-							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
-							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
-							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+			if (utlinksfooter == 'si') {
+				jQuery(function(){
+				   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
+						jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
+							if (is_dark == 0) {
+								jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+								jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
+								jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
+								jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
+								jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+							}
+							else {
+								jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+							}
+						});
+						jQuery('.linksfooter2 .separator').remove();
+						jQuery('.linksfooter2 #ut-menu').remove();
+						jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+							//Noti
+						var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+						jQuery(function() {
+						if (utnoti.length > 0) {
+							jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
 						}
-						else {
-							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+						});
+						jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+							//Avisos
+						var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
+						jQuery(function() {
+						if (utavisos.length > 0) {
+							jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
 						}
-					});		 
-				jQuery('.linksfooter2 .separator').remove();
-				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
-					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
-				jQuery(function() {
-				if (utnoti.length > 0) {
-					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
-				}
+						});
+						jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+							//Mensajes
+						var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
+						jQuery(function() {
+						if (utmsj.length > 0) {
+							jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
+						}
+						});
+						jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
+					 }
+					 else {
+						 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
+								if (is_dark == 0) {
+									jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+									jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
+									jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
+									jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
+									jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+								}
+								else {
+									jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+								}
+							});		 
+						jQuery('.linksfooter2 .separator').remove();
+						jQuery('.linksfooter2 #ut-menu').remove();
+						jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+							//Noti
+						var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+						jQuery(function() {
+						if (utnoti.length > 0) {
+							jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
+						}
+						});
+						jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+							//Avisos
+						var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
+						jQuery(function() {
+						if (utavisos.length > 0) {
+							jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
+						}
+						});
+						jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+							//Mensajes
+						var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
+						jQuery(function() {
+						if (utmsj.length > 0) {
+							jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
+						}
+						});
+						jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
+					 }
 				});
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
-					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
-				jQuery(function() {
-				if (utavisos.length > 0) {
-					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
-					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
-				jQuery(function() {
-				if (utmsj.length > 0) {
-					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
-			 }
+			}
 		});
 		
 		// Marcapaginas en los posts que entras directamente
-		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
-		
+		jQuery(function(){
+			if (utmarcapaginas == 'si') {
+				jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
+			}
+		});
 		
 		// > Greentext (no funciona, hace que dejen de ir los popups de las imagenes y los el hover de los quotes)
 		// > Implicando que no mola
@@ -709,34 +903,41 @@ function main() {
 //		});
 		
 		//Icono del foro del que viene la noticia en Portada
-		jQuery('.bbar a[href^="/foro"]').each(function(i) {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foro = path[pathIndexToGet];
-			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
+		jQuery(function(){
+			if (uticonosportada == 'si') {
+				jQuery('.bbar a[href^="/foro"]').each(function(i) {
+					var enlace = this + "";
+					var split = enlace.split('/');
+					var path = split.splice(1, split.length - 1);
+					var pathIndexToGet = 3;
+					var foro = path[pathIndexToGet];
+					var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+					jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
+				});
+				jQuery('.item h4').each(function (index) {
+					jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
+				});
+				jQuery('div.left:first-child').contents().filter(function(){
+					return this.nodeType === 3;
+				}).remove();
+				jQuery('.bbar div.left:first-child').prepend('En ');
+			}
 		});
-		jQuery('.item h4').each(function (index) {
-			jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
+				
+				//Icono del foro del que viene la noticia en Destacados
+		jQuery(function(){
+			if (uticonosdestacados == 'si') {
+				jQuery('ul.mini a[href^="/foro"]').each(function(i) {
+					var enlace = this + "";
+					var split = enlace.split('/');
+					var path = split.splice(1, split.length - 1);
+					var pathIndexToGet = 3;
+					var foro = path[pathIndexToGet];
+					var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
+					jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
+				});
+			}
 		});
-		jQuery('div.left:first-child').contents().filter(function(){
-			return this.nodeType === 3;
-		}).remove();
-		jQuery('.bbar div.left:first-child').prepend('En ');
-		
-		//Icono del foro del que viene la noticia en Destacados
-		jQuery('ul.mini a[href^="/foro"]').each(function(i) {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foro = path[pathIndexToGet];
-			var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
-		});
-		
 		
 
 		// nueva botonera
@@ -774,7 +975,11 @@ function main() {
 		});
 		
 		// hilos con live destacados (solo funciona con theme normal)
-		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+		jQuery(function(){
+			if (utlivesdestacados == 'si') {
+				jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+			}
+		});
 		
 		// hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
 		// jQuery('<img alt="Relaciones" src="http://www.mvwat.com/mvusertools/heart.png" style="width: 12px; height: 12px;">').insertAfter('a[class="hb"]:contains("amor"), a[class="hb"]:contains("rollo"), a[class="hb"]:contains("novia"), a[class="hb"]:contains("celos")');
