@@ -3,15 +3,6 @@
 // @namespace      MVusertools
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
-// @exclude        http://www.mediavida.com/foro/reportes.php
-// @exclude        http://www.mediavida.com/notificaciones*
-// @exclude        http://www.mediavida.com/invitaciones*
-// @exclude        http://www.mediavida.com/mensajes*
-// @exclude        http://www.mediavida.com/online*
-// @exclude        http://www.mediavida.com/grupos*
-// @exclude        http://www.mediavida.com/g/*
-// @exclude        http://www.mediavida.com/clanes*
-// @exclude        http://www.mediavida.com/stream*
 // ==/UserScript==
 
 function addJQuery(callback) {
@@ -280,7 +271,7 @@ function main() {
 					outline: 0;\
 			}\
 			\
-			.offline\
+			.ut-offline\
 			{\
 					background-position: -56px -58px;\
 					text-indent: -99999px;\
@@ -1161,14 +1152,14 @@ function main() {
 		
 		jQuery('.autor').each(function() {
 			jQuery(this).append("<div class='usertools'>\
-								<div class='online-pos'><a class='tooltip offline sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
+								<div class='online-pos'><a class='tooltip ut-offline sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
 								<div class='mensaje-pos'><a class='tooltip mensaje sprite' href='http://www.mediavida.com/mensajes/nuevo/" + jQuery(this).data('name') + "' original-title='Mensaje'></a></div>\
 								<div class='firma-pos'><a class='tooltip ut-firma sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "/firmas' original-title='Firma'></a></div>\
 								<div class='blacklist-pos'><a class='tooltip blacklist blacklist-off sprite' href='javascript:void(0)' original-title='Blacklist'></a></div>\
 						</div>");
 		});
 		jQuery('div.autor dd.online').hide();
-		jQuery('div.autor dd.online').parent().parent().find('.offline').toggleClass('ut-online offline');
+		jQuery('div.autor dd.online').parent().parent().find('.ut-offline').toggleClass('ut-online ut-offline');
 		
 		//Primera carga del a página. Tapar los posts de la blacklist si procede.
 		
