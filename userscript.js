@@ -816,14 +816,12 @@ function main() {
 						jQuery('#ajax_usercard').remove();
 						jQuery('body').append('<div id="ajax_usercard">'+ jQuery(this).html() +'</div>');
 						var box = jQuery('#ajax_usercard');
-						jQuery(function() {
-							if (is_dark == 0) {
-								box.css('backgroundColor', 'whitesmoke');
-							}
-							else {
-								box.css('backgroundColor', '#39444B');
-							}
-						});	
+						if (is_dark == 0) {
+							box.css('background-Color', 'whitesmoke');
+						}
+						else {
+							box.css('background-color', '#39444B');
+						}
 						box.css('borderRadius', '6px');
 						box.css('padding', '5px');
 						box.css('position', 'absolute');
@@ -831,7 +829,7 @@ function main() {
 						box.css('top', infoBoxY);
 						box.css('overflow', 'hidden');
 						box.css('boxShadow', '1px 1px 5px rgba(0, 0, 0, 0.25)');
-						box.css('zIndex', '5000');
+						box.css('zIndex', '9999');
 
 						var uavatar = jQuery('.useravatar', box);
 						uavatar.css('float', 'left');
