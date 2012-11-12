@@ -621,10 +621,11 @@ function main() {
 		var uticonosdestacados = localStorage["uticonosdestacados"];
 		var utlivesdestacados = localStorage["utlivesdestacados"];
 		var utnewquote = localStorage["utnewquote"];
+		var utuserinfo = localStorage["utuserinfo"];
 			// Forma del menu
 		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick.</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 		jQuery(function() {
 			if (nicklenght > 8) {
@@ -771,6 +772,23 @@ function main() {
 		if (utnewquote == 'no') {
 			jQuery('#ut-utnewquote-si').css('color','#999999')
 		}
+			// Información de usuario en el hover del nick
+		jQuery('#ut-utuserinfo-si').click(function() {
+			localStorage["utuserinfo"] = 'si';
+			jQuery('#ut-utuserinfo-no').css('color','#999999')
+			jQuery('#ut-utuserinfo-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utuserinfo-no').click(function() {
+			localStorage["utuserinfo"] = 'no';
+			jQuery('#ut-utuserinfo-si').css('color','#999999')
+			jQuery('#ut-utuserinfo-no').css('color','#EF5000')
+		});
+		if (utuserinfo == 'si') {
+			jQuery('#ut-utuserinfo-no').css('color','#999999')
+		}
+		if (utuserinfo == 'no') {
+			jQuery('#ut-utuserinfo-si').css('color','#999999')
+		}
 		
 		
 		// Mensaje al updatear y reset de opciones
@@ -779,10 +797,10 @@ function main() {
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut171') {
+			if (utupdate != 'ut172-a') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut171';
+				localStorage["utupdate"] = 'ut172-a';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
@@ -790,6 +808,7 @@ function main() {
 				localStorage["uticonosdestacados"] = 'si';
 				localStorage["utlivesdestacados"] = 'si';
 				localStorage["utnewquote"] = 'si';
+				localStorage["utuserinfo"] = 'si';
 			}
 		});
 		jQuery('#ut-box-cerrar').click(function() {
@@ -799,68 +818,73 @@ function main() {
 		
 		
 		// Información del perfil en la lista de users
-		jQuery(document).ready(function() {
-			var pendingInfoBox = undefined;
-			var infoBoxX = undefined;
-			var infoBoxY = undefined;
+		jQuery(function() {
+			if (utuserinfo == 'si') {
+				jQuery(document).ready(function() {
+					var pendingInfoBox = undefined;
+					var infoBoxX = undefined;
+					var infoBoxY = undefined;
 
-			function checkUserInfoBox() {
-				if(pendingInfoBox != undefined) {
-					launchUserInfoBox(pendingInfoBox);
-				}
-			}
+					function checkUserInfoBox() {
+						if(pendingInfoBox != undefined) {
+							launchUserInfoBox(pendingInfoBox);
+						}
+					}
 
-			function launchUserInfoBox() {
-				jQuery.get('http://www.mediavida.com/id/' + pendingInfoBox, function(data) {
-					jQuery('.infoavatar', data).each(function() {
+					function launchUserInfoBox() {
+						jQuery.get('http://www.mediavida.com/id/' + pendingInfoBox, function(data) {
+							jQuery('.infoavatar', data).each(function() {
+								jQuery('#ajax_usercard').remove();
+								jQuery('body').append('<div id="ajax_usercard">'+ jQuery(this).html() +'</div>');
+								var box = jQuery('#ajax_usercard');
+								if (is_dark == 0) {
+									box.css('background-Color', 'whitesmoke');
+								}
+								else {
+									box.css('background-color', '#39444B');
+								}
+								box.css('borderRadius', '6px');
+								box.css('padding', '5px');
+								box.css('position', 'absolute');
+								box.css('left', infoBoxX);
+								box.css('top', infoBoxY);
+								box.css('overflow', 'hidden');
+								box.css('boxShadow', '1px 1px 5px rgba(0, 0, 0, 0.25)');
+								box.css('zIndex', '9999');
+
+								var uavatar = jQuery('.useravatar', box);
+								uavatar.css('float', 'left');
+								uavatar.css('padding', '5px');
+								uavatar.css('marginRight', '5px');
+
+								var uinfo = jQuery('.userinfo', box);
+								uinfo.css('borderRadius', '6px');
+								uinfo.css('width', '254px');
+								uinfo.css('height', '90px');
+								uinfo.css('backgroundColor', '#F4F6F1');
+								uinfo.css('float', 'left');
+								uinfo.css('padding', '5px');
+								uinfo.css('position', 'relative');
+								uinfo.css('zoom', '1');
+								
+							});
+						});
+					}
+
+					jQuery('.post .autor dt a').hover(function(event) {
+						offset = jQuery(this).offset();
+						pendingInfoBox = jQuery(this).html();
+						infoBoxX = offset.left - 10;
+						infoBoxY = offset.top + 19;
+						setTimeout(checkUserInfoBox, 1000);
+					}, function() {
+						pendingInfoBox = undefined;
 						jQuery('#ajax_usercard').remove();
-						jQuery('body').append('<div id="ajax_usercard">'+ jQuery(this).html() +'</div>');
-						var box = jQuery('#ajax_usercard');
-						if (is_dark == 0) {
-							box.css('background-Color', 'whitesmoke');
-						}
-						else {
-							box.css('background-color', '#39444B');
-						}
-						box.css('borderRadius', '6px');
-						box.css('padding', '5px');
-						box.css('position', 'absolute');
-						box.css('left', infoBoxX);
-						box.css('top', infoBoxY);
-						box.css('overflow', 'hidden');
-						box.css('boxShadow', '1px 1px 5px rgba(0, 0, 0, 0.25)');
-						box.css('zIndex', '9999');
-
-						var uavatar = jQuery('.useravatar', box);
-						uavatar.css('float', 'left');
-						uavatar.css('padding', '5px');
-						uavatar.css('marginRight', '5px');
-
-						var uinfo = jQuery('.userinfo', box);
-						uinfo.css('borderRadius', '6px');
-						uinfo.css('width', '254px');
-						uinfo.css('height', '90px');
-						uinfo.css('backgroundColor', '#F4F6F1');
-						uinfo.css('float', 'left');
-						uinfo.css('padding', '5px');
-						uinfo.css('position', 'relative');
-						uinfo.css('zoom', '1');
-						
 					});
 				});
 			}
-
-			jQuery('.post .autor dt a').hover(function(event) {
-				offset = jQuery(this).offset();
-				pendingInfoBox = jQuery(this).html();
-				infoBoxX = offset.left - 10;
-				infoBoxY = offset.top + 19;
-				setTimeout(checkUserInfoBox, 1000);
-			}, function() {
-				pendingInfoBox = undefined;
-				jQuery('#ajax_usercard').remove();
-			});
-		});
+		});	
+		
 		
 		
 		// Nuevo estilo para los QUOTES
