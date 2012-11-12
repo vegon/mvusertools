@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name           MV Usertools
+// @name           MV-Usertools
 // @namespace      MVusertools
-// @description    Añade controles avanzados a los posts en MV
+// @version        1.7.1
+// @description    Controles avanzados para la web mediavida.com
 // @include        http://www.mediavida.com/*
 // @exclude        http://www.mediavida.com/foro/reportes.php
 // @exclude        http://www.mediavida.com/notificaciones*
