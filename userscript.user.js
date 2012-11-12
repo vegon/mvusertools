@@ -784,14 +784,14 @@ function main() {
 		
 		// Mensaje al updatear y reset de opciones
 		var utupdate = localStorage["utupdate"];
-		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.1</p><br /><br />- Corregido que la caja de busqueda cambie de linea si tienes un nick largo.';
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2</p><br /><br />- Ahora al poner el ratón encima del nick de alguien en un hilo verás la información de su perfil. Esto contará como si visitas su perfil (aviso para los buitres)<br /><br />- La extensión ya funciona en todos los rincones de Mediavida. Streams y Grupos recebirán amor en futuras actualizaciones.<br /><br />- Nuevo estilo para los quotes.<hr />';
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut172-a') {
+			if (utupdate != 'ut172-c') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut172-a';
+				localStorage["utupdate"] = 'ut172-c';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
