@@ -572,6 +572,26 @@ function main() {
 			#ut-menu-contenido TABLE{\
 			border-top: 1px solid #ccc;\
 			}\
+			div.post .msg .newquote .cuerpo, div.post .msg .newquoteblack .cuerpo{\
+			overflow: inherit !important;\
+			}\
+			.newquote a.toggled, .newquoteblack a.toggled{\
+			border-style: solid !important;\
+			border-width: 1px !important;\
+			margin: 0 !important;\
+			padding: 0 3px !important;\
+			}\
+			.newquote a.toggled {\
+			border-color: #CCCCCC #CCCCCC #CCCCCC !important;\
+			}\
+			.newquoteblack a.toggled{\
+			border-color: #CCCCCC #CCCCCC #CCCCCC !important;\
+			}\
+			.newquote div.quote, .newquoteblack div.quote{\
+			border: 1px solid #CCCCCC !important;\
+			margin: 0 0 8px !important;\
+			border-radius: 0 6px 6px 6px !important;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -591,7 +611,7 @@ function main() {
 		}
 		
 		
-		/////////// MENU ///////////////////////////////////////////////////////////////
+		/////////// MENU /////////////////////////////////////////////////////////////// 
 		var bottominfo = '<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.<br /><br />Instrucciones y más información en <a href="http://mvusertools.mvwat.com" target="_blank">la web oficial de la extensión</a>.</p>';
 		
 		var utlinksfooter = localStorage["utlinksfooter"];
@@ -600,10 +620,11 @@ function main() {
 		var uticonosportada = localStorage["uticonosportada"];
 		var uticonosdestacados = localStorage["uticonosdestacados"];
 		var utlivesdestacados = localStorage["utlivesdestacados"];
+		var utnewquote = localStorage["utnewquote"];
 			// Forma del menu
 		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 		jQuery(function() {
 			if (nicklenght > 8) {
@@ -733,6 +754,23 @@ function main() {
 		if (utlivesdestacados == 'no') {
 			jQuery('#ut-utlivesdestacados-si').css('color','#999999')
 		}
+			// Nuevos quotes
+		jQuery('#ut-utnewquote-si').click(function() {
+			localStorage["utnewquote"] = 'si';
+			jQuery('#ut-utnewquote-no').css('color','#999999')
+			jQuery('#ut-utnewquote-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utnewquote-no').click(function() {
+			localStorage["utnewquote"] = 'no';
+			jQuery('#ut-utnewquote-si').css('color','#999999')
+			jQuery('#ut-utnewquote-no').css('color','#EF5000')
+		});
+		if (utnewquote == 'si') {
+			jQuery('#ut-utnewquote-no').css('color','#999999')
+		}
+		if (utnewquote == 'no') {
+			jQuery('#ut-utnewquote-si').css('color','#999999')
+		}
 		
 		
 		// Mensaje al updatear y reset de opciones
@@ -751,12 +789,29 @@ function main() {
 				localStorage["uticonosportada"] = 'si';
 				localStorage["uticonosdestacados"] = 'si';
 				localStorage["utlivesdestacados"] = 'si';
+				localStorage["utnewquote"] = 'si';
 			}
 		});
 		jQuery('#ut-box-cerrar').click(function() {
 			jQuery('div#ut-mask').hide();
 			jQuery('div#ut-dialog').hide();
 		});
+		
+		
+		// Nuevo estilo para los QUOTES
+		jQuery(function() {
+			if (utnewquote == 'si') {
+				jQuery(function() {
+					if (is_dark == 0) {
+						jQuery('div.msg div.body').addClass('newquote');
+					}
+					else {
+						jQuery('div.msg div.body').addClass('newquoteblack');
+					}
+				});	
+			}
+		});	
+		
 		
 		// Mods de cada foro
 		jQuery(function() {
