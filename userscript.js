@@ -851,9 +851,10 @@ function main() {
 			}
 
 			jQuery('.post .autor dt a').hover(function(event) {
+				offset = jQuery(this).offset();
 				pendingInfoBox = jQuery(this).html();
-				infoBoxX = event.pageX - 25;
-				infoBoxY = event.pageY + 20;
+				infoBoxX = offset.left - 10;
+				infoBoxY = offset.top + 19;
 				setTimeout(checkUserInfoBox, 1000);
 			}, function() {
 				pendingInfoBox = undefined;
