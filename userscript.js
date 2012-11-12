@@ -798,6 +798,72 @@ function main() {
 		});
 		
 		
+		// Información del perfil en la lista de users
+		jQuery(document).ready(function() {
+			var pendingInfoBox = undefined;
+			var infoBoxX = undefined;
+			var infoBoxY = undefined;
+
+			function checkUserInfoBox() {
+				if(pendingInfoBox != undefined) {
+					launchUserInfoBox(pendingInfoBox);
+				}
+			}
+
+			function launchUserInfoBox() {
+				jQuery.get('http://www.mediavida.com/id/' + pendingInfoBox, function(data) {
+					jQuery('.infoavatar', data).each(function() {
+						jQuery('#ajax_usercard').remove();
+						jQuery('body').append('<div id="ajax_usercard">'+ jQuery(this).html() +'</div>');
+						var box = jQuery('#ajax_usercard');
+						jQuery(function() {
+							if (is_dark == 0) {
+								box.css('backgroundColor', 'whitesmoke');
+							}
+							else {
+								box.css('backgroundColor', '#39444B');
+							}
+						});	
+						box.css('borderRadius', '6px');
+						box.css('padding', '5px');
+						box.css('position', 'absolute');
+						box.css('left', infoBoxX);
+						box.css('top', infoBoxY);
+						box.css('overflow', 'hidden');
+						box.css('boxShadow', '1px 1px 5px rgba(0, 0, 0, 0.25)');
+						box.css('zIndex', '5000');
+
+						var uavatar = jQuery('.useravatar', box);
+						uavatar.css('float', 'left');
+						uavatar.css('padding', '5px');
+						uavatar.css('marginRight', '5px');
+
+						var uinfo = jQuery('.userinfo', box);
+						uinfo.css('borderRadius', '6px');
+						uinfo.css('width', '254px');
+						uinfo.css('height', '90px');
+						uinfo.css('backgroundColor', '#F4F6F1');
+						uinfo.css('float', 'left');
+						uinfo.css('padding', '5px');
+						uinfo.css('position', 'relative');
+						uinfo.css('zoom', '1');
+						
+					});
+				});
+			}
+
+			jQuery('.post .autor dt a').hover(function(event) {
+				pendingInfoBox = jQuery(this).html();
+				infoBoxX = event.pageX - 25;
+				infoBoxY = event.pageY + 20;
+				setTimeout(checkUserInfoBox, 1000);
+			}, function() {
+				pendingInfoBox = undefined;
+				jQuery('#ajax_usercard').remove();
+			});
+		});
+		
+		
 		// Nuevo estilo para los QUOTES
 		jQuery(function() {
 			if (utnewquote == 'si') {
