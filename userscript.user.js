@@ -34,6 +34,7 @@ function main() {
 		var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -1));
 		var baseHeight;
 		var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
+		var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
 
 		function initInsertions() {
 			var b;
@@ -583,6 +584,19 @@ function main() {
 			margin: 0 0 8px !important;\
 			border-radius: 0 6px 6px 6px !important;\
 			}\
+			.tinycol.bigscreen{\
+			margin-top: 550px;\
+			}\
+			.postit.bigscreen{\
+			width: 958px;\
+			padding-left: 0px;\
+			}\
+			#pi_body.bigscreen{\
+			width: 938px;\
+			}\
+			.embedded.bigscreen{\
+			;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -806,6 +820,40 @@ function main() {
 			jQuery('div#ut-mask').hide();
 			jQuery('div#ut-dialog').hide();
 		});
+		
+		
+		
+		// Modo bigscreen en live con stream
+		
+		if (postitlive != 0) {
+			jQuery('<span id="bigscreen-mode"> Big!</span>').insertAfter('a#showform');
+			jQuery('<span style="display: none;" id="bigscreen-mode-off"> Small!</span>').insertAfter('a#showform');
+		
+			jQuery('#bigscreen-mode').click(function() {
+				jQuery('div.tinycol').addClass('bigscreen');
+				jQuery('div.postit').addClass('bigscreen');
+				jQuery('div#pi_body').addClass('bigscreen');
+				jQuery('div#pi_body div.embedded').addClass('bigscreen');
+				jQuery('div#pi_body div.embedded object embed').attr({
+				  width: '930',
+				  height: '500'
+				});
+				jQuery('#bigscreen-mode').hide();
+				jQuery('#bigscreen-mode-off').show();
+			});
+			jQuery('#bigscreen-mode-off').click(function() {
+				jQuery('div.tinycol').removeClass('bigscreen');
+				jQuery('div.postit').removeClass('bigscreen');
+				jQuery('div#pi_body').removeClass('bigscreen');
+				jQuery('div#pi_body div.embedded').removeClass('bigscreen');
+				jQuery('div#pi_body div.embedded object embed').attr({
+				  width: '560',
+				  height: '315'
+				});
+				jQuery('#bigscreen-mode').show();
+				jQuery('#bigscreen-mode-off').hide();
+			});
+		}
 		
 		
 		// Información del perfil en la lista de users
