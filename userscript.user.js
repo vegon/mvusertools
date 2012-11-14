@@ -194,7 +194,7 @@ function main() {
 		{
 		var css = 
 			".sprite {\
-				background: url(http://www.mvwat.com/mvusertools/sprites-new.png) no-repeat;\
+				background: url(http://www.mvwat.com/mvusertools/sprites172.png) no-repeat;\
 			}\
 			.usertools TABLE TD\
 			{\
@@ -597,6 +597,28 @@ function main() {
 			.embedded.bigscreen{\
 			;\
 			}\
+			#bigscreen-mode{\
+			background-position: -99px -28px;\
+			width: 41px;\
+			height: 23px;\
+			float: right;\
+			margin: 5px -15px 5px 10px;\
+			cursor: pointer;\
+			}\
+			#bigscreen-mode:hover{\
+			background-position: -142px -28px;\
+			}\
+			#bigscreen-mode-off{\
+			background-position: -99px 0;\
+			width: 41px;\
+			height: 23px;\
+			float: right;\
+			margin: 5px -15px 5px 10px;\
+			cursor: pointer;\
+			}\
+			#bigscreen-mode-off:hover{\
+			background-position: -141px 0;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -824,19 +846,22 @@ function main() {
 		
 		
 		// Modo bigscreen en live con stream
-		
 		if (postitlive != 0) {
-			jQuery('<span id="bigscreen-mode"> Big!</span>').insertAfter('a#showform');
-			jQuery('<span style="display: none;" id="bigscreen-mode-off"> Small!</span>').insertAfter('a#showform');
+			jQuery('<div id="bigscreen-mode" class="sprite"></div>').insertAfter('a#showform');
+			jQuery('<div style="display: none;" id="bigscreen-mode-off" class="sprite"></div>').insertAfter('a#showform');
 		
 			jQuery('#bigscreen-mode').click(function() {
 				jQuery('div.tinycol').addClass('bigscreen');
 				jQuery('div.postit').addClass('bigscreen');
 				jQuery('div#pi_body').addClass('bigscreen');
 				jQuery('div#pi_body div.embedded').addClass('bigscreen');
+				jQuery('div#pi_body div.embedded object').attr({
+				  width: '930',
+				  height: '550'
+				});
 				jQuery('div#pi_body div.embedded object embed').attr({
 				  width: '930',
-				  height: '500'
+				  height: '550'
 				});
 				jQuery('#bigscreen-mode').hide();
 				jQuery('#bigscreen-mode-off').show();
@@ -846,6 +871,10 @@ function main() {
 				jQuery('div.postit').removeClass('bigscreen');
 				jQuery('div#pi_body').removeClass('bigscreen');
 				jQuery('div#pi_body div.embedded').removeClass('bigscreen');
+				jQuery('div#pi_body div.embedded object').attr({
+				  width: '560',
+				  height: '315'
+				});
 				jQuery('div#pi_body div.embedded object embed').attr({
 				  width: '560',
 				  height: '315'
