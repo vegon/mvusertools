@@ -585,7 +585,7 @@ function main() {
 			border-radius: 0 6px 6px 6px !important;\
 			}\
 			.tinycol.bigscreen{\
-			margin-top: 550px;\
+			margin-top: 800px;\
 			}\
 			.postit.bigscreen{\
 			width: 958px;\
