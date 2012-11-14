@@ -983,6 +983,7 @@ function main() {
 					function launchUserInfoBox() {
 						jQuery.get('http://www.mediavida.com/id/' + pendingInfoBox, function(data) {
 							jQuery('.infoavatar', data).each(function() {
+								if(pendingInfoBox == undefined) return false;
 								jQuery('#ajax_usercard').remove();
 								jQuery('body').append('<div id="ajax_usercard">'+ jQuery(this).html() +'</div>');
 								var box = jQuery('#ajax_usercard');
