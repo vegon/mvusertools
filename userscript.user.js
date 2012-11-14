@@ -619,6 +619,22 @@ function main() {
 			#bigscreen-mode-off:hover{\
 			background-position: -141px 0;\
 			}\
+			.post .spoiler-content {\
+				background-color: #F0F2ED;\
+				padding: 5px;\
+				border-bottom: 1px solid #d7d9d4;\
+			}\
+			.post.odd .spoiler-content {\
+				background-color: #E7E9E4;\
+			}\
+			.post .spoiler-content-black {\
+				background-color: #435058;\
+				padding: 5px;\
+				border-bottom: 1px solid #252C31;\
+			}\
+			.post.odd .spoiler-content-black {\
+				background-color: #39444B;\
+			}\
 			";
 		}
 		if (typeof GM_addStyle != "undefined") {
@@ -649,10 +665,12 @@ function main() {
 		var utlivesdestacados = localStorage["utlivesdestacados"];
 		var utnewquote = localStorage["utnewquote"];
 		var utuserinfo = localStorage["utuserinfo"];
+		var utestilospoilers = localStorage["utestilospoilers"];
+		var utbigscreen = localStorage["utbigscreen"];
 			// Forma del menu
 		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick.</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick.</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr><td>Nuevo estilo para los spoilers.</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit activado.</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 		jQuery(function() {
 			if (nicklenght > 8) {
@@ -816,18 +834,52 @@ function main() {
 		if (utuserinfo == 'no') {
 			jQuery('#ut-utuserinfo-si').css('color','#999999')
 		}
+			// Estilo spoilers
+		jQuery('#ut-utestilospoilers-si').click(function() {
+			localStorage["utestilospoilers"] = 'si';
+			jQuery('#ut-utestilospoilers-no').css('color','#999999')
+			jQuery('#ut-utestilospoilers-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utestilospoilers-no').click(function() {
+			localStorage["utestilospoilers"] = 'no';
+			jQuery('#ut-utestilospoilers-si').css('color','#999999')
+			jQuery('#ut-utestilospoilers-no').css('color','#EF5000')
+		});
+		if (utestilospoilers == 'si') {
+			jQuery('#ut-utestilospoilers-no').css('color','#999999')
+		}
+		if (utestilospoilers == 'no') {
+			jQuery('#ut-utestilospoilers-si').css('color','#999999')
+		}
+			// Modo bigscreen
+		jQuery('#ut-utbigscreen-si').click(function() {
+			localStorage["utbigscreen"] = 'si';
+			jQuery('#ut-utbigscreen-no').css('color','#999999')
+			jQuery('#ut-utbigscreen-si').css('color','#EF5000')
+		});
+		jQuery('#ut-utbigscreen-no').click(function() {
+			localStorage["utbigscreen"] = 'no';
+			jQuery('#ut-utbigscreen-si').css('color','#999999')
+			jQuery('#ut-utbigscreen-no').css('color','#EF5000')
+		});
+		if (utbigscreen == 'si') {
+			jQuery('#ut-utbigscreen-no').css('color','#999999')
+		}
+		if (utbigscreen == 'no') {
+			jQuery('#ut-utbigscreen-si').css('color','#999999')
+		}
 		
 		
 		// Mensaje al updatear y reset de opciones
 		var utupdate = localStorage["utupdate"];
-		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2</p><br /><br />- Ahora al poner el ratón encima del nick de alguien en un hilo verás la información de su perfil. Esto contará como si visitas su perfil (aviso para los buitres)<br /><br />- La extensión ya funciona en todos los rincones de Mediavida. Streams y Grupos recebirán amor en futuras actualizaciones.<br /><br />- Nuevo estilo para los quotes.<hr />';
+		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2</p><br /><br />- Ahora al poner el ratón encima del nick de alguien en un hilo verás la información de su perfil. Esto contará como si visitas su perfil (aviso para los buitres). Gracias Pirado_IV.<br /><br />- Botón para ensanchar los streams en hilos con Live! activado.<br /><br />- La extensión ya funciona en todos los rincones de Mediavida. Streams y Grupos recebirán amor en futuras actualizaciones.<br /><br />- Nuevo estilo para los quotes.<br /><br />- Nuevo estilo para los spoilers. Gracias Pirado_IV.<hr />';
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut172-c') {
+			if (utupdate != 'ut172-d') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut172-c';
+				localStorage["utupdate"] = 'ut172-d';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
@@ -836,6 +888,8 @@ function main() {
 				localStorage["utlivesdestacados"] = 'si';
 				localStorage["utnewquote"] = 'si';
 				localStorage["utuserinfo"] = 'si';
+				localStorage["utestilospoilers"] = 'si';
+				localStorage["utbigscreen"] = 'si';
 			}
 		});
 		jQuery('#ut-box-cerrar').click(function() {
@@ -844,46 +898,69 @@ function main() {
 		});
 		
 		
+			// Estilos para los spoilers
+			jQuery(function(){
+				if (utestilospoilers == 'si') { // TODO: Vegon, quitale el true y añade la opcion
+					jQuery(function(){
+						if (is_dark == 0) {
+							jQuery('.spoiler').each(function() {
+								spoiler_id = jQuery(this).attr('rel');
+								jQuery('#' + spoiler_id).addClass('spoiler-content');
+							});
+						}
+						else {
+							jQuery('.spoiler').each(function() {
+								spoiler_id = jQuery(this).attr('rel');
+								jQuery('#' + spoiler_id).addClass('spoiler-content-black');
+							});
+						}
+					});
+				}	
+			});
+		
 		
 		// Modo bigscreen en live con stream
-		if (postitlive != 0) {
-			jQuery('<div id="bigscreen-mode" class="sprite"></div>').insertAfter('a#showform');
-			jQuery('<div style="display: none;" id="bigscreen-mode-off" class="sprite"></div>').insertAfter('a#showform');
-		
-			jQuery('#bigscreen-mode').click(function() {
-				jQuery('div.tinycol').addClass('bigscreen');
-				jQuery('div.postit').addClass('bigscreen');
-				jQuery('div#pi_body').addClass('bigscreen');
-				jQuery('div#pi_body div.embedded').addClass('bigscreen');
-				jQuery('div#pi_body div.embedded object').attr({
-				  width: '930',
-				  height: '550'
-				});
-				jQuery('div#pi_body div.embedded object embed').attr({
-				  width: '930',
-				  height: '550'
-				});
-				jQuery('#bigscreen-mode').hide();
-				jQuery('#bigscreen-mode-off').show();
-			});
-			jQuery('#bigscreen-mode-off').click(function() {
-				jQuery('div.tinycol').removeClass('bigscreen');
-				jQuery('div.postit').removeClass('bigscreen');
-				jQuery('div#pi_body').removeClass('bigscreen');
-				jQuery('div#pi_body div.embedded').removeClass('bigscreen');
-				jQuery('div#pi_body div.embedded object').attr({
-				  width: '560',
-				  height: '315'
-				});
-				jQuery('div#pi_body div.embedded object embed').attr({
-				  width: '560',
-				  height: '315'
-				});
-				jQuery('#bigscreen-mode').show();
-				jQuery('#bigscreen-mode-off').hide();
-			});
-		}
-		
+		jQuery(function() {
+			if (utbigscreen == 'si') {
+				if (postitlive != 0) {
+					jQuery('<div id="bigscreen-mode" class="sprite"></div>').insertAfter('a#showform');
+					jQuery('<div style="display: none;" id="bigscreen-mode-off" class="sprite"></div>').insertAfter('a#showform');
+				
+					jQuery('#bigscreen-mode').click(function() {
+						jQuery('div.tinycol').addClass('bigscreen');
+						jQuery('div.postit').addClass('bigscreen');
+						jQuery('div#pi_body').addClass('bigscreen');
+						jQuery('div#pi_body div.embedded').addClass('bigscreen');
+						jQuery('div#pi_body div.embedded object').attr({
+						  width: '930',
+						  height: '550'
+						});
+						jQuery('div#pi_body div.embedded object embed').attr({
+						  width: '930',
+						  height: '550'
+						});
+						jQuery('#bigscreen-mode').hide();
+						jQuery('#bigscreen-mode-off').show();
+					});
+					jQuery('#bigscreen-mode-off').click(function() {
+						jQuery('div.tinycol').removeClass('bigscreen');
+						jQuery('div.postit').removeClass('bigscreen');
+						jQuery('div#pi_body').removeClass('bigscreen');
+						jQuery('div#pi_body div.embedded').removeClass('bigscreen');
+						jQuery('div#pi_body div.embedded object').attr({
+						  width: '560',
+						  height: '315'
+						});
+						jQuery('div#pi_body div.embedded object embed').attr({
+						  width: '560',
+						  height: '315'
+						});
+						jQuery('#bigscreen-mode').show();
+						jQuery('#bigscreen-mode-off').hide();
+					});
+				}
+			}
+		});	
 		
 		// Información del perfil en la lista de users
 		jQuery(function() {
