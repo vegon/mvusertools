@@ -613,7 +613,7 @@ function main() {
 			width: 41px;\
 			height: 23px;\
 			float: right;\
-			margin: 5px -15px 5px 10px;\
+			margin: 5px 0px 5px 10px;\
 			cursor: pointer;\
 			}\
 			#bigscreen-mode-off:hover{\
@@ -670,7 +670,7 @@ function main() {
 			// Forma del menu
 		jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 		jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr class="odd"><td>Links en el footer</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick.</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los spoilers.</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit activado.</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr class="odd"><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 		var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 		jQuery(function() {
 			if (nicklenght > 8) {
@@ -874,12 +874,12 @@ function main() {
 		var utupdate = localStorage["utupdate"];
 		var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2</p><br /><br />- Ahora al poner el ratón encima del nick de alguien en un hilo verás la información de su perfil. Esto contará como si visitas su perfil (aviso para los buitres). Gracias Pirado_IV.<br /><br />- Botón para ensanchar los streams en hilos con Live! activado.<br /><br />- La extensión ya funciona en todos los rincones de Mediavida. Streams y Grupos recebirán amor en futuras actualizaciones.<br /><br />- Nuevo estilo para los quotes.<br /><br />- Nuevo estilo para los spoilers. Gracias Pirado_IV.<hr />';
 		jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 110px 0 110px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+		jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 		jQuery(function() {
-			if (utupdate != 'ut172-d') {
+			if (utupdate != 'ut172-final') {
 				jQuery('div#ut-mask').show();
 				jQuery('div#ut-dialog').show();
-				localStorage["utupdate"] = 'ut172-d';
+				localStorage["utupdate"] = 'ut172-final';
 				localStorage["utlinksfooter"] = 'si';
 				localStorage["uttablamods"] = 'si';
 				localStorage["utmarcapaginas"] = 'si';
@@ -896,27 +896,31 @@ function main() {
 			jQuery('div#ut-mask').hide();
 			jQuery('div#ut-dialog').hide();
 		});
+		jQuery('#ut-mask').click(function() {
+			jQuery('div#ut-mask').hide();
+			jQuery('div#ut-dialog').hide();
+		});
 		
 		
-			// Estilos para los spoilers
-			jQuery(function(){
-				if (utestilospoilers == 'si') { // TODO: Vegon, quitale el true y añade la opcion
-					jQuery(function(){
-						if (is_dark == 0) {
-							jQuery('.spoiler').each(function() {
-								spoiler_id = jQuery(this).attr('rel');
-								jQuery('#' + spoiler_id).addClass('spoiler-content');
-							});
-						}
-						else {
-							jQuery('.spoiler').each(function() {
-								spoiler_id = jQuery(this).attr('rel');
-								jQuery('#' + spoiler_id).addClass('spoiler-content-black');
-							});
-						}
-					});
-				}	
-			});
+		// Estilos para los spoilers
+		jQuery(function(){
+			if (utestilospoilers == 'si') {
+				jQuery(function(){
+					if (is_dark == 0) {
+						jQuery('.spoiler').each(function() {
+							spoiler_id = jQuery(this).attr('rel');
+							jQuery('#' + spoiler_id).addClass('spoiler-content');
+						});
+					}
+					else {
+						jQuery('.spoiler').each(function() {
+							spoiler_id = jQuery(this).attr('rel');
+							jQuery('#' + spoiler_id).addClass('spoiler-content-black');
+						});
+					}
+				});
+			}	
+		});
 		
 		
 		// Modo bigscreen en live con stream
@@ -989,7 +993,7 @@ function main() {
 									box.css('background-color', '#39444B');
 								}
 								box.css('borderRadius', '6px');
-								box.css('padding', '5px');
+								box.css('padding', '10px 5px 5px 5px');
 								box.css('position', 'absolute');
 								box.css('left', infoBoxX);
 								box.css('top', infoBoxY);
@@ -1020,7 +1024,7 @@ function main() {
 						offset = jQuery(this).offset();
 						pendingInfoBox = jQuery(this).html();
 						infoBoxX = offset.left - 10;
-						infoBoxY = offset.top + 19;
+						infoBoxY = offset.top + 14;
 						setTimeout(checkUserInfoBox, 1000);
 					}, function() {
 						pendingInfoBox = undefined;
