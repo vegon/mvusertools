@@ -602,7 +602,7 @@ function main() {
 			width: 41px;\
 			height: 23px;\
 			float: right;\
-			margin: 5px -15px 5px 10px;\
+			margin: 5px 0 5px 10px;\
 			cursor: pointer;\
 			}\
 			#bigscreen-mode:hover{\
