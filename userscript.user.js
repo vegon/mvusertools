@@ -1211,10 +1211,10 @@ function main() {
 				jQuery('.item h4').each(function (index) {
 					jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
 				});
-				jQuery('div.left:first-child').contents().filter(function(){
+				jQuery('div.item div.bbar div.left:first-child').contents().filter(function(){
 					return this.nodeType === 3;
 				}).remove();
-				jQuery('.bbar div.left:first-child').prepend('En ');
+				jQuery('div.item div.bbar div.left:first-child').prepend('En ');
 			}
 		});
 				
