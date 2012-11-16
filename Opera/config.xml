@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" version="1.7.2.1" id="extensions:MV Usertools">
+	<name>MV Usertools</name>
+	<description>Mejoras para la web mediavida.com</description>
+	<author href="http://mvusertools.mvwat.com">Vegon y cm07</author>
+	<access origin="http://mediavida.com" subdomains="true" />
+	<license href="http://www.opensource.org/licenses/mit-license.php">
+    Licensed under the MIT license
+    </license>
+	<icon src="icons/icon_128.png"/>
+</widget>	

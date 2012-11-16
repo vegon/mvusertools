@@ -1,0 +1,19 @@
+{
+    "scripts": [
+        {
+            "name": "MV Usertools",
+            "charset": "UTF-8",
+            "run-at-startup": true,
+            "run-when": "ready",
+            "include": [
+                "http://www.mediavida.com/*"
+            ],
+            "exclude": [],
+            "paths": [
+                "content/jquery-1.8.2.min.js",
+                "content/mvusertools.user.js"
+            ]
+        }
+    ],
+    "scriptify-version": "0.2.3.1"
+}
