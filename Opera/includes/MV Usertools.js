@@ -584,21 +584,21 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
                     window.jQuery('.linksfooter2 a[href^="/id/"]').children("span").text("Perfil");
                     var utnoti = window.jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utnoti.length > 0) {
+                        if (utnoti != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(" (" + utnoti + ")");
                         }
                     });
                     window.jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
                     var utavisos = window.jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utavisos.length > 0) {
+                        if (utavisos != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(" (" + utavisos + ")");
                         }
                     });
                     window.jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
                     var utmsj = window.jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utmsj.length > 0) {
+                        if (utmsj != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(" (" + utmsj + ")");
                         }
                     });
@@ -620,21 +620,21 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
                     window.jQuery('.linksfooter2 a[href^="/id/"]').children("span").text("Perfil");
                     var utnoti = window.jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utnoti.length > 0) {
+                        if (utnoti != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(" (" + utnoti + ")");
                         }
                     });
                     window.jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
                     var utavisos = window.jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utavisos.length > 0) {
+                        if (utavisos != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(" (" + utavisos + ")");
                         }
                     });
                     window.jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
                     var utmsj = window.jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
                     window.jQuery(function() {
-                        if (utmsj.length > 0) {
+                        if (utmsj != undefined) {
                             window.jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(" (" + utmsj + ")");
                         }
                     });
