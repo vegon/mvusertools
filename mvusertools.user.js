@@ -885,6 +885,38 @@ jQuery('#ut-mask').click(function() {
 });
 
 
+
+// Ordenar por respuestas sin leer en favoritos
+var $table = jQuery('table#tfav');
+jQuery('body#favoritos div.largecol').prepend('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>');
+var originalRows = $table.find('tr').slice(1).get(),
+    rows = originalRows.slice(0);
+
+jQuery("#ut-fav-posts").click(function(){
+	rows.sort(function(a, b) {
+		var keyA = +$(a).find('a.unreadcount').text();
+		var keyB = +$(b).find('a.unreadcount').text();
+		if (keyA < keyB) return 1;
+		if (keyA > keyB) return -1;
+		return 0;
+	});
+	jQuery.each(rows, function(index, row) {
+		$table.children('tbody').append(row);
+	});
+	jQuery("#ut-fav-posts").css('color','#EF5000');
+	jQuery("#ut-fav-fecha").css('color','#999999');
+});
+
+jQuery("#ut-fav-fecha").click(function(){
+    jQuery.each(originalRows, function(index, row) {
+       $table.children('tbody').append(row);
+    });
+	jQuery("#ut-fav-posts").css('color','#999999');
+	jQuery("#ut-fav-fecha").css('color','#EF5000');
+});
+
+
+
 // Estilos para los spoilers
 jQuery(function(){
 	if (utestilospoilers == 'si') {
@@ -1168,16 +1200,16 @@ jQuery(function(){
 
 // > Greentext (no funciona, hace que dejen de ir los popups de las imagenes y los el hover de los quotes)
 // > Implicando que no mola
-//		jQuery('div[id^="cuerpo_"]').html(
-//		function (i,h) {
-//			return h.replace(/^\s*&gt.*/mg, function(a) {
-//				if (is_dark) {
-//			        return "<span style='color: #A7BD68;'>" + a + "</span>"
-//			    } else {
-//			        return "<span style='color: #789922;'>" + a + "</span>"
-//			    }
-//			});	
-//		});
+		// jQuery('div[id^="cuerpo_"]').html(
+		// function (i,h) {
+			// return h.replace(/^\s*&gt.*/mg, function(a) {
+				// if (is_dark) {
+			        // return "<span style='color: #A7BD68;'>" + a + "</span>"
+			    // } else {
+			        // return "<span style='color: #789922;'>" + a + "</span>"
+			    // }
+			// });	
+		// });
 
 //Icono del foro del que viene la noticia en Portada
 jQuery(function(){
