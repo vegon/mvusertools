@@ -23,7 +23,6 @@ var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').htm
 var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 
-
 function initInsertions() {
 	var b;
 	if (document.forms[form_name]) {
@@ -892,26 +891,14 @@ jQuery('#ut-mask').click(function() {
 
 
 // Avisos en el favicon
-if (utnoti == undefined) {
-	var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);
-}
-else {
-	var utnoti_int = parseInt(0,10);
-}
-if (utavisos == undefined) {
-	var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);
-}
-else {
-	var utavisos_int = parseInt(0,10);
-}
-if (utnoti == undefined) {
-	var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);
-}
-else {
-	var utmsj_int = parseInt(0,10);
-}
+if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
+else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
+if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
+else {var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
+if (utmsj === undefined) {var utmsj_int = parseInt(0,10);}
+else {var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
 var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
-jQuery('body').addClass(''+ utnoti +'');
+jQuery('body').addClass(''+ utavisostotal +'');
 Tinycon.setBubble(utavisostotal);
 Tinycon.setOptions({
     fallback: true
