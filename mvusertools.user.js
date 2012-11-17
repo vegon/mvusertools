@@ -888,7 +888,9 @@ jQuery('#ut-mask').click(function() {
 
 // Ordenar por respuestas sin leer en favoritos
 var $table = jQuery('table#tfav');
+var $table = jQuery('table.full');
 jQuery('body#favoritos div.largecol').prepend('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>');
+jQuery('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>').insertBefore('body#foros table.full');
 var originalRows = $table.find('tr').slice(1).get(),
     rows = originalRows.slice(0);
 
