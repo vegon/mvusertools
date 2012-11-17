@@ -3,7 +3,7 @@
    "content_scripts": [ {
       "exclude_matches": [  ],
       "include_globs": [ "http://www.mediavida.com/*" ],
-      "js": [ "jquery-1.8.2.min.js","mvusertools.user.js" ],
+      "js": [ "jquery-1.8.2.min.js","tinycon.min.js","mvusertools.user.js" ],
       "matches": [ "http://www.mediavida.com/*","http://mediavida.com/*" ],
       "run_at": "document_idle"
    } ],

@@ -5,6 +5,7 @@
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
+// @require        http://www.mvwat.com/mvusertools/libs/tinycon.min.js
 // ==/UserScript==
 
 
@@ -18,6 +19,9 @@ var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -
 var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
+var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
+var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 
 function initInsertions() {
 	var b;
@@ -885,6 +889,55 @@ jQuery('#ut-mask').click(function() {
 });
 
 
+
+// Avisos en el favicon
+if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
+else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
+if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
+else {var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
+if (utmsj === undefined) {var utmsj_int = parseInt(0,10);}
+else {var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
+var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
+jQuery('body').addClass(''+ utavisostotal +'');
+Tinycon.setBubble(utavisostotal);
+Tinycon.setOptions({
+    fallback: true
+});
+
+
+// Ordenar por respuestas sin leer en favoritos
+var $table = jQuery('table#tfav');
+var $table = jQuery('table.full');
+jQuery('body#favoritos div.largecol').prepend('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>');
+jQuery('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>').insertBefore('body#foros table.full');
+var originalRows = $table.find('tr').slice(1).get(),
+    rows = originalRows.slice(0);
+
+jQuery("#ut-fav-posts").click(function(){
+	rows.sort(function(a, b) {
+		var keyA = +$(a).find('a.unreadcount').text();
+		var keyB = +$(b).find('a.unreadcount').text();
+		if (keyA < keyB) return 1;
+		if (keyA > keyB) return -1;
+		return 0;
+	});
+	jQuery.each(rows, function(index, row) {
+		$table.children('tbody').append(row);
+	});
+	jQuery("#ut-fav-posts").css('color','#EF5000');
+	jQuery("#ut-fav-fecha").css('color','#999999');
+});
+
+jQuery("#ut-fav-fecha").click(function(){
+    jQuery.each(originalRows, function(index, row) {
+       $table.children('tbody').append(row);
+    });
+	jQuery("#ut-fav-posts").css('color','#999999');
+	jQuery("#ut-fav-fecha").css('color','#EF5000');
+});
+
+
+
 // Estilos para los spoilers
 jQuery(function(){
 	if (utestilospoilers == 'si') {
@@ -1090,25 +1143,22 @@ jQuery(function(){
 				jQuery('.linksfooter2 #ut-menu').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 				jQuery(function() {
-				if (utnoti.length > 0) {
+				if (utnoti != undefined) {
 					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
 				}
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
-				if (utavisos.length > 0) {
+				if (utavisos != undefined) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
 				}
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
-				if (utmsj.length > 0) {
+				if (utmsj != undefined) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
 				}
 				});
@@ -1131,25 +1181,22 @@ jQuery(function(){
 				jQuery('.linksfooter2 #ut-menu').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 				jQuery(function() {
-				if (utnoti.length > 0) {
+				if (utnoti != undefined) {
 					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
 				}
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
-				if (utavisos.length > 0) {
+				if (utavisos != undefined) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
 				}
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
-				if (utmsj.length > 0) {
+				if (utmsj != undefined) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
 				}
 				});
@@ -1168,16 +1215,16 @@ jQuery(function(){
 
 // > Greentext (no funciona, hace que dejen de ir los popups de las imagenes y los el hover de los quotes)
 // > Implicando que no mola
-//		jQuery('div[id^="cuerpo_"]').html(
-//		function (i,h) {
-//			return h.replace(/^\s*&gt.*/mg, function(a) {
-//				if (is_dark) {
-//			        return "<span style='color: #A7BD68;'>" + a + "</span>"
-//			    } else {
-//			        return "<span style='color: #789922;'>" + a + "</span>"
-//			    }
-//			});	
-//		});
+		// jQuery('div[id^="cuerpo_"]').html(
+		// function (i,h) {
+			// return h.replace(/^\s*&gt.*/mg, function(a) {
+				// if (is_dark) {
+			        // return "<span style='color: #A7BD68;'>" + a + "</span>"
+			    // } else {
+			        // return "<span style='color: #789922;'>" + a + "</span>"
+			    // }
+			// });	
+		// });
 
 //Icono del foro del que viene la noticia en Portada
 jQuery(function(){

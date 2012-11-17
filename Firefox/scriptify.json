@@ -11,6 +11,7 @@
             "exclude": [],
             "paths": [
                 "content/jquery-1.8.2.min.js",
+				"content/tinycon.min.js",
                 "content/mvusertools.user.js"
             ]
         }
