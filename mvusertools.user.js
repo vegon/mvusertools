@@ -19,9 +19,10 @@ var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -
 var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
-var utnoti = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);
-var utavisos = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);
-var utmsj = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);
+var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
+var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
+
 
 function initInsertions() {
 	var b;
@@ -891,12 +892,28 @@ jQuery('#ut-mask').click(function() {
 
 
 // Avisos en el favicon
-var utavisostotal = utnoti + utmsj + utavisos;
-jQuery('body').addClass(''+ utavisostotal +'');
+if (utnoti == undefined) {
+	var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);
+}
+else {
+	var utnoti_int = parseInt(0,10);
+}
+if (utavisos == undefined) {
+	var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);
+}
+else {
+	var utavisos_int = parseInt(0,10);
+}
+if (utnoti == undefined) {
+	var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);
+}
+else {
+	var utmsj_int = parseInt(0,10);
+}
+var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
+jQuery('body').addClass(''+ utnoti +'');
 Tinycon.setBubble(utavisostotal);
 Tinycon.setOptions({
-    width: 8,
-    height: 10,
     fallback: true
 });
 
