@@ -5,6 +5,7 @@
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
+// @require        http://www.mvwat.com/mvusertools/libs/tinycon.min.js
 // ==/UserScript==
 
 
@@ -18,6 +19,9 @@ var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -
 var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
+var utnoti = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);
+var utavisos = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);
+var utmsj = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);
 
 function initInsertions() {
 	var b;
@@ -886,6 +890,17 @@ jQuery('#ut-mask').click(function() {
 
 
 
+// Avisos en el favicon
+var utavisostotal = utnoti + utmsj + utavisos;
+jQuery('body').addClass(''+ utavisostotal +'');
+Tinycon.setBubble(utavisostotal);
+Tinycon.setOptions({
+    width: 8,
+    height: 10,
+    fallback: true
+});
+
+
 // Ordenar por respuestas sin leer en favoritos
 var $table = jQuery('table#tfav');
 var $table = jQuery('table.full');
@@ -1124,7 +1139,6 @@ jQuery(function(){
 				jQuery('.linksfooter2 #ut-menu').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 				jQuery(function() {
 				if (utnoti != undefined) {
 					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
@@ -1132,7 +1146,6 @@ jQuery(function(){
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
 				if (utavisos != undefined) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
@@ -1140,7 +1153,6 @@ jQuery(function(){
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
 				if (utmsj != undefined) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
@@ -1165,7 +1177,6 @@ jQuery(function(){
 				jQuery('.linksfooter2 #ut-menu').remove();
 				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 				jQuery(function() {
 				if (utnoti != undefined) {
 					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
@@ -1173,7 +1184,6 @@ jQuery(function(){
 				});
 				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
 					//Avisos
-				var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 				jQuery(function() {
 				if (utavisos != undefined) {
 					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
@@ -1181,7 +1191,6 @@ jQuery(function(){
 				});
 				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
 					//Mensajes
-				var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 				jQuery(function() {
 				if (utmsj != undefined) {
 					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
