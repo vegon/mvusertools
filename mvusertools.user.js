@@ -545,7 +545,7 @@ var css =
 	background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;\
 	}\
 	#ut-menu-contenido {\
-	background: #eee;\
+	background: #fff;\
 	}\
 	#ut-menu-contenido TABLE{\
 	border-top: 1px solid #ccc;\
@@ -621,6 +621,38 @@ var css =
 	.post.odd .spoiler-content-black {\
 		background-color: #39444B;\
 	}\
+	#ut-menu-tabs div{\
+		margin: 0 10px 0 0;\
+		padding: 3px 4px;\
+		background: #eee;\
+		display: inline-block;\
+		cursor: pointer;\
+		border-top: 1px solid #CCCCCC;\
+		border-right: 1px solid #CCCCCC;\
+		border-left: 1px solid #CCCCCC;\
+		color: #999;\
+	}\
+	#ut-menu-tabs div.active{\
+		background: #444;\
+		color: #fff;\
+		border-top: 1px solid #CCCCCC;\
+		border-right: 1px solid #CCCCCC;\
+		border-left: 1px solid #CCCCCC;\
+	}\
+	#ut-menu-tabs div.active:hover{\
+		background: #444;\
+		color: #fff;\
+		border-top: 1px solid #CCCCCC;\
+		border-right: 1px solid #CCCCCC;\
+		border-left: 1px solid #CCCCCC;\
+	}\
+	#ut-menu-tabs div:hover{\
+		background: #ddd;\
+		color: #222;\
+	}\
+	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){\
+		width: 420px;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -657,7 +689,49 @@ var utfavicon = localStorage["utfavicon"];
 	// Forma del menu
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr class="odd"><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span id="ut-utfavicon-si">Si</span> <span id="ut-utfavicon-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr class="odd"><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span id="ut-utfavicon-si">Si</span> <span id="ut-utfavicon-no">No</span></td></tr></tbody></table>';
+var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
+var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody></tbody></table>';
+jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">'+ utmenutabs +''+ utmenutabla1 +''+ utmenutabla2 +''+ utmenutabla3 +'</div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+
+jQuery('#ut-menu-tab1').click(function () {
+	jQuery('#ut-menu-tab1').addClass('active');
+	jQuery('#ut-menu-tab2').removeClass('active');
+	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tabla1').show();
+	jQuery('#ut-menu-tabla2').hide();
+	jQuery('#ut-menu-tabla3').hide();
+	});
+jQuery('#ut-menu-tab2').click(function () {
+	jQuery('#ut-menu-tab1').removeClass('active');
+	jQuery('#ut-menu-tab2').addClass('active');
+	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tabla1').hide();
+	jQuery('#ut-menu-tabla2').show();
+	jQuery('#ut-menu-tabla3').hide();
+	});
+jQuery('#ut-menu-tab3').click(function () {
+	jQuery('#ut-menu-tab1').removeClass('active');
+	jQuery('#ut-menu-tab2').removeClass('active');
+	jQuery('#ut-menu-tab3').addClass('active');
+	jQuery('#ut-menu-tabla1').hide();
+	jQuery('#ut-menu-tabla2').hide();
+	jQuery('#ut-menu-tabla3').show();
+	});
+
+jQuery('#ut-menu').click(function () {
+	jQuery('#ut-mask-menu').show();
+	jQuery('#ut-dialog-menu').show();
+	});
+jQuery('#ut-menu-cerrar').click(function() {
+	jQuery('#ut-dialog-menu').hide();
+	jQuery('#ut-mask-menu').hide();
+	});
+jQuery('#ut-mask-menu').click(function() {
+	jQuery('#ut-dialog-menu').hide();
+	jQuery('#ut-mask-menu').hide();
+});
 var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 jQuery(function() {
 	if (nicklenght > 8) {
@@ -672,18 +746,6 @@ jQuery(function() {
 		jQuery('#nav_bar #sbii').css('width','133px');
 		jQuery('#nav_bar .bbii').css('left','143px');
 	}
-});
-jQuery('#ut-menu').click(function () {
-	jQuery('#ut-mask-menu').show();
-	jQuery('#ut-dialog-menu').show();
-	});
-jQuery('#ut-menu-cerrar').click(function() {
-	jQuery('#ut-dialog-menu').hide();
-	jQuery('#ut-mask-menu').hide();
-	});
-jQuery('#ut-mask-menu').click(function() {
-	jQuery('#ut-dialog-menu').hide();
-	jQuery('#ut-mask-menu').hide();
 });
 	// Boton de utlinksfooter
 jQuery('#ut-linksfooter-si').click(function() {
@@ -876,7 +938,7 @@ if (utfavicon == 'no') {
 
 // Mensaje al updatear y reset de opciones
 var utversion = localStorage["utversion"];
-var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2.1</p><br /><br />- Corrección de errores.<br /><br />- Firefox: la extensión ya no necesita reiniciar el navegador para instalarse o actualizarse. Se recomienda hacer una instalación limpia para esta versión.<br /><br />- Opera: Extensión nativa disponible (beta).<hr />';
+var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.3</p><br /><br />- asdasdasd.<br /><br />- asdasdadasd.<hr />';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 jQuery(function() {
@@ -1336,10 +1398,15 @@ jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').r
 jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
 
 // Version en el footer
-jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversion +'');
-if (utversion == undefined) {
-jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
-}
+jQuery(function(){
+	if (utversion == undefined) {
+		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
+	}
+	else {
+		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversion +'');
+	}
+});
+
 
 //Set Toggle Class
 
