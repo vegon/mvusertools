@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           MV Usertools
 // @namespace      MVusertools
-// @version        1.7.2.1
+// @version        1.7.3.beta
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
-// @require        http://www.mvwat.com/mvusertools/libs/tinycon.min.js
+// @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
 // ==/UserScript==
 
 
@@ -173,7 +173,7 @@ var blacklistBarra = "<div class='nopost barra'> \
 
 var balcklistToggle ="<div id='toggle' class='sprite'><div> "; 
 
-var blacklistInfo = "<span class='blacklisted-post'" + (is_dark ? " style='color: #626262 !important;'" : "") + ">Click en <img src='http://www.mvwat.com/mvusertools/blacklist-mini.png'> para desbloquear.</span>";
+var blacklistInfo = "<span class='blacklisted-post'" + (is_dark ? " style='color: #626262 !important;'" : "") + ">Click en <img src='http://www.mvusertools.com/ext/img/blacklist-mini.png'> para desbloquear.</span>";
 
 var blacklistAvatar = "~";
 
@@ -181,7 +181,7 @@ var blacklistAvatar = "~";
 {
 var css = 
 	".sprite {\
-		background: url(http://www.mvwat.com/mvusertools/sprites172.png) no-repeat;\
+		background: url(http://www.mvusertools.com/ext/img/sprites172.png) no-repeat;\
 	}\
 	.usertools TABLE TD\
 	{\
@@ -316,7 +316,7 @@ var css =
 	}\
 	.tapavatares span {\
 			position: abosolute; \
-			background: url(http://www.mvwat.com/mvusertools/blacklisted.png) no-repeat;\
+			background: url(http://www.mvusertools.com/ext/img/blacklisted.png) no-repeat;\
 			background-position: 0 4px;\
 			width: 80px; \
 			height: 84px; \
@@ -642,7 +642,7 @@ if (typeof GM_addStyle != "undefined") {
 
 
 /////////// MENU /////////////////////////////////////////////////////////////// 
-var bottominfo = '<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.<br /><br />Instrucciones y más información en <a href="http://mvusertools.mvwat.com" target="_blank">la web oficial de la extensión</a>.</p>';
+var bottominfo = '<p style="margin-top: 20px; font-size: 9px; color: #888888;">Si ves algún fallo prueba siempre a hacer ctrl+f5. Si así no se ha solucionado comunícanoslo con un post en <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-safari-413818">el hilo oficial</a> indicando navegador y su versión, sistema operativo y, si es posible, una screen del error.<br /><br />Instrucciones y más información en <a href="http://mvusertools.com" target="_blank">la web oficial de la extensión</a>.</p>';
 
 var utlinksfooter = localStorage["utlinksfooter"];
 var uttablamods = localStorage["uttablamods"];
@@ -861,7 +861,7 @@ if (utbigscreen == 'no') {
 var utupdate = localStorage["utupdate"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2.1</p><br /><br />- Corrección de errores.<br /><br />- Firefox: la extensión ya no necesita reiniciar el navegador para instalarse o actualizarse. Se recomienda hacer una instalación limpia para esta versión.<br /><br />- Opera: Extensión nativa disponible (beta).<hr />';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.mvwat.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 jQuery(function() {
 	if (utupdate != 'ut1721-final') {
 		jQuery('div#ut-mask').show();
@@ -1130,10 +1130,10 @@ jQuery(function(){
 				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
 					if (is_dark == 0) {
 						jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-						jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
-						jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
-						jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
-						jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+						jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
+						jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
+						jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
+						jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
 					}
 					else {
 						jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
@@ -1168,10 +1168,10 @@ jQuery(function(){
 				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
 						if (is_dark == 0) {
 							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvwat.com/mvusertools/keko_bar.png');
-							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvwat.com/mvusertools/avisos_bar.png');
-							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvwat.com/mvusertools/fav_bar.png');
-							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvwat.com/mvusertools/mail_bar.png');
+							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
+							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
+							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
+							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
 						}
 						else {
 							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
@@ -1209,7 +1209,7 @@ jQuery(function(){
 // Marcapaginas en los posts que entras directamente
 jQuery(function(){
 	if (utmarcapaginas == 'si') {
-		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvwat.com/mvusertools/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
+		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvusertools.com/ext/img/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
 	}
 });
 
