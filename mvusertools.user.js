@@ -8,7 +8,6 @@
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
 // ==/UserScript==
 
-
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -697,7 +696,7 @@ jQuery('#ut-linksfooter-no').click(function() {
 	jQuery('#ut-linksfooter-si').css('color','#999999')
 	jQuery('#ut-linksfooter-no').css('color','#EF5000')
 });
-if (utlinksfooter == 'si') {
+if (utlinksfooter == 'si' || utlinksfooter == undefined) {
 	jQuery('#ut-linksfooter-no').css('color','#999999')
 }
 if (utlinksfooter == 'no') {
@@ -714,7 +713,7 @@ jQuery('#ut-tablamods-no').click(function() {
 	jQuery('#ut-tablamods-si').css('color','#999999')
 	jQuery('#ut-tablamods-no').css('color','#EF5000')
 });
-if (uttablamods == 'si') {
+if (uttablamods == 'si' || uttablamods == undefined) {
 	jQuery('#ut-tablamods-no').css('color','#999999')
 }
 if (uttablamods == 'no') {
@@ -731,7 +730,7 @@ jQuery('#ut-marcapaginas-no').click(function() {
 	jQuery('#ut-marcapaginas-si').css('color','#999999')
 	jQuery('#ut-marcapaginas-no').css('color','#EF5000')
 });
-if (utmarcapaginas == 'si') {
+if (utmarcapaginas == 'si' || utmarcapaginas == undefined) {
 	jQuery('#ut-marcapaginas-no').css('color','#999999')
 }
 if (utmarcapaginas == 'no') {
@@ -748,7 +747,7 @@ jQuery('#ut-uticonosportada-no').click(function() {
 	jQuery('#ut-uticonosportada-si').css('color','#999999')
 	jQuery('#ut-uticonosportada-no').css('color','#EF5000')
 });
-if (uticonosportada == 'si') {
+if (uticonosportada == 'si' || uticonosportada == undefined) {
 	jQuery('#ut-uticonosportada-no').css('color','#999999')
 }
 if (uticonosportada == 'no') {
@@ -765,7 +764,7 @@ jQuery('#ut-uticonosdestacados-no').click(function() {
 	jQuery('#ut-uticonosdestacados-si').css('color','#999999')
 	jQuery('#ut-uticonosdestacados-no').css('color','#EF5000')
 });
-if (uticonosdestacados == 'si') {
+if (uticonosdestacados == 'si' || uticonosdestacados == undefined) {
 	jQuery('#ut-uticonosdestacados-no').css('color','#999999')
 }
 if (uticonosdestacados == 'no') {
@@ -782,7 +781,7 @@ jQuery('#ut-utlivesdestacados-no').click(function() {
 	jQuery('#ut-utlivesdestacados-si').css('color','#999999')
 	jQuery('#ut-utlivesdestacados-no').css('color','#EF5000')
 });
-if (utlivesdestacados == 'si') {
+if (utlivesdestacados == 'si' || utlivesdestacados == undefined) {
 	jQuery('#ut-utlivesdestacados-no').css('color','#999999')
 }
 if (utlivesdestacados == 'no') {
@@ -799,7 +798,7 @@ jQuery('#ut-utnewquote-no').click(function() {
 	jQuery('#ut-utnewquote-si').css('color','#999999')
 	jQuery('#ut-utnewquote-no').css('color','#EF5000')
 });
-if (utnewquote == 'si') {
+if (utnewquote == 'si' || utnewquote == undefined) {
 	jQuery('#ut-utnewquote-no').css('color','#999999')
 }
 if (utnewquote == 'no') {
@@ -816,7 +815,7 @@ jQuery('#ut-utuserinfo-no').click(function() {
 	jQuery('#ut-utuserinfo-si').css('color','#999999')
 	jQuery('#ut-utuserinfo-no').css('color','#EF5000')
 });
-if (utuserinfo == 'si') {
+if (utuserinfo == 'si' || utuserinfo == undefined) {
 	jQuery('#ut-utuserinfo-no').css('color','#999999')
 }
 if (utuserinfo == 'no') {
@@ -833,7 +832,7 @@ jQuery('#ut-utestilospoilers-no').click(function() {
 	jQuery('#ut-utestilospoilers-si').css('color','#999999')
 	jQuery('#ut-utestilospoilers-no').css('color','#EF5000')
 });
-if (utestilospoilers == 'si') {
+if (utestilospoilers == 'si' || utestilospoilers == undefined) {
 	jQuery('#ut-utestilospoilers-no').css('color','#999999')
 }
 if (utestilospoilers == 'no') {
@@ -850,7 +849,7 @@ jQuery('#ut-utbigscreen-no').click(function() {
 	jQuery('#ut-utbigscreen-si').css('color','#999999')
 	jQuery('#ut-utbigscreen-no').css('color','#EF5000')
 });
-if (utbigscreen == 'si') {
+if (utbigscreen == 'si' || utbigscreen == undefined) {
 	jQuery('#ut-utbigscreen-no').css('color','#999999')
 }
 if (utbigscreen == 'no') {
@@ -867,7 +866,7 @@ jQuery('#ut-utfavicon-no').click(function() {
 	jQuery('#ut-utfavicon-si').css('color','#999999')
 	jQuery('#ut-utfavicon-no').css('color','#EF5000')
 });
-if (utfavicon == 'si') {
+if (utfavicon == 'si' || utfavicon == undefined) {
 	jQuery('#ut-utfavicon-no').css('color','#999999')
 }
 if (utfavicon == 'no') {
@@ -876,26 +875,26 @@ if (utfavicon == 'no') {
 
 
 // Mensaje al updatear y reset de opciones
-var utupdate = localStorage["utupdate"];
+var utversion = localStorage["utversion"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.2.1</p><br /><br />- Corrección de errores.<br /><br />- Firefox: la extensión ya no necesita reiniciar el navegador para instalarse o actualizarse. Se recomienda hacer una instalación limpia para esta versión.<br /><br />- Opera: Extensión nativa disponible (beta).<hr />';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 jQuery(function() {
-	if (utupdate != 'ut173-dev') {
+	if (utversion != '1.7.3-dev2') {
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utupdate"] = 'ut173-dev';
-		localStorage["utlinksfooter"] = 'si';
-		localStorage["uttablamods"] = 'si';
-		localStorage["utmarcapaginas"] = 'si';
-		localStorage["uticonosportada"] = 'si';
-		localStorage["uticonosdestacados"] = 'si';
-		localStorage["utlivesdestacados"] = 'si';
-		localStorage["utnewquote"] = 'si';
-		localStorage["utuserinfo"] = 'si';
-		localStorage["utestilospoilers"] = 'si';
-		localStorage["utbigscreen"] = 'si';
-		localStorage["utfavicon"] = 'si';
+		localStorage["utversion"] = '1.7.3-dev2';
+		// localStorage["utlinksfooter"] = 'si';
+		// localStorage["uttablamods"] = 'si';
+		// localStorage["utmarcapaginas"] = 'si';
+		// localStorage["uticonosportada"] = 'si';
+		// localStorage["uticonosdestacados"] = 'si';
+		// localStorage["utlivesdestacados"] = 'si';
+		// localStorage["utnewquote"] = 'si';
+		// localStorage["utuserinfo"] = 'si';
+		// localStorage["utestilospoilers"] = 'si';
+		// localStorage["utbigscreen"] = 'si';
+		// localStorage["utfavicon"] = 'si';
 	}
 });
 jQuery('#ut-box-cerrar').click(function() {
@@ -911,7 +910,7 @@ jQuery('#ut-mask').click(function() {
 
 // Avisos en el favicon
 jQuery(function(){
-	if (utfavicon == 'si') {
+	if (utfavicon == 'si' || utfavicon == undefined) {
 		if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
 		else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
 		if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
@@ -963,7 +962,7 @@ jQuery("#ut-fav-fecha").click(function(){
 
 // Estilos para los spoilers
 jQuery(function(){
-	if (utestilospoilers == 'si') {
+	if (utestilospoilers == 'si' || utestilospoilers == undefined) {
 		jQuery(function(){
 			if (is_dark == 0) {
 				jQuery('.spoiler').each(function() {
@@ -984,7 +983,7 @@ jQuery(function(){
 
 // Modo bigscreen en live con stream
 jQuery(function() {
-	if (utbigscreen == 'si') {
+	if (utbigscreen == 'si' || utbigscreen == undefined) {
 		if (postitlive != 0) {
 			jQuery('<div id="bigscreen-mode" class="sprite"></div>').insertAfter('a#showform');
 			jQuery('<div style="display: none;" id="bigscreen-mode-off" class="sprite"></div>').insertAfter('a#showform');
@@ -1027,7 +1026,7 @@ jQuery(function() {
 
 // Información del perfil en la lista de users
 jQuery(function() {
-	if (utuserinfo == 'si') {
+	if (utuserinfo == 'si' || utuserinfo == undefined) {
 		jQuery(document).ready(function() {
 			var pendingInfoBox = undefined;
 			var infoBoxX = undefined;
@@ -1098,7 +1097,7 @@ jQuery(function() {
 
 // Nuevo estilo para los QUOTES
 jQuery(function() {
-	if (utnewquote == 'si') {
+	if (utnewquote == 'si' || utnewquote == undefined) {
 		jQuery(function() {
 			if (is_dark == 0) {
 				jQuery('div.msg div.body').addClass('newquote');
@@ -1113,7 +1112,7 @@ jQuery(function() {
 
 // Mods de cada foro
 jQuery(function() {
-	if (uttablamods == 'si') {
+	if (uttablamods == 'si' || uttablamods == undefined) {
 		jQuery(function() {
 			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
 				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
@@ -1147,7 +1146,7 @@ jQuery(function() {
 
 // Links importantes en el footer
 jQuery(function(){
-	if (utlinksfooter == 'si') {
+	if (utlinksfooter == 'si' || utlinksfooter == undefined) {
 		jQuery(function(){
 		   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
 				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
@@ -1231,7 +1230,7 @@ jQuery(function(){
 
 // Marcapaginas en los posts que entras directamente
 jQuery(function(){
-	if (utmarcapaginas == 'si') {
+	if (utmarcapaginas == 'si' || utmarcapaginas == undefined) {
 		jQuery('div.mark').attr('style', 'background-image: url("http://www.mvusertools.com/ext/img/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
 	}
 });
@@ -1251,7 +1250,7 @@ jQuery(function(){
 
 //Icono del foro del que viene la noticia en Portada
 jQuery(function(){
-	if (uticonosportada == 'si') {
+	if (uticonosportada == 'si' || uticonosportada == undefined) {
 		jQuery('.bbar a[href^="/foro"]').each(function(i) {
 			var enlace = this + "";
 			var split = enlace.split('/');
@@ -1273,7 +1272,7 @@ jQuery(function(){
 		
 		//Icono del foro del que viene la noticia en Destacados
 jQuery(function(){
-	if (uticonosdestacados == 'si') {
+	if (uticonosdestacados == 'si' || uticonosdestacados == undefined) {
 		jQuery('ul.mini a[href^="/foro"]').each(function(i) {
 			var enlace = this + "";
 			var split = enlace.split('/');
@@ -1323,7 +1322,7 @@ jQuery("#button_list").click(function () {
 
 // hilos con live destacados (solo funciona con theme normal)
 jQuery(function(){
-	if (utlivesdestacados == 'si') {
+	if (utlivesdestacados == 'si' || utfavicon == undefined) {
 		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
 	}
 });
@@ -1335,6 +1334,12 @@ jQuery(function(){
 // Alien_crrpt = Alien_derp
 jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
 jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
+
+// Version en el footer
+jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversion +'');
+if (utversion == undefined) {
+jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
+}
 
 //Set Toggle Class
 
