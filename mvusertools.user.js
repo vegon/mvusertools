@@ -654,10 +654,11 @@ var utnewquote = localStorage["utnewquote"];
 var utuserinfo = localStorage["utuserinfo"];
 var utestilospoilers = localStorage["utestilospoilers"];
 var utbigscreen = localStorage["utbigscreen"];
+var utfavicon = localStorage["utfavicon"];
 	// Forma del menu
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr class="odd"><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido"><table><tbdoy><tr class="odd"><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr class="odd"><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr class="odd"><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr class="odd"><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span id="ut-utfavicon-si">Si</span> <span id="ut-utfavicon-no">No</span></td></tr></tbody></table></div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
 jQuery(function() {
 	if (nicklenght > 8) {
@@ -855,6 +856,23 @@ if (utbigscreen == 'si') {
 if (utbigscreen == 'no') {
 	jQuery('#ut-utbigscreen-si').css('color','#999999')
 }
+	// Avisos en el favicon
+jQuery('#ut-utfavicon-si').click(function() {
+	localStorage["utfavicon"] = 'si';
+	jQuery('#ut-utfavicon-no').css('color','#999999')
+	jQuery('#ut-utfavicon-si').css('color','#EF5000')
+});
+jQuery('#ut-utfavicon-no').click(function() {
+	localStorage["utfavicon"] = 'no';
+	jQuery('#ut-utfavicon-si').css('color','#999999')
+	jQuery('#ut-utfavicon-no').css('color','#EF5000')
+});
+if (utfavicon == 'si') {
+	jQuery('#ut-utfavicon-no').css('color','#999999')
+}
+if (utfavicon == 'no') {
+	jQuery('#ut-utfavicon-si').css('color','#999999')
+}
 
 
 // Mensaje al updatear y reset de opciones
@@ -863,10 +881,10 @@ var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualizació
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 jQuery(function() {
-	if (utupdate != 'ut1721-final') {
+	if (utupdate != 'ut173-dev') {
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utupdate"] = 'ut1721-final';
+		localStorage["utupdate"] = 'ut173-dev';
 		localStorage["utlinksfooter"] = 'si';
 		localStorage["uttablamods"] = 'si';
 		localStorage["utmarcapaginas"] = 'si';
@@ -877,6 +895,7 @@ jQuery(function() {
 		localStorage["utuserinfo"] = 'si';
 		localStorage["utestilospoilers"] = 'si';
 		localStorage["utbigscreen"] = 'si';
+		localStorage["utfavicon"] = 'si';
 	}
 });
 jQuery('#ut-box-cerrar').click(function() {
@@ -891,25 +910,29 @@ jQuery('#ut-mask').click(function() {
 
 
 // Avisos en el favicon
-if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
-else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
-if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
-else {var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
-if (utmsj === undefined) {var utmsj_int = parseInt(0,10);}
-else {var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
-var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
-jQuery('body').addClass(''+ utavisostotal +'');
-Tinycon.setBubble(utavisostotal);
-Tinycon.setOptions({
-    fallback: true
+jQuery(function(){
+	if (utfavicon == 'si') {
+		if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
+		else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
+		if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
+		else {var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
+		if (utmsj === undefined) {var utmsj_int = parseInt(0,10);}
+		else {var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
+		var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
+		jQuery('body').addClass(''+ utavisostotal +'');
+		Tinycon.setBubble(utavisostotal);
+		Tinycon.setOptions({
+			fallback: true
+		});
+	}
 });
 
 
-// Ordenar por respuestas sin leer en favoritos
+// Ordenar por respuestas sin leer en favoritos (bug con hilos con 1k)
 var $table = jQuery('table#tfav');
 var $table = jQuery('table.full');
-jQuery('body#favoritos div.largecol').prepend('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>');
-jQuery('Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> || <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span>').insertBefore('body#foros table.full');
+jQuery('<span style="font-size: 10px; margin-left: 20px;">Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> | <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span></span>').insertAfter('body#favoritos table#tfav th span.left');
+jQuery('<span style="font-size: 10px; margin-left: -110px;">Ordenar por: <span style="cursor: pointer; color: #EF5000;" id="ut-fav-fecha">Fecha</span> | <span style="cursor: pointer; color: #999999;" id="ut-fav-posts">Respuestas sin leer</span></span>').insertAfter('body#foros table.full th span.left');
 var originalRows = $table.find('tr').slice(1).get(),
     rows = originalRows.slice(0);
 
