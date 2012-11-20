@@ -1474,6 +1474,8 @@ jQuery(function(){
 // Alien_crrpt = Alien_derp
 jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
 jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
+jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
+	jQuery('div[class="autor"]:contains("X-Crim")').children().children('dd:first').replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
 
 // Version en el footer
 jQuery(function(){
