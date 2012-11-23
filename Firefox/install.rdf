@@ -4,12 +4,12 @@
         <em:type>2</em:type>
         <em:id>{7f661c71-5594-4308-a62a-9251a6173a56}</em:id>
         <em:name>MV Usertools</em:name>
-        <em:version>1.7.2.1</em:version>
+        <em:version>1.7.3</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>true</em:bootstrap>
         <em:creator>Vegon  y cm07</em:creator>
         <em:description>Añade controles avanzados a los posts en MV</em:description>
-        <em:homepageURL>http://mvusertools.mvwat.com</em:homepageURL>
+        <em:homepageURL>http://mvusertools.com</em:homepageURL>
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>

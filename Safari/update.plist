@@ -22,15 +22,15 @@
 
        <key>CFBundleVersion</key>
 
-       <string>1.7.2.1</string>
+       <string>1.7.3</string>
 
        <key>CFBundleShortVersionString</key>
 
-       <string>1.7.2.1</string>
+       <string>1.7.3</string>
 
        <key>URL</key>
 
-       <string>http://mvwat.com/mvusertools/safari/mvusertools.safariextz</string>
+       <string>http://mvusertools.com/ext/safari/mvusertools.safariextz</string>
 
      </dict>
 

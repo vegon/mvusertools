@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name           MV Usertools
+// @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.7.3.beta
+// @version        1.7.3
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -540,7 +540,7 @@ var css =
 	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
 	}\
 	#ut-dialog {\
-	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
+	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
 	}\
 	#ut-dialog-menu {\
 	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
@@ -988,14 +988,14 @@ if (utfavicon == 'no') {
 
 // Mensaje al updatear y reset de opciones
 var utversion = localStorage["utversion"];
-var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.3</p><br /><br />- asdasdasd.<br /><br />- asdasdadasd.<hr />';
+var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.3</p><br /><br />- Opción para ordenar hilos por respuestas sin leer (funciona en los foros y en favoritos).<br /><br />- Avisos en el favicon.<br /><br />- Por aclamación popular (y amenazas por MP e IRC), la botonera opcional al final de hilos y foros ahora es posible ponerla con los tonos oscuros aunque uses el theme predeterminado.<br /><br />- Nuevo menú con las opciones mejor ordenadas.<br /><br />- Las opciones ya no se resetearán con cada actualización.<br /><br />- Corregidos los botones que dejaron de ir en el formulario de respuesta. Se ha creado un sistema desde 0 así que se podrán crear botones nuevos en el futuro sin problemas.<br /><br />- Corrección de bugs.';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +'<p>Algunas actualizaciones necesitan poner las opciones por defecto para evitar problemas con los añadidos. Recuerda revisar tus opciones.</p>'+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
 jQuery(function() {
-	if (utversion != '1.7.3-dev2') {
+	if (utversion != '1.7.3') {
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utversion"] = '1.7.3-dev2';
+		localStorage["utversion"] = '1.7.3';
 		// localStorage["utlinksfooter"] = 'si';
 		// localStorage["uttablamods"] = 'si';
 		// localStorage["utmarcapaginas"] = 'si';
