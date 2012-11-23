@@ -4,7 +4,7 @@
         <em:type>2</em:type>
         <em:id>{7f661c71-5594-4308-a62a-9251a6173a56}</em:id>
         <em:name>MV Usertools</em:name>
-        <em:version>1.7.3</em:version>
+        <em:version>1.7.3.1</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>true</em:bootstrap>
         <em:creator>Vegon  y cm07</em:creator>

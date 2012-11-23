@@ -5,5 +5,6 @@ pageMod.PageMod({
   contentScriptWhen: 'end',
   contentScriptFile: [data.url("jquery-1.8.2.min.js"),
                       data.url("tinycon.min.js"),
+					  data.url("jquery.a-tools-1.5.2.js"),
                       data.url("mvusertools.user.js")]
 });
