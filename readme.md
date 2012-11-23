@@ -1,7 +1,8 @@
-﻿![MV-Usertools](https://github.com/vegon/mvusertools/raw/master/logo.png)
+﻿<span style="text-align: center;">![MV-Usertools](https://github.com/vegon/mvusertools/raw/master/logo.png)
 
 # MV-Usertools #
-## Funciones extras para mediavida.com ##
+
+## Funciones extras para mediavida.com</span>
 
 
 Desarrollado por Vegon y cm07.
