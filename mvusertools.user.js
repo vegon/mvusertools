@@ -1400,7 +1400,7 @@ jQuery(function(){
 jQuery('button[accesskey="b"]').hide();
 jQuery('<button class="alt bleft bb" accesskey="b" type="button" onclick="bbstyle(0)">b</button>').insertAfter('button[accesskey="b"]');
 jQuery('button[accesskey="i"]').hide();
-jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button id="ut-boton-s" class="alt bright bs" id = "button_x" accesskey="x" type="button">s</button><button class="alt bsolo" id="ut-boton-center" accesskey="c" type="button" title="[center]"><a class="sprite bcentericon"></a></button><button class="alt bsolo" id="ut-boton-list" type="button" title="[list] Usar * para cada elemento de la lista"><a class="blist sprite"></a></button>').insertAfter('button[accesskey="i"]');
+jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button id="ut-boton-s" class="alt bright bs" accesskey="x" type="button">s</button><button class="alt bsolo" id="ut-boton-center" accesskey="c" type="button" title="[center]"><a class="sprite bcentericon"></a></button><button class="alt bsolo" id="ut-boton-list" type="button" title="[list] Usar * para cada elemento de la lista"><a class="blist sprite"></a></button>').insertAfter('button[accesskey="i"]');
 jQuery('button[accesskey="l"]').hide();
 jQuery('<button class="alt bsolo" accesskey="l" type="button" onclick="bbstyle(8)">[url=]</button>').insertAfter('button[accesskey="l"]');
 jQuery('button[accesskey="m"]').hide();
@@ -1452,6 +1452,65 @@ jQuery("#ut-boton-bar").click(function() {
 	}
 	else {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -5);
+	}
+});
+
+// Nueva botonera en el perfil
+jQuery('<div style="overflow: hidden;margin: 0 0 5px 0;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i">i</button><button type="button" accesskey="u" class="alt bright bu" id="ut-boton-u">u</button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url">[url=]</button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw">NSFW</button></div>').insertBefore('body.usuarios textarea[name="info"]');
+jQuery("#ut-boton-b").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[b]' + jQuery('textarea[name="info"]').getSelection().text + '[/b]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-i").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[i]' + jQuery('textarea[name="info"]').getSelection().text + '[/i]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-u").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[u]' + jQuery('textarea[name="info"]').getSelection().text + '[/u]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-url").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[url=]' + jQuery('textarea[name="info"]').getSelection().text + '[/url]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -5);
+	}
+});
+jQuery("#ut-boton-spoiler").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
+	}
+});
+jQuery("#ut-boton-spoiler2").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler=]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
+	}
+});
+jQuery("#ut-boton-nsfw").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler=NSFW]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
 	}
 });
 
