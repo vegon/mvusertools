@@ -1456,8 +1456,8 @@ jQuery("#ut-boton-bar").click(function() {
 });
 
 // Nueva botonera en el perfil
-jQuery('<div style="overflow: hidden;margin: 0 0 5px 0;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i">i</button><button type="button" accesskey="u" class="alt bright bu" id="ut-boton-u">u</button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url">[url=]</button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw">NSFW</button></div>').insertBefore('body.usuarios textarea[name="info"]');
-jQuery("#ut-boton-b").click(function() {
+jQuery('<div style="overflow: hidden;margin: 0 0 5px 0;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-perfil">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-perfil">i</button><button type="button" accesskey="u" class="alt bright bu" id="ut-boton-u-perfil">u</button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-perfil">[url=]</button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-perfil">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-perfil">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-perfil">NSFW</button></div>').insertBefore('body.usuarios textarea[name="info"]');
+jQuery("#ut-boton-b-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[b]' + jQuery('textarea[name="info"]').getSelection().text + '[/b]').setCaretPos();
 	}
@@ -1465,7 +1465,7 @@ jQuery("#ut-boton-b").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
 	}
 });
-jQuery("#ut-boton-i").click(function() {
+jQuery("#ut-boton-i-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[i]' + jQuery('textarea[name="info"]').getSelection().text + '[/i]').setCaretPos();
 	}
@@ -1473,7 +1473,7 @@ jQuery("#ut-boton-i").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
 	}
 });
-jQuery("#ut-boton-u").click(function() {
+jQuery("#ut-boton-u-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[u]' + jQuery('textarea[name="info"]').getSelection().text + '[/u]').setCaretPos();
 	}
@@ -1481,7 +1481,7 @@ jQuery("#ut-boton-u").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
 	}
 });
-jQuery("#ut-boton-url").click(function() {
+jQuery("#ut-boton-url-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[url=]' + jQuery('textarea[name="info"]').getSelection().text + '[/url]').setCaretPos();
 	}
@@ -1489,7 +1489,7 @@ jQuery("#ut-boton-url").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -5);
 	}
 });
-jQuery("#ut-boton-spoiler").click(function() {
+jQuery("#ut-boton-spoiler-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[spoiler]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
 	}
@@ -1497,7 +1497,7 @@ jQuery("#ut-boton-spoiler").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
 	}
 });
-jQuery("#ut-boton-spoiler2").click(function() {
+jQuery("#ut-boton-spoiler2-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[spoiler=]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
 	}
@@ -1505,7 +1505,7 @@ jQuery("#ut-boton-spoiler2").click(function() {
 		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
 	}
 });
-jQuery("#ut-boton-nsfw").click(function() {
+jQuery("#ut-boton-nsfw-perfil").click(function() {
 	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
 		jQuery('textarea[name="info"]').replaceSelection('[spoiler=NSFW]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
 	}
@@ -1514,6 +1514,150 @@ jQuery("#ut-boton-nsfw").click(function() {
 	}
 });
 
+// Botonera en el fast-edit div.msg div.body div textarea
+function botonessolounavez() {
+	jQuery(function(){
+		jQuery(document).one('mouseenter','div.msg div.body div textarea' , function(){
+			fasteditbuttons();
+		});
+		function fasteditbuttons() {
+			jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea');
+		}
+	});
+}
+jQuery(document).ready(function(){
+	botonessolounavez();
+});
+jQuery(document).on('click', 'button.cancelButton', function() {
+	botonessolounavez();
+});
+jQuery(document).on('click', 'button.saveButton', function() {
+	botonessolounavez();
+});
+jQuery(document).on('click', '#ut-boton-b-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[b]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/b]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-i-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[i]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/i]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-u-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[u]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/u]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-s-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[s]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/s]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[s][/s]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-center-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[center]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/center]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[center][/center]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -8);
+	}
+});
+jQuery(document).on('click', '#ut-boton-list-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[list]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/list]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[list][/list]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
+	}
+});
+jQuery(document).on('click', '#ut-boton-url-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[url=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/url]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-img-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[img]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/img]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[img][/img]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-video-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[video]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/video]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[video][/video]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+	}
+});
+jQuery(document).on('click', '#ut-boton-audio-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[audio]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/audio]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+	}
+});
+jQuery(document).on('click', '#ut-boton-spoiler-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-spoiler2-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-nsfw-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=NSFW]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-bar-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[bar]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/bar]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-code-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[code]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/code]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[code][/code]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
+	}
+});
+
+
+
+
 
 // hilos con live destacados (solo funciona con theme normal)
 jQuery(function(){
@@ -1521,6 +1665,8 @@ jQuery(function(){
 		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
 	}
 });
+
+
 
 // hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
 // jQuery('<img alt="Relaciones" src="http://www.mvwat.com/mvusertools/heart.png" style="width: 12px; height: 12px;">').insertAfter('a[class="hb"]:contains("amor"), a[class="hb"]:contains("rollo"), a[class="hb"]:contains("novia"), a[class="hb"]:contains("celos")');
