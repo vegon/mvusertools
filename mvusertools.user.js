@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.7.3
+// @version        1.8-beta
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
 // @require        http://www.mvusertools.com/ext/libs/jquery.a-tools-1.5.2.js
+// @require        http://www.mvusertools.com/ext/libs/sisyphus.js
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
@@ -1655,6 +1656,13 @@ jQuery(document).on('click', '#ut-boton-code-fast', function() {
 	}
 });
 
+
+// Salvar forms
+jQuery('#postear, #postform').sisyphus({
+  customKeyPrefix: 'ut',
+  timeout: 10,
+  autoRelease: true
+ });
 
 
 
