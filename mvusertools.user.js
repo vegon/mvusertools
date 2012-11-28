@@ -185,7 +185,7 @@ var blacklistAvatar = "~";
 {
 var css = 
 	".sprite {\
-		background: url(http://www.mvusertools.com/ext/img/sprites172.png) no-repeat;\
+		background: url(http://www.mvusertools.com/ext/img/sprites18.png) no-repeat;\
 	}\
 	.usertools TABLE TD\
 	{\
@@ -659,6 +659,18 @@ var css =
 	}\
 	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){\
 		width: 420px;\
+	}\
+	.ut-arrow-up{\
+		background-position: -75px -53px;\
+		width: 12px;\
+		height: 17px;\
+		display: block; \
+	}\
+	.ut-arrow-down{\
+		background-position: -75px -70px;\
+		width: 12px;\
+		height: 17px;\
+		display: block; \
 	}\
 	";
 }
@@ -1413,7 +1425,7 @@ jQuery('<button class="alt bleft" accesskey="s" type="button" onclick="bbstyle(1
 jQuery('button[accesskey="d"]').hide();
 jQuery('<button class="alt bcenter" accesskey="d" type="button" onclick="bbstyle(16)">[spoiler=]</button>').insertAfter('button[accesskey="d"]');
 jQuery('button[accesskey="n"]').hide();
-jQuery('<button class="alt bright" accesskey="n" type="button" onclick="bbstyle(18)">NSFW</button><button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><script></script>').insertAfter('button[accesskey="n"]');
+jQuery('<button class="alt bright" accesskey="n" type="button" onclick="bbstyle(18)">NSFW</button><button title="Pulsa para ver más opciones" id="ut-boton-plus" class="alt bsolo" type="button"><a class="ut-arrow-down sprite"></a></button><script></script>').insertAfter('button[accesskey="n"]');
 
 jQuery("#ut-boton-s").click(function() {
 	if (jQuery('textarea#cuerpo').getSelection().text.length > 0) {
@@ -1445,6 +1457,24 @@ jQuery("#ut-boton-audio").click(function() {
 	}
 	else {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -7);
+	}
+});
+
+
+// Segunda linea en la botonera
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button>'
+jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
+jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
+jQuery('#ut-boton-plus').click(function(){
+	if (jQuery('#ut-botonera2').is( ":visible" )){
+		jQuery('#ut-botonera2').slideUp();
+		jQuery('#ut-boton-plus a').toggleClass('ut-arrow-down').toggleClass('ut-arrow-up');
+		jQuery('#ut-boton-plus').attr('title', 'Pulsa para ver más opciones');
+	}
+	else {
+		jQuery('#ut-botonera2').slideDown();
+		jQuery('#ut-boton-plus a').toggleClass('ut-arrow-down').toggleClass('ut-arrow-up');
+		jQuery('#ut-boton-plus').attr('title', 'Pulsa para ocultar la segunda linea de opciones');
 	}
 });
 jQuery("#ut-boton-bar").click(function() {
@@ -1655,7 +1685,6 @@ jQuery(document).on('click', '#ut-boton-code-fast', function() {
 		jQuery('div.msg div.body div textarea').insertAtCaretPos('[code][/code]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
 	}
 });
-
 
 // Salvar forms
 jQuery('#postear, #postform').sisyphus({
