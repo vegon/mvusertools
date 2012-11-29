@@ -672,11 +672,11 @@ var css =
 		height: 17px;\
 		display: block; \
 	}\
-	#ut-boton-plus a{\
-	background-color: #777777 !important;\
+	#ut-boton-plus{\
+	background-color: #888888 !important;\
 	}\
 	#ut-boton-plus:hover {\
-	background-color: #999999;\
+	background-color: #777777 !important;\
 	}\
 	";
 }
