@@ -672,6 +672,12 @@ var css =
 		height: 17px;\
 		display: block; \
 	}\
+	#ut-boton-plus a{\
+	background-color: #777777 !important;\
+	}\
+	#ut-boton-plus:hover {\
+	background-color: #999999;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
