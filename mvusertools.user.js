@@ -1697,12 +1697,11 @@ jQuery('#postear, #postform').sisyphus({
 
 
 // hilos con live destacados (solo funciona con theme normal)
-jQuery(function(){
-	if (utlivesdestacados == 'si' || utfavicon == undefined) {
+if (utlivesdestacados == 'si' || utfavicon == undefined) {
+	jQuery(document).on('mouseover','body', function(){
 		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
-	}
-});
-
+	});
+}
 
 
 // hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
