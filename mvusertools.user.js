@@ -556,9 +556,6 @@ var css =
 	#ut-menu-contenido TABLE{\
 	border-top: 1px solid #ccc;\
 	}\
-	div.post .msg .newquote .cuerpo, div.post .msg .newquoteblack .cuerpo{\
-	overflow: inherit !important;\
-	}\
 	.newquote a.toggled, .newquoteblack a.toggled{\
 	border-style: solid !important;\
 	border-width: 1px !important;\
