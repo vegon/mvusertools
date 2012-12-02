@@ -1690,14 +1690,16 @@ jQuery(document).on('click', '#ut-boton-code-fast', function() {
 });
 
 // Salvar forms
-jQuery('#postear, #postform').sisyphus({
-  customKeyPrefix: 'ut',
+jQuery('form#postear').sisyphus({
+  customKeyPrefix: 'utextendido',
   timeout: 10,
   autoRelease: true
  });
-
-
-
+ jQuery('form#postform.single').sisyphus({
+  customKeyPrefix: 'utfast',
+  timeout: 10,
+  autoRelease: true
+ });
 
 // hilos con live destacados (solo funciona con theme normal)
 if (utlivesdestacados == 'si' || utfavicon == undefined) {
