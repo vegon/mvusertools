@@ -1093,7 +1093,9 @@ jQuery(document).ready(function() {
 		var title;
 		for (title in store) {
 			if (!(title in macros)) {
-				var $title = jQuery('<a>').html('<span class="ut-titletxt">'+title+ '</span> <a style="cursor:pointer;" class="ut-remove-macro">x</a> <div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>' + store[title] + '</div> '); // solo +title+ para la lista de titulos
+				var $spantitle = jQuery('<span class="ut-titletxt">').text(title);
+				var $spanmacro = jQuery('<div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>').text(store[title]);
+				var $title = jQuery('<a>').html('<a style="cursor:pointer;" class="ut-remove-macro">x</a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
 				var $item = jQuery('<li class="ut-titleymacro">')
 					.data('macro', title)
 					.append($title)
