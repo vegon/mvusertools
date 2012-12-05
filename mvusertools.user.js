@@ -185,7 +185,7 @@ var blacklistAvatar = "~";
 {
 var css = 
 	".sprite {\
-		background: url(http://www.mvusertools.com/ext/img/sprites18.png) no-repeat;\
+		background: url(http://www.mvusertools.com/ext/img/sprites18-2.png) no-repeat;\
 	}\
 	.usertools TABLE TD\
 	{\
@@ -690,6 +690,31 @@ var css =
     overflow:hidden;\
     white-space:nowrap;\
     width: 460px;\
+	}\
+	.icon-down-list{\
+		background-position: -97px -59px;\
+		width: 12px;\
+		height: 9px;\
+		display: inline-block;\
+		vertical-align: middle;\
+	}\
+	#ut-button-macros-list{\
+	position: absolute;\
+	top: 132px;\
+	left: 112px;\
+	width: 125px;\
+	border-radius: 0px 0px 5px 5px;\
+	background-color: #565656;\
+	border: 1px solid #AAAAAA;\
+	padding: 3px 2px;\
+	color: #eee;\
+	}\
+	#ut-button-macros-list li{\
+	display: block;\
+	cursor: pointer;\
+	}\
+	#ut-button-macros-list li:hover{\
+	background-color: #aaaaaa;\
 	}\
 	";
 }
@@ -1575,7 +1600,7 @@ jQuery("#ut-boton-audio").click(function() {
 
 
 // Segunda linea en la botonera
-var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button>'
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul><li>hola</li><li>test</li><li>12345678901234567</li><li>&#3232;_&#3232;</li></ul></div>'
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
 jQuery('#ut-boton-plus').click(function(){
@@ -1598,6 +1623,24 @@ jQuery("#ut-boton-bar").click(function() {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -5);
 	}
 });
+jQuery("#ut-button-macros").click(function() {
+	if (jQuery('#ut-button-macros-list[style="display: none;"]').length){
+	jQuery('#ut-button-macros-list').show();
+	}
+	else {
+	jQuery('#ut-button-macros-list').hide();
+	}
+});
+jQuery('#ut-button-macros-list').mouseup(function() {
+	 return false
+});
+jQuery('#ut-button-macros').mouseup(function() {
+	 return false
+});
+jQuery(document).mouseup(function() {
+	jQuery('#ut-button-macros-list').hide();
+});
+
 
 // Nueva botonera en el perfil
 jQuery('<div style="overflow: hidden;margin: 0 0 5px 0;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-perfil">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-perfil">i</button><button type="button" accesskey="u" class="alt bright bu" id="ut-boton-u-perfil">u</button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-perfil">[url=]</button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-perfil">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-perfil">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-perfil">NSFW</button></div>').insertBefore('body.usuarios textarea[name="info"]');
