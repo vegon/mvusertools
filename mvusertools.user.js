@@ -1104,7 +1104,7 @@ jQuery('#ut-mask').click(function() {
 
 
 
-// MACROS
+// MACROS kaod <3
 jQuery(document).ready(function() { 
 	JSON.encode = JSON.encode || JSON.stringify;
 	JSON.decode = JSON.decode || JSON.parse;
@@ -1143,10 +1143,40 @@ jQuery(document).ready(function() {
 			}
 		}
 	};
+	var updateMacrosButton = function(store, $container2) {
+		var macros = {};
+		$container2.children().each(function(){
+			var $macro = jQuery(this);
+			var title = $macro.data('macro');
+			if (!(title in store)) {
+				$macro.slideUp('slow', function() {
+					$macro.remove();
+				});
+			} else {
+				macros[title] = $macro;
+			}
+		});
+
+		var title;
+		for (title in store) {
+			if (!(title in macros)) {
+				var $spantitle = jQuery('<span class="ut-titletxt-list">').text(title);
+				var $title = jQuery('<div>').html(' ').prepend($spantitle);
+				var $item = jQuery('<li class="ut-titleymacro-list">')
+					.data('macro', title)
+					.append($title)
+					.hide();
+				$container2.append($item);
+				$item.slideDown('slow');
+			}
+		}
+	};
 
 	jQuery(function() {
 		var $macros = jQuery('#ut-macros');
+		var $macrosbutton = jQuery('#ut-button-macros-list ul');
 		updateMacros(macros, $macros);
+		updateMacrosButton(macros, $macrosbutton);
 
 		jQuery("#ut-macros-form").submit(function() {
 			var $title = jQuery("#ut-title");
@@ -1160,6 +1190,7 @@ jQuery(document).ready(function() {
 				$title.val('');
 				$macro.val('');
 				updateMacros(macros, $macros);
+				updateMacrosButton(macros, $macrosbutton);
 			}
 
 			return false;
@@ -1169,12 +1200,17 @@ jQuery(document).ready(function() {
 			delete macros[jQuery(this).parent().parent().data('macro')]; // Si titulo es A y macro es B: macros['A'] te responderá 'B'
 			storeJSON('macros', macros);
 			updateMacros(macros, $macros);
+			updateMacros(macros, $macrosbutton);
 			
+			return false;
+		});
+		$macrosbutton.on('click', 'li', function() {
+			jQuery('textarea').insertAtCaretPos(macros[jQuery(this).data('macro')]);
+			jQuery('#ut-button-macros-list').hide();
 			return false;
 		});
 	});
 });
-
 
 
 
@@ -1613,7 +1649,7 @@ jQuery("#ut-boton-audio").click(function() {
 
 
 // Segunda linea en la botonera
-var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul><li>hola</li><li>test</li><li>12345678901234567</li><li>&#3232;_&#3232;</li></ul></div>'
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul></div>'
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
 jQuery('#ut-boton-plus').click(function(){
