@@ -729,6 +729,10 @@ var css =
 	#ut-button-macros-list li:hover{\
 	background-color: #aaaaaa;\
 	}\
+	.ut-button-macros-list-barrendera{\
+	top: 68px !important;\
+	left: 248px !important;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -1212,7 +1216,11 @@ jQuery(document).ready(function() {
 	});
 });
 
-
+jQuery(function() {
+	if (jQuery('#goext').length > 0){
+		jQuery('#ut-button-macros-list').addClass('ut-button-macros-list-barrendera');
+	}
+});
 
 
 
