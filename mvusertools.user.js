@@ -185,7 +185,7 @@ var blacklistAvatar = "~";
 {
 var css = 
 	".sprite {\
-		background: url(http://www.mvusertools.com/ext/img/sprites18-2.png) no-repeat;\
+		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;\
 	}\
 	.usertools TABLE TD\
 	{\
@@ -698,6 +698,19 @@ var css =
 		display: inline-block;\
 		vertical-align: middle;\
 	}\
+	.icon-trash{\
+		background-position: -97px -72px;\
+		width: 11px;\
+		height: 14px;\
+		display: inline-block;\
+		vertical-align: middle;\
+	}\
+	.icon-trash-orange{\
+		background-position: -114px -72px; \
+		width: 11px;\
+		height: 14px;\
+		display: inline-block;\
+		}\
 	#ut-button-macros-list{\
 	position: absolute;\
 	top: 132px;\
@@ -1120,7 +1133,7 @@ jQuery(document).ready(function() {
 			if (!(title in macros)) {
 				var $spantitle = jQuery('<span class="ut-titletxt">').text(title);
 				var $spanmacro = jQuery('<div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>').text(store[title]);
-				var $title = jQuery('<a>').html('<a style="cursor:pointer;" class="ut-remove-macro">x</a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
+				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" class="ut-remove-macro"><i class="sprite icon-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
 				var $item = jQuery('<li class="ut-titleymacro">')
 					.data('macro', title)
 					.append($title)
