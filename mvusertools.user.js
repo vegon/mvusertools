@@ -1091,14 +1091,22 @@ if (utfavicon == 'no') {
 
 // Mensaje al updatear y reset de opciones
 var utversion = localStorage["utversion"];
-var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.3</p><br /><br />- Opción para ordenar hilos por respuestas sin leer (funciona en los foros y en favoritos).<br /><br />- Avisos en el favicon.<br /><br />- Por aclamación popular (y amenazas por MP e IRC), la botonera opcional al final de hilos y foros ahora es posible ponerla con los tonos oscuros aunque uses el theme predeterminado.<br /><br />- Nuevo menú con las opciones mejor ordenadas.<br /><br />- Las opciones ya no se resetearán con cada actualización.<br /><br />- Corregidos los botones que dejaron de ir en el formulario de respuesta. Se ha creado un sistema desde 0 así que se podrán crear botones nuevos en el futuro sin problemas.<br /><br />- Corrección de bugs.';
+var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.8</p><br /><br />\
+																- Actualización 100% centrada en la creación y edición de hilos y respuestas.<br /><br />\
+																- Reedición de la botonera presentada en la versión 1.6. Código más limpio y liviano y con una segunda barra de botones.<br /><br />\
+																- Sistema de macros personalizados. Guarda textos que reutilizas a menudo, como formatos para crear hilos nuevos, emotes, etc. Más información <a href="http://mvusertools.com/caracteristicas#macros" target="_blank">aquí</a>.<br /><br />\
+																- Si tienes un accidente y tu navegador se cierra o refrescas sin querer la página, no perderás lo que llevaras escrito. Cuando vuelvas a la página todo estará por donde lo dejaste.<br /><br />\
+																- Editar la info de tu perfil ahora es más fácil con la botonera también disponible allí.<br /><br />\
+																- Botonera disponible ahora también en el fast-edit de tus posts. Para quien no lo sepa, doble click en el texto de un post tuyo y puedes editarlo al vuelo.<br /><br />\
+																- Corrección de errores y mejoras internas en el código.\
+																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 jQuery(function() {
-	if (utversion != '1.7.3') {
+	if (utversion != '1.8') {
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utversion"] = '1.7.3';
+		localStorage["utversion"] = '1.8';
 		// localStorage["utlinksfooter"] = 'si';
 		// localStorage["uttablamods"] = 'si';
 		// localStorage["utmarcapaginas"] = 'si';
