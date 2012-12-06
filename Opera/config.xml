@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" version="1.8" id="extensions:MV Usertools">
+<widget xmlns="http://www.w3.org/ns/widgets" version="1.8.0.1" id="extensions:MV Usertools">
 	<name>MV Usertools</name>
 	<description>Mejoras para la web mediavida.com</description>
 	<author href="http://mvusertools.com">Vegon y cm07</author>
