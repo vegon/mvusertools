@@ -1,17 +1,14 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.7.3
+// @version        1.8
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
+// @require        http://www.mvusertools.com/ext/libs/jquery.a-tools-1.5.2.js
+// @require        http://www.mvusertools.com/ext/libs/sisyphus.js
 // ==/UserScript==
-
-////// LIBRERIA PARA CREAR NUESTROS PROPIOS BOTONES //////
-var caretPositionAmp=[]; function init(){if(navigator.appName=="Microsoft Internet Explorer"){obj=document.getElementsByTagName("TEXTAREA");var b,a=0;for(a=0;a<obj.length;a++){b=obj[a];caretPositionAmp[a]=b.value.length;b.onmouseup=function(){b=document.activeElement;for(var c=0;c<obj.length;c++)if(obj[c]==b)break;b.focus();var e=document.selection.createRange(),h=b.createTextRange(),d=h.duplicate();h.moveToBookmark(e.getBookmark());d.setEndPoint("EndToStart",h);caretPositionAmp[c]=d.text.length};b.onkeyup=function(){b=document.activeElement; for(var c=0;c<obj.length;c++)if(obj[c]==b)break;b.focus();var e=document.selection.createRange(),h=b.createTextRange(),d=h.duplicate();h.moveToBookmark(e.getBookmark());d.setEndPoint("EndToStart",h);caretPositionAmp[c]=d.text.length}}}}window.onload=init; jQuery.fn.extend({getSelection:function(){var b=this.jquery?this[0]:this,a,c,e,h=0;b.onmousedown=function(){document.selection&&typeof b.selectionStart!="number"?document.selection.empty():window.getSelection().removeAllRanges()};if(document.selection){var d=document.selection.createRange(),f=0,g=0,i=0;a=document.getElementsByTagName("TEXTAREA");for(c=0;c<a.length;c++)if(a[c]==b)break;if(b.value.match(/\n/g)!=null)h=b.value.match(/\n/g).length;if(d.text){e=d.text;if(typeof b.selectionStart=="number"){a= b.selectionStart;c=b.selectionEnd;if(a==c)return{start:a,end:c,text:d.text,length:c-a}}else{a=b.createTextRange();e=a.duplicate();firstRe=a.text;a.moveToBookmark(d.getBookmark());secondRe=a.text;e.setEndPoint("EndToStart",a);if(firstRe==secondRe&&firstRe!=d.text||e.text.length>firstRe.length)return{start:caretPositionAmp[c],end:caretPositionAmp[c],text:"",length:0};a=e.text.length;c=e.text.length+d.text.length}if(h>0)for(e=0;e<=h;e++){var k=b.value.indexOf("\n",g);if(k!=-1&&k<a){g=k+1;f++;i=f}else if(k!= -1&&k>=a&&k<=c)if(k==a+1){f--;i--;g=k+1}else{g=k+1;i++}else e=h}if(d.text.indexOf("\n",0)==1)i+=2;a-=f;c-=i;return{start:a,end:c,text:d.text,length:c-a}}b.focus();if(typeof b.selectionStart=="number")a=b.selectionStart;else{d=document.selection.createRange();a=b.createTextRange();e=a.duplicate();a.moveToBookmark(d.getBookmark());e.setEndPoint("EndToStart",a);a=e.text.length}if(h>0)for(e=0;e<=h;e++){k=b.value.indexOf("\n",g);if(k!=-1&&k<a){g=k+1;f++}else e=h}a-=f;if(a==0&&typeof b.selectionStart!= "number"){a=caretPositionAmp[c];c=caretPositionAmp[c]}return{start:a,end:a,text:d.text,length:0}}else if(typeof b.selectionStart=="number"){a=b.selectionStart;c=b.selectionEnd;e=b.value.substring(b.selectionStart,b.selectionEnd);return{start:a,end:c,text:e,length:c-a}}else return{start:undefined,end:undefined,text:undefined,length:undefined}},replaceSelection:function(b){var a=this.jquery?this[0]:this,c,e;e=0;var h,d,f=0,g=0,i=a.scrollTop==undefined?0:a.scrollTop;c=document.getElementsByTagName("TEXTAREA"); for(var k=0;k<c.length;k++)if(c[k]==a)break;if(document.selection&&typeof a.selectionStart!="number"){i=document.selection.createRange();if(typeof a.selectionStart!="number"){var j;d=a.createTextRange();h=d.duplicate();c=d.text;d.moveToBookmark(i.getBookmark());j=d.text;try{h.setEndPoint("EndToStart",d)}catch(m){return this}if(c==j&&c!=i.text||h.text.length>c.length)return this}if(i.text){part=i.text;if(a.value.match(/\n/g)!=null)f=a.value.match(/\n/g).length;c=h.text.length;if(f>0)for(j=0;j<=f;j++){var l= a.value.indexOf("\n",e);if(l!=-1&&l<c){e=l+1;g++}else j=f}i.text=b;caretPositionAmp[k]=h.text.length+b.length;d.move("character",caretPositionAmp[k]);document.selection.empty();a.blur()}return this}else if(typeof a.selectionStart=="number"&&a.selectionStart!=a.selectionEnd){c=a.selectionStart;e=a.selectionEnd;a.value=a.value.substr(0,c)+b+a.value.substr(e);e=c+b.length;a.setSelectionRange(e,e);a.scrollTop=i;return this}return this},setSelection:function(b,a){b=parseInt(b);a=parseInt(a);var c=this.jquery? this[0]:this;c.focus();if(typeof c.selectionStart!="number"){re=c.createTextRange();if(re.text.length<a)a=re.text.length+1}if(a<b)return this;if(document.selection){var e=0,h=0,d=0,f=0;if(typeof c.selectionStart!="number"){re.collapse(true);re.moveEnd("character",a);re.moveStart("character",b);re.select()}else{if(typeof c.selectionStart=="number"){if(c.value.match(/\n/g)!=null)e=c.value.match(/\n/g).length;if(e>0)for(var g=0;g<=e;g++){var i=c.value.indexOf("\n",d);if(i!=-1&&i<b){d=i+1;h++;f=h}else if(i!= -1&&i>=b&&i<=a)if(i==b+1){h--;f--;d=i+1}else{d=i+1;f++}else g=e}b+=h;a+=f;c.selectionStart=b;c.selectionEnd=a}c.focus()}return this}else if(c.selectionStart||c.selectionStart==0){c.focus();window.getSelection().removeAllRanges();c.selectionStart=b;c.selectionEnd=a;c.focus();return this}},insertAtCaretPos:function(b){var a=this.jquery?this[0]:this,c,e,h,d,f,g,i;c=e=0;var k=a.scrollTop==undefined?0:a.scrollTop;i=document.getElementsByTagName("TEXTAREA");for(var j=0;j<i.length;j++)if(i[j]==a)break;a.focus(); if(document.selection&&typeof a.selectionStart!="number"){if(a.value.match(/\n/g)!=null)c=a.value.match(/\n/g).length;i=parseInt(caretPositionAmp[j]);if(c>0)for(var m=0;m<=c;m++){var l=a.value.indexOf("\n",h);if(l!=-1&&l<=i){h=l+1;i-=1;e++}}}caretPositionAmp[j]=parseInt(caretPositionAmp[j]);a.onkeyup=function(){if(document.selection&&typeof a.selectionStart!="number"){a.focus();d=document.selection.createRange();f=a.createTextRange();g=f.duplicate();f.moveToBookmark(d.getBookmark());g.setEndPoint("EndToStart", f);caretPositionAmp[j]=g.text.length}};a.onmouseup=function(){if(document.selection&&typeof a.selectionStart!="number"){a.focus();d=document.selection.createRange();f=a.createTextRange();g=f.duplicate();f.moveToBookmark(d.getBookmark());g.setEndPoint("EndToStart",f);caretPositionAmp[j]=g.text.length}};if(document.selection&&typeof a.selectionStart!="number"){d=document.selection.createRange();if(d.text.length!=0)return this;f=a.createTextRange();textLength=f.text.length;g=f.duplicate();f.moveToBookmark(d.getBookmark()); g.setEndPoint("EndToStart",f);c=g.text.length;if(caretPositionAmp[j]>0&&c==0){e=caretPositionAmp[j]-e;f.move("character",e);f.select();d=document.selection.createRange();caretPositionAmp[j]+=b.length}else if(!(caretPositionAmp[j]>=0)&&textLength==0){d=document.selection.createRange();caretPositionAmp[j]=b.length+textLength}else if(!(caretPositionAmp[j]>=0)&&c==0){f.move("character",textLength);f.select();d=document.selection.createRange();caretPositionAmp[j]=b.length+textLength}else if(!(caretPositionAmp[j]>= 0)&&c>0){f.move("character",0);document.selection.empty();f.select();d=document.selection.createRange();caretPositionAmp[j]=c+b.length}else if(caretPositionAmp[j]>=0&&caretPositionAmp[j]==textLength){if(textLength!=0){f.move("character",textLength);f.select()}else f.move("character",0);d=document.selection.createRange();caretPositionAmp[j]=b.length+textLength}else{if(caretPositionAmp[j]>=0&&c!=0&&caretPositionAmp[j]>=c){e=caretPositionAmp[j]-c;f.move("character",e)}else caretPositionAmp[j]>=0&&c!= 0&&caretPositionAmp[j]<c&&f.move("character",0);document.selection.empty();f.select();d=document.selection.createRange();caretPositionAmp[j]+=b.length}d.text=b;a.focus();return this}else if(typeof a.selectionStart=="number"&&a.selectionStart==a.selectionEnd){h=a.selectionStart+b.length;c=a.selectionStart;e=a.selectionEnd;a.value=a.value.substr(0,c)+b+a.value.substr(e);a.setSelectionRange(h,h);a.scrollTop=k;return this}return this},setCaretPos:function(b){var a=this.jquery?this[0]:this,c,e=0,h=0,d; d=document.getElementsByTagName("TEXTAREA");for(var f=0;f<d.length;f++)if(d[f]==a)break;a.focus();if(parseInt(b)==0)return this;if(parseInt(b)>0){b=parseInt(b)-1;if(document.selection&&typeof a.selectionStart=="number"&&a.selectionStart==a.selectionEnd){if(a.value.match(/\n/g)!=null)e=a.value.match(/\n/g).length;if(e>0)for(var g=0;g<=e;g++){d=a.value.indexOf("\n",c);if(d!=-1&&d<=b){c=d+1;b=parseInt(b)+1}}}}else if(parseInt(b)<0){b=parseInt(b)+1;if(document.selection&&typeof a.selectionStart!="number"){b= a.value.length+parseInt(b);if(a.value.match(/\n/g)!=null)e=a.value.match(/\n/g).length;if(e>0){for(g=0;g<=e;g++){d=a.value.indexOf("\n",c);if(d!=-1&&d<=b){c=d+1;b=parseInt(b)-1;h+=1}}b=b+h-e}}else if(document.selection&&typeof a.selectionStart=="number"){b=a.value.length+parseInt(b);if(a.value.match(/\n/g)!=null)e=a.value.match(/\n/g).length;if(e>0){b=parseInt(b)-e;for(g=0;g<=e;g++){d=a.value.indexOf("\n",c);if(d!=-1&&d<=b){c=d+1;b=parseInt(b)+1;h+=1}}}}else b=a.value.length+parseInt(b)}else return this; if(document.selection&&typeof a.selectionStart!="number"){c=document.selection.createRange();if(c.text!=0)return this;a=a.createTextRange();a.collapse(true);a.moveEnd("character",b);a.moveStart("character",b);a.select();caretPositionAmp[f]=b;return this}else if(typeof a.selectionStart=="number"&&a.selectionStart==a.selectionEnd){a.setSelectionRange(b,b);return this}return this},countCharacters:function(){var b=this.jquery?this[0]:this;if(b.value.match(/\r/g)!=null)return b.value.length-b.value.match(/\r/g).length; return b.value.length},setMaxLength:function(b,a){this.each(function(){var c=this.jquery?this[0]:this,e=c.type,h,d;if(parseInt(b)<0)b=1E8;if(e=="text")c.maxLength=b;if(e=="textarea"||e=="text"){c.onkeypress=function(f){var g=c.value.match(/\r/g);d=b;if(g!=null)d=parseInt(d)+g.length;f=f||event;g=f.keyCode;h=document.selection?document.selection.createRange().text.length>0:c.selectionStart!=c.selectionEnd;if(c.value.length>=d&&(g>47||g==32||g==0||g==13)&&!f.ctrlKey&&!f.altKey&&!h){c.value=c.value.substring(0, d);typeof a=="function"&&a();return false}};c.onkeyup=function(){var f=c.value.match(/\r/g),g=0,i=0;d=b;if(f!=null){for(var k=0;k<=f.length;k++)if(c.value.indexOf("\n",i)<=parseInt(b)){g++;i=c.value.indexOf("\n",i)+1}d=parseInt(b)+g}if(c.value.length>d){c.value=c.value.substring(0,d);typeof a=="function"&&a();return this}}}else return this});return this}});
-////// LIBRERIA PARA CREAR NUESTROS PROPIOS BOTONES //////
-
 
 ////// VARIABLES REUTILIZABLES //////
 var bbcode = new Array();
@@ -188,7 +185,7 @@ var blacklistAvatar = "~";
 {
 var css = 
 	".sprite {\
-		background: url(http://www.mvusertools.com/ext/img/sprites172.png) no-repeat;\
+		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;\
 	}\
 	.usertools TABLE TD\
 	{\
@@ -540,12 +537,12 @@ var css =
 	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
 	}\
 	#ut-dialog {\
-	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
+	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;\
 	}\
 	#ut-dialog-menu {\
-	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: fixed; z-index: 9999;\
+	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;\
 	}\
-	#ut-dialog span, #ut-dialog-menu span, ut-dialog A, #ut-dialog-menu A{\
+	.ut-boton-sino{\
 	cursor: pointer;\
 	color: #EF5000;\
 	}\
@@ -558,9 +555,6 @@ var css =
 	}\
 	#ut-menu-contenido TABLE{\
 	border-top: 1px solid #ccc;\
-	}\
-	div.post .msg .newquote .cuerpo, div.post .msg .newquoteblack .cuerpo{\
-	overflow: inherit !important;\
 	}\
 	.newquote a.toggled, .newquoteblack a.toggled{\
 	border-style: solid !important;\
@@ -663,6 +657,97 @@ var css =
 	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){\
 		width: 420px;\
 	}\
+	.ut-arrow-up{\
+		background-position: -75px -53px;\
+		width: 12px;\
+		height: 17px;\
+		display: block; \
+	}\
+	.ut-arrow-down{\
+		background-position: -75px -70px;\
+		width: 12px;\
+		height: 17px;\
+		display: block; \
+	}\
+	#ut-boton-plus{\
+	background-color: #888888 !important;\
+	}\
+	#ut-boton-plus:hover {\
+	background-color: #777777 !important;\
+	}\
+	.ut-titleymacro{\
+	padding: 0 0 2px 3px;\
+	border-left: 2px solid #FF5500;\
+	margin: 10px 0;\
+	}\
+	.ut-titletxt{\
+	font-weight: bold;\
+	cursor: default;\
+	}\
+	.ut-macrotxt {\
+	color: #222222;\
+	text-overflow: ellipsis;\
+	-o-text-overflow: ellipsis;\
+    text-overflow: ellipsis;\
+    overflow:hidden;\
+    white-space:nowrap;\
+    width: 460px;\
+	}\
+	.icon-down-list{\
+		background-position: -97px -59px;\
+		width: 12px;\
+		height: 9px;\
+		display: inline-block;\
+		vertical-align: middle;\
+	}\
+	.icon-trash{\
+		background-position: -97px -72px;\
+		width: 11px;\
+		height: 14px;\
+		display: inline-block;\
+		vertical-align: middle;\
+	}\
+	.icon-trash-orange{\
+		background-position: -114px -72px; \
+		width: 11px;\
+		height: 14px;\
+		display: inline-block;\
+		}\
+	#ut-button-macros-list{\
+	position: absolute;\
+	top: 132px;\
+	left: 112px;\
+	width: 125px;\
+	border-radius: 0px 0px 5px 5px;\
+	background-color: #565656;\
+	border: 1px solid #AAAAAA;\
+	color: #eee;\
+	}\
+	#ut-button-macros-list li{\
+	display: block;\
+	cursor: pointer;\
+	border-bottom: 1px solid #888888;\
+	padding: 1px 1px 1px 3px;\
+	}\
+	#ut-button-macros-list li:hover{\
+	background-color: #aaaaaa;\
+	}\
+	.ut-button-macros-list-barrendera{\
+	top: 68px !important;\
+	left: 248px !important;\
+	}\
+	#ut-button-macros-list-anadir {\
+	padding: 1px 1px 2px 3px;\
+	cursor: pointer;\
+	display: block;\
+	color: #ccc;\
+	background-color: #333;\
+	border-radius: 0 0 5px 5px;\
+	}\
+	#ut-button-macros-list-anadir:hover {\
+	color: #fff;\
+	background-color: #ff7700;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -701,36 +786,54 @@ var utfavicon = localStorage["utfavicon"];
 	// Forma del menu
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
-var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Links importantes al final de la página</td><td><span id="ut-linksfooter-si">Si</span> <span id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span id="ut-utlinksfooteroscuro-si">Si</span> <span id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span id="ut-tablamods-si">Si</span> <span id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span id="ut-uticonosportada-si">Si</span> <span id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span id="ut-uticonosdestacados-si">Si</span> <span id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span id="ut-utuserinfo-si">Si</span> <span id="ut-utuserinfo-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span id="ut-utbigscreen-si">Si</span> <span id="ut-utbigscreen-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span id="ut-utordenarposts-si">Si</span> <span id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span id="ut-utfavicon-si">Si</span> <span id="ut-utfavicon-no">No</span></td></tr></tbody></table>';
-var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span id="ut-marcapaginas-si">Si</span> <span id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span id="ut-utlivesdestacados-si">Si</span> <span id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span id="ut-utnewquote-si">Si</span> <span id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span id="ut-utestilospoilers-si">Si</span> <span id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
+var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr></tbody></table>';
+var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-marcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
 var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
-jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">'+ utmenutabs +''+ utmenutabla1 +''+ utmenutabla2 +''+ utmenutabla3 +'</div>'+ bottominfo +'<a style="float: right; margin-top: 10px;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
+var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"> <input id="ut-macro" placeholder="Macro"> <input type="submit" value="Guardar"></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
+jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">'+ utmenutabs +''+ utmenutabla1 +''+ utmenutabla2 +''+ utmenutabla4 +''+ utmenutabla3 +'</div>'+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 jQuery('#ut-menu-tabla1 tr:odd, #ut-menu-tabla2 tr:odd, #ut-menu-tabla3 tr:odd').addClass('odd');
 jQuery('#ut-menu-tab1').click(function () {
 	jQuery('#ut-menu-tab1').addClass('active');
 	jQuery('#ut-menu-tab2').removeClass('active');
 	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tab4').removeClass('active');
 	jQuery('#ut-menu-tabla1').show();
 	jQuery('#ut-menu-tabla2').hide();
 	jQuery('#ut-menu-tabla3').hide();
+	jQuery('#ut-menu-tabla4').hide();
 	});
 jQuery('#ut-menu-tab2').click(function () {
 	jQuery('#ut-menu-tab1').removeClass('active');
 	jQuery('#ut-menu-tab2').addClass('active');
 	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tab4').removeClass('active');
 	jQuery('#ut-menu-tabla1').hide();
 	jQuery('#ut-menu-tabla2').show();
 	jQuery('#ut-menu-tabla3').hide();
+	jQuery('#ut-menu-tabla4').hide();
 	});
 jQuery('#ut-menu-tab3').click(function () {
 	jQuery('#ut-menu-tab1').removeClass('active');
 	jQuery('#ut-menu-tab2').removeClass('active');
 	jQuery('#ut-menu-tab3').addClass('active');
+	jQuery('#ut-menu-tab4').removeClass('active');
 	jQuery('#ut-menu-tabla1').hide();
 	jQuery('#ut-menu-tabla2').hide();
 	jQuery('#ut-menu-tabla3').show();
+	jQuery('#ut-menu-tabla4').hide();
 	});
+jQuery('#ut-menu-tab4').click(function () {
+	jQuery('#ut-menu-tab1').removeClass('active');
+	jQuery('#ut-menu-tab2').removeClass('active');
+	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tab4').addClass('active');
+	jQuery('#ut-menu-tabla1').hide();
+	jQuery('#ut-menu-tabla2').hide();
+	jQuery('#ut-menu-tabla3').hide();
+	jQuery('#ut-menu-tabla4').show();
+	});
+	
 
 jQuery('#ut-menu').click(function () {
 	jQuery('#ut-mask-menu').show();
@@ -988,14 +1091,22 @@ if (utfavicon == 'no') {
 
 // Mensaje al updatear y reset de opciones
 var utversion = localStorage["utversion"];
-var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.7.3</p><br /><br />- Opción para ordenar hilos por respuestas sin leer (funciona en los foros y en favoritos).<br /><br />- Avisos en el favicon.<br /><br />- Por aclamación popular (y amenazas por MP e IRC), la botonera opcional al final de hilos y foros ahora es posible ponerla con los tonos oscuros aunque uses el theme predeterminado.<br /><br />- Nuevo menú con las opciones mejor ordenadas.<br /><br />- Las opciones ya no se resetearán con cada actualización.<br /><br />- Corregidos los botones que dejaron de ir en el formulario de respuesta. Se ha creado un sistema desde 0 así que se podrán crear botones nuevos en el futuro sin problemas.<br /><br />- Corrección de bugs.';
+var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.8</p><br /><br />\
+																- Actualización 100% centrada en la creación y edición de hilos y respuestas.<br /><br />\
+																- Reedición de la botonera presentada en la versión 1.6. Código más limpio y liviano y con una segunda barra de botones.<br /><br />\
+																- Sistema de macros personalizados. Guarda textos que reutilizas a menudo, como formatos para crear hilos nuevos, emotes, etc. Más información <a href="http://mvusertools.com/caracteristicas#macros" target="_blank">aquí</a>.<br /><br />\
+																- Si tienes un accidente y tu navegador se cierra o refrescas sin querer la página, no perderás lo que llevaras escrito. Cuando vuelvas a la página todo estará por donde lo dejaste.<br /><br />\
+																- Editar la info de tu perfil ahora es más fácil con la botonera también disponible allí.<br /><br />\
+																- Botonera disponible ahora también en el fast-edit de tus posts. Para quien no lo sepa, doble click en el texto de un post tuyo y puedes editarlo al vuelo.<br /><br />\
+																- Corrección de errores y mejoras internas en el código.\
+																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
-jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<span style="float: right; margin-top: 10px;" id="ut-box-cerrar">Cerrar</span></div></div>').insertBefore('#content_head');
+jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 jQuery(function() {
-	if (utversion != '1.7.3') {
+	if (utversion != '1.8') {
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utversion"] = '1.7.3';
+		localStorage["utversion"] = '1.8';
 		// localStorage["utlinksfooter"] = 'si';
 		// localStorage["uttablamods"] = 'si';
 		// localStorage["utmarcapaginas"] = 'si';
@@ -1016,6 +1127,122 @@ jQuery('#ut-box-cerrar').click(function() {
 jQuery('#ut-mask').click(function() {
 	jQuery('div#ut-mask').hide();
 	jQuery('div#ut-dialog').hide();
+});
+
+
+
+// MACROS kaod <3
+jQuery(document).ready(function() { 
+	JSON.encode = JSON.encode || JSON.stringify;
+	JSON.decode = JSON.decode || JSON.parse;
+
+	var storeJSON = function(key, object) {
+		localStorage.setItem(key, JSON.encode(object));
+	};
+
+	var macros = JSON.decode(localStorage.getItem('macros')) || {};
+	var updateMacros = function(store, $container) {
+		var macros = {};
+		$container.children().each(function(){
+			var $macro = jQuery(this);
+			var title = $macro.data('macro');
+			if (!(title in store)) {
+				$macro.slideUp('slow', function() {
+					$macro.remove();
+				});
+			} else {
+				macros[title] = $macro;
+			}
+		});
+
+		var title;
+		for (title in store) {
+			if (!(title in macros)) {
+				var $spantitle = jQuery('<span class="ut-titletxt">').text(title);
+				var $spanmacro = jQuery('<div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>').text(store[title]);
+				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" title="Borrar macro" class="ut-remove-macro"><i class="sprite icon-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
+				var $item = jQuery('<li class="ut-titleymacro">')
+					.data('macro', title)
+					.append($title)
+					.hide();
+				$container.append($item);
+				$item.slideDown('slow');
+			}
+		}
+	};
+	var updateMacrosButton = function(store, $container2) {
+		var macros = {};
+		$container2.children().each(function(){
+			var $macro = jQuery(this);
+			var title = $macro.data('macro');
+			if (!(title in store)) {
+				$macro.slideUp('slow', function() {
+					$macro.remove();
+				});
+			} else {
+				macros[title] = $macro;
+			}
+		});
+
+		var title;
+		for (title in store) {
+			if (!(title in macros)) {
+				var $spantitle = jQuery('<span class="ut-titletxt-list">').text(title);
+				var $title = jQuery('<div>').html(' ').prepend($spantitle);
+				var $item = jQuery('<li class="ut-titleymacro-list">')
+					.data('macro', title)
+					.append($title)
+					.hide();
+				$container2.append($item);
+				$item.slideDown('slow');
+			}
+		}
+	};
+
+	jQuery(function() {
+		var $macros = jQuery('#ut-macros');
+		var $macrosbutton = jQuery('#ut-button-macros-list ul');
+		updateMacros(macros, $macros);
+		updateMacrosButton(macros, $macrosbutton);
+
+		jQuery("#ut-macros-form").submit(function() {
+			var $title = jQuery("#ut-title");
+			var $macro = jQuery("#ut-macro");
+			var title = $title.val();
+			var macro = $macro.val();
+
+			if (title !== "" && macro !== "") {
+				macros[title] = macro;
+				storeJSON('macros', macros);
+				$title.val('');
+				$macro.val('');
+				updateMacros(macros, $macros);
+				updateMacrosButton(macros, $macrosbutton);
+			}
+
+			return false;
+		});
+
+		$macros.on('click', 'a.ut-remove-macro', function() {
+			delete macros[jQuery(this).parent().parent().data('macro')]; // Si titulo es A y macro es B: macros['A'] te responderá 'B'
+			storeJSON('macros', macros);
+			updateMacros(macros, $macros);
+			updateMacros(macros, $macrosbutton);
+			
+			return false;
+		});
+		$macrosbutton.on('click', 'li', function() {
+			jQuery('textarea').insertAtCaretPos(macros[jQuery(this).data('macro')]);
+			jQuery('#ut-button-macros-list').hide();
+			return false;
+		});
+	});
+});
+
+jQuery(function() {
+	if (jQuery('#goext').length > 0){
+		jQuery('#ut-button-macros-list').addClass('ut-button-macros-list-barrendera');
+	}
 });
 
 
@@ -1233,7 +1460,7 @@ jQuery(function() {
 				var url = window.location.pathname;
 				var id = url.split("/")[2];
 				mods = [
-					['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],[''],[''],[''],[''],[''],['']
+					['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','DuPonT'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['0buS','RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],[''],['cm07','RoninPiros'],[''],['Rundull'],[''],[''],[''],[''],['']
 				];
 				jQuery.each(mods[id], function(i,v) {
 					if (mods[id] == '') {
@@ -1404,7 +1631,7 @@ jQuery(function(){
 jQuery('button[accesskey="b"]').hide();
 jQuery('<button class="alt bleft bb" accesskey="b" type="button" onclick="bbstyle(0)">b</button>').insertAfter('button[accesskey="b"]');
 jQuery('button[accesskey="i"]').hide();
-jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button id="ut-boton-s" class="alt bright bs" id = "button_x" accesskey="x" type="button">s</button><button class="alt bsolo" id="ut-boton-center" accesskey="c" type="button" title="[center]"><a class="sprite bcentericon"></a></button><button class="alt bsolo" id="ut-boton-list" type="button" title="[list] Usar * para cada elemento de la lista"><a class="blist sprite"></a></button>').insertAfter('button[accesskey="i"]');
+jQuery('<button class="alt bcenter bi" accesskey="i" type="button" onclick="bbstyle(2)">i</button><button class="alt bcenter2 bu" accesskey="u" type="button" onclick="bbstyle(4)">u</button><button id="ut-boton-s" class="alt bright bs" accesskey="x" type="button">s</button><button class="alt bsolo" id="ut-boton-center" accesskey="c" type="button" title="[center]"><a class="sprite bcentericon"></a></button><button class="alt bsolo" id="ut-boton-list" type="button" title="[list] Usar * para cada elemento de la lista"><a class="blist sprite"></a></button>').insertAfter('button[accesskey="i"]');
 jQuery('button[accesskey="l"]').hide();
 jQuery('<button class="alt bsolo" accesskey="l" type="button" onclick="bbstyle(8)">[url=]</button>').insertAfter('button[accesskey="l"]');
 jQuery('button[accesskey="m"]').hide();
@@ -1416,7 +1643,7 @@ jQuery('<button class="alt bleft" accesskey="s" type="button" onclick="bbstyle(1
 jQuery('button[accesskey="d"]').hide();
 jQuery('<button class="alt bcenter" accesskey="d" type="button" onclick="bbstyle(16)">[spoiler=]</button>').insertAfter('button[accesskey="d"]');
 jQuery('button[accesskey="n"]').hide();
-jQuery('<button class="alt bright" accesskey="n" type="button" onclick="bbstyle(18)">NSFW</button><button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><script></script>').insertAfter('button[accesskey="n"]');
+jQuery('<button class="alt bright" accesskey="n" type="button" onclick="bbstyle(18)">NSFW</button><button title="Pulsa para ver más opciones" id="ut-boton-plus" class="alt bsolo" type="button"><a class="ut-arrow-down sprite"></a></button><script></script>').insertAfter('button[accesskey="n"]');
 
 jQuery("#ut-boton-s").click(function() {
 	if (jQuery('textarea#cuerpo').getSelection().text.length > 0) {
@@ -1450,6 +1677,24 @@ jQuery("#ut-boton-audio").click(function() {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -7);
 	}
 });
+
+
+// Segunda linea en la botonera
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul><a href="#ut-dialog-menu" id="ut-button-macros-list-anadir">añadir macro</a></div>'
+jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
+jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
+jQuery('#ut-boton-plus').click(function(){
+	if (jQuery('#ut-botonera2').is( ":visible" )){
+		jQuery('#ut-botonera2').slideUp();
+		jQuery('#ut-boton-plus a').toggleClass('ut-arrow-down').toggleClass('ut-arrow-up');
+		jQuery('#ut-boton-plus').attr('title', 'Pulsa para ver más opciones');
+	}
+	else {
+		jQuery('#ut-botonera2').slideDown();
+		jQuery('#ut-boton-plus a').toggleClass('ut-arrow-down').toggleClass('ut-arrow-up');
+		jQuery('#ut-boton-plus').attr('title', 'Pulsa para ocultar la segunda linea de opciones');
+	}
+});
 jQuery("#ut-boton-bar").click(function() {
 	if (jQuery('textarea#cuerpo').getSelection().text.length > 0) {
 		jQuery("textarea#cuerpo").replaceSelection('[bar]' + jQuery('textarea#cuerpo').getSelection().text + '[/bar]').setCaretPos();
@@ -1458,14 +1703,256 @@ jQuery("#ut-boton-bar").click(function() {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -5);
 	}
 });
-
-
-// hilos con live destacados (solo funciona con theme normal)
-jQuery(function(){
-	if (utlivesdestacados == 'si' || utfavicon == undefined) {
-		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+jQuery("#ut-button-macros").click(function() {
+	if (jQuery('#ut-button-macros-list[style="display: none;"]').length){
+	jQuery('#ut-button-macros-list').show();
+	}
+	else {
+	jQuery('#ut-button-macros-list').hide();
 	}
 });
+jQuery('#ut-button-macros-list').mouseup(function() {
+	 return false
+});
+jQuery('#ut-button-macros').mouseup(function() {
+	 return false
+});
+jQuery(document).mouseup(function() {
+	jQuery('#ut-button-macros-list').hide();
+});
+jQuery("#ut-button-macros-list-anadir").click(function() {
+	jQuery('#ut-mask-menu').show();
+	jQuery('#ut-dialog-menu').show();
+	jQuery('#ut-menu-tab1').removeClass('active');
+	jQuery('#ut-menu-tab2').removeClass('active');
+	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tab4').addClass('active');
+	jQuery('#ut-menu-tabla1').hide();
+	jQuery('#ut-menu-tabla2').hide();
+	jQuery('#ut-menu-tabla3').hide();
+	jQuery('#ut-menu-tabla4').show();
+});
+
+
+// Nueva botonera en el perfil
+jQuery('<div style="overflow: hidden;margin: 0 0 5px 0;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-perfil">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-perfil">i</button><button type="button" accesskey="u" class="alt bright bu" id="ut-boton-u-perfil">u</button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-perfil">[url=]</button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-perfil">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-perfil">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-perfil">NSFW</button></div>').insertBefore('body.usuarios textarea[name="info"]');
+jQuery("#ut-boton-b-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[b]' + jQuery('textarea[name="info"]').getSelection().text + '[/b]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-i-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[i]' + jQuery('textarea[name="info"]').getSelection().text + '[/i]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-u-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[u]' + jQuery('textarea[name="info"]').getSelection().text + '[/u]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -3);
+	}
+});
+jQuery("#ut-boton-url-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[url=]' + jQuery('textarea[name="info"]').getSelection().text + '[/url]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -5);
+	}
+});
+jQuery("#ut-boton-spoiler-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
+	}
+});
+jQuery("#ut-boton-spoiler2-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler=]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
+	}
+});
+jQuery("#ut-boton-nsfw-perfil").click(function() {
+	if (jQuery('textarea[name="info"]').getSelection().text.length > 0) {
+		jQuery('textarea[name="info"]').replaceSelection('[spoiler=NSFW]' + jQuery('textarea[name="info"]').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('textarea[name="info"]').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('textarea[name="info"]').getSelection().end -9);
+	}
+});
+
+// Botonera en el fast-edit div.msg div.body div textarea
+function botonessolounavez() {
+	jQuery(function(){
+		jQuery(document).one('mouseenter','div.msg div.body div textarea' , function(){
+			fasteditbuttons();
+		});
+		function fasteditbuttons() {
+			jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea:not("div.extraportada textarea")');
+		}
+	});
+}
+jQuery(document).ready(function(){
+	botonessolounavez();
+});
+jQuery(document).on('click', 'button.cancelButton', function() {
+	botonessolounavez();
+});
+jQuery(document).on('click', 'button.saveButton', function() {
+	botonessolounavez();
+});
+jQuery(document).on('click', '#ut-boton-b-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[b]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/b]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-i-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[i]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/i]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-u-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[u]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/u]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-s-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[s]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/s]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[s][/s]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+	}
+});
+jQuery(document).on('click', '#ut-boton-center-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[center]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/center]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[center][/center]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -8);
+	}
+});
+jQuery(document).on('click', '#ut-boton-list-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[list]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/list]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[list][/list]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
+	}
+});
+jQuery(document).on('click', '#ut-boton-url-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[url=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/url]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-img-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[img]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/img]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[img][/img]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-video-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[video]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/video]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[video][/video]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+	}
+});
+jQuery(document).on('click', '#ut-boton-audio-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[audio]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/audio]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+	}
+});
+jQuery(document).on('click', '#ut-boton-spoiler-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-spoiler2-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-nsfw-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=NSFW]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+	}
+});
+jQuery(document).on('click', '#ut-boton-bar-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[bar]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/bar]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+	}
+});
+jQuery(document).on('click', '#ut-boton-code-fast', function() {
+	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+		jQuery('div.msg div.body div textarea').replaceSelection('[code]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/code]').setCaretPos();
+	}
+	else {
+		jQuery('div.msg div.body div textarea').insertAtCaretPos('[code][/code]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
+	}
+});
+
+// Salvar forms
+jQuery('form#postear').sisyphus({
+  customKeyPrefix: 'utextendido',
+  timeout: 10,
+  autoRelease: true
+ });
+ jQuery('form#postform.single').sisyphus({
+  customKeyPrefix: 'utfast',
+  timeout: 10,
+  autoRelease: true
+ });
+
+// hilos con live destacados (solo funciona con theme normal)
+if (utlivesdestacados == 'si' || utfavicon == undefined) {
+	jQuery(document).on('mouseover','body', function(){
+		jQuery('img[alt="live"]').closest('tr').addClass('ut-live');
+	});
+}
+
 
 // hilos sobre relaciones y amor destacados (DESCARTADO, YA EXISTE UNA CATEGORIA DE AMOR Y RELACIONES)
 // jQuery('<img alt="Relaciones" src="http://www.mvwat.com/mvusertools/heart.png" style="width: 12px; height: 12px;">').insertAfter('a[class="hb"]:contains("amor"), a[class="hb"]:contains("rollo"), a[class="hb"]:contains("novia"), a[class="hb"]:contains("celos")');
