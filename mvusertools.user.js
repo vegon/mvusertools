@@ -676,7 +676,9 @@ var css =
 	background-color: #777777 !important;\
 	}\
 	.ut-titleymacro{\
-	padding: 3px 0;\
+	padding: 0 0 2px 3px;\
+	border-left: 2px solid #FF5500;\
+	margin: 10px 0;\
 	}\
 	.ut-titletxt{\
 	font-weight: bold;\
@@ -719,12 +721,13 @@ var css =
 	border-radius: 0px 0px 5px 5px;\
 	background-color: #565656;\
 	border: 1px solid #AAAAAA;\
-	padding: 3px 2px;\
 	color: #eee;\
 	}\
 	#ut-button-macros-list li{\
 	display: block;\
 	cursor: pointer;\
+	border-bottom: 1px solid #888888;\
+	padding: 1px 1px 1px 3px;\
 	}\
 	#ut-button-macros-list li:hover{\
 	background-color: #aaaaaa;\
@@ -732,6 +735,18 @@ var css =
 	.ut-button-macros-list-barrendera{\
 	top: 68px !important;\
 	left: 248px !important;\
+	}\
+	#ut-button-macros-list-anadir {\
+	padding: 1px 1px 2px 3px;\
+	cursor: pointer;\
+	display: block;\
+	color: #ccc;\
+	background-color: #333;\
+	border-radius: 0 0 5px 5px;\
+	}\
+	#ut-button-macros-list-anadir:hover {\
+	color: #fff;\
+	background-color: #ff7700;\
 	}\
 	";
 }
@@ -1137,7 +1152,7 @@ jQuery(document).ready(function() {
 			if (!(title in macros)) {
 				var $spantitle = jQuery('<span class="ut-titletxt">').text(title);
 				var $spanmacro = jQuery('<div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>').text(store[title]);
-				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" class="ut-remove-macro"><i class="sprite icon-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
+				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" title="Borrar macro" class="ut-remove-macro"><i class="sprite icon-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
 				var $item = jQuery('<li class="ut-titleymacro">')
 					.data('macro', title)
 					.append($title)
@@ -1657,7 +1672,7 @@ jQuery("#ut-boton-audio").click(function() {
 
 
 // Segunda linea en la botonera
-var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul></div>'
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul><a href="#ut-dialog-menu" id="ut-button-macros-list-anadir">añadir macro</a></div>'
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
 jQuery('#ut-boton-plus').click(function(){
@@ -1696,6 +1711,18 @@ jQuery('#ut-button-macros').mouseup(function() {
 });
 jQuery(document).mouseup(function() {
 	jQuery('#ut-button-macros-list').hide();
+});
+jQuery("#ut-button-macros-list-anadir").click(function() {
+	jQuery('#ut-mask-menu').show();
+	jQuery('#ut-dialog-menu').show();
+	jQuery('#ut-menu-tab1').removeClass('active');
+	jQuery('#ut-menu-tab2').removeClass('active');
+	jQuery('#ut-menu-tab3').removeClass('active');
+	jQuery('#ut-menu-tab4').addClass('active');
+	jQuery('#ut-menu-tabla1').hide();
+	jQuery('#ut-menu-tabla2').hide();
+	jQuery('#ut-menu-tabla3').hide();
+	jQuery('#ut-menu-tabla4').show();
 });
 
 
