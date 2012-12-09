@@ -21,6 +21,7 @@ var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -
 var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
+var liveactivado = jQuery('div.live_info').length > 0;
 var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
@@ -1940,17 +1941,18 @@ jQuery(document).on('click', '#ut-boton-code-fast', function() {
 });
 
 // Salvar forms
-jQuery('form#postear').sisyphus({
-  customKeyPrefix: 'utextendido',
-  timeout: 10,
-  autoRelease: true
- });
- jQuery('form#postform.single').sisyphus({
-  customKeyPrefix: 'utfast',
-  timeout: 10,
-  autoRelease: true
- });
-
+if (liveactivado == 0) {
+	jQuery('form#postear').sisyphus({
+	  customKeyPrefix: 'utextendido',
+	  timeout: 10,
+	  autoRelease: true
+	 });
+	 jQuery('form#postform.single').sisyphus({
+	  customKeyPrefix: 'utfast',
+	  timeout: 10,
+	  autoRelease: true
+	 });
+}
 // hilos con live destacados (solo funciona con theme normal)
 if (utlivesdestacados == 'si' || utfavicon == undefined) {
 	jQuery(document).on('mouseover','body', function(){
