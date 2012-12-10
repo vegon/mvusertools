@@ -1948,12 +1948,6 @@ if (liveactivado == 0) {
 	  timeout: 10,
 	  autoRelease: true
 	 });
-	 jQuery('form#postform').sisyphus({
-	  customKeyPrefix: 'utfast',
-	  name: 'postear',
-	  timeout: 10,
-	  autoRelease: true
-	 });
 }
 // hilos con live destacados (solo funciona con theme normal)
 if (utlivesdestacados == 'si' || utfavicon == undefined) {
