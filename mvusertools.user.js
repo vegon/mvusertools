@@ -1947,7 +1947,7 @@ if (liveactivado == 0) {
 	  name: 'postear',
 	  timeout: 10,
 	  autoRelease: true
-	 });
+	});
 }
 // hilos con live destacados (solo funciona con theme normal)
 if (utlivesdestacados == 'si' || utfavicon == undefined) {
