@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8
+// @version        1.8.1-beta
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -1944,11 +1944,13 @@ jQuery(document).on('click', '#ut-boton-code-fast', function() {
 if (liveactivado == 0) {
 	jQuery('form#postear').sisyphus({
 	  customKeyPrefix: 'utextendido',
+	  name: 'postear',
 	  timeout: 10,
 	  autoRelease: true
 	 });
-	 jQuery('form#postform.single').sisyphus({
+	 jQuery('form#postform').sisyphus({
 	  customKeyPrefix: 'utfast',
+	  name: 'postear',
 	  timeout: 10,
 	  autoRelease: true
 	 });
