@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8.1-beta
+// @version        1.8.1
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -29,7 +29,7 @@ var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
 
 
 function initInsertions() {
-    var b;
+	var b;
 	if (document.forms[form_name]) {
 		b = document;
 	} else {
@@ -1135,11 +1135,13 @@ if (utsalvarposts == 'no' || utsalvarposts == undefined) {
 
 
 // Mensaje al updatear
-var utversion = '1.8.1-dev6';
+var utversion = '1.8.1';
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- Bugfixes.<br /><br />\
-																- OMGWTFBBQ\
+																- La ventana de aviso de actualización está apagada por defecto. Puedes activarla en el menú o ver los cambios en el último parche desde la pstaña "Sobe MV-UT".<br /><br />\
+																- El texto de los macros más largos se expandirán al máximo en el menú al dejar el ratón encima para que puedas leerlos o copiar el texto para editarlo.<br /><br />\
+																- El módulo de salvar textos en el formulario extendido para evitar accidentes ha provocado bugs, así que se le ha puesto la etiqueta de experimental y viene por defecto desactivado (puedes activarlo en el menú). Los bugs no son fatales ni suceden a todo el mundo, todo el tiempo, así que es usable (pero no lo suficiente para no tener que avisar yo :P).<br /><br />\
+																- Corrección de errores menores.\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');

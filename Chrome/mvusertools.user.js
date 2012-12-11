@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8
+// @version        1.8.1
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -21,6 +21,7 @@ var is_win = ((clientPC.indexOf("win") != -1) || (clientPC.indexOf("16bit") != -
 var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
+var liveactivado = jQuery('div.live_info').length > 0;
 var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
 var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
@@ -693,6 +694,9 @@ var css =
     white-space:nowrap;\
     width: 460px;\
 	}\
+	.ut-macrotxt:hover {\
+    white-space:pre-wrap;\
+	}\
 	.icon-down-list{\
 		background-position: -97px -59px;\
 		width: 12px;\
@@ -788,13 +792,15 @@ var utestilospoilers = localStorage["utestilospoilers"];
 var utbigscreen = localStorage["utbigscreen"];
 var utordenarposts = localStorage["utordenarposts"];
 var utfavicon = localStorage["utfavicon"];
+var utmensajeupdate = localStorage["utmensajeupdate"];
+var utsalvarposts = localStorage["utsalvarposts"];
 	// Forma del menu
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
 var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr></tbody></table>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
 var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-marcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
-var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
+var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
 var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
 jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">'+ utmenutabs +''+ utmenutabla1 +''+ utmenutabla2 +''+ utmenutabla4 +''+ utmenutabla3 +'</div>'+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
 jQuery('#ut-menu-tabla1 tr:odd, #ut-menu-tabla2 tr:odd, #ut-menu-tabla3 tr:odd').addClass('odd');
@@ -1092,49 +1098,80 @@ if (utfavicon == 'si' || utfavicon == undefined) {
 if (utfavicon == 'no') {
 	jQuery('#ut-utfavicon-si').css('color','#999999');
 }
+	// Ventana de actualizacion
+jQuery('#ut-utmensajeupdate-si').click(function() {
+	localStorage["utmensajeupdate"] = 'si';
+	jQuery('#ut-utmensajeupdate-no').css('color','#999999');
+	jQuery('#ut-utmensajeupdate-si').css('color','#EF5000');
+});
+jQuery('#ut-utmensajeupdate-no').click(function() {
+	localStorage["utmensajeupdate"] = 'no';
+	jQuery('#ut-utmensajeupdate-si').css('color','#999999');
+	jQuery('#ut-utmensajeupdate-no').css('color','#EF5000');
+});
+if (utmensajeupdate == 'si') {
+	jQuery('#ut-utmensajeupdate-no').css('color','#999999');
+}
+if (utmensajeupdate == 'no' || utmensajeupdate == undefined) {
+	jQuery('#ut-utmensajeupdate-si').css('color','#999999');
+}
+	// Salvar posts
+jQuery('#ut-utsalvarposts-si').click(function() {
+	localStorage["utsalvarposts"] = 'si';
+	jQuery('#ut-utsalvarposts-no').css('color','#999999');
+	jQuery('#ut-utsalvarposts-si').css('color','#EF5000');
+});
+jQuery('#ut-utsalvarposts-no').click(function() {
+	localStorage["utsalvarposts"] = 'no';
+	jQuery('#ut-utsalvarposts-si').css('color','#999999');
+	jQuery('#ut-utsalvarposts-no').css('color','#EF5000');
+});
+if (utsalvarposts == 'si') {
+	jQuery('#ut-utsalvarposts-no').css('color','#999999');
+}
+if (utsalvarposts == 'no' || utsalvarposts == undefined) {
+	jQuery('#ut-utsalvarposts-si').css('color','#999999');
+}
 
 
-// Mensaje al updatear y reset de opciones
-var utversion = localStorage["utversion"];
-var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.8</p><br /><br />\
-																- Actualización 100% centrada en la creación y edición de hilos y respuestas.<br /><br />\
-																- Reedición de la botonera presentada en la versión 1.6. Código más limpio y liviano y con una segunda barra de botones.<br /><br />\
-																- Sistema de macros personalizados. Guarda textos que reutilizas a menudo, como formatos para crear hilos nuevos, emotes, etc. Más información <a href="http://mvusertools.com/caracteristicas#macros" target="_blank">aquí</a>.<br /><br />\
-																- Si tienes un accidente y tu navegador se cierra o refrescas sin querer la página, no perderás lo que llevaras escrito. Cuando vuelvas a la página todo estará por donde lo dejaste.<br /><br />\
-																- Editar la info de tu perfil ahora es más fácil con la botonera también disponible allí.<br /><br />\
-																- Botonera disponible ahora también en el fast-edit de tus posts. Para quien no lo sepa, doble click en el texto de un post tuyo y puedes editarlo al vuelo.<br /><br />\
-																- Corrección de errores y mejoras internas en el código.\
+// Mensaje al updatear
+var utversion = '1.8.1';
+var utversionls = localStorage["utversionls"];
+var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
+																- La ventana de aviso de actualización está apagada por defecto. Puedes activarla en el menú o ver los cambios en el último parche desde la pstaña "Sobe MV-UT".<br /><br />\
+																- El texto de los macros más largos se expandirán al máximo en el menú al dejar el ratón encima para que puedas leerlos o copiar el texto para editarlo.<br /><br />\
+																- El módulo de salvar textos en el formulario extendido para evitar accidentes ha provocado bugs, así que se le ha puesto la etiqueta de experimental y viene por defecto desactivado (puedes activarlo en el menú). Los bugs no son fatales ni suceden a todo el mundo, todo el tiempo, así que es usable (pero no lo suficiente para no tener que avisar yo :P).<br /><br />\
+																- Corrección de errores menores.\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
-jQuery(function() {
-	if (utversion != '1.8') {
+jQuery(function(){
+	if (utmensajeupdate == 'si') {
+		if (utversionls != utversion) {
+			jQuery('div#ut-mask').show();
+			jQuery('div#ut-dialog').show();
+			localStorage["utversionls"] = utversion;
+		}
+	}
+	else {
+		localStorage["utversionls"] = utversion;
+	}
+	
+	jQuery('#ut-menu-notasdeparche').click(function() {
+		jQuery('#ut-dialog-menu').hide();
+		jQuery('#ut-mask-menu').hide();
 		jQuery('div#ut-mask').show();
 		jQuery('div#ut-dialog').show();
-		localStorage["utversion"] = '1.8';
-		// localStorage["utlinksfooter"] = 'si';
-		// localStorage["uttablamods"] = 'si';
-		// localStorage["utmarcapaginas"] = 'si';
-		// localStorage["uticonosportada"] = 'si';
-		// localStorage["uticonosdestacados"] = 'si';
-		// localStorage["utlivesdestacados"] = 'si';
-		// localStorage["utnewquote"] = 'si';
-		// localStorage["utuserinfo"] = 'si';
-		// localStorage["utestilospoilers"] = 'si';
-		// localStorage["utbigscreen"] = 'si';
-		// localStorage["utfavicon"] = 'si';
-	}
+	});
+	jQuery('#ut-box-cerrar').click(function() {
+		jQuery('div#ut-mask').hide();
+		jQuery('div#ut-dialog').hide();
+	});
+	jQuery('#ut-mask').click(function() {
+		jQuery('div#ut-mask').hide();
+		jQuery('div#ut-dialog').hide();
+	});
 });
-jQuery('#ut-box-cerrar').click(function() {
-	jQuery('div#ut-mask').hide();
-	jQuery('div#ut-dialog').hide();
-});
-jQuery('#ut-mask').click(function() {
-	jQuery('div#ut-mask').hide();
-	jQuery('div#ut-dialog').hide();
-});
-
-
 
 // MACROS kaod <3
 jQuery(document).ready(function() { 
@@ -1245,7 +1282,7 @@ jQuery(document).ready(function() {
 });
 
 jQuery(function() {
-	if (jQuery('#goext').length > 0){
+	if (jQuery('#goext').length > 0 || liveactivado == true){
 		jQuery('#ut-button-macros-list').addClass('ut-button-macros-list-barrendera');
 	}
 });
@@ -1798,158 +1835,171 @@ jQuery("#ut-boton-nsfw-perfil").click(function() {
 	}
 });
 
-// Botonera en el fast-edit div.msg div.body div textarea
-function botonessolounavez() {
-	jQuery(function(){
-		jQuery(document).one('mouseenter','div.msg div.body div textarea' , function(){
-			fasteditbuttons();
+// Botonera en el fast-edit
+if (liveactivado == 0) {
+	function botonessolounavez() {
+		jQuery(function(){
+			jQuery(document).one('mouseenter','div.msg div.body div textarea' , function(){
+				fasteditbuttons();
+			});
+			function fasteditbuttons() {
+				jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea:not("div.extraportada textarea")');
+			}
 		});
-		function fasteditbuttons() {
-			jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea:not("div.extraportada textarea")');
+	}
+	jQuery(document).ready(function(){
+		botonessolounavez();
+	});
+	jQuery(document).on('click', 'button.cancelButton', function() {
+		botonessolounavez();
+	});
+	jQuery(document).on('click', 'button.saveButton', function() {
+		botonessolounavez();
+	});
+	jQuery(document).on('click', '#ut-boton-b-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[b]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/b]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-i-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[i]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/i]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-u-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[u]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/u]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-s-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[s]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/s]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[s][/s]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-center-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[center]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/center]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[center][/center]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -8);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-list-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[list]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/list]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[list][/list]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-url-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[url=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/url]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-img-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[img]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/img]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[img][/img]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-video-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[video]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/video]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[video][/video]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-audio-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[audio]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/audio]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-spoiler-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[spoiler]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-spoiler2-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-nsfw-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=NSFW]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-bar-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[bar]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/bar]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
+		}
+	});
+	jQuery(document).on('click', '#ut-boton-code-fast', function() {
+		if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
+			jQuery('div.msg div.body div textarea').replaceSelection('[code]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/code]').setCaretPos();
+		}
+		else {
+			jQuery('div.msg div.body div textarea').insertAtCaretPos('[code][/code]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
 		}
 	});
 }
-jQuery(document).ready(function(){
-	botonessolounavez();
-});
-jQuery(document).on('click', 'button.cancelButton', function() {
-	botonessolounavez();
-});
-jQuery(document).on('click', 'button.saveButton', function() {
-	botonessolounavez();
-});
-jQuery(document).on('click', '#ut-boton-b-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[b]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/b]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[b][/b]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
-	}
-});
-jQuery(document).on('click', '#ut-boton-i-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[i]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/i]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[i][/i]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
-	}
-});
-jQuery(document).on('click', '#ut-boton-u-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[u]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/u]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[u][/u]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
-	}
-});
-jQuery(document).on('click', '#ut-boton-s-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[s]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/s]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[s][/s]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -3);
-	}
-});
-jQuery(document).on('click', '#ut-boton-center-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[center]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/center]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[center][/center]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -8);
-	}
-});
-jQuery(document).on('click', '#ut-boton-list-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[list]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/list]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[list][/list]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
-	}
-});
-jQuery(document).on('click', '#ut-boton-url-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[url=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/url]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[url=][/url]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
-	}
-});
-jQuery(document).on('click', '#ut-boton-img-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[img]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/img]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[img][/img]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
-	}
-});
-jQuery(document).on('click', '#ut-boton-video-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[video]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/video]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[video][/video]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
-	}
-});
-jQuery(document).on('click', '#ut-boton-audio-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[audio]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/audio]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[audio][/audio]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -7);
-	}
-});
-jQuery(document).on('click', '#ut-boton-spoiler-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
-	}
-});
-jQuery(document).on('click', '#ut-boton-spoiler2-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
-	}
-});
-jQuery(document).on('click', '#ut-boton-nsfw-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[spoiler=NSFW]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/spoiler]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[spoiler=NSFW][/spoiler]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -9);
-	}
-});
-jQuery(document).on('click', '#ut-boton-bar-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[bar]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/bar]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -5);
-	}
-});
-jQuery(document).on('click', '#ut-boton-code-fast', function() {
-	if (jQuery('div.msg div.body div textarea').getSelection().text.length > 0) {
-		jQuery('div.msg div.body div textarea').replaceSelection('[code]' + jQuery('div.msg div.body div textarea').getSelection().text + '[/code]').setCaretPos();
-	}
-	else {
-		jQuery('div.msg div.body div textarea').insertAtCaretPos('[code][/code]').setCaretPos(jQuery('div.msg div.body div textarea').getSelection().end -6);
-	}
-});
 
-// Salvar forms
-jQuery('form#postear').sisyphus({
-  customKeyPrefix: 'utextendido',
-  timeout: 10,
-  autoRelease: true
- });
- jQuery('form#postform.single').sisyphus({
-  customKeyPrefix: 'utfast',
-  timeout: 10,
-  autoRelease: true
- });
+// Salvar forms .remove()
+jQuery(function(){
+	var utavisopostguardado = '<div style="display: none;float: left; margin-top: 28px; opacity: 0.3;">Texto guardado...</div>';
+	if (utsalvarposts == 'si' && liveactivado == false) {
+		jQuery('form#postear').sisyphus({
+		  customKeyPrefix: 'utextendido',
+		  name: 'postear',
+		  timeout: 15,
+		  autoRelease: true,
+		  onSave: function() {
+			jQuery(utavisopostguardado).insertAfter('form#postear div[style="width: 410px"]').fadeIn('slow',function() {
+				jQuery(this).delay(2000).fadeOut('slow',function() {
+					jQuery(this).delay(1000).remove();
+					});
+				});
+		  },
+		});
+		
+		
+		
+	}
+});
 
 // hilos con live destacados (solo funciona con theme normal)
 if (utlivesdestacados == 'si' || utfavicon == undefined) {
@@ -1971,11 +2021,11 @@ jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replace
 
 // Version en el footer
 jQuery(function(){
-	if (utversion == undefined) {
+	if (utversionls == undefined) {
 		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
 	}
 	else {
-		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversion +'');
+		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversionls +'');
 	}
 });
 

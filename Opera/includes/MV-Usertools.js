@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8
+// @version        1.8.1
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -23,6 +23,7 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
         return this.href.match("/style/[0-9]+/mv_oscuro.css");
     }).length > 0;
     var postitlive = window.jQuery("div#pi_body div.embedded object").length > 0;
+    var liveactivado = window.jQuery("div.live_info").length > 0;
     var utnoti = window.jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
     var utavisos = window.jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
     var utmsj = window.jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
@@ -169,7 +170,7 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     var blacklistInfo = "<span class='blacklisted-post'" + (is_dark ? " style='color: #626262 !important;'" : "") + ">Click en <img src='http://www.mvusertools.com/ext/img/blacklist-mini.png'> para desbloquear.</span>";
     var blacklistAvatar = "~";
     {
-        var css = ".sprite {		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;	}	.usertools TABLE TD	{			padding: 3px;	}	.usertools A	{	}	.ut-firma	{			background-position: 0 -58px;			text-indent: -9999px;			width: 14px;			height: 11px;			display: block;			outline: 0;			margin-top: 1px;	}	.ut-firma:hover	{			background-position: 0 -69px;	}	.mensaje	{			background-position: -20px -58px;			text-indent: -9999px;			width: 14px;			height: 10px;			outline: 0;			display: block;			margin-top: 1px;	}	.mensaje:hover	{			background-position: -20px -68px;	}	.blacklist-off	{			background-position: -39px -57px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-off:hover	{			background-position: -39px -69px;	}	.blacklist-on	{			background-position: -39px -69px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-on:hover	{			background-position: -39px -57px;	}	.blacklist	{	}	.ut-online	{			background-position: -56px -72px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}		.ut-offline	{			background-position: -56px -58px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}	.online-pos	{			float: left;			width: 14px;			z-index: 999;	}	.mensaje-pos	{			float: left;			width: 19px;	}	.blacklist-pos	{			float: right;			margin-top: -1px;			width: 15px;	}	.firma-pos	{			float: left;			width: 19px;	}	.mensaje-ocultado	{			font-weight: bold;	}	.toggle-on	{			background-position: -37px -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.toggle-off	{			background-position: 0 -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.tapavatares	{			width: 0px; 			height: 0px; 			position:relative;	}	.tapavatares span {			position: abosolute; 			background: url(http://www.mvusertools.com/ext/img/blacklisted.png) no-repeat;			background-position: 0 4px;			width: 80px; 			height: 84px; 			top: 6px; 			left: 0px;			display: block;	}	.blacklisted-post	{			border-radius: 7px;			ms-border-radius: 7px;			-moz-border-radius: 7px;			-webkit-border-radius: 7px;			-khtml-border-radius: 7px;			padding: 3px 10px 2px 10px;			background: #ccc;			color: #626262 !important;	}	.usertools	{			position: relative;			width: 67px;			margin-top: 2px;	}	button::-moz-focus-inner {	border: 0;	padding: 0;	margin:0;	}	.mbuttons button[type], button.alt[type] {		padding:2px 4px !important;			}	.mbuttons a:hover,button.alt:hover {	background-color:#aaaaaa;	border:1px solid #c2e1ef;	color:#ffffff;	}	button.alt {		border-color: #aaa !important;		min-width: 20px;		border-radius: 5px !important;	}	button.bleft {		border-radius: 5px 0px 0px 5px !important;		margin-right: 0px !important;		border-right-width: 0px !important;		font-weight: normal !important;	}	button.bcenter {		margin-right: 0px !important;		border-left-width: 1px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bcenter2 {		margin-right: 0px !important;		border-left-width: 0px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bright {		border-radius: 0px 5px 5px 0px !important;		margin-left: 0px !important;		border-left-width: 0px !important;		font-weight: normal !important;	}	button.bright2 {		border-radius: 0px 5px 5px 0px !important;		font-weight: normal !important;	}	button.bsolo {		border-radius: 5px !important;		font-weight: normal !important;	}	button.bb {		font-weight: bold !important;	}	button.bi {		font-style: italic !important;	}	button.bu {		text-decoration: underline !important;	}	button.bs {		text-decoration: line-through !important;	}	.baudio {		background-position: -0px 3px;		width: 11px; 		height: 17px; 		display: block; 	}	.bimg {		background-position: -25px 3px;		width: 12px; 		height: 17px; 		display: block; 		margin-left: 1px; 	}	.bvideo {		background-position: -12px 3px;		width: 12px; 		height: 17px; 		display: block; 	}	.bcentericon {		background-position: -37px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.blist {		background-position: -51px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.ut-live td {		background-color: #FFEEEE;	}	.ut-live td.alt {		background-color: #EFE0E0;	}	.linksfooter A {		opacity: 0.5;	}	.linksfooter A:hover {		opacity: 1;	}	.linksfooter2 {		padding: 5px 6px !important;		border-radius: 6px;		line-height: 35px;	}	.linksfooter2 IMG {		vertical-align: sub;	}	.linksfooter2 A {		padding: 0px 3px !important;	}	.linksfooterblanco {		background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;		color: #8e908a;		border: 1px solid #C7C9C3;		border-bottom: 1px solid #BABCB6;	}	.linksfooterblanco A {		color: #666666;	}	.linksfooterblanco A:hover {		color: #222222;	}	.linksfooternegro {		background: linear-gradient(to top, #1c252b, #010101) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;		color: #4A4D50;		border: 1px solid #555f66;		border-bottom: 1px solid #0e1113;	}	#modlist {		margin: 20px 0 0;		padding: 10px 10px;		border-radius: 6px 6px 6px 6px;	}	.modlistblanco {		border: 1px solid #D4D4D2;	}	.modlistnegro {		border: 1px solid #273037;		background-color: #39444B;	}	#modlist H3{		margin-top: 0px !important;	}	#modlist A{		padding: 3px 0 3px 3px;		display: block;	}	.modlistblanco A:nth-child(odd){		background: #E8EBE3;	}	.modlistblanco A:hover{		background: #D6D8D2;	}	.modlistblanco span{		color: #555555;	}	.modlistnegro A:nth-child(odd){		background: #435058;	}	.modlistnegro A:hover{		background: #273037;	}	.modlistnegro span{		color: #C5D1EC;	}	.config {	background-position: -78px -34px;	width: 14px;	height: 14px;	display: inline-block;	margin: 0 3px;	top: 3px;	position: relative;	}	#ut-mask {	background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-mask-menu {	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-dialog {	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	#ut-dialog-menu {	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	.ut-boton-sino{	cursor: pointer;	color: #EF5000;	}	#ut-window {	background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;	}	#ut-menu-contenido {	background: #fff;	min-height: 270px;	}	#ut-menu-contenido TABLE{	border-top: 1px solid #ccc;	}	.newquote a.toggled, .newquoteblack a.toggled{	border-style: solid !important;	border-width: 1px !important;	margin: 0 !important;	padding: 0 3px !important;	}	.newquote a.toggled {	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquoteblack a.toggled{	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquote div.quote, .newquoteblack div.quote{	border: 1px solid #CCCCCC !important;	margin: 0 0 8px !important;	border-radius: 0 6px 6px 6px !important;	}	.tinycol.bigscreen{	margin-top: 800px;	}	.postit.bigscreen{	width: 958px;	padding-left: 0px;	}	#pi_body.bigscreen{	width: 938px;	}	.embedded.bigscreen{	;	}	#bigscreen-mode{	background-position: -99px -28px;	width: 41px;	height: 23px;	float: right;	margin: 5px 0 5px 10px;	cursor: pointer;	}	#bigscreen-mode:hover{	background-position: -142px -28px;	}	#bigscreen-mode-off{	background-position: -99px 0;	width: 41px;	height: 23px;	float: right;	margin: 5px 0px 5px 10px;	cursor: pointer;	}	#bigscreen-mode-off:hover{	background-position: -141px 0;	}	.post .spoiler-content {		background-color: #F0F2ED;		padding: 5px;		border-bottom: 1px solid #d7d9d4;	}	.post.odd .spoiler-content {		background-color: #E7E9E4;	}	.post .spoiler-content-black {		background-color: #435058;		padding: 5px;		border-bottom: 1px solid #252C31;	}	.post.odd .spoiler-content-black {		background-color: #39444B;	}	#ut-menu-tabs div{		margin: 0 10px 0 0;		padding: 3px 4px;		background: #eee;		display: inline-block;		cursor: pointer;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;		color: #999;		font-size: 13px;	}	#ut-menu-tabs div.active{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div.active:hover{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div:hover{		background: #ddd;		color: #222;	}	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){		width: 420px;	}	.ut-arrow-up{		background-position: -75px -53px;		width: 12px;		height: 17px;		display: block; 	}	.ut-arrow-down{		background-position: -75px -70px;		width: 12px;		height: 17px;		display: block; 	}	#ut-boton-plus{	background-color: #888888 !important;	}	#ut-boton-plus:hover {	background-color: #777777 !important;	}	.ut-titleymacro{	padding: 0 0 2px 3px;	border-left: 2px solid #FF5500;	margin: 10px 0;	}	.ut-titletxt{	font-weight: bold;	cursor: default;	}	.ut-macrotxt {	color: #222222;	text-overflow: ellipsis;	-o-text-overflow: ellipsis;    text-overflow: ellipsis;    overflow:hidden;    white-space:nowrap;    width: 460px;	}	.icon-down-list{		background-position: -97px -59px;		width: 12px;		height: 9px;		display: inline-block;		vertical-align: middle;	}	.icon-trash{		background-position: -97px -72px;		width: 11px;		height: 14px;		display: inline-block;		vertical-align: middle;	}	.icon-trash-orange{		background-position: -114px -72px; 		width: 11px;		height: 14px;		display: inline-block;		}	#ut-button-macros-list{	position: absolute;	top: 132px;	left: 112px;	width: 125px;	border-radius: 0px 0px 5px 5px;	background-color: #565656;	border: 1px solid #AAAAAA;	color: #eee;	}	#ut-button-macros-list li{	display: block;	cursor: pointer;	border-bottom: 1px solid #888888;	padding: 1px 1px 1px 3px;	}	#ut-button-macros-list li:hover{	background-color: #aaaaaa;	}	.ut-button-macros-list-barrendera{	top: 68px !important;	left: 248px !important;	}	#ut-button-macros-list-anadir {	padding: 1px 1px 2px 3px;	cursor: pointer;	display: block;	color: #ccc;	background-color: #333;	border-radius: 0 0 5px 5px;	}	#ut-button-macros-list-anadir:hover {	color: #fff;	background-color: #ff7700;	}	#ut-macro {	overflow: auto;	width: 98%;	margin-top: 5px;	}	";
+        var css = ".sprite {		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;	}	.usertools TABLE TD	{			padding: 3px;	}	.usertools A	{	}	.ut-firma	{			background-position: 0 -58px;			text-indent: -9999px;			width: 14px;			height: 11px;			display: block;			outline: 0;			margin-top: 1px;	}	.ut-firma:hover	{			background-position: 0 -69px;	}	.mensaje	{			background-position: -20px -58px;			text-indent: -9999px;			width: 14px;			height: 10px;			outline: 0;			display: block;			margin-top: 1px;	}	.mensaje:hover	{			background-position: -20px -68px;	}	.blacklist-off	{			background-position: -39px -57px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-off:hover	{			background-position: -39px -69px;	}	.blacklist-on	{			background-position: -39px -69px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-on:hover	{			background-position: -39px -57px;	}	.blacklist	{	}	.ut-online	{			background-position: -56px -72px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}		.ut-offline	{			background-position: -56px -58px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}	.online-pos	{			float: left;			width: 14px;			z-index: 999;	}	.mensaje-pos	{			float: left;			width: 19px;	}	.blacklist-pos	{			float: right;			margin-top: -1px;			width: 15px;	}	.firma-pos	{			float: left;			width: 19px;	}	.mensaje-ocultado	{			font-weight: bold;	}	.toggle-on	{			background-position: -37px -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.toggle-off	{			background-position: 0 -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.tapavatares	{			width: 0px; 			height: 0px; 			position:relative;	}	.tapavatares span {			position: abosolute; 			background: url(http://www.mvusertools.com/ext/img/blacklisted.png) no-repeat;			background-position: 0 4px;			width: 80px; 			height: 84px; 			top: 6px; 			left: 0px;			display: block;	}	.blacklisted-post	{			border-radius: 7px;			ms-border-radius: 7px;			-moz-border-radius: 7px;			-webkit-border-radius: 7px;			-khtml-border-radius: 7px;			padding: 3px 10px 2px 10px;			background: #ccc;			color: #626262 !important;	}	.usertools	{			position: relative;			width: 67px;			margin-top: 2px;	}	button::-moz-focus-inner {	border: 0;	padding: 0;	margin:0;	}	.mbuttons button[type], button.alt[type] {		padding:2px 4px !important;			}	.mbuttons a:hover,button.alt:hover {	background-color:#aaaaaa;	border:1px solid #c2e1ef;	color:#ffffff;	}	button.alt {		border-color: #aaa !important;		min-width: 20px;		border-radius: 5px !important;	}	button.bleft {		border-radius: 5px 0px 0px 5px !important;		margin-right: 0px !important;		border-right-width: 0px !important;		font-weight: normal !important;	}	button.bcenter {		margin-right: 0px !important;		border-left-width: 1px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bcenter2 {		margin-right: 0px !important;		border-left-width: 0px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bright {		border-radius: 0px 5px 5px 0px !important;		margin-left: 0px !important;		border-left-width: 0px !important;		font-weight: normal !important;	}	button.bright2 {		border-radius: 0px 5px 5px 0px !important;		font-weight: normal !important;	}	button.bsolo {		border-radius: 5px !important;		font-weight: normal !important;	}	button.bb {		font-weight: bold !important;	}	button.bi {		font-style: italic !important;	}	button.bu {		text-decoration: underline !important;	}	button.bs {		text-decoration: line-through !important;	}	.baudio {		background-position: -0px 3px;		width: 11px; 		height: 17px; 		display: block; 	}	.bimg {		background-position: -25px 3px;		width: 12px; 		height: 17px; 		display: block; 		margin-left: 1px; 	}	.bvideo {		background-position: -12px 3px;		width: 12px; 		height: 17px; 		display: block; 	}	.bcentericon {		background-position: -37px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.blist {		background-position: -51px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.ut-live td {		background-color: #FFEEEE;	}	.ut-live td.alt {		background-color: #EFE0E0;	}	.linksfooter A {		opacity: 0.5;	}	.linksfooter A:hover {		opacity: 1;	}	.linksfooter2 {		padding: 5px 6px !important;		border-radius: 6px;		line-height: 35px;	}	.linksfooter2 IMG {		vertical-align: sub;	}	.linksfooter2 A {		padding: 0px 3px !important;	}	.linksfooterblanco {		background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;		color: #8e908a;		border: 1px solid #C7C9C3;		border-bottom: 1px solid #BABCB6;	}	.linksfooterblanco A {		color: #666666;	}	.linksfooterblanco A:hover {		color: #222222;	}	.linksfooternegro {		background: linear-gradient(to top, #1c252b, #010101) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;		color: #4A4D50;		border: 1px solid #555f66;		border-bottom: 1px solid #0e1113;	}	#modlist {		margin: 20px 0 0;		padding: 10px 10px;		border-radius: 6px 6px 6px 6px;	}	.modlistblanco {		border: 1px solid #D4D4D2;	}	.modlistnegro {		border: 1px solid #273037;		background-color: #39444B;	}	#modlist H3{		margin-top: 0px !important;	}	#modlist A{		padding: 3px 0 3px 3px;		display: block;	}	.modlistblanco A:nth-child(odd){		background: #E8EBE3;	}	.modlistblanco A:hover{		background: #D6D8D2;	}	.modlistblanco span{		color: #555555;	}	.modlistnegro A:nth-child(odd){		background: #435058;	}	.modlistnegro A:hover{		background: #273037;	}	.modlistnegro span{		color: #C5D1EC;	}	.config {	background-position: -78px -34px;	width: 14px;	height: 14px;	display: inline-block;	margin: 0 3px;	top: 3px;	position: relative;	}	#ut-mask {	background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-mask-menu {	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-dialog {	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	#ut-dialog-menu {	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	.ut-boton-sino{	cursor: pointer;	color: #EF5000;	}	#ut-window {	background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;	}	#ut-menu-contenido {	background: #fff;	min-height: 270px;	}	#ut-menu-contenido TABLE{	border-top: 1px solid #ccc;	}	.newquote a.toggled, .newquoteblack a.toggled{	border-style: solid !important;	border-width: 1px !important;	margin: 0 !important;	padding: 0 3px !important;	}	.newquote a.toggled {	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquoteblack a.toggled{	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquote div.quote, .newquoteblack div.quote{	border: 1px solid #CCCCCC !important;	margin: 0 0 8px !important;	border-radius: 0 6px 6px 6px !important;	}	.tinycol.bigscreen{	margin-top: 800px;	}	.postit.bigscreen{	width: 958px;	padding-left: 0px;	}	#pi_body.bigscreen{	width: 938px;	}	.embedded.bigscreen{	;	}	#bigscreen-mode{	background-position: -99px -28px;	width: 41px;	height: 23px;	float: right;	margin: 5px 0 5px 10px;	cursor: pointer;	}	#bigscreen-mode:hover{	background-position: -142px -28px;	}	#bigscreen-mode-off{	background-position: -99px 0;	width: 41px;	height: 23px;	float: right;	margin: 5px 0px 5px 10px;	cursor: pointer;	}	#bigscreen-mode-off:hover{	background-position: -141px 0;	}	.post .spoiler-content {		background-color: #F0F2ED;		padding: 5px;		border-bottom: 1px solid #d7d9d4;	}	.post.odd .spoiler-content {		background-color: #E7E9E4;	}	.post .spoiler-content-black {		background-color: #435058;		padding: 5px;		border-bottom: 1px solid #252C31;	}	.post.odd .spoiler-content-black {		background-color: #39444B;	}	#ut-menu-tabs div{		margin: 0 10px 0 0;		padding: 3px 4px;		background: #eee;		display: inline-block;		cursor: pointer;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;		color: #999;		font-size: 13px;	}	#ut-menu-tabs div.active{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div.active:hover{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div:hover{		background: #ddd;		color: #222;	}	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){		width: 420px;	}	.ut-arrow-up{		background-position: -75px -53px;		width: 12px;		height: 17px;		display: block; 	}	.ut-arrow-down{		background-position: -75px -70px;		width: 12px;		height: 17px;		display: block; 	}	#ut-boton-plus{	background-color: #888888 !important;	}	#ut-boton-plus:hover {	background-color: #777777 !important;	}	.ut-titleymacro{	padding: 0 0 2px 3px;	border-left: 2px solid #FF5500;	margin: 10px 0;	}	.ut-titletxt{	font-weight: bold;	cursor: default;	}	.ut-macrotxt {	color: #222222;	text-overflow: ellipsis;	-o-text-overflow: ellipsis;    text-overflow: ellipsis;    overflow:hidden;    white-space:nowrap;    width: 460px;	}	.ut-macrotxt:hover {    white-space:pre-wrap;	}	.icon-down-list{		background-position: -97px -59px;		width: 12px;		height: 9px;		display: inline-block;		vertical-align: middle;	}	.icon-trash{		background-position: -97px -72px;		width: 11px;		height: 14px;		display: inline-block;		vertical-align: middle;	}	.icon-trash-orange{		background-position: -114px -72px; 		width: 11px;		height: 14px;		display: inline-block;		}	#ut-button-macros-list{	position: absolute;	top: 132px;	left: 112px;	width: 125px;	border-radius: 0px 0px 5px 5px;	background-color: #565656;	border: 1px solid #AAAAAA;	color: #eee;	}	#ut-button-macros-list li{	display: block;	cursor: pointer;	border-bottom: 1px solid #888888;	padding: 1px 1px 1px 3px;	}	#ut-button-macros-list li:hover{	background-color: #aaaaaa;	}	.ut-button-macros-list-barrendera{	top: 68px !important;	left: 248px !important;	}	#ut-button-macros-list-anadir {	padding: 1px 1px 2px 3px;	cursor: pointer;	display: block;	color: #ccc;	background-color: #333;	border-radius: 0 0 5px 5px;	}	#ut-button-macros-list-anadir:hover {	color: #fff;	background-color: #ff7700;	}	#ut-macro {	overflow: auto;	width: 98%;	margin-top: 5px;	}	";
     }
     if (typeof window.GM_addStyle != "undefined") {
         window.GM_addStyle(css);
@@ -200,12 +201,14 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     var utbigscreen = window.localStorage["utbigscreen"];
     var utordenarposts = window.localStorage["utordenarposts"];
     var utfavicon = window.localStorage["utfavicon"];
+    var utmensajeupdate = window.localStorage["utmensajeupdate"];
+    var utsalvarposts = window.localStorage["utsalvarposts"];
     window.jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter("div#userinfo");
     window.jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore("#background");
     var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-    var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr></tbody></table>';
+    var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
     var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-marcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
-    var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
+    var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
     var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
     window.jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">' + utmenutabs + "" + utmenutabla1 + "" + utmenutabla2 + "" + utmenutabla4 + "" + utmenutabla3 + "</div>" + bottominfo + '<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore("#content_head");
     window.jQuery("#ut-menu-tabla1 tr:odd, #ut-menu-tabla2 tr:odd, #ut-menu-tabla3 tr:odd").addClass("odd");
@@ -488,24 +491,67 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     if (utfavicon == "no") {
         window.jQuery("#ut-utfavicon-si").css("color", "#999999");
     }
-    var utversion = window.localStorage["utversion"];
-    var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización 1.8</p><br /><br />																- Actualización 100% centrada en la creación y edición de hilos y respuestas.<br /><br />																- Reedición de la botonera presentada en la versión 1.6. Código más limpio y liviano y con una segunda barra de botones.<br /><br />																- Sistema de macros personalizados. Guarda textos que reutilizas a menudo, como formatos para crear hilos nuevos, emotes, etc. Más información <a href="http://mvusertools.com/caracteristicas#macros" target="_blank">aquí</a>.<br /><br />																- Si tienes un accidente y tu navegador se cierra o refrescas sin querer la página, no perderás lo que llevaras escrito. Cuando vuelvas a la página todo estará por donde lo dejaste.<br /><br />																- Editar la info de tu perfil ahora es más fácil con la botonera también disponible allí.<br /><br />																- Botonera disponible ahora también en el fast-edit de tus posts. Para quien no lo sepa, doble click en el texto de un post tuyo y puedes editarlo al vuelo.<br /><br />																- Corrección de errores y mejoras internas en el código.																';
+    window.jQuery("#ut-utmensajeupdate-si").click(function() {
+        window.localStorage["utmensajeupdate"] = "si";
+        window.jQuery("#ut-utmensajeupdate-no").css("color", "#999999");
+        window.jQuery("#ut-utmensajeupdate-si").css("color", "#EF5000");
+    });
+    window.jQuery("#ut-utmensajeupdate-no").click(function() {
+        window.localStorage["utmensajeupdate"] = "no";
+        window.jQuery("#ut-utmensajeupdate-si").css("color", "#999999");
+        window.jQuery("#ut-utmensajeupdate-no").css("color", "#EF5000");
+    });
+    if (utmensajeupdate == "si") {
+        window.jQuery("#ut-utmensajeupdate-no").css("color", "#999999");
+    }
+    if (utmensajeupdate == "no" || utmensajeupdate == undefined) {
+        window.jQuery("#ut-utmensajeupdate-si").css("color", "#999999");
+    }
+    window.jQuery("#ut-utsalvarposts-si").click(function() {
+        window.localStorage["utsalvarposts"] = "si";
+        window.jQuery("#ut-utsalvarposts-no").css("color", "#999999");
+        window.jQuery("#ut-utsalvarposts-si").css("color", "#EF5000");
+    });
+    window.jQuery("#ut-utsalvarposts-no").click(function() {
+        window.localStorage["utsalvarposts"] = "no";
+        window.jQuery("#ut-utsalvarposts-si").css("color", "#999999");
+        window.jQuery("#ut-utsalvarposts-no").css("color", "#EF5000");
+    });
+    if (utsalvarposts == "si") {
+        window.jQuery("#ut-utsalvarposts-no").css("color", "#999999");
+    }
+    if (utsalvarposts == "no" || utsalvarposts == undefined) {
+        window.jQuery("#ut-utsalvarposts-si").css("color", "#999999");
+    }
+    var utversion = "1.8.1";
+    var utversionls = window.localStorage["utversionls"];
+    var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización ' + utversion + '</p><br /><br />																- La ventana de aviso de actualización está apagada por defecto. Puedes activarla en el menú o ver los cambios en el último parche desde la pstaña "Sobe MV-UT".<br /><br />																- El texto de los macros más largos se expandirán al máximo en el menú al dejar el ratón encima para que puedas leerlos o copiar el texto para editarlo.<br /><br />																- El módulo de salvar textos en el formulario extendido para evitar accidentes ha provocado bugs, así que se le ha puesto la etiqueta de experimental y viene por defecto desactivado (puedes activarlo en el menú). Los bugs no son fatales ni suceden a todo el mundo, todo el tiempo, así que es usable (pero no lo suficiente para no tener que avisar yo :P).<br /><br />																- Corrección de errores menores.																';
     window.jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore("#background");
     window.jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">' + utpatchnotes + "" + bottominfo + '<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore("#content_head");
     window.jQuery(function() {
-        if (utversion != "1.8") {
+        if (utmensajeupdate == "si") {
+            if (utversionls != utversion) {
+                window.jQuery("div#ut-mask").show();
+                window.jQuery("div#ut-dialog").show();
+                window.localStorage["utversionls"] = utversion;
+            }
+        } else {
+            window.localStorage["utversionls"] = utversion;
+        }
+        window.jQuery("#ut-menu-notasdeparche").click(function() {
+            window.jQuery("#ut-dialog-menu").hide();
+            window.jQuery("#ut-mask-menu").hide();
             window.jQuery("div#ut-mask").show();
             window.jQuery("div#ut-dialog").show();
-            window.localStorage["utversion"] = "1.8";
-        }
-    });
-    window.jQuery("#ut-box-cerrar").click(function() {
-        window.jQuery("div#ut-mask").hide();
-        window.jQuery("div#ut-dialog").hide();
-    });
-    window.jQuery("#ut-mask").click(function() {
-        window.jQuery("div#ut-mask").hide();
-        window.jQuery("div#ut-dialog").hide();
+        });
+        window.jQuery("#ut-box-cerrar").click(function() {
+            window.jQuery("div#ut-mask").hide();
+            window.jQuery("div#ut-dialog").hide();
+        });
+        window.jQuery("#ut-mask").click(function() {
+            window.jQuery("div#ut-mask").hide();
+            window.jQuery("div#ut-dialog").hide();
+        });
     });
     window.jQuery(document).ready(function() {
         window.JSON.encode = window.JSON.encode || window.JSON.stringify;
@@ -598,7 +644,7 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
         });
     });
     window.jQuery(function() {
-        if (window.jQuery("#goext").length > 0) {
+        if (window.jQuery("#goext").length > 0 || liveactivado == true) {
             window.jQuery("#ut-button-macros-list").addClass("ut-button-macros-list-barrendera");
         }
     });
@@ -1064,139 +1110,149 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
             window.jQuery('textarea[name="info"]').insertAtCaretPos("[spoiler=NSFW][/spoiler]").setCaretPos(window.jQuery('textarea[name="info"]').getSelection().end - 9);
         }
     });
-    function botonessolounavez() {
-        window.jQuery(function() {
-            window.jQuery(document).one("mouseenter", "div.msg div.body div textarea", function() {
-                fasteditbuttons();
+    if (liveactivado == 0) {
+        function botonessolounavez() {
+            window.jQuery(function() {
+                window.jQuery(document).one("mouseenter", "div.msg div.body div textarea", function() {
+                    fasteditbuttons();
+                });
+                function fasteditbuttons() {
+                    window.jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea:not("div.extraportada textarea")');
+                }
             });
-            function fasteditbuttons() {
-                window.jQuery('<div style="overflow: hidden;margin: 0 0px 10px -5px;clear: both"><button type="button" accesskey="b" class="alt bleft bb" id="ut-boton-b-fast">b</button><button type="button" accesskey="i" class="alt bcenter bi" id="ut-boton-i-fast">i</button><button type="button" accesskey="u" class="alt bcenter2 bu" id="ut-boton-u-fast">u</button><button type="button" accesskey="x" class="alt bright bs" id="ut-boton-s-fast">s</button><button title="[center]" type="button" accesskey="c" id="ut-boton-center-fast" class="alt bsolo"><a class="sprite bcentericon"></a></button><button title="[list] Usar * para cada elemento de la lista" type="button" id="ut-boton-list-fast" class="alt bsolo"><a class="blist sprite"></a></button><button type="button" accesskey="l" class="alt bsolo" id="ut-boton-url-fast">[url=]</button><button title="[img]" type="button" accesskey="m" class="alt bleft" id="ut-boton-img-fast"><a class="bimg sprite"></a></button><button title="[video]" type="button" accesskey="v" class="alt bcenter" id="ut-boton-video-fast"><a class="bvideo sprite"></a></button><button type="button" class="alt bright" title="[audio]" id="ut-boton-audio-fast"><a class="baudio sprite"></a></button><button type="button" accesskey="s" class="alt bleft" id="ut-boton-spoiler-fast">[spoiler]</button><button type="button" accesskey="d" class="alt bcenter" id="ut-boton-spoiler2-fast">[spoiler=]</button><button type="button" accesskey="n" class="alt bright" id="ut-boton-nsfw-fast">NSFW</button><button type="button" id="ut-boton-bar-fast" class="alt bsolo">[bar]</button><button type="button" class="alt bsolo" id="ut-boton-code-fast">[code]</button></div>').insertBefore('div.msg div.body div textarea:not("div.extraportada textarea")');
+        }
+        window.jQuery(document).ready(function() {
+            botonessolounavez();
+        });
+        window.jQuery(document).on("click", "button.cancelButton", function() {
+            botonessolounavez();
+        });
+        window.jQuery(document).on("click", "button.saveButton", function() {
+            botonessolounavez();
+        });
+        window.jQuery(document).on("click", "#ut-boton-b-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[b]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/b]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[b][/b]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-i-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[i]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/i]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[i][/i]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-u-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[u]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/u]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[u][/u]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-s-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[s]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/s]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[s][/s]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-center-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[center]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/center]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[center][/center]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 8);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-list-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[list]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/list]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[list][/list]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 6);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-url-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[url=]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/url]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[url=][/url]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-img-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[img]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/img]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[img][/img]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-video-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[video]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/video]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[video][/video]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 7);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-audio-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[audio]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/audio]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[audio][/audio]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 7);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-spoiler-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-spoiler2-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler=]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler=][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-nsfw-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler=NSFW]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler=NSFW][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-bar-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[bar]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/bar]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[bar][/bar]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
+            }
+        });
+        window.jQuery(document).on("click", "#ut-boton-code-fast", function() {
+            if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
+                window.jQuery("div.msg div.body div textarea").replaceSelection("[code]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/code]").setCaretPos();
+            } else {
+                window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[code][/code]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 6);
             }
         });
     }
-    window.jQuery(document).ready(function() {
-        botonessolounavez();
-    });
-    window.jQuery(document).on("click", "button.cancelButton", function() {
-        botonessolounavez();
-    });
-    window.jQuery(document).on("click", "button.saveButton", function() {
-        botonessolounavez();
-    });
-    window.jQuery(document).on("click", "#ut-boton-b-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[b]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/b]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[b][/b]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
+    window.jQuery(function() {
+        var utavisopostguardado = '<div style="display: none;float: left; margin-top: 28px; opacity: 0.3;">Texto guardado...</div>';
+        if (utsalvarposts == "si" && liveactivado == false) {
+            window.jQuery("form#postear").sisyphus({
+                customKeyPrefix: "utextendido",
+                name: "postear",
+                timeout: 15,
+                autoRelease: true,
+                onSave: function() {
+                    window.jQuery(utavisopostguardado).insertAfter('form#postear div[style="width: 410px"]').fadeIn("slow", function() {
+                        window.jQuery(this).delay(2e3).fadeOut("slow", function() {
+                            window.jQuery(this).delay(1e3).remove();
+                        });
+                    });
+                }
+            });
         }
-    });
-    window.jQuery(document).on("click", "#ut-boton-i-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[i]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/i]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[i][/i]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-u-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[u]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/u]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[u][/u]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-s-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[s]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/s]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[s][/s]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 3);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-center-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[center]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/center]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[center][/center]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 8);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-list-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[list]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/list]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[list][/list]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 6);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-url-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[url=]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/url]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[url=][/url]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-img-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[img]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/img]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[img][/img]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-video-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[video]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/video]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[video][/video]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 7);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-audio-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[audio]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/audio]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[audio][/audio]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 7);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-spoiler-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-spoiler2-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler=]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler=][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-nsfw-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[spoiler=NSFW]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/spoiler]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[spoiler=NSFW][/spoiler]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 9);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-bar-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[bar]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/bar]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[bar][/bar]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 5);
-        }
-    });
-    window.jQuery(document).on("click", "#ut-boton-code-fast", function() {
-        if (window.jQuery("div.msg div.body div textarea").getSelection().text.length > 0) {
-            window.jQuery("div.msg div.body div textarea").replaceSelection("[code]" + window.jQuery("div.msg div.body div textarea").getSelection().text + "[/code]").setCaretPos();
-        } else {
-            window.jQuery("div.msg div.body div textarea").insertAtCaretPos("[code][/code]").setCaretPos(window.jQuery("div.msg div.body div textarea").getSelection().end - 6);
-        }
-    });
-    window.jQuery("form#postear").sisyphus({
-        customKeyPrefix: "utextendido",
-        timeout: 10,
-        autoRelease: true
-    });
-    window.jQuery("form#postform.single").sisyphus({
-        customKeyPrefix: "utfast",
-        timeout: 10,
-        autoRelease: true
     });
     if (utlivesdestacados == "si" || utfavicon == undefined) {
         window.jQuery(document).on("mouseover", "body", function() {
@@ -1208,10 +1264,10 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     window.jQuery('div[class="autor"]:contains("Ekisu")').children().children("dt").replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
     window.jQuery('div[class="autor"]:contains("X-Crim")').children().children("dd:first").replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
     window.jQuery(function() {
-        if (utversion == undefined) {
+        if (utversionls == undefined) {
             window.jQuery("div#footer div.f_info p").append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
         } else {
-            window.jQuery("div#footer div.f_info p").append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión ' + utversion + "");
+            window.jQuery("div#footer div.f_info p").append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión ' + utversionls + "");
         }
     });
     window.jQuery("#scrollpages").append(balcklistToggle);
