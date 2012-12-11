@@ -803,7 +803,7 @@
   "api-utils/lib/runtime.js": {
    "docsSHA256": "da3d34aa242a4a1a78874ef3458f8288a8e16881679b7cfe9c7340a7af3783f6", 
    "jsSHA256": "e9ef8c81cb4ae966c53082c6851e52b07195ac48556f3cba90a6aa9b01ffe3aa", 
-   "moduleName": "runtime", 
+   "moduleName": "runtime.js", 
    "packageName": "api-utils", 
    "requirements": {
     "chrome": {
@@ -1318,7 +1318,7 @@
   }, 
   "mv-usertools/lib/main.js": {
    "docsSHA256": null, 
-   "jsSHA256": "2d06823c4a6b53b2459d4adff3a1e2c6aa40f5d13c588f0edfdc0ae3faab7ac3", 
+   "jsSHA256": "bb9b2c86f2c665cc29fd6d25337fc9bc6aac2ccdd779aafed440d019ec3d5725", 
    "moduleName": "main", 
    "packageName": "mv-usertools", 
    "requirements": {
@@ -1372,7 +1372,7 @@
    "description": "A\u00f1ade funcionalidades extras a la web mediavida.com", 
    "main": "main", 
    "name": "mv-usertools", 
-   "version": "initial.rev77"
+   "version": "initial.rev81"
   }
  }, 
  "name": "mv-usertools", 
