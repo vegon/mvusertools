@@ -757,6 +757,36 @@ var css =
 	width: 98%;\
 	margin-top: 5px;\
 	}\
+	#top-foros-bar {\
+	/*Sombra*/\
+	box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);\
+	/*Fondo en gradiente*/\
+	background:-moz-linear-gradient(center top , #ECEEE9, #D2D3D1) repeat scroll 0 0 transparent;\
+	background: -webkit-gradient(linear, center top, center bottom, from(#ECEEE9), to(#D2D3D1), color-stop(0.5, #D2D3D1), color-stop(0.5, #D2D3D1));\
+	/*Altura y margen interno*/\
+	height:24px;\
+	padding: 2px;\
+	text-align: left;\
+	/*Fija*/\
+	position: fixed;\
+	top:0px;\
+	left:0px;\
+	right:0px;\
+	color: #fff;\
+	font-size: 14px;\
+	/*Capa, sobre todo*/\
+	z-index:9959;\
+	}\
+	#pub {\
+	top: 28px;\
+	}\
+	body {\
+	padding-top: 28px;\
+	}\
+	#ut-foros-fav LI{\
+	display: inline-block;\
+	padding: 1px 10px 1px 0;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -1172,6 +1202,51 @@ jQuery(function(){
 		jQuery('div#ut-dialog').hide();
 	});
 });
+
+
+// Foros Favoritos
+jQuery(function() {
+	var forosFav = ['7','32','9', '4', '99']
+	
+	var $forosFavContainer = jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
+	
+	/*Función scroll*/
+	jQuery(window).scroll(function(){
+		var scrollTop = jQuery(window).scrollTop();
+		if(scrollTop != 0){
+			jQuery('#top-foros-bar').stop().animate({'opacity':'0.2'},400);
+		}else{	
+			jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
+		}
+	});
+
+	/*Función opacidad al pasar ratón por encima*/
+	jQuery('#top-foros-bar').hover(
+		function (e) {
+			var scrollTop = jQuery(window).scrollTop();
+			if(scrollTop != 0){
+			jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
+
+			}
+		},
+		function (e) {
+			var scrollTop = jQuery(window).scrollTop();
+			if(scrollTop != 0){
+			jQuery('#top-foros-bar').stop().animate({'opacity':'0.1'},400);
+			}
+		}
+	);
+	/*Añadimos los foros favoritos a la lista de la barra de top*/
+	for(i=0;i<forosFav.length;i++){
+		jQuery('#ut-foros-fav').append(
+			jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a>')
+		);
+	}
+	/*Boton para añadir a favoritos*/
+	
+});
+
+
 
 // MACROS kaod <3
 jQuery(document).ready(function() { 
