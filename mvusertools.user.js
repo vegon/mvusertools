@@ -764,7 +764,7 @@ var css =
 	background:-moz-linear-gradient(center top , #ECEEE9, #D2D3D1) repeat scroll 0 0 transparent;\
 	background: -webkit-gradient(linear, center top, center bottom, from(#ECEEE9), to(#D2D3D1), color-stop(0.5, #D2D3D1), color-stop(0.5, #D2D3D1));\
 	/*Altura y margen interno*/\
-	height:24px;\
+	height:26px;\
 	padding: 2px;\
 	text-align: left;\
 	/*Fija*/\
@@ -778,10 +778,10 @@ var css =
 	z-index:9959;\
 	}\
 	#pub {\
-	top: 28px;\
+	top: 30px;\
 	}\
-	body {\
-	padding-top: 28px;\
+	#background {\
+	margin-top: 30px;\
 	}\
 	#ut-foros-fav LI{\
 	display: inline-block;\
@@ -1208,7 +1208,7 @@ jQuery(function(){
 jQuery(function() {
 	var forosFav = ['7','32','9', '4', '99']
 	
-	var $forosFavContainer = jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
+	jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
 	
 	/*Función scroll*/
 	jQuery(window).scroll(function(){
