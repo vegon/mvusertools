@@ -805,7 +805,7 @@ var css =
 	}\
 	#foros-fav-float{\
 	position: fixed;\
-	top: 103px;\
+	top: 210px;\
 	margin-left: 1005px;\
 	opacity: 0.2;\
 	transition: all 0.5s;\
