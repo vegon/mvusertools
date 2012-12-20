@@ -778,22 +778,30 @@ var css =
 	z-index:9959;\
 	}\
 	#ut-foros-fav LI{\
-	background: #ccc;\
-	border-radius: 3px 3px 3px 3px;\
 	margin: 0 0 5px;\
-	border: 1px solid #EEEEEE;\
-	}\
-	#ut-foros-fav LI:hover{\
-	background: #aaa;\
 	transition: all 0.5s;\
 	-moz-transition: all 0.5s;\
 	-ms-transition: all 0.5s;\
 	-webkit-transition: all 0.5s;\
 	-o-transition: all 0.5s;\
 	}\
+	#ut-foros-fav LI:hover{\
+	}\
 	#ut-foros-fav LI A{\
+	background: #ccc;\
+	border-radius: 3px 3px 3px 3px;\
+	border: 1px solid #EEEEEE;\
+	vertical-align: middle;\
 	padding: 3px 4px 1px;\
-	display: block;\
+	display: inline-block;\
+	transition: all 0.5s;\
+	-moz-transition: all 0.5s;\
+	-ms-transition: all 0.5s;\
+	-webkit-transition: all 0.5s;\
+	-o-transition: all 0.5s;\
+	}\
+	#ut-foros-fav LI A:hover{\
+	background: #999;\
 	}\
 	#foros-fav-float{\
 	position: fixed;\
@@ -807,6 +815,20 @@ var css =
 	-o-transition: all 0.5s;\
 	}\
 	#foros-fav-float:hover {\
+	opacity: 1;\
+	}\
+	.ut-foros-fav-borrar{\
+	display: none;\
+	margin: 0 0 0 10px;\
+	vertical-align: middle;\
+	opacity: 0.1;\
+	transition: all 0.5s;\
+	-moz-transition: all 0.5s;\
+	-ms-transition: all 0.5s;\
+	-webkit-transition: all 0.5s;\
+	-o-transition: all 0.5s;\
+	}\
+	.ut-foros-fav-borrar:hover{\
 	opacity: 1;\
 	}\
 	";
@@ -1266,10 +1288,21 @@ jQuery(function() {
 	
 	/*Añadimos los foros favoritos a la lista*/
 	for(i=0;i<forosFav.length;i++){
+		var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
 		jQuery('#ut-foros-fav').append(
-			jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a>')
+			jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
 		);
 	}
+	jQuery("#ut-foros-fav LI").hover(
+	  function () {
+		jQuery(this).children('.ut-foros-fav-borrar').css('display', 'inline-block');
+		
+	  }, 
+	  function () {
+		jQuery(this).children('.ut-foros-fav-borrar').hide();
+	  }
+	);
+
 	/*Boton para añadir a favoritos*/
 	
 });
