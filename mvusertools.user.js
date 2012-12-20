@@ -777,15 +777,37 @@ var css =
 	/*Capa, sobre todo*/\
 	z-index:9959;\
 	}\
-	#pub {\
-	top: 30px;\
-	}\
-	#background {\
-	margin-top: 30px;\
-	}\
 	#ut-foros-fav LI{\
-	display: inline-block;\
-	padding: 1px 10px 1px 0;\
+	background: #ccc;\
+	border-radius: 3px 3px 3px 3px;\
+	margin: 0 0 5px;\
+	border: 1px solid #EEEEEE;\
+	}\
+	#ut-foros-fav LI:hover{\
+	background: #aaa;\
+	transition: all 0.5s;\
+	-moz-transition: all 0.5s;\
+	-ms-transition: all 0.5s;\
+	-webkit-transition: all 0.5s;\
+	-o-transition: all 0.5s;\
+	}\
+	#ut-foros-fav LI A{\
+	padding: 3px 4px 1px;\
+	display: block;\
+	}\
+	#foros-fav-float{\
+	position: fixed;\
+	top: 103px;\
+	margin-left: 1005px;\
+	opacity: 0.2;\
+	transition: all 0.5s;\
+	-moz-transition: all 0.5s;\
+	-ms-transition: all 0.5s;\
+	-webkit-transition: all 0.5s;\
+	-o-transition: all 0.5s;\
+	}\
+	#foros-fav-float:hover {\
+	opacity: 1;\
 	}\
 	";
 }
@@ -1206,37 +1228,43 @@ jQuery(function(){
 
 // Foros Favoritos
 jQuery(function() {
-	var forosFav = ['7','32','9', '4', '99']
+	//var forosFav = ['7','32','9', '4', '99']
+	//localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+	var forosFav = JSON.parse(localStorage['ut-forosFav']);
 	
-	jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
+	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body');
 	
-	/*Función scroll*/
-	jQuery(window).scroll(function(){
-		var scrollTop = jQuery(window).scrollTop();
-		if(scrollTop != 0){
-			jQuery('#top-foros-bar').stop().animate({'opacity':'0.2'},400);
-		}else{	
-			jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
-		}
-	});
+	
+	//OPCION DE BARRA EN TOP
+	// jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
+	// /*Función scroll*/
+	// jQuery(window).scroll(function(){
+		// var scrollTop = jQuery(window).scrollTop();
+		// if(scrollTop != 0){
+			// jQuery('#top-foros-bar').stop().animate({'opacity':'0.2'},400);
+		// }else{	
+			// jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
+		// }
+	// });
 
-	/*Función opacidad al pasar ratón por encima*/
-	jQuery('#top-foros-bar').hover(
-		function (e) {
-			var scrollTop = jQuery(window).scrollTop();
-			if(scrollTop != 0){
-			jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
+	// /*Función opacidad al pasar ratón por encima*/
+	// jQuery('#top-foros-bar').hover(
+		// function (e) {
+			// var scrollTop = jQuery(window).scrollTop();
+			// if(scrollTop != 0){
+			// jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
 
-			}
-		},
-		function (e) {
-			var scrollTop = jQuery(window).scrollTop();
-			if(scrollTop != 0){
-			jQuery('#top-foros-bar').stop().animate({'opacity':'0.1'},400);
-			}
-		}
-	);
-	/*Añadimos los foros favoritos a la lista de la barra de top*/
+			// }
+		// },
+		// function (e) {
+			// var scrollTop = jQuery(window).scrollTop();
+			// if(scrollTop != 0){
+			// jQuery('#top-foros-bar').stop().animate({'opacity':'0.1'},400);
+			// }
+		// }
+	// );
+	
+	/*Añadimos los foros favoritos a la lista*/
 	for(i=0;i<forosFav.length;i++){
 		jQuery('#ut-foros-fav').append(
 			jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a>')
