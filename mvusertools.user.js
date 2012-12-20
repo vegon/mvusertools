@@ -1228,9 +1228,9 @@ jQuery(function(){
 
 // Foros Favoritos
 jQuery(function() {
-	//var forosFav = ['7','32','9', '4', '99']
+	var forosFav = ['7','32','9', '4', '99']
 	//localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-	var forosFav = JSON.parse(localStorage['ut-forosFav']);
+	// var forosFav = JSON.parse(localStorage['ut-forosFav']);
 	
 	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body');
 	
