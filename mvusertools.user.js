@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8.1
+// @version        1.9-beta
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -811,6 +811,24 @@ var css =
 	.ut-foros-fav-borrar:hover{\
 	opacity: 1;\
 	}\
+	.ut-foro-fav-add {\
+	background: url('http://i.imgur.com/6Fdef.png') no-repeat scroll center 8px #FF9300;\
+	height: 33px;\
+	margin: 40px 0 0 -8px;\
+	width: 40px;\
+	transition: all 0.5s;\
+	-moz-transition: all 0.5s;\
+	-ms-transition: all 0.5s;\
+	-webkit-transition: all 0.5s;\
+	-o-transition: all 0.5s;\
+	cursor: pointer;\
+	}\
+	.ut-foro-fav-added {\
+	background: url('http://i.imgur.com/9tdvO.png') no-repeat scroll center 8px #FF9300;\
+	}\
+	.ut-foro-fav-add-moveup{\
+	margin: 0 0 0 -8px;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -1189,13 +1207,10 @@ if (utsalvarposts == 'no' || utsalvarposts == undefined) {
 
 
 // Mensaje al updatear
-var utversion = '1.8.1';
+var utversion = '1.9-beta';
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- La ventana de aviso de actualización está apagada por defecto. Puedes activarla en el menú o ver los cambios en el último parche desde la pstaña "Sobe MV-UT".<br /><br />\
-																- El texto de los macros más largos se expandirán al máximo en el menú al dejar el ratón encima para que puedas leerlos o copiar el texto para editarlo.<br /><br />\
-																- El módulo de salvar textos en el formulario extendido para evitar accidentes ha provocado bugs, así que se le ha puesto la etiqueta de experimental y viene por defecto desactivado (puedes activarlo en el menú). Los bugs no son fatales ni suceden a todo el mundo, todo el tiempo, así que es usable (pero no lo suficiente para no tener que avisar yo :P).<br /><br />\
-																- Corrección de errores menores.\
+																- oski y forcrium se desean.<br /><br />\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
@@ -1230,19 +1245,64 @@ jQuery(function(){
 
 // Foros Favoritos
 jQuery(function() {
-	var forosFav = ['7','32','9', '4', '99']
-	//localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-	// var forosFav = JSON.parse(localStorage['ut-forosFav']);
+	if (localStorage['ut-forosFav'] == undefined) {
+		//var forosFav = [7,32,9,4,99];
+		var forosFav = [];
+		localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+	}
 	
+	/*Container*/
 	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
 	
-	/*Añadimos los foros favoritos a la lista*/
-	for(i=0;i<forosFav.length;i++){
-		var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
-		jQuery('#ut-foros-fav').append(
-			jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
-		);
-	}
+	/*Dibujamos los foros favoritos en la lista*/
+	var forosFavUpdate = function(){
+			var forosFav = JSON.parse(localStorage['ut-forosFav']);
+
+			var forosFavDibujo = function() {
+				for(i=0;i<forosFav.length;i++){
+					var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
+					jQuery('#ut-foros-fav').append(
+						jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
+					);
+				}
+			};
+			
+			forosFavDibujo();
+	};
+		forosFavUpdate();
+
+
+	/*Boton para añadir a favoritos*/
+	jQuery('div.fpanel div.icon').append('<div class="ut-foro-fav-add">');
+	
+	jQuery("div.fpanel div.icon").hover(
+	  function () {
+		jQuery(this).children('.ut-foro-fav-add').toggleClass('ut-foro-fav-add-moveup');
+		
+	  }, 
+	  function () {
+		jQuery(this).children('.ut-foro-fav-add').toggleClass('ut-foro-fav-add-moveup');
+	  }
+	);
+	jQuery('.ut-foro-fav-add').click(function () {
+		var forosFav = JSON.parse(localStorage['ut-forosFav']);
+
+		jQuery(this).siblings('a[href^="/foro"]').each(function() {
+			var enlace = this + "";
+			var split = enlace.split('/');
+			var path = split.splice(1, split.length - 1);
+			var pathIndexToGet = 3;
+			var foroNumber = path[pathIndexToGet];
+			forosFav.push(foroNumber);
+			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+		});
+		
+		
+		jQuery(this).toggleClass('ut-foro-fav-added');
+	});
+	
+	
+	/*Botón para borrar*/
 	jQuery("#ut-foros-fav LI").hover(
 	  function () {
 		jQuery(this).children('.ut-foros-fav-borrar').css('display', 'inline-block');
@@ -1252,9 +1312,9 @@ jQuery(function() {
 		jQuery(this).children('.ut-foros-fav-borrar').hide();
 	  }
 	);
-
-	/*Boton para añadir a favoritos*/
 	
+	//localStorage['ut-forosFav'] = [7,9];
+	//localStorage.clear();
 });
 
 
@@ -2123,10 +2183,10 @@ jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replace
 // Version en el footer
 jQuery(function(){
 	if (utversionls == undefined) {
-		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
+		jQuery('div#footer div.f_info p').append('• <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
 	}
 	else {
-		jQuery('div#footer div.f_info p').append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión '+ utversionls +'');
+		jQuery('div#footer div.f_info p').append('• <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> '+ utversionls +'');
 	}
 });
 
@@ -2138,12 +2198,10 @@ jQuery("#scrollpages").append(balcklistToggle);
 if (localStorage.getItem('blacklist') == 'on') {
 	jQuery('#toggle').addClass("toggle-on");
 	jQuery('#toggle').removeClass("toggle-off");
-	console.log("encendido");
 }
 else {
 	jQuery('#toggle').addClass("toggle-off");
 	jQuery('#toggle').removeClass("toggle-on");
-	console.log("apagado");
 }
 
 
