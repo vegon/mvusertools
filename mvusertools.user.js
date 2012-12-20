@@ -757,26 +757,6 @@ var css =
 	width: 98%;\
 	margin-top: 5px;\
 	}\
-	#top-foros-bar {\
-	/*Sombra*/\
-	box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);\
-	/*Fondo en gradiente*/\
-	background:-moz-linear-gradient(center top , #ECEEE9, #D2D3D1) repeat scroll 0 0 transparent;\
-	background: -webkit-gradient(linear, center top, center bottom, from(#ECEEE9), to(#D2D3D1), color-stop(0.5, #D2D3D1), color-stop(0.5, #D2D3D1));\
-	/*Altura y margen interno*/\
-	height:26px;\
-	padding: 2px;\
-	text-align: left;\
-	/*Fija*/\
-	position: fixed;\
-	top:0px;\
-	left:0px;\
-	right:0px;\
-	color: #fff;\
-	font-size: 14px;\
-	/*Capa, sobre todo*/\
-	z-index:9959;\
-	}\
 	#ut-foros-fav LI{\
 	margin: 0 0 5px;\
 	transition: all 0.5s;\
@@ -1254,37 +1234,7 @@ jQuery(function() {
 	//localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 	// var forosFav = JSON.parse(localStorage['ut-forosFav']);
 	
-	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body');
-	
-	
-	//OPCION DE BARRA EN TOP
-	// jQuery('<div id="top-foros-bar">').append('<div style="width: 996px; margin: 0 auto;"><ul id="ut-foros-fav">').insertBefore('#background');
-	// /*Función scroll*/
-	// jQuery(window).scroll(function(){
-		// var scrollTop = jQuery(window).scrollTop();
-		// if(scrollTop != 0){
-			// jQuery('#top-foros-bar').stop().animate({'opacity':'0.2'},400);
-		// }else{	
-			// jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
-		// }
-	// });
-
-	// /*Función opacidad al pasar ratón por encima*/
-	// jQuery('#top-foros-bar').hover(
-		// function (e) {
-			// var scrollTop = jQuery(window).scrollTop();
-			// if(scrollTop != 0){
-			// jQuery('#top-foros-bar').stop().animate({'opacity':'1'},400);
-
-			// }
-		// },
-		// function (e) {
-			// var scrollTop = jQuery(window).scrollTop();
-			// if(scrollTop != 0){
-			// jQuery('#top-foros-bar').stop().animate({'opacity':'0.1'},400);
-			// }
-		// }
-	// );
+	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
 	
 	/*Añadimos los foros favoritos a la lista*/
 	for(i=0;i<forosFav.length;i++){
