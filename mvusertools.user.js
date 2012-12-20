@@ -821,7 +821,7 @@ var css =
 	display: none;\
 	margin: 0 0 0 10px;\
 	vertical-align: middle;\
-	opacity: 0.1;\
+	opacity: 0.01;\
 	transition: all 0.5s;\
 	-moz-transition: all 0.5s;\
 	-ms-transition: all 0.5s;\
