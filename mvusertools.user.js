@@ -784,18 +784,23 @@ var css =
 	background: #999;\
 	}\
 	#foros-fav-float{\
-	position: fixed;\
-	top: 210px;\
+	position: absolute;\
+	top: 200px;\
 	margin-left: 1005px;\
 	opacity: 0.2;\
-	transition: all 0.5s;\
-	-moz-transition: all 0.5s;\
-	-ms-transition: all 0.5s;\
-	-webkit-transition: all 0.5s;\
-	-o-transition: all 0.5s;\
+	margin-top: 10px;\
+	transition: opacity 0.5s;\
+	-moz-transition: opacity 0.5s;\
+	-ms-transition: opacity 0.5s;\
+	-webkit-transition: opacity 0.5s;\
+	-o-transition: opacity 0.5s;\
 	}\
 	#foros-fav-float:hover {\
 	opacity: 1;\
+	}\
+	.foros-fav-float-sticky{\
+	top: 0px !important;\
+	position: fixed !important;\
 	}\
 	.ut-foros-fav-borrar{\
 	display: inline-block;\
@@ -1066,7 +1071,9 @@ jQuery(function() {
 		localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 	}
 	/*Container*/
-	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
+	//jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
+	jQuery('<div id="sticky-anchor" style="position: absolute; top: 200px;">').insertBefore('#content_body, #content_head');
+	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertAfter('#sticky-anchor');
 	/*Dibujamos los foros favoritos en la lista*/
 	var forosFavUpdate = function(){
 			var forosFav = JSON.parse(localStorage['ut-forosFav']);
@@ -1146,6 +1153,17 @@ jQuery(function() {
 			}
 		});
 	});
+	/*Panel flotante sigue el scroll*/
+	function sticky_relocate() {
+	  var window_top = jQuery(window).scrollTop();
+	  var div_top = jQuery('#sticky-anchor').offset().top;
+	  if (window_top > div_top)
+		jQuery('#foros-fav-float').addClass('foros-fav-float-sticky')
+	  else
+		jQuery('#foros-fav-float').removeClass('foros-fav-float-sticky');
+	  };
+	  jQuery(window).scroll(sticky_relocate);
+	  sticky_relocate();
 });
 
 
