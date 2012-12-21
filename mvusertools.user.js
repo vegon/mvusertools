@@ -816,19 +816,19 @@ var css =
 	opacity: 1;\
 	}\
 	.ut-foro-fav-add {\
-	background: url('http://i.imgur.com/6Fdef.png') no-repeat scroll center 8px #FF9300;\
+	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center -30px #FF9300;\
 	height: 33px;\
 	margin: 40px 0 0 -8px;\
 	width: 40px;\
-	transition: all 0.5s;\
-	-moz-transition: all 0.5s;\
-	-ms-transition: all 0.5s;\
-	-webkit-transition: all 0.5s;\
-	-o-transition: all 0.5s;\
+	transition: margin 0.5s;\
+	-moz-transition: margin 0.5s;\
+	-ms-transition: margin 0.5s;\
+	-webkit-transition: margin 0.5s;\
+	-o-transition: margin 0.5s;\
 	cursor: pointer;\
 	}\
 	.ut-foro-fav-added {\
-	background: url('http://i.imgur.com/9tdvO.png') no-repeat scroll center 8px #FF9300;\
+	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center 8px #FF9300;\
 	}\
 	.ut-foro-fav-add-moveup{\
 	margin: 0 0 0 -8px;\
@@ -1065,14 +1065,11 @@ jQuery(function() {
 		var forosFav = [];
 		localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 	}
-	
 	/*Container*/
 	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
-	
 	/*Dibujamos los foros favoritos en la lista*/
 	var forosFavUpdate = function(){
 			var forosFav = JSON.parse(localStorage['ut-forosFav']);
-
 			var forosFavDibujo = function() {
 				for(i=0;i<forosFav.length;i++){
 					var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
@@ -1085,11 +1082,8 @@ jQuery(function() {
 			forosFavDibujo();
 	};
 		forosFavUpdate();
-
-
 	/*Boton para añadir a favoritos*/
 	jQuery('div.fpanel div.icon').append('<div class="ut-foro-fav-add">');
-	
 	jQuery("div.fpanel div.icon").hover(
 	  function () {
 		jQuery(this).children('.ut-foro-fav-add').toggleClass('ut-foro-fav-add-moveup');
@@ -1101,7 +1095,6 @@ jQuery(function() {
 	);
 	jQuery('.ut-foro-fav-add').click(function () {
 		var forosFav = JSON.parse(localStorage['ut-forosFav']);
-		
 		jQuery(this).siblings('a[href^="/foro"]').each(function() {
 			var enlace = this + "";
 			var split = enlace.split('/');
@@ -1136,15 +1129,14 @@ jQuery(function() {
 			forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
 			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 			jQuery(this).closest('li').remove();
-			jQuery('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
+			jQuery('div.fpanel div.icon').children('a[href="/foro/'+foroNumber+'"]').siblings('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
 		});
 	});
-	
 	/*Pone la estrella correcta*/
-	jQuery('.ut-foro-fav-add').each(function () {
+	jQuery('div.fpanel div.icon').each(function () {
 		var forosFav = JSON.parse(localStorage['ut-forosFav']);
 		
-		jQuery(this).siblings('a[href^="/foro"]').each(function() {
+		jQuery(this).children('a[href^="/foro"]').each(function() {
 			var enlace = this + "";
 			var split = enlace.split('/');
 			var path = split.splice(1, split.length - 1);
@@ -1156,11 +1148,6 @@ jQuery(function() {
 			}
 		});
 	});
-	
-	
-	
-	//localStorage['ut-forosFav'] = [7,9];
-	//localStorage.clear();
 });
 
 
