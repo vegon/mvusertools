@@ -870,8 +870,8 @@ var utsalvarposts = localStorage["utsalvarposts"];
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
 var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
-var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-marcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
+var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-utmarcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-utmarcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
 var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
 var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
 jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">'+ utmenutabs +''+ utmenutabla1 +''+ utmenutabla2 +''+ utmenutabla4 +''+ utmenutabla3 +'</div>'+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
@@ -916,8 +916,6 @@ jQuery('#ut-menu-tab4').click(function () {
 	jQuery('#ut-menu-tabla3').hide();
 	jQuery('#ut-menu-tabla4').show();
 	});
-	
-
 jQuery('#ut-menu').click(function () {
 	jQuery('#ut-mask-menu').show();
 	jQuery('#ut-dialog-menu').show();
@@ -945,7 +943,59 @@ jQuery(function() {
 		jQuery('#nav_bar .bbii').css('left','143px');
 	}
 });
-	// Boton de utlinksfooter
+// CONSTRUCTORES DE OPCIONES
+var utOpcionesSi = function(opcion) {
+	jQuery('#ut-'+opcion+'-si').click(function() {
+		localStorage[''+opcion+''] = 'si';
+		jQuery('#ut-'+opcion+'-no').css('color','#999999');
+		jQuery('#ut-'+opcion+'-si').css('color','#EF5000');
+	});
+	jQuery('#ut-'+opcion+'-no').click(function() {
+		localStorage[''+opcion+''] = 'no';
+		jQuery('#ut-'+opcion+'-si').css('color','#999999');
+		jQuery('#ut-'+opcion+'-no').css('color','#EF5000');
+	});
+	if (localStorage[opcion] == 'si' || localStorage[opcion] == undefined) {
+		jQuery('#ut-'+opcion+'-no').css('color','#999999');
+	}
+	if (localStorage[opcion] == 'no') {
+		jQuery('#ut-'+opcion+'-si').css('color','#999999');
+	}
+};
+var utOpcionesNo = function(opcion) {
+	jQuery('#ut-'+opcion+'-si').click(function() {
+		localStorage[opcion] = 'si';
+		jQuery('#ut-'+opcion+'-no').css('color','#999999');
+		jQuery('#ut-'+opcion+'-si').css('color','#EF5000');
+	});
+	jQuery('#ut-'+opcion+'-no').click(function() {
+		localStorage[opcion] = 'no';
+		jQuery('#ut-'+opcion+'-si').css('color','#999999');
+		jQuery('#ut-'+opcion+'-no').css('color','#EF5000');
+	});
+	if (localStorage[opcion] == 'si') {
+		jQuery('#ut-'+opcion+'-no').css('color','#999999');
+	}
+	if (localStorage[opcion] == 'no' || localStorage[opcion] == undefined) {
+		jQuery('#ut-'+opcion+'-si').css('color','#999999');
+	}
+};
+// Opciones
+utOpcionesSi('utordenarposts');
+utOpcionesSi('utbigscreen');
+utOpcionesSi('utestilospoilers');
+utOpcionesSi('utuserinfo');
+utOpcionesSi('utnewquote');
+utOpcionesSi('utlivesdestacados');
+utOpcionesSi('uticonosdestacados');
+utOpcionesSi('uticonosportada');
+utOpcionesSi('utmarcapaginas');
+utOpcionesSi('uttablamods');
+utOpcionesSi('utfavicon');
+utOpcionesNo('utsalvarposts');
+utOpcionesNo('utmensajeupdate');
+utOpcionesNo('utlinksfooteroscuro');
+// Boton de utlinksfooter. Tiene funciones extras, no es posible usar el constructor.
 jQuery('#ut-linksfooter-si').click(function() {
 	localStorage["utlinksfooter"] = 'si';
 	jQuery('#ut-linksfooter-no').css('color','#999999');
@@ -966,245 +1016,6 @@ if (utlinksfooter == 'no') {
 	jQuery('#ut-linksfooter-si').css('color','#999999');
 	jQuery('#ut-utlinksfooteroscuro').css('color','#999999');
 }
-	// Boton de utlinksfooteroscuro
-jQuery('#ut-utlinksfooteroscuro-si').click(function() {
-	localStorage["utlinksfooteroscuro"] = 'si';
-	jQuery('#ut-utlinksfooteroscuro-no').css('color','#999999');
-	jQuery('#ut-utlinksfooteroscuro-si').css('color','#EF5000');
-});
-jQuery('#ut-utlinksfooteroscuro-no').click(function() {
-	localStorage["utlinksfooteroscuro"] = 'no';
-	jQuery('#ut-utlinksfooteroscuro-si').css('color','#999999');
-	jQuery('#ut-utlinksfooteroscuro-no').css('color','#EF5000');
-});
-if (utlinksfooteroscuro == 'si') {
-	jQuery('#ut-utlinksfooteroscuro-no').css('color','#999999');
-}
-if (utlinksfooteroscuro == 'no' || utlinksfooteroscuro == undefined) {
-	jQuery('#ut-utlinksfooteroscuro-si').css('color','#999999');
-}
-	// Boton de uttablamods
-jQuery('#ut-tablamods-si').click(function() {
-	localStorage["uttablamods"] = 'si';
-	jQuery('#ut-tablamods-no').css('color','#999999');
-	jQuery('#ut-tablamods-si').css('color','#EF5000');
-});
-jQuery('#ut-tablamods-no').click(function() {
-	localStorage["uttablamods"] = 'no';
-	jQuery('#ut-tablamods-si').css('color','#999999');
-	jQuery('#ut-tablamods-no').css('color','#EF5000');
-});
-if (uttablamods == 'si' || uttablamods == undefined) {
-	jQuery('#ut-tablamods-no').css('color','#999999');
-}
-if (uttablamods == 'no') {
-	jQuery('#ut-tablamods-si').css('color','#999999');
-}
-	// Marcapaginas
-jQuery('#ut-marcapaginas-si').click(function() {
-	localStorage["utmarcapaginas"] = 'si';
-	jQuery('#ut-marcapaginas-no').css('color','#999999');
-	jQuery('#ut-marcapaginas-si').css('color','#EF5000');
-});
-jQuery('#ut-marcapaginas-no').click(function() {
-	localStorage["utmarcapaginas"] = 'no';
-	jQuery('#ut-marcapaginas-si').css('color','#999999');
-	jQuery('#ut-marcapaginas-no').css('color','#EF5000');
-});
-if (utmarcapaginas == 'si' || utmarcapaginas == undefined) {
-	jQuery('#ut-marcapaginas-no').css('color','#999999');
-}
-if (utmarcapaginas == 'no') {
-	jQuery('#ut-marcapaginas-si').css('color','#999999');
-}
-	// Iconos de las noticias en portada
-jQuery('#ut-uticonosportada-si').click(function() {
-	localStorage["uticonosportada"] = 'si';
-	jQuery('#ut-uticonosportada-no').css('color','#999999');
-	jQuery('#ut-uticonosportada-si').css('color','#EF5000');
-});
-jQuery('#ut-uticonosportada-no').click(function() {
-	localStorage["uticonosportada"] = 'no';
-	jQuery('#ut-uticonosportada-si').css('color','#999999');
-	jQuery('#ut-uticonosportada-no').css('color','#EF5000');
-});
-if (uticonosportada == 'si' || uticonosportada == undefined) {
-	jQuery('#ut-uticonosportada-no').css('color','#999999');
-}
-if (uticonosportada == 'no') {
-	jQuery('#ut-uticonosportada-si').css('color','#999999');
-}
-	// Iconos de las noticias en destacados
-jQuery('#ut-uticonosdestacados-si').click(function() {
-	localStorage["uticonosdestacados"] = 'si';
-	jQuery('#ut-uticonosdestacados-no').css('color','#999999');
-	jQuery('#ut-uticonosdestacados-si').css('color','#EF5000');
-});
-jQuery('#ut-uticonosdestacados-no').click(function() {
-	localStorage["uticonosdestacados"] = 'no';
-	jQuery('#ut-uticonosdestacados-si').css('color','#999999');
-	jQuery('#ut-uticonosdestacados-no').css('color','#EF5000');
-});
-if (uticonosdestacados == 'si' || uticonosdestacados == undefined) {
-	jQuery('#ut-uticonosdestacados-no').css('color','#999999');
-}
-if (uticonosdestacados == 'no') {
-	jQuery('#ut-uticonosdestacados-si').css('color','#999999');
-}
-	// Lives destacados
-jQuery('#ut-utlivesdestacados-si').click(function() {
-	localStorage["utlivesdestacados"] = 'si';
-	jQuery('#ut-utlivesdestacados-no').css('color','#999999');
-	jQuery('#ut-utlivesdestacados-si').css('color','#EF5000');
-});
-jQuery('#ut-utlivesdestacados-no').click(function() {
-	localStorage["utlivesdestacados"] = 'no';
-	jQuery('#ut-utlivesdestacados-si').css('color','#999999');
-	jQuery('#ut-utlivesdestacados-no').css('color','#EF5000');
-});
-if (utlivesdestacados == 'si' || utlivesdestacados == undefined) {
-	jQuery('#ut-utlivesdestacados-no').css('color','#999999');
-}
-if (utlivesdestacados == 'no') {
-	jQuery('#ut-utlivesdestacados-si').css('color','#999999');
-}
-	// Nuevos quotes
-jQuery('#ut-utnewquote-si').click(function() {
-	localStorage["utnewquote"] = 'si';
-	jQuery('#ut-utnewquote-no').css('color','#999999');
-	jQuery('#ut-utnewquote-si').css('color','#EF5000');
-});
-jQuery('#ut-utnewquote-no').click(function() {
-	localStorage["utnewquote"] = 'no';
-	jQuery('#ut-utnewquote-si').css('color','#999999');
-	jQuery('#ut-utnewquote-no').css('color','#EF5000');
-});
-if (utnewquote == 'si' || utnewquote == undefined) {
-	jQuery('#ut-utnewquote-no').css('color','#999999');
-}
-if (utnewquote == 'no') {
-	jQuery('#ut-utnewquote-si').css('color','#999999');
-}
-	// Información de usuario en el hover del nick
-jQuery('#ut-utuserinfo-si').click(function() {
-	localStorage["utuserinfo"] = 'si';
-	jQuery('#ut-utuserinfo-no').css('color','#999999');
-	jQuery('#ut-utuserinfo-si').css('color','#EF5000');
-});
-jQuery('#ut-utuserinfo-no').click(function() {
-	localStorage["utuserinfo"] = 'no';
-	jQuery('#ut-utuserinfo-si').css('color','#999999');
-	jQuery('#ut-utuserinfo-no').css('color','#EF5000');
-});
-if (utuserinfo == 'si' || utuserinfo == undefined) {
-	jQuery('#ut-utuserinfo-no').css('color','#999999');
-}
-if (utuserinfo == 'no') {
-	jQuery('#ut-utuserinfo-si').css('color','#999999');
-}
-	// Estilo spoilers
-jQuery('#ut-utestilospoilers-si').click(function() {
-	localStorage["utestilospoilers"] = 'si';
-	jQuery('#ut-utestilospoilers-no').css('color','#999999');
-	jQuery('#ut-utestilospoilers-si').css('color','#EF5000');
-});
-jQuery('#ut-utestilospoilers-no').click(function() {
-	localStorage["utestilospoilers"] = 'no';
-	jQuery('#ut-utestilospoilers-si').css('color','#999999');
-	jQuery('#ut-utestilospoilers-no').css('color','#EF5000');
-});
-if (utestilospoilers == 'si' || utestilospoilers == undefined) {
-	jQuery('#ut-utestilospoilers-no').css('color','#999999');
-}
-if (utestilospoilers == 'no') {
-	jQuery('#ut-utestilospoilers-si').css('color','#999999');
-}
-	// Modo bigscreen
-jQuery('#ut-utbigscreen-si').click(function() {
-	localStorage["utbigscreen"] = 'si';
-	jQuery('#ut-utbigscreen-no').css('color','#999999');
-	jQuery('#ut-utbigscreen-si').css('color','#EF5000');
-});
-jQuery('#ut-utbigscreen-no').click(function() {
-	localStorage["utbigscreen"] = 'no';
-	jQuery('#ut-utbigscreen-si').css('color','#999999');
-	jQuery('#ut-utbigscreen-no').css('color','#EF5000');
-});
-if (utbigscreen == 'si' || utbigscreen == undefined) {
-	jQuery('#ut-utbigscreen-no').css('color','#999999');
-}
-if (utbigscreen == 'no') {
-	jQuery('#ut-utbigscreen-si').css('color','#999999');
-}
-	// Boton ordenar posts
-jQuery('#ut-utordenarposts-si').click(function() {
-	localStorage["utordenarposts"] = 'si';
-	jQuery('#ut-utordenarposts-no').css('color','#999999');
-	jQuery('#ut-utordenarposts-si').css('color','#EF5000');
-});
-jQuery('#ut-utordenarposts-no').click(function() {
-	localStorage["utordenarposts"] = 'no';
-	jQuery('#ut-utordenarposts-si').css('color','#999999');
-	jQuery('#ut-utordenarposts-no').css('color','#EF5000');
-});
-if (utordenarposts == 'si' || utordenarposts == undefined) {
-	jQuery('#ut-utordenarposts-no').css('color','#999999');
-}
-if (utordenarposts == 'no') {
-	jQuery('#ut-utordenarposts-si').css('color','#999999');
-}
-	// Avisos en el favicon
-jQuery('#ut-utfavicon-si').click(function() {
-	localStorage["utfavicon"] = 'si';
-	jQuery('#ut-utfavicon-no').css('color','#999999');
-	jQuery('#ut-utfavicon-si').css('color','#EF5000');
-});
-jQuery('#ut-utfavicon-no').click(function() {
-	localStorage["utfavicon"] = 'no';
-	jQuery('#ut-utfavicon-si').css('color','#999999');
-	jQuery('#ut-utfavicon-no').css('color','#EF5000');
-});
-if (utfavicon == 'si' || utfavicon == undefined) {
-	jQuery('#ut-utfavicon-no').css('color','#999999');
-}
-if (utfavicon == 'no') {
-	jQuery('#ut-utfavicon-si').css('color','#999999');
-}
-	// Ventana de actualizacion
-jQuery('#ut-utmensajeupdate-si').click(function() {
-	localStorage["utmensajeupdate"] = 'si';
-	jQuery('#ut-utmensajeupdate-no').css('color','#999999');
-	jQuery('#ut-utmensajeupdate-si').css('color','#EF5000');
-});
-jQuery('#ut-utmensajeupdate-no').click(function() {
-	localStorage["utmensajeupdate"] = 'no';
-	jQuery('#ut-utmensajeupdate-si').css('color','#999999');
-	jQuery('#ut-utmensajeupdate-no').css('color','#EF5000');
-});
-if (utmensajeupdate == 'si') {
-	jQuery('#ut-utmensajeupdate-no').css('color','#999999');
-}
-if (utmensajeupdate == 'no' || utmensajeupdate == undefined) {
-	jQuery('#ut-utmensajeupdate-si').css('color','#999999');
-}
-	// Salvar posts
-jQuery('#ut-utsalvarposts-si').click(function() {
-	localStorage["utsalvarposts"] = 'si';
-	jQuery('#ut-utsalvarposts-no').css('color','#999999');
-	jQuery('#ut-utsalvarposts-si').css('color','#EF5000');
-});
-jQuery('#ut-utsalvarposts-no').click(function() {
-	localStorage["utsalvarposts"] = 'no';
-	jQuery('#ut-utsalvarposts-si').css('color','#999999');
-	jQuery('#ut-utsalvarposts-no').css('color','#EF5000');
-});
-if (utsalvarposts == 'si') {
-	jQuery('#ut-utsalvarposts-no').css('color','#999999');
-}
-if (utsalvarposts == 'no' || utsalvarposts == undefined) {
-	jQuery('#ut-utsalvarposts-si').css('color','#999999');
-}
-
 
 // Mensaje al updatear
 var utversion = '1.9-beta';
