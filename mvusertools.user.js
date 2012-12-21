@@ -807,6 +807,7 @@ var css =
 	-ms-transition: all 0.5s;\
 	-webkit-transition: all 0.5s;\
 	-o-transition: all 0.5s;\
+	cursor: pointer;\
 	}\
 	.ut-foros-fav-borrar:hover{\
 	opacity: 1;\
@@ -1123,6 +1124,19 @@ jQuery(function() {
 		jQuery(this).children('.ut-foros-fav-borrar').hide();
 	  }
 	);
+	jQuery('.ut-foros-fav-borrar').click(function () {
+		var forosFav = JSON.parse(localStorage['ut-forosFav']);
+		jQuery(this).siblings('a[href^="/foro"]').each(function() {
+			var enlace = this + "";
+			var split = enlace.split('/');
+			var path = split.splice(1, split.length - 1);
+			var pathIndexToGet = 3;
+			var foroNumber = path[pathIndexToGet];
+			forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
+			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+			jQuery(this).closest('li').remove();
+		});
+	});
 	
 	//localStorage['ut-forosFav'] = [7,9];
 	//localStorage.clear();
