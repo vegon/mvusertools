@@ -1136,6 +1136,7 @@ jQuery(function() {
 			forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
 			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 			jQuery(this).closest('li').remove();
+			jQuery('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
 		});
 	});
 	
