@@ -1072,7 +1072,7 @@ jQuery(function() {
 	var utfiltrarOpcion = localStorage['utfiltrarOpcion'];
 	$utfiltrar.addClass('ut-filtrar');
 	jQuery($utfiltrar).click(function(){
-		jQuery('#nofids').toggle();
+		jQuery('#nofids').slideToggle();
 		$utfiltrarP.toggle();
 		if (localStorage['utfiltrarOpcion'] == 'si' || localStorage['utfiltrarOpcion'] == undefined) {
 			localStorage['utfiltrarOpcion'] = 'no'
