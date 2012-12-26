@@ -846,11 +846,10 @@ var css =
 	opacity: 0.2;\
 	}\
 	#ut-filtros-fav{\
-	margin: 0 0 20px 0;\
 	}\
-	#ut-filtros-fav p{\
+	#favoritos .tinycol p{\
 	cursor: pointer;\
-	margin: 5px 0 0 0;\
+	margin: 5px 0 20px 0;\
 	width: 80px;\
 	}\
 	";
@@ -1081,33 +1080,38 @@ jQuery(function() {
 	jQuery('#favoritos .tinycol').prepend('<div id="ut-filtros-fav">');
 
 	/* Movemos y filtramos iconos de foros */
-	jQuery('#tfav a.foroicon').each(function() {
-		jQuery('#ut-filtros-fav').append(jQuery(this).clone());
-	});
-	var utforosUnicos = {};
-	jQuery('#ut-filtros-fav a.foroicon').each(function() {
-		jQuery(this).attr('href','#filtrados');
-		var interiorA = jQuery(this).html();
-		if (utforosUnicos[interiorA])
-			jQuery(this).remove();
-		else
-			utforosUnicos[interiorA] = true;
+	
+	jQuery(document).on('mouseover','body', function(){
+		jQuery('#tfav a.foroicon').each(function() {
+			jQuery('#ut-filtros-fav').append(jQuery(this).clone());
+		});
+		var utforosUnicos = {};
+		jQuery('#ut-filtros-fav a.foroicon').each(function() {
+			jQuery(this).attr('href','#filtrados');
+			var interiorA = jQuery(this).html();
+			if (utforosUnicos[interiorA])
+				jQuery(this).remove();
+			else
+				utforosUnicos[interiorA] = true;
+		});
 	});
 	
+	
+	
 	/* Filtramos foros */
-	jQuery('#ut-filtros-fav a.foroicon').click(function(){
-		jQuery('#ut-filtros-fav a.foroicon').not(this).removeClass('ut-opacity');
+	jQuery(document).on('click', '#ut-filtros-fav a.foroicon', function() {
+		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
 		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 		var foroImgSrc = jQuery(this).children('img').attr('src');
 		
 		jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').toggle();
-		jQuery(this).addClass('ut-opacity');
+		jQuery('#ut-filtros-fav a.foroicon').not(this).addClass('ut-opacity');
 	});
 	
 	/* Quitamos filtros */
-	jQuery('#ut-filtros-fav').append(jQuery('<p>').text('Quitar filtro.'));
+	jQuery('<p>').text('Quitar filtro.').insertAfter('#ut-filtros-fav');
 	
-	jQuery('#ut-filtros-fav p').click(function(){
+	jQuery(document).on('click', '#favoritos .tinycol p', function() {
 		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
 		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 	});
