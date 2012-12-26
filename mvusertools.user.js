@@ -1106,16 +1106,17 @@ jQuery(function() {
 		
 		jQuery('<div id="ut-filtros-tags">').insertAfter('#ut-filtros-fav');
 		jQuery('#tfav tr').not('tr.utfiltrado').children('td.dash').children('a.cat2').each(function() {
-			jQuery('#ut-filtros-tags').append(jQuery(this).clone());
+			jQuery('#ut-filtros-tags').append(jQuery(this).clone().removeAttr('title'));
 		});
+		jQuery('#ut-filtros-tags a.cat2 img').removeAttr('alt', 'style');
 		var utCatsUnicos = {};
 		jQuery('#ut-filtros-tags a.cat2').each(function() {
 			jQuery(this).attr('href','#filtrados');
-			var interiorA = jQuery(this).html();
-			if (utCatsUnicos[interiorA])
+			var interiorB = jQuery(this).html();
+			if (utCatsUnicos[interiorB])
 				jQuery(this).remove();
 			else
-				utCatsUnicos[interiorA] = true;
+				utCatsUnicos[interiorB] = true;
 		});
 	});
 	jQuery(document).on('click', '#ut-filtros-tags a.cat2', function() {
