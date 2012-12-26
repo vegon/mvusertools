@@ -1080,7 +1080,6 @@ jQuery(function() {
 	jQuery('#favoritos .tinycol').prepend('<div id="ut-filtros-fav">');
 
 	/* Movemos y filtramos iconos de foros */
-	
 	jQuery(document).on('mouseover','body', function(){
 		jQuery('#tfav a.foroicon').each(function() {
 			jQuery('#ut-filtros-fav').append(jQuery(this).clone());
@@ -1095,17 +1094,36 @@ jQuery(function() {
 				utforosUnicos[interiorA] = true;
 		});
 	});
-	
-	
-	
-	/* Filtramos foros */
+	/* Filtramos foros y categorias */
 	jQuery(document).on('click', '#ut-filtros-fav a.foroicon', function() {
 		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
+		jQuery('#tfav tr').removeClass('utfiltrado');
+		jQuery('#ut-filtros-tags').remove();
 		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 		var foroImgSrc = jQuery(this).children('img').attr('src');
-		
-		jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').toggle();
+		jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').addClass('utfiltrado').hide();
 		jQuery('#ut-filtros-fav a.foroicon').not(this).addClass('ut-opacity');
+		
+		jQuery('<div id="ut-filtros-tags">').insertAfter('#ut-filtros-fav');
+		jQuery('#tfav tr').not('tr.utfiltrado').children('td.dash').children('a.cat2').each(function() {
+			jQuery('#ut-filtros-tags').append(jQuery(this).clone());
+		});
+		var utCatsUnicos = {};
+		jQuery('#ut-filtros-tags a.cat2').each(function() {
+			jQuery(this).attr('href','#filtrados');
+			var interiorA = jQuery(this).html();
+			if (utCatsUnicos[interiorA])
+				jQuery(this).remove();
+			else
+				utCatsUnicos[interiorA] = true;
+		});
+	});
+	jQuery(document).on('click', '#ut-filtros-tags a.cat2', function() {
+		jQuery('#ut-filtros-tags a.cat2').removeClass('ut-opacity');
+		jQuery('#tfav a.foroicon').closest('tr').not('tr.utfiltrado').attr('style','display: table-row;');
+		var catImgSrc = jQuery(this).children('img').attr('src');
+		jQuery('#tfav a.cat2 img').not('img[src="'+catImgSrc+'"]').closest('tr').hide();
+		jQuery('#ut-filtros-tags a.cat2').not(this).addClass('ut-opacity');
 	});
 	
 	/* Quitamos filtros */
@@ -1113,6 +1131,8 @@ jQuery(function() {
 	
 	jQuery(document).on('click', '#favoritos .tinycol p', function() {
 		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
+		jQuery('#tfav tr').removeClass('utfiltrado');
+		jQuery('#ut-filtros-tags').remove();
 		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 	});
 });
