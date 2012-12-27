@@ -847,10 +847,42 @@ var css =
 	}\
 	#ut-filtros-fav{\
 	}\
-	#favoritos .tinycol p{\
+	#utFavQuitar{\
 	cursor: pointer;\
 	margin: 5px 0 20px 0;\
 	width: 80px;\
+	opacity: 0.7;\
+	}\
+	#utFavAviso{\
+	cursor: pointer;\
+	margin: 5px 0 20px 0;\
+	font-size: 9px;\
+	opacity: 0.5;\
+	}\
+	#utFavAviso:hover{\
+	opacity: 1;\
+	}\
+	#utFavAvisoTxt{\
+	border: 1px solid #ccc;\
+	border-radius: 6px;\
+	padding: 5px;\
+	margin: -15px 0 20px 0;\
+	display: none;\
+	font-size: 9px;\
+	}\
+	#ut-filtros-fav .foroicon{\
+	display: inline-block;\
+	padding: 0 4px 4px;\
+	}\
+	#ut-filtros-tags .cat2{\
+	display: inline-block;\
+	margin: 0 15px 5px 5px;\
+	}\
+	#ut-fav-filto-titulo{\
+	font-size: 14px;\
+	margin: 0 0 9px;\
+	font-family: Trebuchet MS,Arial,Verdana,sans-serif;\
+	font-weight: bold;\
 	}\
 	";
 }
@@ -1078,7 +1110,7 @@ jQuery(function(){
 // Filtrar favoritos
 jQuery(function() {
 	jQuery('#favoritos .tinycol').prepend('<div id="ut-filtros-fav">');
-
+	jQuery('<h3 id="ut-fav-filto-titulo">').text('Filtros').insertBefore('#ut-filtros-fav');
 	/* Movemos y filtramos iconos de foros */
 	jQuery(document).on('mouseover','body', function(){
 		jQuery('#tfav a.foroicon').each(function() {
@@ -1128,14 +1160,29 @@ jQuery(function() {
 	});
 	
 	/* Quitamos filtros */
-	jQuery('<p>').text('Quitar filtro.').insertAfter('#ut-filtros-fav');
-	
-	jQuery(document).on('click', '#favoritos .tinycol p', function() {
+	jQuery('<p id="utFavQuitar">').text('Quitar filtro.').insertAfter('#ut-filtros-fav');
+	jQuery(document).on('click', '#utFavQuitar', function() {
 		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
 		jQuery('#tfav tr').removeClass('utfiltrado');
 		jQuery('#ut-filtros-tags').remove();
 		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 	});
+	
+	/* Aviso para los que tienen más de 30 favoritos */
+	var utVerMasFav = jQuery('#favoritos .tfooter #moar').text();
+	if (utVerMasFav === 'Ver más') {
+		jQuery('<p id="utFavAviso">').text('Tienes más de 30 favoritos +').insertAfter('#utFavQuitar');
+		jQuery('<div id="utFavAvisoTxt">').html('Para que el filtro funcione con todos tus hilos guardados en favoritos, debes darle al botón de "Ver más" al final de la lista de hilos. Si no se muestran el filtro no tendrá efecto en ellos.').insertAfter('#utFavAviso');
+		jQuery('#utFavAviso').click(function(){
+			jQuery('#utFavAvisoTxt').slideToggle();
+			if (jQuery('#utFavAviso').text() === 'Tienes más de 30 favoritos +') {
+				jQuery('#utFavAviso').text('Tienes más de 30 favoritos -');
+			}
+			else {
+				jQuery('#utFavAviso').text('Tienes más de 30 favoritos +');
+			}
+		});
+	}
 });
 
 // Ocultar filtros en spy
