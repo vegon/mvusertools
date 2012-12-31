@@ -823,7 +823,7 @@ var css =
 	}\
 	.ut-foro-fav-add {\
 	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center -30px #FF9300;\
-	height: 33px;\
+	height: 38px;\
 	margin: 40px 0 0 -8px;\
 	width: 40px;\
 	transition: margin 0.5s;\
