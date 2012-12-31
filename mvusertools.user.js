@@ -1239,11 +1239,11 @@ jQuery(function() {
 	jQuery('div.fpanel div.icon').append('<div class="ut-foro-fav-add">');
 	jQuery("div.fpanel div.icon").hover(
 	  function () {
-		jQuery(this).children('.ut-foro-fav-add').toggleClass('ut-foro-fav-add-moveup');
+		jQuery(this).children('.ut-foro-fav-add').addClass('ut-foro-fav-add-moveup');
 		
 	  }, 
 	  function () {
-		jQuery(this).children('.ut-foro-fav-add').toggleClass('ut-foro-fav-add-moveup');
+		jQuery(this).children('.ut-foro-fav-add').removeClass('ut-foro-fav-add-moveup');
 	  }
 	);
 	jQuery('.ut-foro-fav-add').click(function () {
