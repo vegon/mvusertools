@@ -1079,7 +1079,10 @@ if (utlinksfooter == 'no') {
 // Mensaje al updatear
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- oski y forcrium se desean.<br /><br />\
+																- Foros favoritos: añade los foros que más visitas a un menú visible en toda la web.<br /><br />\
+																- Filtros en favoritos: filtra los hilos que tienes guardados en favoritos por foro y categoría.<br /><br />\
+																- Pequeños añadidos.<br /><br />\
+																- Corrección de errores y limpieza del código.<br /><br />\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
@@ -2179,6 +2182,7 @@ if (utlivesdestacados == 'si' || utfavicon == undefined) {
 
 // Alien_crrpt = Alien_derp
 jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
+jQuery('div[class="autor"]:contains("Achotiodeque")').children().children('dt').replaceWith('<dt><a href="/id/Achotiodeque">Achotoditeque</a></dt>');
 jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
 jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
 	jQuery('div[class="autor"]:contains("X-Crim")').children().children('dd:first').replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
