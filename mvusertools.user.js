@@ -837,7 +837,7 @@ var css =
 	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center 8px #FF9300;\
 	}\
 	.ut-foro-fav-add-moveup{\
-	margin: 0 0 0 -8px;\
+	margin: 3px 0 0 -8px;\
 	}\
 	.ut-filtrar {\
 	cursor: pointer;\
@@ -921,11 +921,13 @@ var utordenarposts = localStorage["utordenarposts"];
 var utfavicon = localStorage["utfavicon"];
 var utmensajeupdate = localStorage["utmensajeupdate"];
 var utsalvarposts = localStorage["utsalvarposts"];
+var utforosfavs = localStorage["utforosfavs"];
+var utfiltrarfavs = localStorage["utfiltrarfavs"];
 	// Forma del menu
 jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
 var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><tr><td>Tener siempre a la vista foros favoritos.</td><td><span class="ut-boton-sino" id="ut-utforosfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utforosfavs-no">No</span></td></tr><tr><td>Activar filtro para hilos en favoritos.</td><td><span class="ut-boton-sino" id="ut-utfiltrarfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utfiltrarfavs-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
 var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-utmarcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-utmarcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
 var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a> Versión '+utversion+'.</p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
 var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
@@ -1047,6 +1049,8 @@ utOpcionesSi('uticonosportada');
 utOpcionesSi('utmarcapaginas');
 utOpcionesSi('uttablamods');
 utOpcionesSi('utfavicon');
+utOpcionesSi('utforosfavs');
+utOpcionesSi('utfiltrarfavs');
 utOpcionesNo('utsalvarposts');
 utOpcionesNo('utmensajeupdate');
 utOpcionesNo('utlinksfooteroscuro');
@@ -1109,79 +1113,81 @@ jQuery(function(){
 
 // Filtrar favoritos
 jQuery(function() {
-	jQuery('#favoritos .tinycol').prepend('<div id="ut-filtros-fav">');
-	jQuery('<h3 id="ut-fav-filto-titulo">').text('Filtros').insertBefore('#ut-filtros-fav');
-	/* Movemos y filtramos iconos de foros */
-	jQuery(document).on('mouseover','body', function(){
-		jQuery('#tfav a.foroicon').each(function() {
-			jQuery('#ut-filtros-fav').append(jQuery(this).clone());
+	if (utfiltrarfavs == 'si' || utfiltrarfavs == undefined) {
+		jQuery('#favoritos .tinycol').prepend('<div id="ut-filtros-fav">');
+		jQuery('<h3 id="ut-fav-filto-titulo">').text('Filtros').insertBefore('#ut-filtros-fav');
+		/* Movemos y filtramos iconos de foros */
+		jQuery(document).on('mouseover','body', function(){
+			jQuery('#tfav a.foroicon').each(function() {
+				jQuery('#ut-filtros-fav').append(jQuery(this).clone());
+			});
+			var utforosUnicos = {};
+			jQuery('#ut-filtros-fav a.foroicon').each(function() {
+				jQuery(this).attr('href','#filtrados');
+				var interiorA = jQuery(this).html();
+				if (utforosUnicos[interiorA])
+					jQuery(this).remove();
+				else
+					utforosUnicos[interiorA] = true;
+			});
 		});
-		var utforosUnicos = {};
-		jQuery('#ut-filtros-fav a.foroicon').each(function() {
-			jQuery(this).attr('href','#filtrados');
-			var interiorA = jQuery(this).html();
-			if (utforosUnicos[interiorA])
-				jQuery(this).remove();
-			else
-				utforosUnicos[interiorA] = true;
+		/* Filtramos foros y categorias */
+		jQuery(document).on('click', '#ut-filtros-fav a.foroicon', function() {
+			jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
+			jQuery('#tfav tr').removeClass('utfiltrado');
+			jQuery('#ut-filtros-tags').remove();
+			jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
+			var foroImgSrc = jQuery(this).children('img').attr('src');
+			jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').addClass('utfiltrado').hide();
+			jQuery('#ut-filtros-fav a.foroicon').not(this).addClass('ut-opacity');
+			
+			jQuery('<div id="ut-filtros-tags">').insertAfter('#ut-filtros-fav');
+			jQuery('#tfav tr').not('tr.utfiltrado').children('td.dash').children('a.cat2').each(function() {
+				jQuery('#ut-filtros-tags').append(jQuery(this).clone().removeAttr('title'));
+			});
+			jQuery('#ut-filtros-tags a.cat2 img').removeAttr('alt', 'style');
+			var utCatsUnicos = {};
+			jQuery('#ut-filtros-tags a.cat2').each(function() {
+				jQuery(this).attr('href','#filtrados');
+				var interiorB = jQuery(this).html();
+				if (utCatsUnicos[interiorB])
+					jQuery(this).remove();
+				else
+					utCatsUnicos[interiorB] = true;
+			});
 		});
-	});
-	/* Filtramos foros y categorias */
-	jQuery(document).on('click', '#ut-filtros-fav a.foroicon', function() {
-		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
-		jQuery('#tfav tr').removeClass('utfiltrado');
-		jQuery('#ut-filtros-tags').remove();
-		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
-		var foroImgSrc = jQuery(this).children('img').attr('src');
-		jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').addClass('utfiltrado').hide();
-		jQuery('#ut-filtros-fav a.foroicon').not(this).addClass('ut-opacity');
+		jQuery(document).on('click', '#ut-filtros-tags a.cat2', function() {
+			jQuery('#ut-filtros-tags a.cat2').removeClass('ut-opacity');
+			jQuery('#tfav a.foroicon').closest('tr').not('tr.utfiltrado').attr('style','display: table-row;');
+			var catImgSrc = jQuery(this).children('img').attr('src');
+			jQuery('#tfav a.cat2 img').not('img[src="'+catImgSrc+'"]').closest('tr').hide();
+			jQuery('#ut-filtros-tags a.cat2').not(this).addClass('ut-opacity');
+		});
 		
-		jQuery('<div id="ut-filtros-tags">').insertAfter('#ut-filtros-fav');
-		jQuery('#tfav tr').not('tr.utfiltrado').children('td.dash').children('a.cat2').each(function() {
-			jQuery('#ut-filtros-tags').append(jQuery(this).clone().removeAttr('title'));
+		/* Quitamos filtros */
+		jQuery('<p id="utFavQuitar">').text('Quitar filtro.').insertAfter('#ut-filtros-fav');
+		jQuery(document).on('click', '#utFavQuitar', function() {
+			jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
+			jQuery('#tfav tr').removeClass('utfiltrado');
+			jQuery('#ut-filtros-tags').remove();
+			jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
 		});
-		jQuery('#ut-filtros-tags a.cat2 img').removeAttr('alt', 'style');
-		var utCatsUnicos = {};
-		jQuery('#ut-filtros-tags a.cat2').each(function() {
-			jQuery(this).attr('href','#filtrados');
-			var interiorB = jQuery(this).html();
-			if (utCatsUnicos[interiorB])
-				jQuery(this).remove();
-			else
-				utCatsUnicos[interiorB] = true;
-		});
-	});
-	jQuery(document).on('click', '#ut-filtros-tags a.cat2', function() {
-		jQuery('#ut-filtros-tags a.cat2').removeClass('ut-opacity');
-		jQuery('#tfav a.foroicon').closest('tr').not('tr.utfiltrado').attr('style','display: table-row;');
-		var catImgSrc = jQuery(this).children('img').attr('src');
-		jQuery('#tfav a.cat2 img').not('img[src="'+catImgSrc+'"]').closest('tr').hide();
-		jQuery('#ut-filtros-tags a.cat2').not(this).addClass('ut-opacity');
-	});
-	
-	/* Quitamos filtros */
-	jQuery('<p id="utFavQuitar">').text('Quitar filtro.').insertAfter('#ut-filtros-fav');
-	jQuery(document).on('click', '#utFavQuitar', function() {
-		jQuery('#ut-filtros-fav a.foroicon').removeClass('ut-opacity');
-		jQuery('#tfav tr').removeClass('utfiltrado');
-		jQuery('#ut-filtros-tags').remove();
-		jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
-	});
-	
-	/* Aviso para los que tienen más de 30 favoritos */
-	var utVerMasFav = jQuery('#favoritos .tfooter #moar').text();
-	if (utVerMasFav === 'Ver más') {
-		jQuery('<p id="utFavAviso">').text('Tienes más de 30 favoritos +').insertAfter('#utFavQuitar');
-		jQuery('<div id="utFavAvisoTxt">').html('Para que el filtro funcione con todos tus hilos guardados en favoritos, debes darle al botón de "Ver más" al final de la lista de hilos. Si no se muestran el filtro no tendrá efecto en ellos.').insertAfter('#utFavAviso');
-		jQuery('#utFavAviso').click(function(){
-			jQuery('#utFavAvisoTxt').slideToggle();
-			if (jQuery('#utFavAviso').text() === 'Tienes más de 30 favoritos +') {
-				jQuery('#utFavAviso').text('Tienes más de 30 favoritos -');
-			}
-			else {
-				jQuery('#utFavAviso').text('Tienes más de 30 favoritos +');
-			}
-		});
+		
+		/* Aviso para los que tienen más de 30 favoritos */
+		var utVerMasFav = jQuery('#favoritos .tfooter #moar').text();
+		if (utVerMasFav === 'Ver más') {
+			jQuery('<p id="utFavAviso">').text('Tienes más de 30 favoritos +').insertAfter('#utFavQuitar');
+			jQuery('<div id="utFavAvisoTxt">').html('Para que el filtro funcione con todos tus hilos guardados en favoritos, debes darle al botón de "Ver más" al final de la lista de hilos. Si no se muestran el filtro no tendrá efecto en ellos.').insertAfter('#utFavAviso');
+			jQuery('#utFavAviso').click(function(){
+				jQuery('#utFavAvisoTxt').slideToggle();
+				if (jQuery('#utFavAviso').text() === 'Tienes más de 30 favoritos +') {
+					jQuery('#utFavAviso').text('Tienes más de 30 favoritos -');
+				}
+				else {
+					jQuery('#utFavAviso').text('Tienes más de 30 favoritos +');
+				}
+			});
+		}
 	}
 });
 
@@ -1211,105 +1217,107 @@ jQuery(function() {
 
 // Foros Favoritos
 jQuery(function() {
-	if (localStorage['ut-forosFav'] == undefined) {
-		//var forosFav = [7,32,9,4,99];
-		var forosFav = [];
-		localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-	}
-	/*Container*/
-	//jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
-	jQuery('<div id="sticky-anchor" style="position: absolute; top: 200px;">').insertBefore('#content_body, #content_head');
-	jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertAfter('#sticky-anchor');
-	/*Dibujamos los foros favoritos en la lista*/
-	var forosFavUpdate = function(){
-			var forosFav = JSON.parse(localStorage['ut-forosFav']);
-			var forosFavDibujo = function() {
-				for(i=0;i<forosFav.length;i++){
-					var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
-					jQuery('#ut-foros-fav').append(
-						jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
-					);
-				}
-			};
+	if (utforosfavs == 'si' || utforosfavs == undefined) {
+		if (localStorage['ut-forosFav'] == undefined) {
+			//var forosFav = [7,32,9,4,99];
+			var forosFav = [];
+			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+		}
+		/*Container*/
+		//jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertBefore('#content_body, #content_head');
+		jQuery('<div id="sticky-anchor" style="position: absolute; top: 200px;">').insertBefore('#content_body, #content_head');
+		jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertAfter('#sticky-anchor');
+		/*Dibujamos los foros favoritos en la lista*/
+		var forosFavUpdate = function(){
+				var forosFav = JSON.parse(localStorage['ut-forosFav']);
+				var forosFavDibujo = function() {
+					for(i=0;i<forosFav.length;i++){
+						var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
+						jQuery('#ut-foros-fav').append(
+							jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
+						);
+					}
+				};
+				
+				forosFavDibujo();
+		};
+			forosFavUpdate();
+		/*Boton para añadir a favoritos*/
+		jQuery('div.fpanel div.icon').append('<div class="ut-foro-fav-add">');
+		jQuery("div.fpanel div.icon").hover(
+		  function () {
+			jQuery(this).children('.ut-foro-fav-add').addClass('ut-foro-fav-add-moveup');
 			
-			forosFavDibujo();
-	};
-		forosFavUpdate();
-	/*Boton para añadir a favoritos*/
-	jQuery('div.fpanel div.icon').append('<div class="ut-foro-fav-add">');
-	jQuery("div.fpanel div.icon").hover(
-	  function () {
-		jQuery(this).children('.ut-foro-fav-add').addClass('ut-foro-fav-add-moveup');
-		
-	  }, 
-	  function () {
-		jQuery(this).children('.ut-foro-fav-add').removeClass('ut-foro-fav-add-moveup');
-	  }
-	);
-	jQuery('.ut-foro-fav-add').click(function () {
-		var forosFav = JSON.parse(localStorage['ut-forosFav']);
-		jQuery(this).closest('div.icon').siblings('div.info').find('a.hb,strong a').each(function() {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foroNumber = path[pathIndexToGet];
-			if (jQuery.inArray(foroNumber, forosFav) > -1) {
+		  }, 
+		  function () {
+			jQuery(this).children('.ut-foro-fav-add').removeClass('ut-foro-fav-add-moveup');
+		  }
+		);
+		jQuery('.ut-foro-fav-add').click(function () {
+			var forosFav = JSON.parse(localStorage['ut-forosFav']);
+			jQuery(this).closest('div.icon').siblings('div.info').find('a.hb,strong a').each(function() {
+				var enlace = this + "";
+				var split = enlace.split('/');
+				var path = split.splice(1, split.length - 1);
+				var pathIndexToGet = 3;
+				var foroNumber = path[pathIndexToGet];
+				if (jQuery.inArray(foroNumber, forosFav) > -1) {
+					forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
+					localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+					jQuery('#foros-fav-float a[href="/foro/'+foroNumber+'"]').closest('li').remove();
+				}
+				else {
+					forosFav.push(foroNumber);
+					localStorage['ut-forosFav'] = JSON.stringify(forosFav);
+					jQuery('#ut-foros-fav').append(
+						jQuery('<li>').html('<a href="/foro/'+foroNumber+'"><img width="24" height="24" src="/style/img/icon/foro/'+foroNumber+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
+					);
+				}	
+			});
+			jQuery(this).toggleClass('ut-foro-fav-added');
+		});
+		/*Botón para borrar*/
+		jQuery(document).on('click', '.ut-foros-fav-borrar', function() {
+			var forosFav = JSON.parse(localStorage['ut-forosFav']);
+			jQuery(this).siblings('a[href^="/foro"]').each(function() {
+				var enlace = this + "";
+				var split = enlace.split('/');
+				var path = split.splice(1, split.length - 1);
+				var pathIndexToGet = 3;
+				var foroNumber = path[pathIndexToGet];
 				forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
 				localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-				jQuery('#foros-fav-float a[href="/foro/'+foroNumber+'"]').closest('li').remove();
-			}
-			else {
-				forosFav.push(foroNumber);
-				localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-				jQuery('#ut-foros-fav').append(
-					jQuery('<li>').html('<a href="/foro/'+foroNumber+'"><img width="24" height="24" src="/style/img/icon/foro/'+foroNumber+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
-				);
-			}	
+				jQuery(this).closest('li').remove();
+				jQuery('div.fpanel').find('a[href="/foro/'+foroNumber+'"]').closest('div.info').siblings('div.icon').children('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
+			});
 		});
-		jQuery(this).toggleClass('ut-foro-fav-added');
-	});
-	/*Botón para borrar*/
-	jQuery(document).on('click', '.ut-foros-fav-borrar', function() {
-		var forosFav = JSON.parse(localStorage['ut-forosFav']);
-		jQuery(this).siblings('a[href^="/foro"]').each(function() {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foroNumber = path[pathIndexToGet];
-			forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
-			localStorage['ut-forosFav'] = JSON.stringify(forosFav);
-			jQuery(this).closest('li').remove();
-			jQuery('div.fpanel').find('a[href="/foro/'+foroNumber+'"]').closest('div.info').siblings('div.icon').children('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
+		/*Pone la estrella correcta*/
+		jQuery('div.fpanel div.icon').each(function () {
+			var forosFav = JSON.parse(localStorage['ut-forosFav']);
+			
+			jQuery(this).siblings('div.info').find('a.hb,strong a').each(function() {
+				var enlace = this + "";
+				var split = enlace.split('/');
+				var path = split.splice(1, split.length - 1);
+				var pathIndexToGet = 3;
+				var foroNumber = path[pathIndexToGet];
+				if (jQuery.inArray(foroNumber, forosFav) > -1) {
+					jQuery(this).closest('div.info').siblings('div.icon').children('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
+				}
+			});
 		});
-	});
-	/*Pone la estrella correcta*/
-	jQuery('div.fpanel div.icon').each(function () {
-		var forosFav = JSON.parse(localStorage['ut-forosFav']);
-		
-		jQuery(this).siblings('div.info').find('a.hb,strong a').each(function() {
-			var enlace = this + "";
-			var split = enlace.split('/');
-			var path = split.splice(1, split.length - 1);
-			var pathIndexToGet = 3;
-			var foroNumber = path[pathIndexToGet];
-			if (jQuery.inArray(foroNumber, forosFav) > -1) {
-				jQuery(this).closest('div.info').siblings('div.icon').children('div.ut-foro-fav-add').toggleClass('ut-foro-fav-added');
-			}
-		});
-	});
-	/*Panel flotante sigue el scroll*/
-	function sticky_relocate() {
-	  var window_top = jQuery(window).scrollTop();
-	  var div_top = jQuery('#sticky-anchor').offset().top;
-	  if (window_top > div_top)
-		jQuery('#foros-fav-float').addClass('foros-fav-float-sticky')
-	  else
-		jQuery('#foros-fav-float').removeClass('foros-fav-float-sticky');
-	  };
-	  jQuery(window).scroll(sticky_relocate);
-	  sticky_relocate();
+		/*Panel flotante sigue el scroll*/
+		function sticky_relocate() {
+		  var window_top = jQuery(window).scrollTop();
+		  var div_top = jQuery('#sticky-anchor').offset().top;
+		  if (window_top > div_top)
+			jQuery('#foros-fav-float').addClass('foros-fav-float-sticky')
+		  else
+			jQuery('#foros-fav-float').removeClass('foros-fav-float-sticky');
+		  };
+		  jQuery(window).scroll(sticky_relocate);
+		  sticky_relocate();
+	}
 });
 
 
