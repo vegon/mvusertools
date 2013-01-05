@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.9-beta
+// @version        1.9
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.9-beta';
+/*CAMBIAR VERSIÓN*/var utversion = '1.9';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -1320,6 +1320,13 @@ jQuery(function() {
 		  };
 		  jQuery(window).scroll(sticky_relocate);
 		  sticky_relocate();
+		  
+		  
+		if (jQuery.browser.safari) {
+			jQuery("#foros-fav-float").css( "margin-left","1145px" );
+		} else if (jQuery.browser.opera) {
+			jQuery("#foros-fav-float").css("margin-left", "1145px");
+        }
 	}
 });
 

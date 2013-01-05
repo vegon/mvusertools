@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.8.1
+// @version        1.9
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -11,6 +11,7 @@
 // ==/UserScript==
 
 window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
+    var utversion = "1.9";
     var bbcode = new Array;
     var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
     var theSelection = false;
@@ -170,7 +171,7 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     var blacklistInfo = "<span class='blacklisted-post'" + (is_dark ? " style='color: #626262 !important;'" : "") + ">Click en <img src='http://www.mvusertools.com/ext/img/blacklist-mini.png'> para desbloquear.</span>";
     var blacklistAvatar = "~";
     {
-        var css = ".sprite {		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;	}	.usertools TABLE TD	{			padding: 3px;	}	.usertools A	{	}	.ut-firma	{			background-position: 0 -58px;			text-indent: -9999px;			width: 14px;			height: 11px;			display: block;			outline: 0;			margin-top: 1px;	}	.ut-firma:hover	{			background-position: 0 -69px;	}	.mensaje	{			background-position: -20px -58px;			text-indent: -9999px;			width: 14px;			height: 10px;			outline: 0;			display: block;			margin-top: 1px;	}	.mensaje:hover	{			background-position: -20px -68px;	}	.blacklist-off	{			background-position: -39px -57px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-off:hover	{			background-position: -39px -69px;	}	.blacklist-on	{			background-position: -39px -69px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-on:hover	{			background-position: -39px -57px;	}	.blacklist	{	}	.ut-online	{			background-position: -56px -72px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}		.ut-offline	{			background-position: -56px -58px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}	.online-pos	{			float: left;			width: 14px;			z-index: 999;	}	.mensaje-pos	{			float: left;			width: 19px;	}	.blacklist-pos	{			float: right;			margin-top: -1px;			width: 15px;	}	.firma-pos	{			float: left;			width: 19px;	}	.mensaje-ocultado	{			font-weight: bold;	}	.toggle-on	{			background-position: -37px -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.toggle-off	{			background-position: 0 -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.tapavatares	{			width: 0px; 			height: 0px; 			position:relative;	}	.tapavatares span {			position: abosolute; 			background: url(http://www.mvusertools.com/ext/img/blacklisted.png) no-repeat;			background-position: 0 4px;			width: 80px; 			height: 84px; 			top: 6px; 			left: 0px;			display: block;	}	.blacklisted-post	{			border-radius: 7px;			ms-border-radius: 7px;			-moz-border-radius: 7px;			-webkit-border-radius: 7px;			-khtml-border-radius: 7px;			padding: 3px 10px 2px 10px;			background: #ccc;			color: #626262 !important;	}	.usertools	{			position: relative;			width: 67px;			margin-top: 2px;	}	button::-moz-focus-inner {	border: 0;	padding: 0;	margin:0;	}	.mbuttons button[type], button.alt[type] {		padding:2px 4px !important;			}	.mbuttons a:hover,button.alt:hover {	background-color:#aaaaaa;	border:1px solid #c2e1ef;	color:#ffffff;	}	button.alt {		border-color: #aaa !important;		min-width: 20px;		border-radius: 5px !important;	}	button.bleft {		border-radius: 5px 0px 0px 5px !important;		margin-right: 0px !important;		border-right-width: 0px !important;		font-weight: normal !important;	}	button.bcenter {		margin-right: 0px !important;		border-left-width: 1px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bcenter2 {		margin-right: 0px !important;		border-left-width: 0px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bright {		border-radius: 0px 5px 5px 0px !important;		margin-left: 0px !important;		border-left-width: 0px !important;		font-weight: normal !important;	}	button.bright2 {		border-radius: 0px 5px 5px 0px !important;		font-weight: normal !important;	}	button.bsolo {		border-radius: 5px !important;		font-weight: normal !important;	}	button.bb {		font-weight: bold !important;	}	button.bi {		font-style: italic !important;	}	button.bu {		text-decoration: underline !important;	}	button.bs {		text-decoration: line-through !important;	}	.baudio {		background-position: -0px 3px;		width: 11px; 		height: 17px; 		display: block; 	}	.bimg {		background-position: -25px 3px;		width: 12px; 		height: 17px; 		display: block; 		margin-left: 1px; 	}	.bvideo {		background-position: -12px 3px;		width: 12px; 		height: 17px; 		display: block; 	}	.bcentericon {		background-position: -37px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.blist {		background-position: -51px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.ut-live td {		background-color: #FFEEEE;	}	.ut-live td.alt {		background-color: #EFE0E0;	}	.linksfooter A {		opacity: 0.5;	}	.linksfooter A:hover {		opacity: 1;	}	.linksfooter2 {		padding: 5px 6px !important;		border-radius: 6px;		line-height: 35px;	}	.linksfooter2 IMG {		vertical-align: sub;	}	.linksfooter2 A {		padding: 0px 3px !important;	}	.linksfooterblanco {		background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;		color: #8e908a;		border: 1px solid #C7C9C3;		border-bottom: 1px solid #BABCB6;	}	.linksfooterblanco A {		color: #666666;	}	.linksfooterblanco A:hover {		color: #222222;	}	.linksfooternegro {		background: linear-gradient(to top, #1c252b, #010101) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;		color: #4A4D50;		border: 1px solid #555f66;		border-bottom: 1px solid #0e1113;	}	#modlist {		margin: 20px 0 0;		padding: 10px 10px;		border-radius: 6px 6px 6px 6px;	}	.modlistblanco {		border: 1px solid #D4D4D2;	}	.modlistnegro {		border: 1px solid #273037;		background-color: #39444B;	}	#modlist H3{		margin-top: 0px !important;	}	#modlist A{		padding: 3px 0 3px 3px;		display: block;	}	.modlistblanco A:nth-child(odd){		background: #E8EBE3;	}	.modlistblanco A:hover{		background: #D6D8D2;	}	.modlistblanco span{		color: #555555;	}	.modlistnegro A:nth-child(odd){		background: #435058;	}	.modlistnegro A:hover{		background: #273037;	}	.modlistnegro span{		color: #C5D1EC;	}	.config {	background-position: -78px -34px;	width: 14px;	height: 14px;	display: inline-block;	margin: 0 3px;	top: 3px;	position: relative;	}	#ut-mask {	background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-mask-menu {	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-dialog {	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	#ut-dialog-menu {	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	.ut-boton-sino{	cursor: pointer;	color: #EF5000;	}	#ut-window {	background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;	}	#ut-menu-contenido {	background: #fff;	min-height: 270px;	}	#ut-menu-contenido TABLE{	border-top: 1px solid #ccc;	}	.newquote a.toggled, .newquoteblack a.toggled{	border-style: solid !important;	border-width: 1px !important;	margin: 0 !important;	padding: 0 3px !important;	}	.newquote a.toggled {	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquoteblack a.toggled{	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquote div.quote, .newquoteblack div.quote{	border: 1px solid #CCCCCC !important;	margin: 0 0 8px !important;	border-radius: 0 6px 6px 6px !important;	}	.tinycol.bigscreen{	margin-top: 800px;	}	.postit.bigscreen{	width: 958px;	padding-left: 0px;	}	#pi_body.bigscreen{	width: 938px;	}	.embedded.bigscreen{	;	}	#bigscreen-mode{	background-position: -99px -28px;	width: 41px;	height: 23px;	float: right;	margin: 5px 0 5px 10px;	cursor: pointer;	}	#bigscreen-mode:hover{	background-position: -142px -28px;	}	#bigscreen-mode-off{	background-position: -99px 0;	width: 41px;	height: 23px;	float: right;	margin: 5px 0px 5px 10px;	cursor: pointer;	}	#bigscreen-mode-off:hover{	background-position: -141px 0;	}	.post .spoiler-content {		background-color: #F0F2ED;		padding: 5px;		border-bottom: 1px solid #d7d9d4;	}	.post.odd .spoiler-content {		background-color: #E7E9E4;	}	.post .spoiler-content-black {		background-color: #435058;		padding: 5px;		border-bottom: 1px solid #252C31;	}	.post.odd .spoiler-content-black {		background-color: #39444B;	}	#ut-menu-tabs div{		margin: 0 10px 0 0;		padding: 3px 4px;		background: #eee;		display: inline-block;		cursor: pointer;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;		color: #999;		font-size: 13px;	}	#ut-menu-tabs div.active{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div.active:hover{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div:hover{		background: #ddd;		color: #222;	}	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){		width: 420px;	}	.ut-arrow-up{		background-position: -75px -53px;		width: 12px;		height: 17px;		display: block; 	}	.ut-arrow-down{		background-position: -75px -70px;		width: 12px;		height: 17px;		display: block; 	}	#ut-boton-plus{	background-color: #888888 !important;	}	#ut-boton-plus:hover {	background-color: #777777 !important;	}	.ut-titleymacro{	padding: 0 0 2px 3px;	border-left: 2px solid #FF5500;	margin: 10px 0;	}	.ut-titletxt{	font-weight: bold;	cursor: default;	}	.ut-macrotxt {	color: #222222;	text-overflow: ellipsis;	-o-text-overflow: ellipsis;    text-overflow: ellipsis;    overflow:hidden;    white-space:nowrap;    width: 460px;	}	.ut-macrotxt:hover {    white-space:pre-wrap;	}	.icon-down-list{		background-position: -97px -59px;		width: 12px;		height: 9px;		display: inline-block;		vertical-align: middle;	}	.icon-trash{		background-position: -97px -72px;		width: 11px;		height: 14px;		display: inline-block;		vertical-align: middle;	}	.icon-trash-orange{		background-position: -114px -72px; 		width: 11px;		height: 14px;		display: inline-block;		}	#ut-button-macros-list{	position: absolute;	top: 132px;	left: 112px;	width: 125px;	border-radius: 0px 0px 5px 5px;	background-color: #565656;	border: 1px solid #AAAAAA;	color: #eee;	}	#ut-button-macros-list li{	display: block;	cursor: pointer;	border-bottom: 1px solid #888888;	padding: 1px 1px 1px 3px;	}	#ut-button-macros-list li:hover{	background-color: #aaaaaa;	}	.ut-button-macros-list-barrendera{	top: 68px !important;	left: 248px !important;	}	#ut-button-macros-list-anadir {	padding: 1px 1px 2px 3px;	cursor: pointer;	display: block;	color: #ccc;	background-color: #333;	border-radius: 0 0 5px 5px;	}	#ut-button-macros-list-anadir:hover {	color: #fff;	background-color: #ff7700;	}	#ut-macro {	overflow: auto;	width: 98%;	margin-top: 5px;	}	";
+        var css = ".sprite {		background: url(http://www.mvusertools.com/ext/img/sprites18-3.png) no-repeat;	}	.usertools TABLE TD	{			padding: 3px;	}	.usertools A	{	}	.ut-firma	{			background-position: 0 -58px;			text-indent: -9999px;			width: 14px;			height: 11px;			display: block;			outline: 0;			margin-top: 1px;	}	.ut-firma:hover	{			background-position: 0 -69px;	}	.mensaje	{			background-position: -20px -58px;			text-indent: -9999px;			width: 14px;			height: 10px;			outline: 0;			display: block;			margin-top: 1px;	}	.mensaje:hover	{			background-position: -20px -68px;	}	.blacklist-off	{			background-position: -39px -57px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-off:hover	{			background-position: -39px -69px;	}	.blacklist-on	{			background-position: -39px -69px;			text-indent: -9999px;			width: 12px;			height: 12px;			outline: 0;			display: block;			margin-top: 1px;	}	.blacklist-on:hover	{			background-position: -39px -57px;	}	.blacklist	{	}	.ut-online	{			background-position: -56px -72px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}		.ut-offline	{			background-position: -56px -58px;			text-indent: -99999px;			width: 8px;			height: 12px;			display: block;			outline: 0;	}	.online-pos	{			float: left;			width: 14px;			z-index: 999;	}	.mensaje-pos	{			float: left;			width: 19px;	}	.blacklist-pos	{			float: right;			margin-top: -1px;			width: 15px;	}	.firma-pos	{			float: left;			width: 19px;	}	.mensaje-ocultado	{			font-weight: bold;	}	.toggle-on	{			background-position: -37px -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.toggle-off	{			background-position: 0 -21px;			width: 34px;			height: 34px;			cursor: pointer;	}	.tapavatares	{			width: 0px; 			height: 0px; 			position:relative;	}	.tapavatares span {			position: abosolute; 			background: url(http://www.mvusertools.com/ext/img/blacklisted.png) no-repeat;			background-position: 0 4px;			width: 80px; 			height: 84px; 			top: 6px; 			left: 0px;			display: block;	}	.blacklisted-post	{			border-radius: 7px;			ms-border-radius: 7px;			-moz-border-radius: 7px;			-webkit-border-radius: 7px;			-khtml-border-radius: 7px;			padding: 3px 10px 2px 10px;			background: #ccc;			color: #626262 !important;	}	.usertools	{			position: relative;			width: 67px;			margin-top: 2px;	}	button::-moz-focus-inner {	border: 0;	padding: 0;	margin:0;	}	.mbuttons button[type], button.alt[type] {		padding:2px 4px !important;			}	.mbuttons a:hover,button.alt:hover {	background-color:#aaaaaa;	border:1px solid #c2e1ef;	color:#ffffff;	}	button.alt {		border-color: #aaa !important;		min-width: 20px;		border-radius: 5px !important;	}	button.bleft {		border-radius: 5px 0px 0px 5px !important;		margin-right: 0px !important;		border-right-width: 0px !important;		font-weight: normal !important;	}	button.bcenter {		margin-right: 0px !important;		border-left-width: 1px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bcenter2 {		margin-right: 0px !important;		border-left-width: 0px !important;		border-left-color: #aaa !important;		font-weight: normal !important;		border-radius: 0px !important;	}	button.bright {		border-radius: 0px 5px 5px 0px !important;		margin-left: 0px !important;		border-left-width: 0px !important;		font-weight: normal !important;	}	button.bright2 {		border-radius: 0px 5px 5px 0px !important;		font-weight: normal !important;	}	button.bsolo {		border-radius: 5px !important;		font-weight: normal !important;	}	button.bb {		font-weight: bold !important;	}	button.bi {		font-style: italic !important;	}	button.bu {		text-decoration: underline !important;	}	button.bs {		text-decoration: line-through !important;	}	.baudio {		background-position: -0px 3px;		width: 11px; 		height: 17px; 		display: block; 	}	.bimg {		background-position: -25px 3px;		width: 12px; 		height: 17px; 		display: block; 		margin-left: 1px; 	}	.bvideo {		background-position: -12px 3px;		width: 12px; 		height: 17px; 		display: block; 	}	.bcentericon {		background-position: -37px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.blist {		background-position: -51px 3px;		width: 14px; 		height: 17px; 		display: block; 	}	.ut-live td {		background-color: #FFEEEE;	}	.ut-live td.alt {		background-color: #EFE0E0;	}	.linksfooter A {		opacity: 0.5;	}	.linksfooter A:hover {		opacity: 1;	}	.linksfooter2 {		padding: 5px 6px !important;		border-radius: 6px;		line-height: 35px;	}	.linksfooter2 IMG {		vertical-align: sub;	}	.linksfooter2 A {		padding: 0px 3px !important;	}	.linksfooterblanco {		background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;		color: #8e908a;		border: 1px solid #C7C9C3;		border-bottom: 1px solid #BABCB6;	}	.linksfooterblanco A {		color: #666666;	}	.linksfooterblanco A:hover {		color: #222222;	}	.linksfooternegro {		background: linear-gradient(to top, #1c252b, #010101) !important;		background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;		color: #4A4D50;		border: 1px solid #555f66;		border-bottom: 1px solid #0e1113;	}	#modlist {		margin: 20px 0 0;		padding: 10px 10px;		border-radius: 6px 6px 6px 6px;	}	.modlistblanco {		border: 1px solid #D4D4D2;	}	.modlistnegro {		border: 1px solid #273037;		background-color: #39444B;	}	#modlist H3{		margin-top: 0px !important;	}	#modlist A{		padding: 3px 0 3px 3px;		display: block;	}	.modlistblanco A:nth-child(odd){		background: #E8EBE3;	}	.modlistblanco A:hover{		background: #D6D8D2;	}	.modlistblanco span{		color: #555555;	}	.modlistnegro A:nth-child(odd){		background: #435058;	}	.modlistnegro A:hover{		background: #273037;	}	.modlistnegro span{		color: #C5D1EC;	}	.config {	background-position: -78px -34px;	width: 14px;	height: 14px;	display: inline-block;	margin: 0 3px;	top: 3px;	position: relative;	}	#ut-mask {	background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-mask-menu {	background: #000000; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;	}	#ut-dialog {	width: 500px; top: 10px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	#ut-dialog-menu {	width: 500px; top: 50px; left: 50%; margin-left: -250px; position: absolute; z-index: 9999;	}	.ut-boton-sino{	cursor: pointer;	color: #EF5000;	}	#ut-window {	background: #ffffff; border-radius: 6px; padding: 10px 10px 30px 10px; border: 1px solid #cccccc;	}	#ut-menu-contenido {	background: #fff;	min-height: 270px;	}	#ut-menu-contenido TABLE{	border-top: 1px solid #ccc;	}	.newquote a.toggled, .newquoteblack a.toggled{	border-style: solid !important;	border-width: 1px !important;	margin: 0 !important;	padding: 0 3px !important;	}	.newquote a.toggled {	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquoteblack a.toggled{	border-color: #CCCCCC #CCCCCC #CCCCCC !important;	}	.newquote div.quote, .newquoteblack div.quote{	border: 1px solid #CCCCCC !important;	margin: 0 0 8px !important;	border-radius: 0 6px 6px 6px !important;	}	.tinycol.bigscreen{	margin-top: 800px;	}	.postit.bigscreen{	width: 958px;	padding-left: 0px;	}	#pi_body.bigscreen{	width: 938px;	}	.embedded.bigscreen{	;	}	#bigscreen-mode{	background-position: -99px -28px;	width: 41px;	height: 23px;	float: right;	margin: 5px 0 5px 10px;	cursor: pointer;	}	#bigscreen-mode:hover{	background-position: -142px -28px;	}	#bigscreen-mode-off{	background-position: -99px 0;	width: 41px;	height: 23px;	float: right;	margin: 5px 0px 5px 10px;	cursor: pointer;	}	#bigscreen-mode-off:hover{	background-position: -141px 0;	}	.post .spoiler-content {		background-color: #F0F2ED;		padding: 5px;		border-bottom: 1px solid #d7d9d4;	}	.post.odd .spoiler-content {		background-color: #E7E9E4;	}	.post .spoiler-content-black {		background-color: #435058;		padding: 5px;		border-bottom: 1px solid #252C31;	}	.post.odd .spoiler-content-black {		background-color: #39444B;	}	#ut-menu-tabs div{		margin: 0 10px 0 0;		padding: 3px 4px;		background: #eee;		display: inline-block;		cursor: pointer;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;		color: #999;		font-size: 13px;	}	#ut-menu-tabs div.active{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div.active:hover{		background: #444;		color: #eee;		border-top: 1px solid #CCCCCC;		border-right: 1px solid #CCCCCC;		border-left: 1px solid #CCCCCC;	}	#ut-menu-tabs div:hover{		background: #ddd;		color: #222;	}	#ut-menu-contenido .ut-opciones td:nth-child(2n+1){		width: 420px;	}	.ut-arrow-up{		background-position: -75px -53px;		width: 12px;		height: 17px;		display: block; 	}	.ut-arrow-down{		background-position: -75px -70px;		width: 12px;		height: 17px;		display: block; 	}	#ut-boton-plus{	background-color: #888888 !important;	}	#ut-boton-plus:hover {	background-color: #777777 !important;	}	.ut-titleymacro{	padding: 0 0 2px 3px;	border-left: 2px solid #FF5500;	margin: 10px 0;	}	.ut-titletxt{	font-weight: bold;	cursor: default;	}	.ut-macrotxt {	color: #222222;	text-overflow: ellipsis;	-o-text-overflow: ellipsis;    text-overflow: ellipsis;    overflow:hidden;    white-space:nowrap;    width: 460px;	}	.ut-macrotxt:hover {    white-space:pre-wrap;	}	.icon-down-list{		background-position: -97px -59px;		width: 12px;		height: 9px;		display: inline-block;		vertical-align: middle;	}	.icon-trash{		background-position: -97px -72px;		width: 11px;		height: 14px;		display: inline-block;		vertical-align: middle;	}	.icon-trash-orange{		background-position: -114px -72px; 		width: 11px;		height: 14px;		display: inline-block;		}	#ut-button-macros-list{	position: absolute;	top: 132px;	left: 112px;	width: 125px;	border-radius: 0px 0px 5px 5px;	background-color: #565656;	border: 1px solid #AAAAAA;	color: #eee;	}	#ut-button-macros-list li{	display: block;	cursor: pointer;	border-bottom: 1px solid #888888;	padding: 1px 1px 1px 3px;	}	#ut-button-macros-list li:hover{	background-color: #aaaaaa;	}	.ut-button-macros-list-barrendera{	top: 68px !important;	left: 248px !important;	}	#ut-button-macros-list-anadir {	padding: 1px 1px 2px 3px;	cursor: pointer;	display: block;	color: #ccc;	background-color: #333;	border-radius: 0 0 5px 5px;	}	#ut-button-macros-list-anadir:hover {	color: #fff;	background-color: #ff7700;	}	#ut-macro {	overflow: auto;	width: 98%;	margin-top: 5px;	}	#ut-foros-fav LI{	margin: 0 0 5px;	transition: all 0.5s;	-moz-transition: all 0.5s;	-ms-transition: all 0.5s;	-webkit-transition: all 0.5s;	-o-transition: all 0.5s;	}	#ut-foros-fav LI:hover{	}	#ut-foros-fav LI A{	background: #ccc;	border-radius: 3px 3px 3px 3px;	border: 1px solid #EEEEEE;	vertical-align: middle;	padding: 3px 4px 1px;	display: inline-block;	transition: all 0.5s;	-moz-transition: all 0.5s;	-ms-transition: all 0.5s;	-webkit-transition: all 0.5s;	-o-transition: all 0.5s;	}	#ut-foros-fav LI A:hover{	background: #999;	}	#foros-fav-float{	position: absolute;	top: 200px;	margin-left: 1005px;	opacity: 0.2;	margin-top: 10px;	transition: opacity 0.5s;	-moz-transition: opacity 0.5s;	-ms-transition: opacity 0.5s;	-webkit-transition: opacity 0.5s;	-o-transition: opacity 0.5s;	}	#foros-fav-float:hover {	opacity: 1;	}	.foros-fav-float-sticky{	top: 0px !important;	position: fixed !important;	}	.ut-foros-fav-borrar{	display: inline-block;	margin: 0 0 0 10px;	vertical-align: middle;	opacity: 0.04;	transition: all 0.5s;	-moz-transition: all 0.5s;	-ms-transition: all 0.5s;	-webkit-transition: all 0.5s;	-o-transition: all 0.5s;	cursor: pointer;	}	.ut-foros-fav-borrar:hover{	opacity: 1;	}	.ut-foros-fav-borrar:hover{	opacity: 1;	}	.ut-foro-fav-add {	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center -30px #FF9300;	height: 38px;	margin: 40px 0 0 -8px;	width: 40px;	transition: margin 0.5s;	-moz-transition: margin 0.5s;	-ms-transition: margin 0.5s;	-webkit-transition: margin 0.5s;	-o-transition: margin 0.5s;	cursor: pointer;	}	.ut-foro-fav-added {	background: url('http://www.mvusertools.com/ext/img/star.png') no-repeat scroll center 8px #FF9300;	}	.ut-foro-fav-add-moveup{	margin: 3px 0 0 -8px;	}	.ut-filtrar {	cursor: pointer;	}	.ut-opacity {	opacity: 0.2;	}	#ut-filtros-fav{	}	#utFavQuitar{	cursor: pointer;	margin: 5px 0 20px 0;	width: 80px;	opacity: 0.7;	}	#utFavAviso{	cursor: pointer;	margin: 5px 0 20px 0;	font-size: 9px;	opacity: 0.5;	}	#utFavAviso:hover{	opacity: 1;	}	#utFavAvisoTxt{	border: 1px solid #ccc;	border-radius: 6px;	padding: 5px;	margin: -15px 0 20px 0;	display: none;	font-size: 9px;	}	#ut-filtros-fav .foroicon{	display: inline-block;	padding: 0 4px 4px;	}	#ut-filtros-tags .cat2{	display: inline-block;	margin: 0 15px 5px 5px;	}	#ut-fav-filto-titulo{	font-size: 14px;	margin: 0 0 9px;	font-family: Trebuchet MS,Arial,Verdana,sans-serif;	font-weight: bold;	}	";
     }
     if (typeof window.GM_addStyle != "undefined") {
         window.GM_addStyle(css);
@@ -203,12 +204,14 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     var utfavicon = window.localStorage["utfavicon"];
     var utmensajeupdate = window.localStorage["utmensajeupdate"];
     var utsalvarposts = window.localStorage["utsalvarposts"];
+    var utforosfavs = window.localStorage["utforosfavs"];
+    var utfiltrarfavs = window.localStorage["utfiltrarfavs"];
     window.jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter("div#userinfo");
     window.jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore("#background");
     var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-    var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-tablamods-si">Si</span> <span class="ut-boton-sino" id="ut-tablamods-no">No</span></td></tr><tr><td>Iconos de las noticias en portada</td><td><span class="ut-boton-sino" id="ut-uticonosportada-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosportada-no">No</span></td></tr><tr><td>Iconos de las noticias en destacados</td><td><span class="ut-boton-sino" id="ut-uticonosdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-uticonosdestacados-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
-    var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-marcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-marcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><tr><td>Nuevo estilo para los quotes</td><td><span class="ut-boton-sino" id="ut-utnewquote-si">Si</span> <span class="ut-boton-sino" id="ut-utnewquote-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
-    var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a></p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
+    var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><tr><td>Tener siempre a la vista foros favoritos.</td><td><span class="ut-boton-sino" id="ut-utforosfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utforosfavs-no">No</span></td></tr><tr><td>Activar filtro para hilos en favoritos.</td><td><span class="ut-boton-sino" id="ut-utfiltrarfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utfiltrarfavs-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
+    var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-utmarcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-utmarcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
+    var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a> Versión ' + utversion + '.</p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
     var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
     window.jQuery('<div style="display: none;" id="ut-dialog-menu"><div id="ut-window"><div id="ut-menu-contenido">' + utmenutabs + "" + utmenutabla1 + "" + utmenutabla2 + "" + utmenutabla4 + "" + utmenutabla3 + "</div>" + bottominfo + '<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-menu-cerrar">Cerrar</a></div></div>').insertBefore("#content_head");
     window.jQuery("#ut-menu-tabla1 tr:odd, #ut-menu-tabla2 tr:odd, #ut-menu-tabla3 tr:odd").addClass("odd");
@@ -279,6 +282,58 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
             window.jQuery("#nav_bar .bbii").css("left", "143px");
         }
     });
+    var utOpcionesSi = function(opcion) {
+        window.jQuery("#ut-" + opcion + "-si").click(function() {
+            window.localStorage["" + opcion + ""] = "si";
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#999999");
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#EF5000");
+        });
+        window.jQuery("#ut-" + opcion + "-no").click(function() {
+            window.localStorage["" + opcion + ""] = "no";
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#999999");
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#EF5000");
+        });
+        if (window.localStorage[opcion] == "si" || window.localStorage[opcion] == undefined) {
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#999999");
+        }
+        if (window.localStorage[opcion] == "no") {
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#999999");
+        }
+    };
+    var utOpcionesNo = function(opcion) {
+        window.jQuery("#ut-" + opcion + "-si").click(function() {
+            window.localStorage[opcion] = "si";
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#999999");
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#EF5000");
+        });
+        window.jQuery("#ut-" + opcion + "-no").click(function() {
+            window.localStorage[opcion] = "no";
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#999999");
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#EF5000");
+        });
+        if (window.localStorage[opcion] == "si") {
+            window.jQuery("#ut-" + opcion + "-no").css("color", "#999999");
+        }
+        if (window.localStorage[opcion] == "no" || window.localStorage[opcion] == undefined) {
+            window.jQuery("#ut-" + opcion + "-si").css("color", "#999999");
+        }
+    };
+    utOpcionesSi("utordenarposts");
+    utOpcionesSi("utbigscreen");
+    utOpcionesSi("utestilospoilers");
+    utOpcionesSi("utuserinfo");
+    utOpcionesSi("utnewquote");
+    utOpcionesSi("utlivesdestacados");
+    utOpcionesSi("uticonosdestacados");
+    utOpcionesSi("uticonosportada");
+    utOpcionesSi("utmarcapaginas");
+    utOpcionesSi("uttablamods");
+    utOpcionesSi("utfavicon");
+    utOpcionesSi("utforosfavs");
+    utOpcionesSi("utfiltrarfavs");
+    utOpcionesNo("utsalvarposts");
+    utOpcionesNo("utmensajeupdate");
+    utOpcionesNo("utlinksfooteroscuro");
     window.jQuery("#ut-linksfooter-si").click(function() {
         window.localStorage["utlinksfooter"] = "si";
         window.jQuery("#ut-linksfooter-no").css("color", "#999999");
@@ -299,233 +354,8 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
         window.jQuery("#ut-linksfooter-si").css("color", "#999999");
         window.jQuery("#ut-utlinksfooteroscuro").css("color", "#999999");
     }
-    window.jQuery("#ut-utlinksfooteroscuro-si").click(function() {
-        window.localStorage["utlinksfooteroscuro"] = "si";
-        window.jQuery("#ut-utlinksfooteroscuro-no").css("color", "#999999");
-        window.jQuery("#ut-utlinksfooteroscuro-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utlinksfooteroscuro-no").click(function() {
-        window.localStorage["utlinksfooteroscuro"] = "no";
-        window.jQuery("#ut-utlinksfooteroscuro-si").css("color", "#999999");
-        window.jQuery("#ut-utlinksfooteroscuro-no").css("color", "#EF5000");
-    });
-    if (utlinksfooteroscuro == "si") {
-        window.jQuery("#ut-utlinksfooteroscuro-no").css("color", "#999999");
-    }
-    if (utlinksfooteroscuro == "no" || utlinksfooteroscuro == undefined) {
-        window.jQuery("#ut-utlinksfooteroscuro-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-tablamods-si").click(function() {
-        window.localStorage["uttablamods"] = "si";
-        window.jQuery("#ut-tablamods-no").css("color", "#999999");
-        window.jQuery("#ut-tablamods-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-tablamods-no").click(function() {
-        window.localStorage["uttablamods"] = "no";
-        window.jQuery("#ut-tablamods-si").css("color", "#999999");
-        window.jQuery("#ut-tablamods-no").css("color", "#EF5000");
-    });
-    if (uttablamods == "si" || uttablamods == undefined) {
-        window.jQuery("#ut-tablamods-no").css("color", "#999999");
-    }
-    if (uttablamods == "no") {
-        window.jQuery("#ut-tablamods-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-marcapaginas-si").click(function() {
-        window.localStorage["utmarcapaginas"] = "si";
-        window.jQuery("#ut-marcapaginas-no").css("color", "#999999");
-        window.jQuery("#ut-marcapaginas-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-marcapaginas-no").click(function() {
-        window.localStorage["utmarcapaginas"] = "no";
-        window.jQuery("#ut-marcapaginas-si").css("color", "#999999");
-        window.jQuery("#ut-marcapaginas-no").css("color", "#EF5000");
-    });
-    if (utmarcapaginas == "si" || utmarcapaginas == undefined) {
-        window.jQuery("#ut-marcapaginas-no").css("color", "#999999");
-    }
-    if (utmarcapaginas == "no") {
-        window.jQuery("#ut-marcapaginas-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-uticonosportada-si").click(function() {
-        window.localStorage["uticonosportada"] = "si";
-        window.jQuery("#ut-uticonosportada-no").css("color", "#999999");
-        window.jQuery("#ut-uticonosportada-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-uticonosportada-no").click(function() {
-        window.localStorage["uticonosportada"] = "no";
-        window.jQuery("#ut-uticonosportada-si").css("color", "#999999");
-        window.jQuery("#ut-uticonosportada-no").css("color", "#EF5000");
-    });
-    if (uticonosportada == "si" || uticonosportada == undefined) {
-        window.jQuery("#ut-uticonosportada-no").css("color", "#999999");
-    }
-    if (uticonosportada == "no") {
-        window.jQuery("#ut-uticonosportada-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-uticonosdestacados-si").click(function() {
-        window.localStorage["uticonosdestacados"] = "si";
-        window.jQuery("#ut-uticonosdestacados-no").css("color", "#999999");
-        window.jQuery("#ut-uticonosdestacados-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-uticonosdestacados-no").click(function() {
-        window.localStorage["uticonosdestacados"] = "no";
-        window.jQuery("#ut-uticonosdestacados-si").css("color", "#999999");
-        window.jQuery("#ut-uticonosdestacados-no").css("color", "#EF5000");
-    });
-    if (uticonosdestacados == "si" || uticonosdestacados == undefined) {
-        window.jQuery("#ut-uticonosdestacados-no").css("color", "#999999");
-    }
-    if (uticonosdestacados == "no") {
-        window.jQuery("#ut-uticonosdestacados-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utlivesdestacados-si").click(function() {
-        window.localStorage["utlivesdestacados"] = "si";
-        window.jQuery("#ut-utlivesdestacados-no").css("color", "#999999");
-        window.jQuery("#ut-utlivesdestacados-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utlivesdestacados-no").click(function() {
-        window.localStorage["utlivesdestacados"] = "no";
-        window.jQuery("#ut-utlivesdestacados-si").css("color", "#999999");
-        window.jQuery("#ut-utlivesdestacados-no").css("color", "#EF5000");
-    });
-    if (utlivesdestacados == "si" || utlivesdestacados == undefined) {
-        window.jQuery("#ut-utlivesdestacados-no").css("color", "#999999");
-    }
-    if (utlivesdestacados == "no") {
-        window.jQuery("#ut-utlivesdestacados-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utnewquote-si").click(function() {
-        window.localStorage["utnewquote"] = "si";
-        window.jQuery("#ut-utnewquote-no").css("color", "#999999");
-        window.jQuery("#ut-utnewquote-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utnewquote-no").click(function() {
-        window.localStorage["utnewquote"] = "no";
-        window.jQuery("#ut-utnewquote-si").css("color", "#999999");
-        window.jQuery("#ut-utnewquote-no").css("color", "#EF5000");
-    });
-    if (utnewquote == "si" || utnewquote == undefined) {
-        window.jQuery("#ut-utnewquote-no").css("color", "#999999");
-    }
-    if (utnewquote == "no") {
-        window.jQuery("#ut-utnewquote-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utuserinfo-si").click(function() {
-        window.localStorage["utuserinfo"] = "si";
-        window.jQuery("#ut-utuserinfo-no").css("color", "#999999");
-        window.jQuery("#ut-utuserinfo-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utuserinfo-no").click(function() {
-        window.localStorage["utuserinfo"] = "no";
-        window.jQuery("#ut-utuserinfo-si").css("color", "#999999");
-        window.jQuery("#ut-utuserinfo-no").css("color", "#EF5000");
-    });
-    if (utuserinfo == "si" || utuserinfo == undefined) {
-        window.jQuery("#ut-utuserinfo-no").css("color", "#999999");
-    }
-    if (utuserinfo == "no") {
-        window.jQuery("#ut-utuserinfo-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utestilospoilers-si").click(function() {
-        window.localStorage["utestilospoilers"] = "si";
-        window.jQuery("#ut-utestilospoilers-no").css("color", "#999999");
-        window.jQuery("#ut-utestilospoilers-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utestilospoilers-no").click(function() {
-        window.localStorage["utestilospoilers"] = "no";
-        window.jQuery("#ut-utestilospoilers-si").css("color", "#999999");
-        window.jQuery("#ut-utestilospoilers-no").css("color", "#EF5000");
-    });
-    if (utestilospoilers == "si" || utestilospoilers == undefined) {
-        window.jQuery("#ut-utestilospoilers-no").css("color", "#999999");
-    }
-    if (utestilospoilers == "no") {
-        window.jQuery("#ut-utestilospoilers-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utbigscreen-si").click(function() {
-        window.localStorage["utbigscreen"] = "si";
-        window.jQuery("#ut-utbigscreen-no").css("color", "#999999");
-        window.jQuery("#ut-utbigscreen-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utbigscreen-no").click(function() {
-        window.localStorage["utbigscreen"] = "no";
-        window.jQuery("#ut-utbigscreen-si").css("color", "#999999");
-        window.jQuery("#ut-utbigscreen-no").css("color", "#EF5000");
-    });
-    if (utbigscreen == "si" || utbigscreen == undefined) {
-        window.jQuery("#ut-utbigscreen-no").css("color", "#999999");
-    }
-    if (utbigscreen == "no") {
-        window.jQuery("#ut-utbigscreen-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utordenarposts-si").click(function() {
-        window.localStorage["utordenarposts"] = "si";
-        window.jQuery("#ut-utordenarposts-no").css("color", "#999999");
-        window.jQuery("#ut-utordenarposts-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utordenarposts-no").click(function() {
-        window.localStorage["utordenarposts"] = "no";
-        window.jQuery("#ut-utordenarposts-si").css("color", "#999999");
-        window.jQuery("#ut-utordenarposts-no").css("color", "#EF5000");
-    });
-    if (utordenarposts == "si" || utordenarposts == undefined) {
-        window.jQuery("#ut-utordenarposts-no").css("color", "#999999");
-    }
-    if (utordenarposts == "no") {
-        window.jQuery("#ut-utordenarposts-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utfavicon-si").click(function() {
-        window.localStorage["utfavicon"] = "si";
-        window.jQuery("#ut-utfavicon-no").css("color", "#999999");
-        window.jQuery("#ut-utfavicon-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utfavicon-no").click(function() {
-        window.localStorage["utfavicon"] = "no";
-        window.jQuery("#ut-utfavicon-si").css("color", "#999999");
-        window.jQuery("#ut-utfavicon-no").css("color", "#EF5000");
-    });
-    if (utfavicon == "si" || utfavicon == undefined) {
-        window.jQuery("#ut-utfavicon-no").css("color", "#999999");
-    }
-    if (utfavicon == "no") {
-        window.jQuery("#ut-utfavicon-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utmensajeupdate-si").click(function() {
-        window.localStorage["utmensajeupdate"] = "si";
-        window.jQuery("#ut-utmensajeupdate-no").css("color", "#999999");
-        window.jQuery("#ut-utmensajeupdate-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utmensajeupdate-no").click(function() {
-        window.localStorage["utmensajeupdate"] = "no";
-        window.jQuery("#ut-utmensajeupdate-si").css("color", "#999999");
-        window.jQuery("#ut-utmensajeupdate-no").css("color", "#EF5000");
-    });
-    if (utmensajeupdate == "si") {
-        window.jQuery("#ut-utmensajeupdate-no").css("color", "#999999");
-    }
-    if (utmensajeupdate == "no" || utmensajeupdate == undefined) {
-        window.jQuery("#ut-utmensajeupdate-si").css("color", "#999999");
-    }
-    window.jQuery("#ut-utsalvarposts-si").click(function() {
-        window.localStorage["utsalvarposts"] = "si";
-        window.jQuery("#ut-utsalvarposts-no").css("color", "#999999");
-        window.jQuery("#ut-utsalvarposts-si").css("color", "#EF5000");
-    });
-    window.jQuery("#ut-utsalvarposts-no").click(function() {
-        window.localStorage["utsalvarposts"] = "no";
-        window.jQuery("#ut-utsalvarposts-si").css("color", "#999999");
-        window.jQuery("#ut-utsalvarposts-no").css("color", "#EF5000");
-    });
-    if (utsalvarposts == "si") {
-        window.jQuery("#ut-utsalvarposts-no").css("color", "#999999");
-    }
-    if (utsalvarposts == "no" || utsalvarposts == undefined) {
-        window.jQuery("#ut-utsalvarposts-si").css("color", "#999999");
-    }
-    var utversion = "1.8.1";
     var utversionls = window.localStorage["utversionls"];
-    var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización ' + utversion + '</p><br /><br />																- La ventana de aviso de actualización está apagada por defecto. Puedes activarla en el menú o ver los cambios en el último parche desde la pstaña "Sobe MV-UT".<br /><br />																- El texto de los macros más largos se expandirán al máximo en el menú al dejar el ratón encima para que puedas leerlos o copiar el texto para editarlo.<br /><br />																- El módulo de salvar textos en el formulario extendido para evitar accidentes ha provocado bugs, así que se le ha puesto la etiqueta de experimental y viene por defecto desactivado (puedes activarlo en el menú). Los bugs no son fatales ni suceden a todo el mundo, todo el tiempo, así que es usable (pero no lo suficiente para no tener que avisar yo :P).<br /><br />																- Corrección de errores menores.																';
+    var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización ' + utversion + "</p><br /><br />																- Foros favoritos: añade los foros que más visitas a un menú visible en toda la web.<br /><br />																- Filtros en favoritos: filtra los hilos que tienes guardados en favoritos por foro y categoría.<br /><br />																- Pequeños añadidos.<br /><br />																- Corrección de errores y limpieza del código.<br /><br />																";
     window.jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore("#background");
     window.jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">' + utpatchnotes + "" + bottominfo + '<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore("#content_head");
     window.jQuery(function() {
@@ -552,6 +382,175 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
             window.jQuery("div#ut-mask").hide();
             window.jQuery("div#ut-dialog").hide();
         });
+    });
+    window.jQuery(function() {
+        if (utfiltrarfavs == "si" || utfiltrarfavs == undefined) {
+            window.jQuery("#favoritos .tinycol").prepend('<div id="ut-filtros-fav">');
+            window.jQuery('<h3 id="ut-fav-filto-titulo">').text("Filtros").insertBefore("#ut-filtros-fav");
+            window.jQuery(document).on("mouseover", "body", function() {
+                window.jQuery("#tfav a.foroicon").each(function() {
+                    window.jQuery("#ut-filtros-fav").append(window.jQuery(this).clone());
+                });
+                var utforosUnicos = {};
+                window.jQuery("#ut-filtros-fav a.foroicon").each(function() {
+                    window.jQuery(this).attr("href", "#filtrados");
+                    var interiorA = window.jQuery(this).html();
+                    if (utforosUnicos[interiorA]) window.jQuery(this).remove(); else utforosUnicos[interiorA] = true;
+                });
+            });
+            window.jQuery(document).on("click", "#ut-filtros-fav a.foroicon", function() {
+                window.jQuery("#ut-filtros-fav a.foroicon").removeClass("ut-opacity");
+                window.jQuery("#tfav tr").removeClass("utfiltrado");
+                window.jQuery("#ut-filtros-tags").remove();
+                window.jQuery("#tfav a.foroicon").closest("tr").attr("style", "display: table-row;");
+                var foroImgSrc = window.jQuery(this).children("img").attr("src");
+                window.jQuery("#tfav a.foroicon img").not('img[src="' + foroImgSrc + '"]').closest("tr").addClass("utfiltrado").hide();
+                window.jQuery("#ut-filtros-fav a.foroicon").not(this).addClass("ut-opacity");
+                window.jQuery('<div id="ut-filtros-tags">').insertAfter("#ut-filtros-fav");
+                window.jQuery("#tfav tr").not("tr.utfiltrado").children("td.dash").children("a.cat2").each(function() {
+                    window.jQuery("#ut-filtros-tags").append(window.jQuery(this).clone().removeAttr("title"));
+                });
+                window.jQuery("#ut-filtros-tags a.cat2 img").removeAttr("alt", "style");
+                var utCatsUnicos = {};
+                window.jQuery("#ut-filtros-tags a.cat2").each(function() {
+                    window.jQuery(this).attr("href", "#filtrados");
+                    var interiorB = window.jQuery(this).html();
+                    if (utCatsUnicos[interiorB]) window.jQuery(this).remove(); else utCatsUnicos[interiorB] = true;
+                });
+            });
+            window.jQuery(document).on("click", "#ut-filtros-tags a.cat2", function() {
+                window.jQuery("#ut-filtros-tags a.cat2").removeClass("ut-opacity");
+                window.jQuery("#tfav a.foroicon").closest("tr").not("tr.utfiltrado").attr("style", "display: table-row;");
+                var catImgSrc = window.jQuery(this).children("img").attr("src");
+                window.jQuery("#tfav a.cat2 img").not('img[src="' + catImgSrc + '"]').closest("tr").hide();
+                window.jQuery("#ut-filtros-tags a.cat2").not(this).addClass("ut-opacity");
+            });
+            window.jQuery('<p id="utFavQuitar">').text("Quitar filtro.").insertAfter("#ut-filtros-fav");
+            window.jQuery(document).on("click", "#utFavQuitar", function() {
+                window.jQuery("#ut-filtros-fav a.foroicon").removeClass("ut-opacity");
+                window.jQuery("#tfav tr").removeClass("utfiltrado");
+                window.jQuery("#ut-filtros-tags").remove();
+                window.jQuery("#tfav a.foroicon").closest("tr").attr("style", "display: table-row;");
+            });
+            var utVerMasFav = window.jQuery("#favoritos .tfooter #moar").text();
+            if (utVerMasFav === "Ver más") {
+                window.jQuery('<p id="utFavAviso">').text("Tienes más de 30 favoritos +").insertAfter("#utFavQuitar");
+                window.jQuery('<div id="utFavAvisoTxt">').html('Para que el filtro funcione con todos tus hilos guardados en favoritos, debes darle al botón de "Ver más" al final de la lista de hilos. Si no se muestran el filtro no tendrá efecto en ellos.').insertAfter("#utFavAviso");
+                window.jQuery("#utFavAviso").click(function() {
+                    window.jQuery("#utFavAvisoTxt").slideToggle();
+                    if (window.jQuery("#utFavAviso").text() === "Tienes más de 30 favoritos +") {
+                        window.jQuery("#utFavAviso").text("Tienes más de 30 favoritos -");
+                    } else {
+                        window.jQuery("#utFavAviso").text("Tienes más de 30 favoritos +");
+                    }
+                });
+            }
+        }
+    });
+    window.jQuery(function() {
+        var $utfiltrar = window.jQuery("#nofids").siblings("h3");
+        var $utfiltrarP = window.jQuery("#nofids").closest(".box").siblings("p");
+        var utfiltrarOpcion = window.localStorage["utfiltrarOpcion"];
+        $utfiltrar.addClass("ut-filtrar");
+        window.jQuery($utfiltrar).click(function() {
+            window.jQuery("#nofids").slideToggle();
+            $utfiltrarP.toggle();
+            if (window.localStorage["utfiltrarOpcion"] == "si" || window.localStorage["utfiltrarOpcion"] == undefined) {
+                window.localStorage["utfiltrarOpcion"] = "no";
+            } else {
+                window.localStorage["utfiltrarOpcion"] = "si";
+            }
+        });
+        if (window.localStorage["utfiltrarOpcion"] == "no") {
+            window.jQuery("#nofids").toggle();
+            $utfiltrarP.toggle();
+        }
+    });
+    window.jQuery(function() {
+        if (utforosfavs == "si" || utforosfavs == undefined) {
+            if (window.localStorage["ut-forosFav"] == undefined) {
+                var forosFav = [];
+                window.localStorage["ut-forosFav"] = window.JSON.stringify(forosFav);
+            }
+            window.jQuery('<div id="sticky-anchor" style="position: absolute; top: 200px;">').insertBefore("#content_body, #content_head");
+            window.jQuery('<div id="foros-fav-float">').append('<div><ul id="ut-foros-fav">').insertAfter("#sticky-anchor");
+            var forosFavUpdate = function() {
+                var forosFav = window.JSON.parse(window.localStorage["ut-forosFav"]);
+                var forosFavDibujo = function() {
+                    for (window.i = 0; window.i < forosFav.length; window.i++) {
+                        var foroNombre = window.jQuery('div.fpanel div.info a.hb[href="/foro/' + forosFav[window.i] + '"]').html();
+                        window.jQuery("#ut-foros-fav").append(window.jQuery("<li>").html('<a href="/foro/' + forosFav[window.i] + '"><img width="24" height="24" src="/style/img/icon/foro/' + forosFav[window.i] + '.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>'));
+                    }
+                };
+                forosFavDibujo();
+            };
+            forosFavUpdate();
+            window.jQuery("div.fpanel div.icon").append('<div class="ut-foro-fav-add">');
+            window.jQuery("div.fpanel div.icon").hover(function() {
+                window.jQuery(this).children(".ut-foro-fav-add").addClass("ut-foro-fav-add-moveup");
+            }, function() {
+                window.jQuery(this).children(".ut-foro-fav-add").removeClass("ut-foro-fav-add-moveup");
+            });
+            window.jQuery(".ut-foro-fav-add").click(function() {
+                var forosFav = window.JSON.parse(window.localStorage["ut-forosFav"]);
+                window.jQuery(this).closest("div.icon").siblings("div.info").find("a.hb,strong a").each(function() {
+                    var enlace = this + "";
+                    var split = enlace.split("/");
+                    var path = split.splice(1, split.length - 1);
+                    var pathIndexToGet = 3;
+                    var foroNumber = path[pathIndexToGet];
+                    if (window.jQuery.inArray(foroNumber, forosFav) > -1) {
+                        forosFav.splice(window.jQuery.inArray(foroNumber, forosFav), 1);
+                        window.localStorage["ut-forosFav"] = window.JSON.stringify(forosFav);
+                        window.jQuery('#foros-fav-float a[href="/foro/' + foroNumber + '"]').closest("li").remove();
+                    } else {
+                        forosFav.push(foroNumber);
+                        window.localStorage["ut-forosFav"] = window.JSON.stringify(forosFav);
+                        window.jQuery("#ut-foros-fav").append(window.jQuery("<li>").html('<a href="/foro/' + foroNumber + '"><img width="24" height="24" src="/style/img/icon/foro/' + foroNumber + '.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>'));
+                    }
+                });
+                window.jQuery(this).toggleClass("ut-foro-fav-added");
+            });
+            window.jQuery(document).on("click", ".ut-foros-fav-borrar", function() {
+                var forosFav = window.JSON.parse(window.localStorage["ut-forosFav"]);
+                window.jQuery(this).siblings('a[href^="/foro"]').each(function() {
+                    var enlace = this + "";
+                    var split = enlace.split("/");
+                    var path = split.splice(1, split.length - 1);
+                    var pathIndexToGet = 3;
+                    var foroNumber = path[pathIndexToGet];
+                    forosFav.splice(window.jQuery.inArray(foroNumber, forosFav), 1);
+                    window.localStorage["ut-forosFav"] = window.JSON.stringify(forosFav);
+                    window.jQuery(this).closest("li").remove();
+                    window.jQuery("div.fpanel").find('a[href="/foro/' + foroNumber + '"]').closest("div.info").siblings("div.icon").children("div.ut-foro-fav-add").toggleClass("ut-foro-fav-added");
+                });
+            });
+            window.jQuery("div.fpanel div.icon").each(function() {
+                var forosFav = window.JSON.parse(window.localStorage["ut-forosFav"]);
+                window.jQuery(this).siblings("div.info").find("a.hb,strong a").each(function() {
+                    var enlace = this + "";
+                    var split = enlace.split("/");
+                    var path = split.splice(1, split.length - 1);
+                    var pathIndexToGet = 3;
+                    var foroNumber = path[pathIndexToGet];
+                    if (window.jQuery.inArray(foroNumber, forosFav) > -1) {
+                        window.jQuery(this).closest("div.info").siblings("div.icon").children("div.ut-foro-fav-add").toggleClass("ut-foro-fav-added");
+                    }
+                });
+            });
+            function sticky_relocate() {
+                var window_top = window.jQuery(window).scrollTop();
+                var div_top = window.jQuery("#sticky-anchor").offset().top;
+                if (window_top > div_top) window.jQuery("#foros-fav-float").addClass("foros-fav-float-sticky"); else window.jQuery("#foros-fav-float").removeClass("foros-fav-float-sticky");
+            }
+            window.jQuery(window).scroll(sticky_relocate);
+            sticky_relocate();
+            if (window.jQuery.browser.safari) {
+                window.jQuery("#foros-fav-float").css("margin-left", "1145px");
+            } else if (window.jQuery.browser.opera) {
+				window.jQuery("#foros-fav-float").css("margin-left", "1145px");
+            }
+        }
     });
     window.jQuery(document).ready(function() {
         window.JSON.encode = window.JSON.encode || window.JSON.stringify;
@@ -820,24 +819,13 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
         }
     });
     window.jQuery(function() {
-        if (utnewquote == "si" || utnewquote == undefined) {
-            window.jQuery(function() {
-                if (is_dark == 0) {
-                    window.jQuery("div.msg div.body").addClass("newquote");
-                } else {
-                    window.jQuery("div.msg div.body").addClass("newquoteblack");
-                }
-            });
-        }
-    });
-    window.jQuery(function() {
         if (uttablamods == "si" || uttablamods == undefined) {
             window.jQuery(function() {
                 if (window.jQuery('div#topnav a[href="/foro/"]').length > 0 && window.jQuery("div.live_info").length == 0) {
                     window.jQuery("div.smallcol, div.tinycol").append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
                     var url = window.location.pathname;
                     var id = url.split("/")[2];
-                    window.mods = [ [ "nulo" ], [ "bazoo", "jadgix", "J40", "RaymaN", "TazzMaTazz" ], [ "Eristoff", "kalinka-" ], [ "aLeX", "Josekron", "Loa", "MegalomaniaC", "mongui", "Prava" ], [ "" ], [ "" ], [ "Atoll", "Bloody", "Eristoff", "Kails", "JMBaDBoY", "Prava", "PruDeN", "sacnoth" ], [ "abichuela", "AG", "alejo", "Ch4iNeR", "cm07", "Korso", "lb_nacho", "Netzach", "VipeR_CS" ], [ "" ], [ "Kaos", "PiradoIV" ], [ "TNx7", "tutitin" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Kaneas", "TNx7" ], [ "" ], [ "" ], [ "Cryoned", "DuPonT" ], [ "darkavm", "ElKedao", "Privatovic", "ukuki" ], [ "" ], [ "" ], [ "Midgard", "StumKrav", "thunder_" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Eristoff", "ReYzell" ], [ "Andy", "eisenfaust", "ISAILOVIC", "JMBaDBoY", "loko_man", "ruben132", "Sh1n0d4", "t0rrY" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Hir0shz", "Ligia", "ManOwaR", "sPoiLeR" ], [ "" ], [ "ferk", "HaZuKi", "horvathzeros", "J40" ], [ "" ], [ "dangerous", "zashael" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "BigmAK", "MaSqUi", "tutitin", "XaViMeTaL" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Cheester", "cuerpi", "darkavm", "sk_sk4t3r", "TNx7", "Txentx0" ], [ "spyro512" ], [ "" ], [ "" ], [ "" ], [ "GR33N" ], [ "" ], [ "" ], [ "Snorky", "spyro512" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "JMBaDBoY", "Sirius_spa", "suggus", "ZaGo" ], [ "granaino127", "SaBaNdIjA" ], [ "granaino127", "SaBaNdIjA" ], [ "darkavm", "GryF", "Kb", "lb_nacho", "-Power" ], [ "" ], [ "" ], [ "ElKedao", "darkavm", "dicon", "sk_sk4t3r" ], [ "" ], [ "" ], [ "" ], [ "Atoll", "ZaGo" ], [ "DeNz1L", "kaitoo", "NosFeR_" ], [ "Skelus" ], [ "darkavm", "Dolz", "Txentx0", "urrako" ], [ "babri", "dicon", "RoDRa", "Spank" ], [ "iosp", "Hogwarts", "lb_nacho" ], [ "zashael" ], [ "Charly-", "edvan", "frostttt", "Kazuya_", "zashael" ], [ "0buS", "RaymaN", "sPoiLeR" ], [ "CsNarsil", "CybeR" ], [ "eisenfaust" ], [ "bazoo", "StumKrav", "thunder_" ], [ "DarkHawX", "Korso", "Netzach", "StumKrav" ], [ "benitogb", "BigmAK" ], [ "" ], [ "Andy", "ISAILOVIC", "JMBaDBoY", "loko_man", "ruben132", "Sh1n0d4", "t0rrY" ], [ "" ], [ "allmy", "naete", "slakk", "StumKrav", "thunder_" ], [ "gonya707", "TRON" ], [ "babri", "RoninPiros" ], [ "Bidroid", "MagicAnnii" ], [ "ChaRliFuM", "menolikeyou", "undimmer" ], [ "locof", "Pedrosa7", "Syuk" ], [ "" ], [ "alexander", "ferk", "horvathzeros", "J40" ], [ "" ], [ "" ], [ "cm07", "RoninPiros" ], [ "" ], [ "Rundull" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ] ];
+                    window.mods = [ [ "nulo" ], [ "bazoo", "jadgix", "J40", "RaymaN", "TazzMaTazz" ], [ "Eristoff", "kalinka-" ], [ "aLeX", "Josekron", "Loa", "MegalomaniaC", "mongui", "Prava" ], [ "" ], [ "" ], [ "Atoll", "Bloody", "Eristoff", "Kails", "JMBaDBoY", "Prava", "PruDeN", "sacnoth" ], [ "abichuela", "AG", "alejo", "Ch4iNeR", "cm07", "Korso", "lb_nacho", "Netzach", "VipeR_CS" ], [ "" ], [ "Kaos", "PiradoIV" ], [ "TNx7", "tutitin" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Kaneas", "TNx7" ], [ "" ], [ "" ], [ "Cryoned", "Dream-MV", "esvarianzza" ], [ "darkavm", "ElKedao", "Privatovic", "ukuki" ], [ "" ], [ "" ], [ "Midgard", "StumKrav", "thunder_" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Eristoff", "ReYzell" ], [ "Andy", "eisenfaust", "ISAILOVIC", "JMBaDBoY", "loko_man", "ruben132", "Sh1n0d4", "t0rrY" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Hir0shz", "Ligia", "ManOwaR", "sPoiLeR" ], [ "" ], [ "ferk", "HaZuKi", "horvathzeros", "J40" ], [ "" ], [ "dangerous", "zashael" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "BigmAK", "MaSqUi", "tutitin", "XaViMeTaL" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "Cheester", "cuerpi", "darkavm", "sk_sk4t3r", "TNx7", "Txentx0" ], [ "spyro512" ], [ "" ], [ "" ], [ "" ], [ "GR33N" ], [ "" ], [ "" ], [ "Snorky", "spyro512" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "JMBaDBoY", "Sirius_spa", "suggus", "ZaGo" ], [ "granaino127", "SaBaNdIjA" ], [ "granaino127", "SaBaNdIjA" ], [ "darkavm", "GryF", "Kb", "lb_nacho", "-Power" ], [ "" ], [ "" ], [ "ElKedao", "darkavm", "dicon", "sk_sk4t3r" ], [ "" ], [ "" ], [ "" ], [ "Atoll", "ZaGo" ], [ "DeNz1L", "kaitoo", "NosFeR_" ], [ "Skelus" ], [ "darkavm", "Dolz", "Txentx0", "urrako" ], [ "babri", "dicon", "RoDRa", "Spank" ], [ "iosp", "Hogwarts", "lb_nacho" ], [ "zashael" ], [ "Charly-", "edvan", "frostttt", "Kazuya_", "zashael" ], [ "0buS", "RaymaN", "sPoiLeR" ], [ "CsNarsil", "CybeR" ], [ "eisenfaust" ], [ "bazoo", "StumKrav", "thunder_" ], [ "DarkHawX", "Korso", "Netzach", "StumKrav" ], [ "benitogb", "BigmAK" ], [ "" ], [ "Andy", "ISAILOVIC", "JMBaDBoY", "loko_man", "ruben132", "Sh1n0d4", "t0rrY" ], [ "" ], [ "allmy", "naete", "slakk", "StumKrav", "thunder_" ], [ "gonya707", "TRON" ], [ "babri", "RoninPiros" ], [ "Bidroid", "MagicAnnii" ], [ "ChaRliFuM", "menolikeyou", "undimmer" ], [ "locof", "Pedrosa7", "Syuk" ], [ "" ], [ "alexander", "ferk", "horvathzeros", "J40" ], [ "" ], [ "KinachO" ], [ "cm07", "RoninPiros" ], [ "" ], [ "Rundull" ], [ "" ], [ "" ], [ "" ], [ "" ], [ "" ] ];
                     window.jQuery.each(window.mods[id], function(i, v) {
                         if (window.mods[id] == "") {
                             window.jQuery("<p/>").html("<span>Este foro no tiene mods o no están listados.</span>").appendTo("#modlist");
@@ -932,39 +920,6 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
     window.jQuery(function() {
         if (utmarcapaginas == "si" || utmarcapaginas == undefined) {
             window.jQuery("div.mark").attr("style", 'background-image: url("http://www.mvusertools.com/ext/img/marcapaginas2.png") !important; background-repeat: no-repeat !important; background-position: 100px top !important;');
-        }
-    });
-    window.jQuery(function() {
-        if (uticonosportada == "si" || uticonosportada == undefined) {
-            window.jQuery('.bbar a[href^="/foro"]').each(function(i) {
-                var enlace = this + "";
-                var split = enlace.split("/");
-                var path = split.splice(1, split.length - 1);
-                var pathIndexToGet = 3;
-                var foro = path[pathIndexToGet];
-                var foroicon = "http://www.mediavida.com/style/img/icon/foro/" + foro + ".png";
-                window.jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
-            });
-            window.jQuery(".item h4").each(function(index) {
-                window.jQuery(this).prepend(window.jQuery('.bbar a[href^="/foro"]').eq(0));
-            });
-            window.jQuery("div.item div.bbar div.left:first-child").contents().filter(function() {
-                return this.nodeType === 3;
-            }).remove();
-            window.jQuery("div.item div.bbar div.left:first-child").prepend("En ");
-        }
-    });
-    window.jQuery(function() {
-        if (uticonosdestacados == "si" || uticonosdestacados == undefined) {
-            window.jQuery('ul.mini a[href^="/foro"]').each(function(i) {
-                var enlace = this + "";
-                var split = enlace.split("/");
-                var path = split.splice(1, split.length - 1);
-                var pathIndexToGet = 3;
-                var foro = path[pathIndexToGet];
-                var foroicon = "http://www.mediavida.com/style/img/icon/foro/" + foro + ".png";
-                window.jQuery(this).closest("li").attr("style", "background-image: url(" + foroicon + ") !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;");
-            });
         }
     });
     window.jQuery('button[accesskey="b"]').hide();
@@ -1260,25 +1215,24 @@ window.opera.addEventListener("BeforeEvent.DOMContentLoaded", function() {
         });
     }
     window.jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children("dt").replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
+    window.jQuery('div[class="autor"]:contains("Achotiodeque")').children().children("dt").replaceWith('<dt><a href="/id/Achotiodeque">Achotoditeque</a></dt>');
     window.jQuery('div[class="autor"]:contains("Masme")').children().children("dt").replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
     window.jQuery('div[class="autor"]:contains("Ekisu")').children().children("dt").replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
     window.jQuery('div[class="autor"]:contains("X-Crim")').children().children("dd:first").replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
     window.jQuery(function() {
         if (utversionls == undefined) {
-            window.jQuery("div#footer div.f_info p").append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
+            window.jQuery("div#footer div.f_info p").append('• <a href="http://mvusertools.com" target="_blank">MV-Usertools</a>');
         } else {
-            window.jQuery("div#footer div.f_info p").append('• Estás usando <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> versión ' + utversionls + "");
+            window.jQuery("div#footer div.f_info p").append('• <a href="http://mvusertools.com" target="_blank">MV-Usertools</a> ' + utversionls + "");
         }
     });
     window.jQuery("#scrollpages").append(balcklistToggle);
     if (window.localStorage.getItem("blacklist") == "on") {
         window.jQuery("#toggle").addClass("toggle-on");
         window.jQuery("#toggle").removeClass("toggle-off");
-        window.console.log("encendido");
     } else {
         window.jQuery("#toggle").addClass("toggle-off");
         window.jQuery("#toggle").removeClass("toggle-on");
-        window.console.log("apagado");
     }
     window.jQuery("a[href^='/id/']").each(function() {
         var name = this.href.slice(this.href.lastIndexOf("/") + 1);
