@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.9
+// @version        1.9.0.1
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.9';
+/*CAMBIAR VERSIÓN*/var utversion = '1.9.0.1';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -23,9 +23,9 @@ var baseHeight;
 var is_dark = jQuery("link[rel='stylesheet']").filter(function(){return this.href.match('\/style\/[0-9]+\/mv_oscuro\.css')}).length > 0;
 var postitlive = jQuery("div#pi_body div.embedded object").length > 0;
 var liveactivado = jQuery('div.live_info').length > 0;
-var utnoti = jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
-var utavisos = jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html();
-var utmsj = jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html();
+var utnoti = jQuery('#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
+var utavisos = jQuery('#userinfo a[href^="/notificaciones"] strong.bubble').html();
+var utmsj = jQuery('#userinfo a[href^="/mensajes"] strong.bubble').html();
 ////// VARIABLES REUTILIZABLES //////
 
 
@@ -524,13 +524,15 @@ var css =
 		color: #C5D1EC;\
 	}\
 	.config {\
-	background-position: -78px -34px;\
+	background-position: -78px -29px;\
 	width: 14px;\
 	height: 14px;\
 	display: inline-block;\
 	margin: 0 3px;\
-	top: 3px;\
 	position: relative;\
+	}\
+	.utmenubutton{\
+	padding-left: 15px;\
 	}\
 	#ut-mask {\
 	background: #ffffff; width: 100%; height: 100%; position: fixed; opacity: 0.9; z-index: 9998;\
@@ -924,10 +926,10 @@ var utsalvarposts = localStorage["utsalvarposts"];
 var utforosfavs = localStorage["utforosfavs"];
 var utfiltrarfavs = localStorage["utfiltrarfavs"];
 	// Forma del menu
-jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><strong class="bar"><a id="ut-menu" style="cursor:pointer;"><span class="sprite config"></span><span class="uextra">Ut</span></a></strong></div>').insertAfter('div#userinfo');
+jQuery('<div id="ut-config" class="last" style="margin-left: 10px;"><ul class="bar" style="margin: 0px 0px 0px 10px; padding: 0px 12px;"><li><a id="ut-menu" class="sprite config uextra" style="cursor: pointer; margin: 0px 0px 0px -5px;"><span class="utmenubutton">Ut</span></a></li></ul></div>').insertAfter('#userinfo');
 jQuery('<div style="display: none;" id="ut-mask-menu"></div>').insertBefore('#background');
 var utmenutabs = '<div id="ut-menu-tabs"><div id="ut-menu-tab1" class="active">Modulos</div><div id="ut-menu-tab2">Estilos</div><div id="ut-menu-tab4">Macros</div><div id="ut-menu-tab3">Sobre MV-UT</div></div>';
-var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><tr><td>Tener siempre a la vista foros favoritos.</td><td><span class="ut-boton-sino" id="ut-utforosfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utforosfavs-no">No</span></td></tr><tr><td>Activar filtro para hilos en favoritos.</td><td><span class="ut-boton-sino" id="ut-utfiltrarfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utfiltrarfavs-no">No</span></td></tr><td>Links importantes al final de la página</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
+var utmenutabla1 = '<table id="ut-menu-tabla1" class="ut-opciones"><tbody><tr><td>Ventana con aviso y notas de actualización al actualizar.</td><td><span class="ut-boton-sino" id="ut-utmensajeupdate-si">Si</span> <span class="ut-boton-sino" id="ut-utmensajeupdate-no">No</span></td></tr><tr><td>Tener siempre a la vista foros favoritos.</td><td><span class="ut-boton-sino" id="ut-utforosfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utforosfavs-no">No</span></td></tr><tr><td>Activar filtro para hilos en favoritos.</td><td><span class="ut-boton-sino" id="ut-utfiltrarfavs-si">Si</span> <span class="ut-boton-sino" id="ut-utfiltrarfavs-no">No</span></td></tr><td>Links importantes al final de la página (temporalmente no funciona, es necesario reescribir el código debido a una actualización en MV)</td><td><span class="ut-boton-sino" id="ut-linksfooter-si">Si</span> <span class="ut-boton-sino" id="ut-linksfooter-no">No</span></td></tr><tr style="background: none;"><td><p id="ut-utlinksfooteroscuro" style="color: #999999;">Links importantes estilo oscuro usando theme predeterminado</p></td><td><span class="ut-boton-sino" id="ut-utlinksfooteroscuro-si">Si</span> <span class="ut-boton-sino" id="ut-utlinksfooteroscuro-no">No</span></td></tr><tr><td>Tabla de mods</td><td><span class="ut-boton-sino" id="ut-uttablamods-si">Si</span> <span class="ut-boton-sino" id="ut-uttablamods-no">No</span></td></tr><tr><td>Información del usuario al dejar el ratón sobre su nick</td><td><span class="ut-boton-sino" id="ut-utuserinfo-si">Si</span> <span class="ut-boton-sino" id="ut-utuserinfo-no">No</span></td></tr><tr><td>Opción para ordenar hilos por respuestas sin leer</td><td><span class="ut-boton-sino" id="ut-utordenarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utordenarposts-no">No</span></td></tr><tr><td>Avisos en el favicon</td><td><span class="ut-boton-sino" id="ut-utfavicon-si">Si</span> <span class="ut-boton-sino" id="ut-utfavicon-no">No</span></td></tr><tr><td>Botón para ensanchar streams en hilos con Live! y postit (Experimental)</td><td><span class="ut-boton-sino" id="ut-utbigscreen-si">Si</span> <span class="ut-boton-sino" id="ut-utbigscreen-no">No</span></td></tr><tr><td>Recupera el texto escrito en el formulario extendido si se cierra la pestaña o navegador (Experimental)</td><td><span class="ut-boton-sino" id="ut-utsalvarposts-si">Si</span> <span class="ut-boton-sino" id="ut-utsalvarposts-no">No</span></td></tr></tbody></table>';
 var utmenutabla2 = '<table id="ut-menu-tabla2" class="ut-opciones" style="display: none;"><tbody><tr><td>Marcapáginas</td><td><span class="ut-boton-sino" id="ut-utmarcapaginas-si">Si</span> <span class="ut-boton-sino" id="ut-utmarcapaginas-no">No</span></td></tr><tr><td>Hilos con Live! activado destacados (solo para theme predeterminado)</td><td><span class="ut-boton-sino" id="ut-utlivesdestacados-si">Si</span> <span class="ut-boton-sino" id="ut-utlivesdestacados-no">No</span></td></tr><td>Nuevo estilo para los spoilers</td><td><span class="ut-boton-sino" id="ut-utestilospoilers-si">Si</span> <span class="ut-boton-sino" id="ut-utestilospoilers-no">No</span></td></tr></tbody></table>';
 var utmenutabla3 = '<table id="ut-menu-tabla3" style="display: none;"><tbody><tr><td><a href="http://mvusertools.com" target="_blank"><img src="http://www.mediavida.com/img/f/mediavida/2012/11/55268_mv_usertools_extension_para_firefox_chrome_opera_safari_0_full.png" width="48" height="48"><p>MV-Usertools</a> desarrollado por <a href="/id/Vegon">Vegon</a> y <a href="/id/cm07">cm07</a></p><br /><br /><p><a style="cursor: pointer;" id="ut-menu-notasdeparche">Notas del último parche.</a> Versión '+utversion+'.</p><br /><br /><p>Para comunicar bugs usa el <a href="http://www.mediavida.com/foro/4/mv-usertools-extension-para-firefox-chrome-opera-safari-413818">hilo oficial</a>. Si tienes dudas de como funciona algun modulo u opción visita el <a href="http://mvusertools.com/caracteristicas">manual en la web oficial</a> que siempre está actualizado con las ultimas novedades.</p><br /><br /><p>Si las MV-Usertools te resultan utiles y quieres agradecernos las horas de trabajo detrás de ellas, tiranos algunas monedas.</p><br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="hosted_button_id" value="2TD967SQAC6HC"><input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet."><img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1"></form></td></tr></tbody></table>';
 var utmenutabla4 = '<table id="ut-menu-tabla4" style="display: none;"><tbody><tr><td><form id="ut-macros-form"><input id="ut-title" placeholder="Título" maxlength="17"><br /><textarea id="ut-macro" placeholder="Macro"></textarea><br /><input type="submit" value="Guardar" style="margin-top: 3px;" ></form><ul id="ut-macros"></ul></td></tr></tbody></table>';
@@ -985,9 +987,9 @@ jQuery('#ut-mask-menu').click(function() {
 	jQuery('#ut-dialog-menu').hide();
 	jQuery('#ut-mask-menu').hide();
 });
-var nicklenght = jQuery('div#userinfo a[href^="/id/"] span').text().length;
+var nicklenght = jQuery('#userinfo a[href^="/id/"]').text().length;
 jQuery(function() {
-	if (nicklenght > 8) {
+	if (nicklenght > 10) {
 		jQuery('#nav_bar #buscar').css('width','130px');
 		jQuery('#nav_bar #sbii').css('width','93px');
 		jQuery('#nav_bar .bbii').css('left','103px');
@@ -1452,11 +1454,11 @@ jQuery(function() {
 jQuery(function(){
 	if (utfavicon == 'si' || utfavicon == undefined) {
 		if (utnoti === undefined) {var utnoti_int = parseInt(0,10);}
-		else {var utnoti_int = parseInt(jQuery('div#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
+		else {var utnoti_int = parseInt(jQuery('#userinfo a[href^="/foro/favoritos"] strong.bubble').html(),10);}
 		if (utavisos === undefined) {var utavisos_int = parseInt(0,10);}
-		else {var utavisos_int = parseInt(jQuery('div#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
+		else {var utavisos_int = parseInt(jQuery('#userinfo a[href^="/notificaciones"] strong.bubble').html(),10);}
 		if (utmsj === undefined) {var utmsj_int = parseInt(0,10);}
-		else {var utmsj_int = parseInt(jQuery('div#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
+		else {var utmsj_int = parseInt(jQuery('#userinfo a[href^="/mensajes"] strong.bubble').html(),10);}
 		var utavisostotal = utnoti_int + utmsj_int + utavisos_int;
 		jQuery('body').addClass(''+ utavisostotal +'');
 		Tinycon.setBubble(utavisostotal);
@@ -1687,88 +1689,88 @@ jQuery(function() {
 
 
 // Links importantes en el footer
-jQuery(function(){
-	if (utlinksfooter == 'si' || utlinksfooter == undefined) {
-		jQuery(function(){
-		   if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
-				jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
-					if (is_dark || utlinksfooteroscuro == 'si') {
-						jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-					}
-					else {
-						jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-						jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
-						jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
-						jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
-						jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
-					}
-				});
-				jQuery('.linksfooter2 .separator').remove();
-				jQuery('.linksfooter2 #ut-menu').remove();
-				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+// jQuery(function(){
+	// if (utlinksfooter == 'si' || utlinksfooter == undefined) {
+		// jQuery(function(){
+		   // if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
+				// jQuery('#userinfo.bar').clone().addClass('linksfooter2').each(function(){
+					// if (is_dark || utlinksfooteroscuro == 'si') {
+						// jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+					// }
+					// else {
+						// jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
+						// jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
+						// jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
+						// jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
+						// jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
+					// }
+				// });
+				// jQuery('.linksfooter2 .separator').remove();
+				// jQuery('.linksfooter2 #ut-menu').remove();
+				// jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				jQuery(function() {
-				if (utnoti != undefined) {
-					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+				// jQuery(function() {
+				// if (utnoti != undefined) {
+					// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .uextra').append(' ('+ utnoti +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .bubble').remove();
 					//Avisos
-				jQuery(function() {
-				if (utavisos != undefined) {
-					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+				// jQuery(function() {
+				// if (utavisos != undefined) {
+					// jQuery('.linksfooter2 a[href^="/notificaciones"] .uextra').append(' ('+ utavisos +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/notificaciones"] .bubble').remove();
 					//Mensajes
-				jQuery(function() {
-				if (utmsj != undefined) {
-					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
-			 }
-			 else {
-				 jQuery('div#userinfo strong.bar').clone().addClass('linksfooter2').each(function(){
-						if (is_dark || utlinksfooteroscuro == 'si') {
-							jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-						}
-						else {
-							jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-							jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
-							jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
-							jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
-							jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
-						}
-					});		 
-				jQuery('.linksfooter2 .separator').remove();
-				jQuery('.linksfooter2 #ut-menu').remove();
-				jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
+				// jQuery(function() {
+				// if (utmsj != undefined) {
+					// jQuery('.linksfooter2 a[href^="/mensajes"] .uextra').append(' ('+ utmsj +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/mensajes"] .bubble').remove();
+			 // }
+			 // else {
+				 // jQuery('#userinfo .bar').clone().addClass('linksfooter2').each(function(){
+						// if (is_dark || utlinksfooteroscuro == 'si') {
+							// jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+						// }
+						// else {
+							// jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
+							// jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
+							// jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
+							// jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
+							// jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
+						// }
+					// });		 
+				// jQuery('.linksfooter2 .separator').remove();
+				// jQuery('.linksfooter2 #ut-menu').remove();
+				// jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
 					//Noti
-				jQuery(function() {
-				if (utnoti != undefined) {
-					jQuery('.linksfooter2 a[href^="/foro/favoritos"] span.uextra').append(' ('+ utnoti +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/foro/favoritos"] strong.bubble').remove();
+				// jQuery(function() {
+				// if (utnoti != undefined) {
+					// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .uextra').append(' ('+ utnoti +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .bubble').remove();
 					//Avisos
-				jQuery(function() {
-				if (utavisos != undefined) {
-					jQuery('.linksfooter2 a[href^="/notificaciones"] span.uextra').append(' ('+ utavisos +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/notificaciones"] strong.bubble').remove();
+				// jQuery(function() {
+				// if (utavisos != undefined) {
+					// jQuery('.linksfooter2 a[href^="/notificaciones"] .uextra').append(' ('+ utavisos +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/notificaciones"] .bubble').remove();
 					//Mensajes
-				jQuery(function() {
-				if (utmsj != undefined) {
-					jQuery('.linksfooter2 a[href^="/mensajes"] span.uextra').append(' ('+ utmsj +')');
-				}
-				});
-				jQuery('.linksfooter2 a[href^="/mensajes"] strong.bubble').remove();
-			 }
-		});
-	}
-});
+				// jQuery(function() {
+				// if (utmsj != undefined) {
+					// jQuery('.linksfooter2 a[href^="/mensajes"] .uextra').append(' ('+ utmsj +')');
+				// }
+				// });
+				// jQuery('.linksfooter2 a[href^="/mensajes"] .bubble').remove();
+			 // }
+		// });
+	// }
+// });
 
 // Marcapaginas en los posts que entras directamente
 jQuery(function(){
