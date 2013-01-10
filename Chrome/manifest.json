@@ -1,4 +1,4 @@
-{
+﻿{
    "manifest_version": 2,
    "content_scripts": [ {
       "exclude_matches": [  ],
@@ -10,7 +10,7 @@
    "converted_from_user_script": true,
    "description": "Controles avanzados para la web mediavida.com",
    "name": "MV-Usertools",
-   "version": "1.9.0.1",
+   "version": "1.9.0.3",
    "icons": {
 			"16": "icon16.png",
 			"48": "icon48.png",
