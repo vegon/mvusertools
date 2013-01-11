@@ -1118,11 +1118,14 @@ jQuery(function(){
 // Antiguos links de favs/avisos/msj
 jQuery(function() {
 	if (utantiguoslinksuserinfo == 'si') {
+		var utnotifylinkdesnudo = jQuery('#nav_bar a#notifylink').closest('li').clone();
+		var utfavslinkdesnudo = jQuery('#nav_bar a#favslink').closest('li').clone();
+		var utmplinkdesnudo = jQuery('#nav_bar a#mplink').closest('li').clone();
 		jQuery('#nav_bar a#notifylink').closest('li').remove();
 		jQuery('#nav_bar a#favslink').closest('li').remove();
 		jQuery('#nav_bar a#mplink').closest('li').remove();
 		var navbarAncla = jQuery('#nav_bar a[href^="/id/"]').closest('li');
-		jQuery('<li><a id="notifylink" href="/notificaciones" class="ln">Avisos</a></li><li><a id="favslink" href="/foro/favoritos" class="lf">Favs</a></li><li><a id="mplink" href="/mensajes" class="lm">Msj</a></li>').insertAfter(navbarAncla);
+		utnotifylinkdesnudo.add(utfavslinkdesnudo).add(utmplinkdesnudo).insertAfter(navbarAncla);
 	}
 });
 
