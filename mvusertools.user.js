@@ -449,43 +449,6 @@ var css =
 	.ut-live td.alt {\
 		background-color: #EFE0E0;\
 	}\
-	.linksfooter A {\
-		opacity: 0.5;\
-	}\
-	.linksfooter A:hover {\
-		opacity: 1;\
-	}\
-	.linksfooter2 {\
-		padding: 5px 6px !important;\
-		border-radius: 6px;\
-		line-height: 35px;\
-	}\
-	.linksfooter2 IMG {\
-		vertical-align: sub;\
-	}\
-	.linksfooter2 A {\
-		padding: 0px 3px !important;\
-	}\
-	.linksfooterblanco {\
-		background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;\
-		background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;\
-		color: #8e908a;\
-		border: 1px solid #C7C9C3;\
-		border-bottom: 1px solid #BABCB6;\
-	}\
-	.linksfooterblanco A {\
-		color: #666666;\
-	}\
-	.linksfooterblanco A:hover {\
-		color: #222222;\
-	}\
-	.linksfooternegro {\
-		background: linear-gradient(to top, #1c252b, #010101) !important;\
-		background: -webkit-gradient(linear, left top, left bottom, from(#010101), to(#1C252B)) !important;\
-		color: #4A4D50;\
-		border: 1px solid #555f66;\
-		border-bottom: 1px solid #0e1113;\
-	}\
 	#modlist {\
 		margin: 20px 0 0;\
 		padding: 10px 10px;\
@@ -885,6 +848,16 @@ var css =
 	margin: 0 0 9px;\
 	font-family: Trebuchet MS,Arial,Verdana,sans-serif;\
 	font-weight: bold;\
+	}\
+	.ut-linksfooter{\
+	margin-top: 15px;\
+	}\
+	.ut-linksfooter-blanco{\
+	border: 1px solid #C7C9C3 !important;\
+	border-top:1px solid #C7C9C3 !important;\
+	border-bottom:1px solid #BABCB6 !important;\
+	background: linear-gradient(to top, #E8EBE3, #D6D8D2) !important;\
+	background: -webkit-gradient(linear, left top, left bottom, from(#D6D8D2), to(#E8EBE3)) !important;\
 	}\
 	";
 }
@@ -1699,90 +1672,27 @@ jQuery(function() {
 	}
 });
 
-
 // Links importantes en el footer
-// jQuery(function(){
-	// if (utlinksfooter == 'si' || utlinksfooter == undefined) {
-		// jQuery(function(){
-		   // if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
-				// jQuery('#userinfo.bar').clone().addClass('linksfooter2').each(function(){
-					// if (is_dark || utlinksfooteroscuro == 'si') {
-						// jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-					// }
-					// else {
-						// jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('div.tfooter').prepend('<a href="/foro/">Foros</a> <a href="/foro/spy">Spy</a> |');
-						// jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
-						// jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
-						// jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
-						// jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
-					// }
-				// });
-				// jQuery('.linksfooter2 .separator').remove();
-				// jQuery('.linksfooter2 #ut-menu').remove();
-				// jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
-					//Noti
-				// jQuery(function() {
-				// if (utnoti != undefined) {
-					// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .uextra').append(' ('+ utnoti +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .bubble').remove();
-					//Avisos
-				// jQuery(function() {
-				// if (utavisos != undefined) {
-					// jQuery('.linksfooter2 a[href^="/notificaciones"] .uextra').append(' ('+ utavisos +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/notificaciones"] .bubble').remove();
-					//Mensajes
-				// jQuery(function() {
-				// if (utmsj != undefined) {
-					// jQuery('.linksfooter2 a[href^="/mensajes"] .uextra').append(' ('+ utmsj +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/mensajes"] .bubble').remove();
-			 // }
-			 // else {
-				 // jQuery('#userinfo .bar').clone().addClass('linksfooter2').each(function(){
-						// if (is_dark || utlinksfooteroscuro == 'si') {
-							// jQuery(this).addClass('linksfooternegro').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-						// }
-						// else {
-							// jQuery(this).addClass('linksfooterblanco').removeClass('bar').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<a href="/foro/spy">Spy</a> |');
-							// jQuery('.linksfooter2 a[href^="/id/"] img').attr('src', 'http://www.mvusertools.com/ext/img/keko_bar.png');
-							// jQuery('.linksfooter2 a[href^="/notificaciones"] img').attr('src', 'http://www.mvusertools.com/ext/img/avisos_bar.png');
-							// jQuery('.linksfooter2 a[href^="/foro/favoritos"] img').attr('src', 'http://www.mvusertools.com/ext/img/fav_bar.png');
-							// jQuery('.linksfooter2 a[href^="/mensajes"] img').attr('src', 'http://www.mvusertools.com/ext/img/mail_bar.png');
-						// }
-					// });		 
-				// jQuery('.linksfooter2 .separator').remove();
-				// jQuery('.linksfooter2 #ut-menu').remove();
-				// jQuery('.linksfooter2 a[href^="/id/"]').children('span').text('Perfil');
-					//Noti
-				// jQuery(function() {
-				// if (utnoti != undefined) {
-					// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .uextra').append(' ('+ utnoti +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/foro/favoritos"] .bubble').remove();
-					//Avisos
-				// jQuery(function() {
-				// if (utavisos != undefined) {
-					// jQuery('.linksfooter2 a[href^="/notificaciones"] .uextra').append(' ('+ utavisos +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/notificaciones"] .bubble').remove();
-					//Mensajes
-				// jQuery(function() {
-				// if (utmsj != undefined) {
-					// jQuery('.linksfooter2 a[href^="/mensajes"] .uextra').append(' ('+ utmsj +')');
-				// }
-				// });
-				// jQuery('.linksfooter2 a[href^="/mensajes"] .bubble').remove();
-			 // }
-		// });
-	// }
-// });
+jQuery(function(){
+	if (utlinksfooter == 'si' || utlinksfooter == undefined) {
+		if(jQuery('a.boton[href^="/foro/post.php?f"]').length > 0){
+			jQuery('#nav_bar #userinfo').clone().removeAttr('id').addClass('ut-linksfooter').insertAfter('div.tfooter').prepend('<li><a href="/foro/">Foros</a></li><li><a href="/foro/spy">Spy</a></li><li> |</li>');
+			jQuery('#modpanel').css('margin-top','55px');
+			jQuery('.ut-linksfooter a').removeAttr('id');
+		}
+		else{
+			jQuery('#nav_bar #userinfo').clone().removeAttr('id').addClass('ut-linksfooter').insertAfter('form#postform[action="/foro/post_action.php"]').prepend('<li><a href="/foro/spy">Spy</a></li><li> |</li>');
+			jQuery('.tpanel #mmform').closest('div').css('margin-top','55px');
+			jQuery('.ut-linksfooter a').removeAttr('id');
+		}
+		if (is_dark || utlinksfooteroscuro == 'si'){
+			jQuery('.ut-linksfooter').addClass('ut-linksfooter-negro');
+		}
+		else{
+			jQuery('.ut-linksfooter').addClass('ut-linksfooter-blanco');
+		}
+	}
+});
 
 // Marcapaginas en los posts que entras directamente
 jQuery(function(){
