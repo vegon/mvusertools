@@ -686,7 +686,7 @@ var css =
 	#ut-button-macros-list{\
 	position: absolute;\
 	top: 132px;\
-	left: 112px;\
+	left: 154px;\
 	width: 125px;\
 	border-radius: 0px 0px 5px 5px;\
 	background-color: #565656;\
@@ -704,7 +704,7 @@ var css =
 	}\
 	.ut-button-macros-list-barrendera{\
 	top: 68px !important;\
-	left: 248px !important;\
+	left: 290px !important;\
 	}\
 	#ut-button-macros-list-anadir {\
 	padding: 1px 1px 2px 3px;\
@@ -1839,7 +1839,7 @@ jQuery("#ut-boton-audio").click(function() {
 
 
 // Segunda linea en la botonera
-var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bsolo" type="button" onclick="bbstyle(20)">[code]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul><a href="#ut-dialog-menu" id="ut-button-macros-list-anadir">añadir macro</a></div>'
+var utsegundabarra = '<button class="alt bsolo" id="ut-boton-bar" type="button">[bar]</button><button class="alt bleft" type="button" onclick="bbstyle(20)">[code]</button><button class="alt bright2" id="ut-boton-cmd" type="button">[cmd]</button><button id="ut-button-macros" class="alt bsolo" type="button">macros <i class="sprite icon-down-list"></i></button><div id="ut-button-macros-list" style="display: none;"><ul></ul><a href="#ut-dialog-menu" id="ut-button-macros-list-anadir">añadir macro</a></div>'
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postear div[style="overflow: hidden;margin: 10px 0;clear: both"]');
 jQuery('<div id="ut-botonera2" style="overflow: hidden;margin: 10px 0;clear: both; display: none;">'+ utsegundabarra +'</div>').insertAfter('form#postform div[style="overflow: hidden;margin-bottom: 10px;clear: both"]');
 jQuery('#ut-boton-plus').click(function(){
@@ -1860,6 +1860,14 @@ jQuery("#ut-boton-bar").click(function() {
 	}
 	else {
 		jQuery("textarea#cuerpo").insertAtCaretPos('[bar][/bar]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -5);
+	}
+});
+jQuery("#ut-boton-cmd").click(function() {
+	if (jQuery('textarea#cuerpo').getSelection().text.length > 0) {
+		jQuery("textarea#cuerpo").replaceSelection('[cmd]' + jQuery('textarea#cuerpo').getSelection().text + '[/cmd]').setCaretPos();
+	}
+	else {
+		jQuery("textarea#cuerpo").insertAtCaretPos('[cmd][/cmd]').setCaretPos(jQuery('textarea#cuerpo').getSelection().end -5);
 	}
 });
 jQuery("#ut-button-macros").click(function() {
