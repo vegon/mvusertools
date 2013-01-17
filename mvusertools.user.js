@@ -35,13 +35,13 @@ var previousPageLink = jQuery($(".tnext")).attr('href');
 var nextPageLink = jQuery($(".tprev")).attr('href');
 
 if(typeof previousPageLink != 'undefined'){
-	Mousetrap.bind('ctrl+m', function(){
+	Mousetrap.bind('ctrl+alt+m', function(){
 		document.location = 'http://www.mediavida.com' + previousPageLink;
 	});
 }
 
 if(typeof nextPageLink != 'undefined'){
-	Mousetrap.bind('ctrl+k', function(){
+	Mousetrap.bind('ctrl+alt+k', function(){
 		document.location = 'http://www.mediavida.com' + nextPageLink;
 	});		
 }
