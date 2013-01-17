@@ -8,6 +8,7 @@
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
 // @require        http://www.mvusertools.com/ext/libs/jquery.a-tools-1.5.2.js
 // @require        http://www.mvusertools.com/ext/libs/sisyphus.js
+// @require        http://craig.is/assets/js/mousetrap/mousetrap.min.js
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
@@ -28,6 +29,24 @@ var utavisos = jQuery('#userinfo a[href^="/notificaciones"] strong.bubble').html
 var utmsj = jQuery('#userinfo a[href^="/mensajes"] strong.bubble').html();
 ////// VARIABLES REUTILIZABLES //////
 
+
+//Atajos de teclado
+var previousPageLink = jQuery($(".tnext")).attr('href');
+var nextPageLink = jQuery($(".tprev")).attr('href');
+
+if(typeof previousPageLink != 'undefined'){
+	Mousetrap.bind('ctrl+m', function(){
+		document.location = 'http://www.mediavida.com' + previousPageLink;
+	});
+}
+
+if(typeof nextPageLink != 'undefined'){
+	Mousetrap.bind('ctrl+k', function(){
+		document.location = 'http://www.mediavida.com' + nextPageLink;
+	});		
+}
+
+//Fin de atajos de teclado
 
 function initInsertions() {
 	var b;
@@ -2187,6 +2206,7 @@ jQuery("a[href^='/id/']")
 //jQuery("img[src^='/img/users/avatar']").parent().after("<div class='ancla'><div>");
 
 jQuery('.autor').each(function() {
+
 	jQuery(this).append("<div class='usertools'>\
 						<div class='online-pos'><a class='tooltip ut-offline sprite' href='http://www.mediavida.com/id/" + jQuery(this).data('name') + "' original-title='Perfil' ></a></div>\
 						<div class='mensaje-pos'><a class='tooltip mensaje sprite' href='http://www.mediavida.com/mensajes/nuevo/" + jQuery(this).data('name') + "' original-title='Mensaje'></a></div>\
