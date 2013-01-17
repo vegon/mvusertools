@@ -46,6 +46,18 @@ if(typeof nextPageLink != 'undefined'){
 	});		
 }
 
+Mousetrap.bind('ctrl+alt+s', function(){
+	if (jQuery('div[id^="cuerpo_"] div[id^="sp_"]').is(':visible')){
+		jQuery('div[id^="cuerpo_"] a.spoiler.less').removeClass('less');
+		jQuery('div[id^="cuerpo_"] div[id^="sp_"]').hide();
+	}
+	else {
+		jQuery('div[id^="cuerpo_"] a.spoiler').toggleClass('less');
+		jQuery('div[id^="cuerpo_"] div[id^="sp_"]').toggle();
+	}
+});
+
+
 //Fin de atajos de teclado
 
 function initInsertions() {
