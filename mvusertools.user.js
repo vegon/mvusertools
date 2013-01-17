@@ -8,7 +8,7 @@
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
 // @require        http://www.mvusertools.com/ext/libs/jquery.a-tools-1.5.2.js
 // @require        http://www.mvusertools.com/ext/libs/sisyphus.js
-// @require        http://craig.is/assets/js/mousetrap/mousetrap.min.js
+// @require        http://www.mvusertools.com/ext/libs/mousetrap.js
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
