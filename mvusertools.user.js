@@ -27,25 +27,31 @@ var liveactivado = jQuery('div.live_info').length > 0;
 var utnoti = jQuery('#userinfo a[href^="/foro/favoritos"] strong.bubble').html();
 var utavisos = jQuery('#userinfo a[href^="/notificaciones"] strong.bubble').html();
 var utmsj = jQuery('#userinfo a[href^="/mensajes"] strong.bubble').html();
+var username = jQuery('.lu').html();
 ////// VARIABLES REUTILIZABLES //////
 
 
 //Atajos de teclado
+//Vars
+var baseUrl = 'http://www.mediavida.com';
 var previousPageLink = jQuery($(".tnext")).attr('href');
 var nextPageLink = jQuery($(".tprev")).attr('href');
 
+//Go previus page
 if(typeof previousPageLink != 'undefined'){
 	Mousetrap.bind('ctrl+alt+m', function(){
-		document.location = 'http://www.mediavida.com' + previousPageLink;
+		document.location = baseUrl + '/' + previousPageLink;
 	});
 }
 
+//Go next page
 if(typeof nextPageLink != 'undefined'){
 	Mousetrap.bind('ctrl+alt+k', function(){
-		document.location = 'http://www.mediavida.com' + nextPageLink;
+		document.location = baseUrl + '/' + nextPageLink;
 	});		
 }
 
+//Open/close Spoilers
 Mousetrap.bind('ctrl+alt+s', function(){
 	if (jQuery('div[id^="cuerpo_"] div[id^="sp_"]').is(':visible')){
 		jQuery('div[id^="cuerpo_"] a.spoiler.less').removeClass('less');
@@ -55,6 +61,36 @@ Mousetrap.bind('ctrl+alt+s', function(){
 		jQuery('div[id^="cuerpo_"] a.spoiler').toggleClass('less');
 		jQuery('div[id^="cuerpo_"] div[id^="sp_"]').toggle();
 	}
+});
+
+//Go favorites
+Mousetrap.bind('ctrl+alt+f', function(){
+	document.location = baseUrl + '/foro/favoritos';
+});
+
+//Go to your profile
+Mousetrap.bind('ctrl+alt+p', function(){
+	document.location = baseUrl + '/id/' + username;
+});
+
+//Go to warnings
+Mousetrap.bind('ctrl+alt+a', function(){
+	document.location = baseUrl + '/notificaciones';
+});
+
+//Go to private messages
+Mousetrap.bind('ctrl+alt+z', function(){
+	document.location = baseUrl + '/mensajes';
+});
+
+//Go to forums
+Mousetrap.bind('ctrl+alt+o', function(){
+	document.location = baseUrl + '/foro';
+});
+
+//Go to spy
+Mousetrap.bind('ctrl+alt+y', function(){
+	document.location = baseUrl + '/foro/spy';
 });
 
 
