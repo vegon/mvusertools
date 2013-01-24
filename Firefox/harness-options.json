@@ -1318,7 +1318,7 @@
   }, 
   "mv-usertools/lib/main.js": {
    "docsSHA256": null, 
-   "jsSHA256": "bb9b2c86f2c665cc29fd6d25337fc9bc6aac2ccdd779aafed440d019ec3d5725", 
+   "jsSHA256": "e245a8be9a6b548acf3a88d19951d0c951faa590f47d1a95bb98f4f0100c5d83", 
    "moduleName": "main", 
    "packageName": "mv-usertools", 
    "requirements": {
@@ -1372,7 +1372,7 @@
    "description": "A\u00f1ade funcionalidades extras a la web mediavida.com", 
    "main": "main", 
    "name": "mv-usertools", 
-   "version": "initial.rev82"
+   "version": "initial.rev85"
   }
  }, 
  "name": "mv-usertools", 
