@@ -2236,7 +2236,7 @@ if (utCambiosNombre == 'si' || utCambiosNombre == undefined) {
 		jQuery('div[class="autor"]:contains("Madme")').each(function() {
 			jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Experto iOS Games</dd>');
 			});
-	/*Maven*/jQuery('div[class="autor"]:contains("Maven")').children().children('dt').replaceWith('<dt><a href="/id/Maven">Madven</a></dt>');
+	/*Maven*/jQuery('div[class="autor"]:contains("MavenBack")').children().children('dt').replaceWith('<dt><a href="/id/MavenBack">Madven</a></dt>');
 	/*Ekisu*/jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
 		jQuery('div[class="autor"]:contains("X-Crim")').each(function() {
 			jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
