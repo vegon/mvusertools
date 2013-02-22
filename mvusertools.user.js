@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.9.1
+// @version        1.9.2-beta
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.9.1';
+/*CAMBIAR VERSIÓN*/var utversion = '1.9.2-beta';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -29,7 +29,6 @@ var utavisos = jQuery('#userinfo a[href^="/notificaciones"] strong.bubble').html
 var utmsj = jQuery('#userinfo a[href^="/mensajes"] strong.bubble').html();
 var utusername = jQuery('.lu').html();
 ////// VARIABLES REUTILIZABLES //////
-
 
 //Atajos de teclado
 //Vars
@@ -737,14 +736,14 @@ var css =
 		display: inline-block;\
 		vertical-align: middle;\
 	}\
-	.icon-trash{\
+	.UT-trash{\
 		background-position: -97px -72px;\
 		width: 11px;\
 		height: 14px;\
 		display: inline-block;\
 		vertical-align: middle;\
 	}\
-	.icon-trash-orange{\
+	.UT-trash-orange{\
 		background-position: -114px -72px; \
 		width: 11px;\
 		height: 14px;\
@@ -805,7 +804,7 @@ var css =
 	border-radius: 3px 3px 3px 3px;\
 	border: 1px solid #EEEEEE;\
 	vertical-align: middle;\
-	padding: 3px 4px 1px;\
+	padding: 3px 4px;\
 	display: inline-block;\
 	transition: all 0.5s;\
 	-moz-transition: all 0.5s;\
@@ -1231,8 +1230,8 @@ jQuery(function() {
 			jQuery('#tfav tr').removeClass('utfiltrado');
 			jQuery('#ut-filtros-tags').remove();
 			jQuery('#tfav a.foroicon').closest('tr').attr('style','display: table-row;');
-			var foroImgSrc = jQuery(this).children('img').attr('src');
-			jQuery('#tfav a.foroicon img').not('img[src="'+foroImgSrc+'"]').closest('tr').addClass('utfiltrado').hide();
+			var foroImgSrc = jQuery(this).children('i').attr("class").match(/fid_(.*)/)[1];
+			jQuery('#tfav a.foroicon i').not('.fid_'+foroImgSrc+'').closest('tr').addClass('utfiltrado').hide();
 			jQuery('#ut-filtros-fav a.foroicon').not(this).addClass('ut-opacity');
 			
 			jQuery('<div id="ut-filtros-tags">').insertAfter('#ut-filtros-fav');
@@ -1327,7 +1326,7 @@ jQuery(function() {
 					for(i=0;i<forosFav.length;i++){
 						var foroNombre = jQuery('div.fpanel div.info a.hb[href="/foro/'+forosFav[i]+'"]').html();
 						jQuery('#ut-foros-fav').append(
-							jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><img width="24" height="24" src="/style/img/icon/foro/'+forosFav[i]+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
+							jQuery('<li>').html('<a href="/foro/'+forosFav[i]+'"><i class="ifid fid_'+forosFav[i]+'"></i></a><div class="ut-foros-fav-borrar"><i class="sprite UT-trash"></i></div>')
 						);
 					}
 				};
@@ -1348,12 +1347,8 @@ jQuery(function() {
 		);
 		jQuery('.ut-foro-fav-add').click(function () {
 			var forosFav = JSON.parse(localStorage['ut-forosFav']);
-			jQuery(this).closest('div.icon').siblings('div.info').find('a.hb,strong a').each(function() {
-				var enlace = this + "";
-				var split = enlace.split('/');
-				var path = split.splice(1, split.length - 1);
-				var pathIndexToGet = 3;
-				var foroNumber = path[pathIndexToGet];
+			jQuery(this).closest('div.icon').find('i.ifid').each(function() {
+				var foroNumber = jQuery(this).attr("class").match(/fid_(.*)/)[1];
 				if (jQuery.inArray(foroNumber, forosFav) > -1) {
 					forosFav.splice( jQuery.inArray(foroNumber, forosFav), 1 );
 					localStorage['ut-forosFav'] = JSON.stringify(forosFav);
@@ -1363,7 +1358,7 @@ jQuery(function() {
 					forosFav.push(foroNumber);
 					localStorage['ut-forosFav'] = JSON.stringify(forosFav);
 					jQuery('#ut-foros-fav').append(
-						jQuery('<li>').html('<a href="/foro/'+foroNumber+'"><img width="24" height="24" src="/style/img/icon/foro/'+foroNumber+'.png" style="width: 24px; height: 24px;"></a><div class="ut-foros-fav-borrar"><i class="sprite icon-trash"></i></div>')
+						jQuery('<li>').html('<a href="/foro/'+foroNumber+'"><i class="ifid fid_'+foroNumber+'"></i></a><div class="ut-foros-fav-borrar"><i class="sprite UT-trash"></i></div>')
 					);
 				}	
 			});
@@ -1420,8 +1415,6 @@ jQuery(function() {
 	}
 });
 
-
-
 // MACROS kaod <3
 jQuery(document).ready(function() { 
 	JSON.encode = JSON.encode || JSON.stringify;
@@ -1451,7 +1444,7 @@ jQuery(document).ready(function() {
 			if (!(title in macros)) {
 				var $spantitle = jQuery('<span class="ut-titletxt">').text(title);
 				var $spanmacro = jQuery('<div class="ut-macrotxt"' + (is_dark ? " style='color: #EEEEEE !important;'" : "") + '>').text(store[title]);
-				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" title="Borrar macro" class="ut-remove-macro"><i class="sprite icon-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
+				var $title = jQuery('<a>').html(' <a style="cursor:pointer;" title="Borrar macro" class="ut-remove-macro"><i class="sprite UT-trash-orange"></i></a>').prepend($spantitle).append($spanmacro); // solo +title+ para la lista de titulos
 				var $item = jQuery('<li class="ut-titleymacro">')
 					.data('macro', title)
 					.append($title)
