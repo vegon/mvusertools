@@ -9,6 +9,7 @@
 // @require        http://www.mvusertools.com/ext/libs/jquery.a-tools-1.5.2.js
 // @require        http://www.mvusertools.com/ext/libs/sisyphus.js
 // @require        http://www.mvusertools.com/ext/libs/mousetrap.js
+// @require        http://www.mvusertools.com/ext/libs/jquery.scrollto.js
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
@@ -1181,11 +1182,13 @@ jQuery(function() {
 	if (utcerrarspoilers == 'si') {
 		jQuery('div[id^="cuerpo_"] div[id^="sp_"]').append('<br /><br /><a class="ut-cerrarspoiler-boton" style="cursor: pointer;">Cerrar Spoiler</a>');
 		jQuery('.ut-cerrarspoiler-boton').click(function() {
-			var utSpoilerPostId = jQuery(this).closest('div.body').siblings('div.info').children('a.qn').attr('rel');
-			jQuery(this).attr('href','#'+ utSpoilerPostId +'');
+			var utSpoilerPostId = jQuery(this).closest('div.post').attr('id');
 			var utSpoilerId = jQuery(this).closest('div[id^="sp_"]').attr('id');
 			jQuery(this).closest('div[id^="sp_"]').siblings('a[rel="'+ utSpoilerId +'"]').removeClass('less');
 			jQuery(this).closest('div[id^="'+ utSpoilerId +'"]').hide();
+			jQuery('#'+utSpoilerPostId).ScrollTo({
+				duration: 0
+			});
 		});
 	}
 });
@@ -1741,8 +1744,9 @@ jQuery(function() {
 		jQuery(function() {
 			if(jQuery('div#topnav a[href="/foro/"]').length > 0 && jQuery('div.live_info').length == 0) {
 				jQuery('div.smallcol, div.tinycol').append('<div class="box"><div id="modlist"><h3>Moderadores</h3></div></div>');
-				var url = window.location.pathname;
-				var id = url.split("/")[2];
+				//var url = window.location.pathname;
+				//var id = url.split("/")[2];
+				var id = jQuery('input#fid').attr('value');
 				mods = [
 					['nulo'],['bazoo','jadgix','J40','RaymaN','TazzMaTazz'],['Eristoff','kalinka-'],['aLeX','Josekron','Loa','MegalomaniaC','mongui','Prava'],[''],[''],['Atoll','Bloody','Eristoff','Kails','JMBaDBoY','Prava','PruDeN','sacnoth',],['abichuela','AG','alejo','Ch4iNeR','cm07','Korso','lb_nacho','Netzach','VipeR_CS'],[''],['Kaos','PiradoIV'],['TNx7','tutitin'],[''],[''],[''],[''],[''],[''],[''],[''],['Kaneas','TNx7'],[''],[''],['Cryoned','Dream-MV','esvarianzza'],['darkavm','ElKedao','Privatovic','ukuki'],[''],[''],['Midgard','StumKrav','thunder_'],[''],[''],[''],[''],['Eristoff','ReYzell'],['Andy','eisenfaust','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY',],[''],[''],[''],[''],[''],['Hir0shz','Ligia','ManOwaR','sPoiLeR',],[''],['ferk','HaZuKi','horvathzeros','J40'],[''],['dangerous','zashael'],[''],[''],[''],[''],[''],[''],[''],[''],[''],['BigmAK','MaSqUi','tutitin','XaViMeTaL'],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],[''],['Cheester','cuerpi','darkavm','sk_sk4t3r','TNx7','Txentx0'],['dangerous','spyro512'],[''],[''],[''],['GR33N'],[''],[''],['Snorky','spyro512'],[''],[''],[''],[''],[''],['JMBaDBoY','Sirius_spa','suggus','ZaGo'],['granaino127','SaBaNdIjA'],['granaino127','SaBaNdIjA'],['darkavm','GryF','Kb','lb_nacho','-Power'],[''],[''],['ElKedao','darkavm','dicon','sk_sk4t3r'],[''],[''],[''],['Atoll','ZaGo'],['DeNz1L','kaitoo','NosFeR_'],['Skelus'],['darkavm','Dolz','Txentx0','urrako'],['babri','dicon','RoDRa','Spank'],['iosp','Hogwarts','lb_nacho'],['zashael'],['Charly-','edvan','frostttt','Kazuya_','zashael'],['0buS','RaymaN','sPoiLeR'],['CsNarsil','CybeR'],['eisenfaust'],['bazoo','StumKrav','thunder_'],['DarkHawX','Korso','Netzach','StumKrav'],['benitogb','BigmAK'],[''],['Andy','ISAILOVIC','JMBaDBoY','loko_man','ruben132','Sh1n0d4','t0rrY'],[''],['allmy','naete','slakk','StumKrav','thunder_'],['gonya707','TRON'],['babri','RoninPiros',],['Bidroid','MagicAnnii'],['ChaRliFuM','menolikeyou','undimmer'],['locof','Pedrosa7','Syuk',],[''],['alexander','ferk','horvathzeros','J40'],[''],['KinachO'],['cm07','RoninPiros'],[''],['Rundull'],['dangerous'],['HeXaN','Prostyler','thunder_'],[''],[''],['']
 				];
@@ -1829,44 +1833,6 @@ jQuery(function(){
 			// });	
 		// });
 	// });
-
-
-// Icono del foro del que viene la noticia en Portada
-// jQuery(function(){
-	// if (uticonosportada == 'si' || uticonosportada == undefined) {
-		// jQuery('.bbar a[href^="/foro"]').each(function(i) {
-			// var enlace = this + "";
-			// var split = enlace.split('/');
-			// var path = split.splice(1, split.length - 1);
-			// var pathIndexToGet = 3;
-			// var foro = path[pathIndexToGet];
-			// var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			// jQuery(this).html('<img style="vertical-align: middle; padding: 0 5px 0 0;" src="' + foroicon + '">');
-		// });
-		// jQuery('.item h4').each(function (index) {
-			// jQuery(this).prepend(jQuery('.bbar a[href^="/foro"]').eq(0));
-		// });
-		// jQuery('div.item div.bbar div.left:first-child').contents().filter(function(){
-			// return this.nodeType === 3;
-		// }).remove();
-		// jQuery('div.item div.bbar div.left:first-child').prepend('En ');
-	// }
-// });
-		
-// Icono del foro del que viene la noticia en Destacados
-// jQuery(function(){
-	// if (uticonosdestacados == 'si' || uticonosdestacados == undefined) {
-		// jQuery('ul.mini a[href^="/foro"]').each(function(i) {
-			// var enlace = this + "";
-			// var split = enlace.split('/');
-			// var path = split.splice(1, split.length - 1);
-			// var pathIndexToGet = 3;
-			// var foro = path[pathIndexToGet];
-			// var foroicon = 'http://www.mediavida.com/style/img/icon/foro/' + foro + '.png';
-			// jQuery(this).closest('li').attr('style','background-image: url('+ foroicon +') !important; background-repeat: no-repeat !important; background-position: 5px center !important; padding: 10px 8px 10px 35px !important;');
-		// });
-	// }
-// });
 
 
 // nueva botonera
