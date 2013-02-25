@@ -1130,12 +1130,12 @@ if (utlinksfooter == 'no') {
 // Mensaje al updatear
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- Se ha reescrito el código de los enlaces importantes al final de la página después de haberse roto con una actualización de Mediavida.<br /><br />\
-																- Opción en Estilos para quitar los avisos/favoritos/mensajes en ventana flotante.<br /><br />\
-																- Opción en Estilos para añadir un botón al final de un spoiler para cerrarlo sin volver arriba.<br /><br />\
-																- Atajos de teclado (abrir todos los spoilers, pasar página en un hilo,...). Los tenéis todos en la pestaña "Sobre MV-UT".<br /><br />\
+																- Actualización 100% centrada en corrección de errores.<br /><br />\
+																- Filtros en favoritos y añadir foros favoritos vuelven a funcionar correctamente.<br /><br />\
+																- La lista de mods vuelve a ser visible.<br /><br />\
+																- Al cerrar un spoiler con el botón al final del mismo, el navegador te deja al comienzo del post del que proviene el spoiler.<br /><br />\
+																- Atajos de teclado cambiados para mejor acceso. Los tenéis todos en la pestaña "Sobre MV-UT".<br /><br />\
 																- Pequeñas mejoras y añadidos.<br /><br />\
-																- Corrección de errores.\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
