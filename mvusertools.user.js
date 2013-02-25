@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.9.2-beta
+// @version        1.9.2
 // @description    Añade controles avanzados a los posts en MV
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
@@ -13,7 +13,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.9.2-beta';
+/*CAMBIAR VERSIÓN*/var utversion = '1.9.2';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -36,21 +36,18 @@ var utusername = jQuery('.lu').html();
 var utbaseUrl = 'http://www.mediavida.com';
 var previousPageLink = jQuery($(".tnext")).attr('href');
 var nextPageLink = jQuery($(".tprev")).attr('href');
-
 //Go previus page
 if(typeof previousPageLink != 'undefined'){
-	Mousetrap.bind('ctrl+alt+m', function(){
+	Mousetrap.bind('ctrl+alt+z', function(){
 		document.location = utbaseUrl + '/' + previousPageLink;
 	});
 }
-
 //Go next page
 if(typeof nextPageLink != 'undefined'){
-	Mousetrap.bind('ctrl+alt+k', function(){
+	Mousetrap.bind('ctrl+alt+x', function(){
 		document.location = utbaseUrl + '/' + nextPageLink;
 	});		
 }
-
 //Open/close Spoilers
 Mousetrap.bind('ctrl+alt+s', function(){
 	if (jQuery('div[id^="cuerpo_"] div[id^="sp_"]').is(':visible')){
@@ -62,39 +59,32 @@ Mousetrap.bind('ctrl+alt+s', function(){
 		jQuery('div[id^="cuerpo_"] div[id^="sp_"]').toggle();
 	}
 });
-
 //Go favorites
-Mousetrap.bind('ctrl+alt+f', function(){
+Mousetrap.bind('ctrl+alt+e', function(){
 	document.location = utbaseUrl + '/foro/favoritos';
 });
-
 //Go to your profile
-Mousetrap.bind('ctrl+alt+p', function(){
+Mousetrap.bind('ctrl+alt+q', function(){
 	document.location = utbaseUrl + '/id/' + utusername;
 });
-
 //Go to warnings
-Mousetrap.bind('ctrl+alt+a', function(){
+Mousetrap.bind('ctrl+alt+w', function(){
 	document.location = utbaseUrl + '/notificaciones';
 });
-
 //Go to private messages
-Mousetrap.bind('ctrl+alt+z', function(){
+Mousetrap.bind('ctrl+alt+r', function(){
 	document.location = utbaseUrl + '/mensajes';
 });
-
 //Go to forums
-Mousetrap.bind('ctrl+alt+o', function(){
+Mousetrap.bind('ctrl+alt+a', function(){
 	document.location = utbaseUrl + '/foro';
 });
-
 //Go to spy
-Mousetrap.bind('ctrl+alt+y', function(){
+Mousetrap.bind('ctrl+alt+d', function(){
 	document.location = utbaseUrl + '/foro/spy';
 });
+//Fin de atajos de teclado//
 
-
-//Fin de atajos de teclado
 
 function initInsertions() {
 	var b;
@@ -2192,9 +2182,9 @@ if (utCambiosNombre == 'si' || utCambiosNombre == undefined) {
 	/*Alien_crrpt*/jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
 	/*Achotiodeque*/jQuery('div[class="autor"]:contains("Achotiodeque")').children().children('dt').replaceWith('<dt><a href="/id/Achotiodeque">Achotoditeque</a></dt>');
 	/*Masme*/jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
-		jQuery('div[class="autor"]:contains("Madme")').each(function() {
-			jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Experto iOS Games</dd>');
-			});
+		// jQuery('div[class="autor"]:contains("Madme")').each(function() {
+			// jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Experto iOS Games</dd>');
+			// });
 	/*Maven*/jQuery('div[class="autor"]:contains("MavenBack")').children().children('dt').replaceWith('<dt><a href="/id/MavenBack">Madven</a></dt>');
 	/*Ekisu*/jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
 		jQuery('div[class="autor"]:contains("X-Crim")').each(function() {
