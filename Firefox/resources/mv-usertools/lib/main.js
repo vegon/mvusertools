@@ -8,5 +8,6 @@ pageMod.PageMod({
     				  data.url("jquery.a-tools-1.5.2.js"),
 					  data.url("sisyphus.js"),
                       data.url("mousetrap.js"),
+                      data.url("jquery.scrollto.js"),
                       data.url("mvusertools.user.js")]
 });

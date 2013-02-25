@@ -644,7 +644,7 @@
   }, 
   "addon-sdk/lib/sdk/net/url.js": {
    "docsSHA256": null, 
-   "jsSHA256": "c291bf69f1c25ee67e4e6f8220dc65367bdf64f1afaf18bcc89d31bd4a3a8f70", 
+   "jsSHA256": "c40de0749cd249c1ddad20927af53ec161883cc49b8625796de5d876273c7d71", 
    "moduleName": "sdk/net/url", 
    "packageName": "addon-sdk", 
    "requirements": {
@@ -1084,7 +1084,7 @@
   }, 
   "addon-sdk/lib/sdk/tabs/tab-firefox.js": {
    "docsSHA256": null, 
-   "jsSHA256": "9c51508241ed7167374bdcd7f9255f7ece5fac1a19d3a5a8a44f12c08cf1dcdb", 
+   "jsSHA256": "dfb3324902919cd8657e1b1fa1ab2be7d77493ba00400fbead285ea37ac7522d", 
    "moduleName": "sdk/tabs/tab-firefox", 
    "packageName": "addon-sdk", 
    "requirements": {
@@ -1502,7 +1502,7 @@
   }, 
   "addon-sdk/lib/sdk/windows/loader.js": {
    "docsSHA256": null, 
-   "jsSHA256": "29c96d09068af2b60895571f18f12b4d5ddaa5580da02a256ca5920a03de3ee1", 
+   "jsSHA256": "ca3063c7f5a91bfca119dd8a78d2a7ed9d5fb3708c17c347d3607615344db52f", 
    "moduleName": "sdk/windows/loader", 
    "packageName": "addon-sdk", 
    "requirements": {
@@ -1636,7 +1636,7 @@
   }, 
   "mv-usertools/lib/main.js": {
    "docsSHA256": null, 
-   "jsSHA256": "e245a8be9a6b548acf3a88d19951d0c951faa590f47d1a95bb98f4f0100c5d83", 
+   "jsSHA256": "eb7ee62aaebbaa5d369ed818c7be8a7b2274c206098b67db194c1109a524fa55", 
    "moduleName": "main", 
    "packageName": "mv-usertools", 
    "requirements": {
@@ -1670,11 +1670,11 @@
    "description": "A\u00f1ade funcionalidades extras a la web mediavida.com", 
    "main": "main", 
    "name": "mv-usertools", 
-   "version": "initial.rev89"
+   "version": "initial.rev94"
   }
  }, 
  "name": "mv-usertools", 
- "sdkVersion": "1.13.1", 
+ "sdkVersion": "1.13.2", 
  "staticArgs": {}, 
  "verbose": false
 }
