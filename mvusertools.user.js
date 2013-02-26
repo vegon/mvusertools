@@ -2201,6 +2201,7 @@ if (utCambiosNombre == 'si' || utCambiosNombre == undefined) {
 	utCambioDeNick('MavenBack', 'Madven');
 	utCambioDeNick('Ekisu', 'X-Crim', 'Mod de Mario Kart');
 	utCambioDeNick('Txentx0','Txentxo');
+	utCambioDeNick('Link34','Link-pyon');
 	//Foros
 	var utCambioDeNombreForo = function(original, falso) {
 		jQuery('div.fpanels div.fpanel div.info span.sub a:contains("'+original+'")').text(''+falso+'');
