@@ -930,6 +930,24 @@ var css =
 	background-image: url('http://mvusertools.com/ext/img/bubble.png') !important;\
 	text-shadow: 0 0 3px #000000 !important;\
 	}\
+	.ut_tag{\
+	color: #ffffff;\
+	position: absolute;\
+	margin-top: 28px;\
+	padding: 2px 4px;\
+	border-radius: 4px;\
+	transition: 0.5s;\
+	-moz-transition: 0.5s;\
+	-ms-transition: 0.5s;\
+	-webkit-transition: 0.5s;\
+	-o-transition: 0.5s;\
+	cursor: pointer;\
+	}\
+	.ut_tag:hover{\
+	opacity: 1.0 !important;\
+	width: auto !important;\
+	height: auto !important;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -1168,11 +1186,26 @@ jQuery(function(){
 	});
 });
 
-// FUCKING TAGS
+// FUCKING TAGS http://www.mediavida.com/foro/redaccion/prueba-468971
 jQuery(function() {
-
-
-
+	if (localStorage['ut-Tags'] == undefined) {
+			//var utTags = {"Vegon":{tag:"tag",link:"http://google.es",color:"#98C6F8"}, "-Power":{tag:"tag2",link:"http://mediavida.com",color:"rgb(116, 173, 121)"}};
+			var utTags = {};
+			localStorage['ut-Tags'] = JSON.stringify(utTags);
+		}
+	// Dibuja tags
+	var utTags = JSON.parse(localStorage['ut-Tags']);
+	jQuery(':not(form)> div.post > div.autor > dl > dt > a').each(function() {
+		var nick = jQuery(this).text();
+		if (typeof utTags[nick] !== "undefined") {
+			//jQuery(this).addClass(''+utTags[nick].tag+'');
+			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: '+utTags[nick].color+'">'+utTags[nick].tag+'</div>')
+		}
+		else {
+			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display: none;">Hola!</div>');
+		}
+	});
+	// Añade tags
 });
 
 // Botón para cerrar spoiler al final del mismo
