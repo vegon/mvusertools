@@ -3,6 +3,7 @@
 // @namespace      MVusertools
 // @version        1.9.2
 // @description    Añade controles avanzados a los posts en MV
+// @grant          GM_addStyle
 // @include        http://www.mediavida.com/*
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js
 // @require        http://www.mvusertools.com/ext/libs/tinycon.min.js
@@ -402,7 +403,7 @@ var css =
 	{\
 			position: relative;\
 			width: 67px;\
-			margin-top: 2px;\
+			margin-top: 10px;\
 	}\
 	button::-moz-focus-inner {\
 	border: 0;\
@@ -2179,22 +2180,36 @@ if (utlivesdestacados == 'si' || utlivesdestacados == undefined) {
 
 // Cambios de nombres
 if (utCambiosNombre == 'si' || utCambiosNombre == undefined) {
-	/*Alien_crrpt*/jQuery('div[class="autor"]:contains("Alien_crrpt")').children().children('dt').replaceWith('<dt><a href="/id/Alien_crrpt">Alien_derp</a></dt>');
-	/*Achotiodeque*/jQuery('div[class="autor"]:contains("Achotiodeque")').children().children('dt').replaceWith('<dt><a href="/id/Achotiodeque">Achotoditeque</a></dt>');
-	/*Masme*/jQuery('div[class="autor"]:contains("Masme")').children().children('dt').replaceWith('<dt><a href="/id/Masme">Madme</a></dt>');
-		// jQuery('div[class="autor"]:contains("Madme")').each(function() {
-			// jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Experto iOS Games</dd>');
-			// });
-	/*Maven*/jQuery('div[class="autor"]:contains("MavenBack")').children().children('dt').replaceWith('<dt><a href="/id/MavenBack">Madven</a></dt>');
-	/*Ekisu*/jQuery('div[class="autor"]:contains("Ekisu")').children().children('dt').replaceWith('<dt><a href="/id/Ekisu">X-Crim</a></dt>');
-		jQuery('div[class="autor"]:contains("X-Crim")').each(function() {
-			jQuery(this).children().children('dd:first').replaceWith('<dd style="font-size: 10px">Mod de Mario Kart</dd>');
+	// Nicks
+	var utCambioDeNick = function(original, falso, ct) {
+		jQuery('div.post div[class="autor"]:contains("'+original+'")').each(function() {
+			jQuery(this).children().children('dt').children('a').text(''+falso+'');
+			if (typeof ct !== "undefined") {
+				jQuery(this).children().children('dd:first').text(''+ct+'');
+			}
 			});
-	/*Juegos móviles*/jQuery('div.fpanels div.fpanel div.info span.sub a[href="/foro/136"]').text('Shitphones');
-		jQuery('#topnav h1:contains("Juegos móviles")').text('Shitphones');
-		jQuery('#topnav a[href="/foro/136"]').text('Shitphones');
-		jQuery('#footnav a[href="/foro/136"]').text('Shitphones');
-		jQuery('div.fpanels div.fpanel div.info strong a[href="/foro/136"]').text('Shitphones');
+		jQuery(document).on('mouseover','body', function(){
+			jQuery('div.lastpost cite a:contains("'+original+'")').text(''+falso+'');
+		});
+		jQuery('tr div.left a[href^="/id/"]:contains("'+original+'")').each(function() {
+			jQuery(this).text(''+falso+'');
+			});
+	};
+	utCambioDeNick('Alien_crrpt', 'Alien_derp');
+	utCambioDeNick('Achotiodeque', 'Achotoditeque');
+	utCambioDeNick('Masme', 'Madme');
+	utCambioDeNick('MavenBack', 'Madven');
+	utCambioDeNick('Ekisu', 'X-Crim', 'Mod de Mario Kart');
+	utCambioDeNick('Txentx0','Txentxo');
+	//Foros
+	var utCambioDeNombreForo = function(original, falso) {
+		jQuery('div.fpanels div.fpanel div.info span.sub a:contains("'+original+'")').text(''+falso+'');
+		jQuery('#topnav h1:contains("'+original+'")').text(''+falso+'');
+		jQuery('#topnav a:contains("'+original+'")').text(''+falso+'');
+		jQuery('#footnav a:contains("'+original+'")').text(''+falso+'');
+		jQuery('div.fpanels div.fpanel div.info strong a:contains("'+original+'")').text(''+falso+'');
+	};
+	utCambioDeNombreForo('Juegos móvil','Shitphones');
 }
 
 // Version en el footer
