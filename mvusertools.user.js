@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.9.2
+// @version        1.10-beta
 // @description    Añade controles avanzados a los posts en MV
 // @grant          GM_addStyle
 // @include        http://www.mediavida.com/*
@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.9.2';
+/*CAMBIAR VERSIÓN*/var utversion = '1.10-beta';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -1166,6 +1166,13 @@ jQuery(function(){
 		jQuery('div#ut-mask').hide();
 		jQuery('div#ut-dialog').hide();
 	});
+});
+
+// FUCKING TAGS
+jQuery(function() {
+
+
+
 });
 
 // Botón para cerrar spoiler al final del mismo
