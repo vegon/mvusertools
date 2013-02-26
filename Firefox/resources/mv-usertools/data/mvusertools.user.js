@@ -38,7 +38,7 @@ var previousPageLink = jQuery($(".tnext")).attr('href');
 var nextPageLink = jQuery($(".tprev")).attr('href');
 //Go previus page
 if(typeof previousPageLink != 'undefined'){
-    Mousetrap.bind('ctrl+alt+z', function(){
+	Mousetrap.bind('ctrl+alt+z', function(){
 		document.location = utbaseUrl + '/' + previousPageLink;
 	});
 }
@@ -2373,4 +2373,3 @@ jQuery(".blacklist").click(function () {
 	});
 	// Fin de actualización
 });
-jQuery("a.tooltip").tipsy();

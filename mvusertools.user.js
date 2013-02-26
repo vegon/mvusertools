@@ -2373,4 +2373,4 @@ jQuery(".blacklist").click(function () {
 	});
 	// Fin de actualización
 });
-jQuery("a.tooltip").tipsy();
+//jQuery("a.tooltip").tipsy();
