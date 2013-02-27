@@ -1271,7 +1271,7 @@ jQuery(function() {
 			jQuery(this).closest('.autor').append('<div class="ut_tag ut_tag_vacia" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="11"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="26"><br />&gt; <span class="ut_tag_link_span">Link</span><br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
 		}
 		
-		jQuery(this).closest('.autor').children(".ut_tag_info").children(".ut_tag_form").submit(function() { // guardamos datos del tag
+		jQuery(this).closest('.autor').children(".ut_tag_info").on('submit', 'form.ut_tag_form', function() { // guardamos datos del tag
 			var $tag = jQuery(this).children(".ut_tag_tag");
 			var $color = jQuery(this).children(".ut_tag_color");
 			var $link = jQuery(this).children(".ut_tag_link");
@@ -1309,6 +1309,7 @@ jQuery(function() {
 				});
 			}
 			localStorage['ut-Tags'] = JSON.stringify(utTags);
+			
 			return false;
 		});		
 	});
