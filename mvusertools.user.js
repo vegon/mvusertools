@@ -948,6 +948,35 @@ var css =
 	width: auto !important;\
 	height: auto !important;\
 	}\
+	.ut_tag_info {\
+	position: absolute;\
+	background: #cccccc;\
+	border: 1px solid #999999;\
+	padding: 5px;\
+	margin: -129px 0 0 0;\
+	font-size: 10px;\
+	}\
+	.ut_tag_info input,.ut_tag_info textarea{\
+	font-size: 9px;\
+	padding: 1px 1px 3px 1px;\
+	}\
+	.ut_tag_info input[type=submit]{\
+	padding: 0px;\
+	float: right;\
+	}\
+	.ut_tag_info input[type=submit]:hover{\
+	background: #3e8baf;\
+	color: #fff;\
+	}\
+	.ut_tag_tag, .ut_tag_link, .ut_tag_color {\
+	width: 110px;\
+	}\
+	.ut_tag_info_cerrar {\
+	cursor: pointer;\
+	position: absolute;\
+	margin: -8px 0 0 110px;\
+	color: #cb0000;\
+	}\
 	";
 }
 if (typeof GM_addStyle != "undefined") {
@@ -1199,13 +1228,57 @@ jQuery(function() {
 		var nick = jQuery(this).text();
 		if (typeof utTags[nick] !== "undefined") {
 			//jQuery(this).addClass(''+utTags[nick].tag+'');
-			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: '+utTags[nick].color+'">'+utTags[nick].tag+'</div>')
+			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: '+utTags[nick].color+'">'+utTags[nick].tag+'</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" value="'+utTags[nick].tag+'" maxlength="11"><br />&gt; Color<br><input class="ut_tag_color" value="'+utTags[nick].color+'" maxlength="7"><br />&gt; Link<br><input class="ut_tag_link" value="'+utTags[nick].link+'"><br />&gt; Descripción<br><textarea class="ut_tag_desc" style="width: 110px;">'+utTags[nick].desc+'</textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>')
+		
+			jQuery(this).closest('.autor').children(".ut_tag_info").children(".ut_tag_form").submit(function() {
+				var $tag = jQuery(this).children(".ut_tag_tag");
+				var $color = jQuery(this).children(".ut_tag_color");
+				var $link = jQuery(this).children(".ut_tag_link");
+				var $desc = jQuery(this).children(".ut_tag_desc");
+				var tag = $tag.val();
+				var color = $color.val();
+				var link = $link.val();
+				var desc = $desc.val();
+				
+				utTags[''+nick+''] = {tag:''+tag+'', color:''+color+'', link:''+link+'', desc:''+desc+''};
+				
+				localStorage['ut-Tags'] = JSON.stringify(utTags);
+				
+				return false;
+			});
+		
 		}
 		else {
-			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display: none;">Hola!</div>');
+			jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="11"><br />&gt; Color<br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="7"><br />&gt; Link<br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
+			
+			jQuery(this).closest('.autor').children(".ut_tag_info").children(".ut_tag_form").submit(function() {
+				var $tag = jQuery(this).children(".ut_tag_tag");
+				var $color = jQuery(this).children(".ut_tag_color");
+				var $link = jQuery(this).children(".ut_tag_link");
+				var $desc = jQuery(this).children(".ut_tag_desc");
+				var tag = $tag.val();
+				var color = $color.val();
+				var link = $link.val();
+				var desc = $desc.val();
+				
+				utTags[''+nick+''] = {tag:''+tag+'', color:''+color+'', link:''+link+'', desc:''+desc+''};
+				
+				localStorage['ut-Tags'] = JSON.stringify(utTags);
+				
+				return false;
+			});
 		}
 	});
 	// Añade tags
+	
+	
+	// Funciones de los botones
+	
+	jQuery('.ut_tag, .ut_tag_info_cerrar').each(function() {
+		jQuery(this).click(function(){
+			jQuery(this).closest('div.autor').children('.ut_tag_info').toggle();
+		});
+	});
 });
 
 // Botón para cerrar spoiler al final del mismo
