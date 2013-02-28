@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.10-beta1
+// @version        1.10
 // @description    Añade controles avanzados a los posts en MV
 // @grant          GM_addStyle
 // @include        http://www.mediavida.com/*
@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.10-beta1';
+/*CAMBIAR VERSIÓN*/var utversion = '1.10';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -1215,12 +1215,9 @@ if (utlinksfooter == 'no') {
 // Mensaje al updatear
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- Actualización 100% centrada en corrección de errores.<br /><br />\
-																- Filtros en favoritos y añadir foros favoritos vuelven a funcionar correctamente.<br /><br />\
-																- La lista de mods vuelve a ser visible.<br /><br />\
-																- Al cerrar un spoiler con el botón al final del mismo, el navegador te deja al comienzo del post del que proviene el spoiler.<br /><br />\
-																- Atajos de teclado cambiados para mejor acceso. Los tenéis todos en la pestaña "Sobre MV-UT".<br /><br />\
-																- Pequeñas mejoras y añadidos.<br /><br />\
+																- ¡¡Tags!! Información de como funcionan en <a href="http://mvusertools.com/caracteristicas#tags" target="_blank">el apartado Características de la web oficial</a>.<br /><br />\
+																- Pequeños añadidos.<br /><br />\
+																- Corrección de errores.<br /><br />\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
 jQuery('<div style="display: none" id="ut-dialog"><a href="http://mvusertools.com" target="_blank"><img style="margin: 0 150px;" src="http://www.mediavida.com/img/f/mediavida/2012/10/02632_mv_usertools_extension_para_firefox_chrome_safari_0_full.png"></a><div id="ut-window">'+ utpatchnotes +''+ bottominfo +'<a style="float: right; margin-top: 10px; cursor: pointer;" id="ut-box-cerrar">Cerrar</a></div></div>').insertBefore('#content_head');
