@@ -1861,7 +1861,8 @@ jQuery(function() {
 
 			jQuery('.post .autor dt a').hover(function(event) {
 				offset = jQuery(this).offset();
-				pendingInfoBox = jQuery(this).html();
+				pendingInfoBoxOld = jQuery(this).attr('href');
+				pendingInfoBox = pendingInfoBoxOld.match(/id\/(.+)/)[1];
 				infoBoxX = offset.left - 10;
 				infoBoxY = offset.top + 14;
 				setTimeout(checkUserInfoBox, 1000);
@@ -2363,6 +2364,7 @@ if (utCambiosNombre == 'si' || utCambiosNombre == undefined) {
 	utCambioDeNick('Ekisu', 'X-Crim', 'Mod de Mario Kart');
 	utCambioDeNick('Txentx0','Txentxo');
 	utCambioDeNick('Link34','Link-pyon');
+	utCambioDeNick('GaTToO','GaTToO', 'Me punishean :_(');
 	//Foros
 	var utCambioDeNombreForo = function(original, falso) {
 		jQuery('div.fpanels div.fpanel div.info span.sub a:contains("'+original+'")').text(''+falso+'');
