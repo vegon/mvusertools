@@ -1670,7 +1670,7 @@
    "description": "A\u00f1ade funcionalidades extras a la web mediavida.com", 
    "main": "main", 
    "name": "mv-usertools", 
-   "version": "initial.rev94"
+   "version": "initial.rev96"
   }
  }, 
  "name": "mv-usertools", 
