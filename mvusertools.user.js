@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.10
+// @version        1.10.1
 // @description    Añade controles avanzados a los posts en MV
 // @grant          GM_addStyle
 // @include        http://www.mediavida.com/*
@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
-/*CAMBIAR VERSIÓN*/var utversion = '1.10';
+/*CAMBIAR VERSIÓN*/var utversion = '1.10.1';
 var bbcode = new Array();
 var bbtags = new Array("[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[url]", "[/url]", "[url=]", "[/url]", "[img]", "[/img]", "[video]", "[/video]", "[spoiler]", "[/spoiler]", "[spoiler=]", "[/spoiler]", "[spoiler=NSFW]", "[/spoiler]", "[code]", "[/code]", "[center]", "[/center]", "[s]", "[/s]", "[bar]", "[/bar]", "[list]", "[/list]", "[audio]", "[/audio]");
 var theSelection = false;
@@ -1215,8 +1215,6 @@ if (utlinksfooter == 'no') {
 // Mensaje al updatear
 var utversionls = localStorage["utversionls"];
 var utpatchnotes = '<p style="font-size: 16px; font-weight: bold;">Actualización '+ utversion +'</p><br /><br />\
-																- ¡¡Tags!! Información de como funcionan en <a href="http://mvusertools.com/caracteristicas#tags" target="_blank">el apartado Características de la web oficial</a>.<br /><br />\
-																- Pequeños añadidos.<br /><br />\
 																- Corrección de errores.<br /><br />\
 																';
 jQuery('<div style="display: none" id="ut-mask"></div>').insertBefore('#background');
@@ -1249,7 +1247,7 @@ jQuery(function(){
 	});
 });
 
-// FUCKING TAGS http://www.mediavida.com/foro/redaccion/prueba-468971
+// FUCKING TAGS
 jQuery(function() {
 	if (utTagsOpcion == 'si' || utTagsOpcion == undefined) {
 		if (localStorage['ut-Tags'] == undefined) {
@@ -1262,13 +1260,13 @@ jQuery(function() {
 		jQuery(':not(form)> div.post > div.autor > dl > dt > a').each(function() {
 			var nick = jQuery(this).text();
 			if (typeof utTags[nick] !== "undefined") { // dibuja con datos
-				jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: '+utTags[nick].color+'">'+utTags[nick].tag+'</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" value="'+utTags[nick].tag+'" maxlength="11"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" value="'+utTags[nick].color+'" maxlength="26"><br />&gt; <span class="ut_tag_link_span"><a href="'+utTags[nick].link+'" target="_blank">Link</a></span><br><input class="ut_tag_link" value="'+utTags[nick].link+'"><br />&gt; Descripción<br><textarea class="ut_tag_desc" style="width: 110px;">'+utTags[nick].desc+'</textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
+				jQuery(this).closest('.autor').append('<div class="ut_tag" style="background-color: '+utTags[nick].color+'">'+utTags[nick].tag+'</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" value="'+utTags[nick].tag+'" maxlength="25"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" value="'+utTags[nick].color+'" maxlength="26"><br />&gt; <span class="ut_tag_link_span"><a href="'+utTags[nick].link+'" target="_blank">Link</a></span><br><input class="ut_tag_link" value="'+utTags[nick].link+'"><br />&gt; Descripción<br><textarea class="ut_tag_desc" style="width: 110px;">'+utTags[nick].desc+'</textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
 				if (utTags[nick].link === "") { // quita el link si no tiene enlace
 					jQuery(this).closest('.autor').children('.ut_tag_info').children('.ut_tag_form').children('.ut_tag_link_span').replaceWith('<span class="ut_tag_link_span">Link</span>');
 				}
 			}
 			else { // dibuja sin datos
-				jQuery(this).closest('.autor').append('<div class="ut_tag ut_tag_vacia" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="11"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="26"><br />&gt; <span class="ut_tag_link_span">Link</span><br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
+				jQuery(this).closest('.autor').append('<div class="ut_tag ut_tag_vacia" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div><div class="ut_tag_info" style="display:none;"><div class="ut_tag_info_cerrar">x</div><form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="25"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="26"><br />&gt; <span class="ut_tag_link_span">Link</span><br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form></div>');
 			}
 			
 			jQuery(this).closest('.autor').children(".ut_tag_info").on('submit', 'form.ut_tag_form', function() { // guardamos datos del tag
@@ -1304,7 +1302,7 @@ jQuery(function() {
 					jQuery(':not(form)> div.post > div.autor > dl > dt > a:contains("'+nick+'")').each(function() {
 						delete utTags[''+nick+''];
 						jQuery(this).closest('.autor').children('.ut_tag').replaceWith('<div class="ut_tag ut_tag_vacia" style="background-color: #aaaaaa; opacity: 0.25; width: 9px; height: 15px; overflow: hidden;">+ etiqueta</div>');
-						jQuery(this).closest('.autor').children('.ut_tag_info').children('.ut_tag_form').replaceWith('<form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="11"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="26"><br />&gt; <span class="ut_tag_link_span">Link</span><br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form>');
+						jQuery(this).closest('.autor').children('.ut_tag_info').children('.ut_tag_form').replaceWith('<form class="ut_tag_form">&gt; Tag<br><input class="ut_tag_tag" placeholder="Tag" maxlength="25"><br />&gt; Color<div class="ut_tag_colores" style="display: inline;"><div class="ut_tag_colores_1"></div><div class="ut_tag_colores_2"></div><div class="ut_tag_colores_3"></div><div class="ut_tag_colores_4"></div><div class="ut_tag_colores_5"></div><div class="ut_tag_colores_6"></div></div><br><input class="ut_tag_color" placeholder="#5eadb9" maxlength="26"><br />&gt; <span class="ut_tag_link_span">Link</span><br><input class="ut_tag_link" placeholder="http://"><br />&gt; Descripción<br><textarea placeholder="Descripción" class="ut_tag_desc" style="width: 110px;"></textarea><br /><input type="submit" style="margin-top: 1px;" value="Guardar"></form>');
 						jQuery(this).closest('div.autor').children('.ut_tag_info').hide();
 					});
 				}
