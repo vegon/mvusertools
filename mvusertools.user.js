@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
+// @author         Vegon
 // @version        1.10.2
 // @description    Añade controles avanzados a los posts en MV
 // @grant          GM_addStyle
