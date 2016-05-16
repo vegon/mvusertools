@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           MV-Usertools
 // @namespace      MVusertools
-// @version        1.10.1
+// @version        1.10.2
 // @description    Añade controles avanzados a los posts en MV
 // @grant          GM_addStyle
 // @include        http://www.mediavida.com/*
@@ -12,6 +12,7 @@
 // @require        http://www.mvusertools.com/ext/libs/sisyphus.js
 // @require        http://www.mvusertools.com/ext/libs/mousetrap.js
 // @require        http://www.mvusertools.com/ext/libs/jquery.scrollto.js
+// @updateURL      https://raw.githubusercontent.com/vegon/mvusertools/master/mvusertools.user.js
 // ==/UserScript==
 
 ////// VARIABLES REUTILIZABLES //////
